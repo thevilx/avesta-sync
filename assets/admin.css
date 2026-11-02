@@ -1,0 +1,49 @@
+.avesta-sync .as-card {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 4px 20px 16px;
+	margin: 16px 0;
+	max-width: 1200px;
+}
+.avesta-sync .as-keyrow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.avesta-sync .as-keyrow input { flex: 1 1 280px; min-width: 0; }
+.avesta-sync .as-inline { display: inline-block; margin: 0 16px 6px 0; }
+.avesta-sync .as-toolbar { display: flex; flex-wrap: wrap; gap: 6px; }
+.avesta-sync .as-table-wrap { overflow-x: auto; max-height: 560px; overflow-y: auto; }
+.avesta-sync #as-table td, .avesta-sync #as-table th { vertical-align: middle; }
+.avesta-sync #as-table .as-group th { background: #f0f0f1; font-weight: 600; }
+.avesta-sync .as-path { word-break: break-all; font-family: Menlo, Consolas, monospace; font-size: 12px; }
+.avesta-sync .as-meta { font-family: Menlo, Consolas, monospace; font-size: 11px; color: #50575e; white-space: nowrap; }
+.avesta-sync .as-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: 600;
+	white-space: nowrap;
+	background: #f0f0f1;
+	color: #1d2327;
+}
+.avesta-sync .as-badge.st-local-new, .avesta-sync .as-badge.st-local-changed { background: #d7e7fb; color: #0a3b73; }
+.avesta-sync .as-badge.st-remote-new, .avesta-sync .as-badge.st-remote-changed { background: #d6f0dc; color: #0b4a1b; }
+.avesta-sync .as-badge.st-local-deleted, .avesta-sync .as-badge.st-remote-deleted { background: #f6e0c0; color: #6b3f00; }
+.avesta-sync .as-badge.st-conflict { background: #f7d4d6; color: #7a1118; }
+.avesta-sync progress { width: 100%; max-width: 600px; height: 14px; display: block; margin: 12px 0; }
+.avesta-sync .as-log {
+	max-height: 240px;
+	overflow: auto;
+	background: #1d2327;
+	color: #dcdcde;
+	padding: 8px 12px;
+	font: 12px/1.6 Menlo, Consolas, monospace;
+	border-radius: 4px;
+}
+.avesta-sync .as-log .err { color: #ff8a8a; }
+.avesta-sync .as-summary { font-weight: 600; }
+.avesta-sync .ok-text { color: #0a6b1e; }
+.avesta-sync .err-text { color: #b32d2e; }
+@media (max-width: 782px) {
+	.avesta-sync .as-card { padding: 4px 12px 12px; }
+	.avesta-sync #as-table select { min-width: 140px; }
+}
