@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       Avesta Sync
  * Plugin URI:        https://avestatech.ir
- * Description:       Hash-based two-way sync (push/pull) of theme files, custom plugins, content and media between a local site and production over a signed REST API. Only changed items are transferred.
- * Version:           1.1.0
+ * Description:       Hash-based two-way sync (push/pull) of theme files, custom plugins, content, media and WooCommerce catalog and settings between a local site and production over a signed REST API. Only changed items are transferred.
+ * Version:           1.2.0
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            AvestaTech
@@ -17,13 +17,16 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AVESTA_SYNC_VERSION', '1.1.0' );
+define( 'AVESTA_SYNC_VERSION', '1.2.0' );
 define( 'AVESTA_SYNC_FILE', __FILE__ );
 define( 'AVESTA_SYNC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AVESTA_SYNC_URL', plugin_dir_url( __FILE__ ) );
 
-foreach ( array( 'settings', 'auth', 'paths', 'backup', 'files', 'content', 'media', 'importer', 'menus', 'client', 'diff', 'history', 'sync', 'rest', 'schedule', 'ajax', 'admin' ) as $avesta_sync_file ) {
+foreach ( array( 'settings', 'auth', 'paths', 'backup', 'backup-labels', 'files', 'content', 'media', 'importer', 'menus', 'client', 'diff', 'history', 'sync', 'rest', 'schedule', 'ajax', 'admin' ) as $avesta_sync_file ) {
 	require_once AVESTA_SYNC_DIR . 'includes/class-' . $avesta_sync_file . '.php';
+}
+foreach ( array( 'refs', 'taxonomies', 'terms', 'variations', 'preview', 'products', 'product-import', 'coupons', 'tax', 'shipping', 'settings', '' ) as $avesta_sync_file ) {
+	require_once AVESTA_SYNC_DIR . 'includes/woo/class-woo' . ( '' === $avesta_sync_file ? '' : '-' . $avesta_sync_file ) . '.php';
 }
 unset( $avesta_sync_file );
 

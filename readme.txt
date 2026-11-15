@@ -1,14 +1,14 @@
 === Avesta Sync ===
 Contributors: avestatech
-Tags: sync, deploy, migration, staging, push
+Tags: sync, deploy, staging, woocommerce, migration
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Push and pull only what changed between two WordPress sites: theme files, plugins, content and media, with a review step and automatic backups.
+Push and pull only what changed between two WordPress sites: themes, plugins, content, media and WooCommerce catalog, with review and backups.
 
 == Description ==
 
@@ -22,6 +22,7 @@ Install it on both sites, paste one site's secret key into the other, and click 
 * **Plugin folders** you choose (activation state is never touched)
 * **Content**: pages, posts, custom post types, block templates and template parts, navigation menus, and a few core reading options
 * **Media**: upload files and their Media Library entries
+* **WooCommerce catalog and store settings** (optional, see below)
 
 = How it works =
 
@@ -37,6 +38,23 @@ After the first sync the plugin remembers what was last in step, so later compar
 * **Deletions are opt-in.** They are never preselected and always ask for confirmation.
 * **Signed requests.** Every call between the two sites is signed with HMAC-SHA256 and time-limited, write requests are replay-protected, and failed attempts are throttled. HTTPS is required for non-local sites.
 * **Guard rails.** `wp-config.php`, `.env` files, `.git`, `node_modules`, logs and must-use plugins are never synced. PHP files that fail to parse are refused. Executable file types are never written into uploads.
+
+= WooCommerce =
+
+Design your catalog on staging and push it to the live store, or pull live edits back, product by product.
+
+* **Products**: simple, variable (with all variations), grouped and external, with prices, attributes, images, linked products and downloads
+* **Categories, tags, brands, shipping classes, attributes** and their terms
+* **Coupons**
+* **Store settings** from a fixed list: general, product, tax options and tax rates, shipping zones with flat rate, free shipping and local pickup, account options
+
+Products are matched by SKU (or slug) and written through WooCommerce itself, so variations, filters, price sorting and linked products keep working on the other site even though database IDs differ.
+
+What it never writes: orders, customers, sessions, reviews, sales counts, coupon usage counts, payment gateway settings, API keys, webhooks and email settings.
+
+**Live stock is protected.** A push leaves stock quantity, stock status and stock management on the receiving store untouched, so sales made since your last sync are not lost. Tick "Also overwrite stock quantities" for a single run when you really want to replace them.
+
+WooCommerce sync must be enabled in Avesta Sync settings on both sites, and both must run the same major WooCommerce version.
 
 = More =
 
@@ -60,7 +78,7 @@ Avesta Sync connects only to the remote WordPress site whose URL you enter in it
 1. Install and activate Avesta Sync on **both** sites.
 2. On the remote site (for example production), open **Tools > Avesta Sync > Settings** and copy **This site's secret key**.
 3. On the site you work from, open **Tools > Avesta Sync > Settings**, enter the remote site URL and paste that key into **Remote secret key**.
-4. Choose what to sync (themes, plugins, content, media) and save.
+4. Choose what to sync (themes, plugins, content, media, WooCommerce) and save. For WooCommerce, enable it in the settings of both sites.
 5. Click **Test connection**, then open the **Sync** tab and click **Compare**.
 
 == Frequently Asked Questions ==
@@ -87,7 +105,19 @@ Whoever holds a site's key can write theme and plugin files to that site, so tre
 
 = Does it sync the whole database? =
 
-No. It syncs selected content items by slug, not database tables. Users, orders, comments, plugin settings and other options are not synced.
+No. It syncs selected items, not database tables. Users, orders, comments and the settings of other plugins are not synced. With WooCommerce sync enabled, products, catalog terms, coupons and a fixed list of store settings are synced as items.
+
+= Will pushing products overwrite my live stock or orders? =
+
+No. Orders and customers are never written. Stock quantity, stock status and the manage-stock setting of an existing product are left alone unless you tick "Also overwrite stock quantities" in the apply dialog for that run. A brand-new product receives the stock values from the sending site once.
+
+= Which WooCommerce data is not synced? =
+
+Orders, refunds, customers, reviews, sales counts, coupon usage, payment gateway settings, API keys, webhooks, email settings, analytics, and shipping methods other than flat rate, free shipping and local pickup. Product types added by other plugins (subscriptions, bookings, bundles) are listed as skipped. Product data that other plugins store in hidden fields may not travel.
+
+= What happens when I delete a product on one site and sync the deletion? =
+
+The product is moved to Trash on the other site, never deleted permanently, so old orders keep their link to it and you can restore it. Deletions are never preselected.
 
 = Does it sync plugin activation? =
 
@@ -99,7 +129,7 @@ The scheduled check can compare automatically and email you a summary. Applying 
 
 = Does it work with page builders or custom post types? =
 
-Content sync covers pages, posts, custom post types that have an admin screen, block templates, template parts, menus and media entries. A custom post type must be registered on both sites. Content is copied as stored, so page builder data kept in post content travels with it; data kept in separate tables does not. Developers can adjust the list with the `avesta_sync_post_types` filter.
+Content sync covers pages, posts, custom post types that have an admin screen, block templates, template parts, menus and media entries. A custom post type must be registered on both sites. It works best with the block editor. Content and its custom fields are copied as stored, so page builder layouts usually travel, but page builders are not officially tested: image IDs inside layouts are not remapped, builder caches may need regenerating, and builder settings kept in site options or separate tables are not synced. Developers can adjust the list with the `avesta_sync_post_types` filter.
 
 = Which hosts does it work on? =
 
@@ -113,8 +143,17 @@ Any host where the WordPress REST API is reachable. If pretty permalinks are off
 4. Backups: browse past runs and restore a file with one click.
 5. History of sync runs.
 6. Settings: remote site, what to sync, exclude patterns, scheduled check.
+7. WooCommerce products, categories and store settings in the compare list, with the stock option in the apply dialog.
 
 == Changelog ==
+
+= 1.2.0 =
+* New: WooCommerce sync for products (simple, variable, grouped, external), categories, tags, brands, attributes, shipping classes, coupons and a fixed list of store settings.
+* New: live stock protection with an explicit "Also overwrite stock quantities" option per run.
+* New: orders, customers, coupon usage, payment gateways and API keys are never written.
+* New: readable names in Backups and plain-language results in the log and History.
+* Fixed: two requests sent in the same second could be rejected as a replay.
+* Security: receiving sites enforce their own sync settings; item types must match their keys.
 
 = 1.1.0 =
 * New: tabbed admin screen with dashboard, sync, backups, history and settings.
@@ -132,6 +171,9 @@ Any host where the WordPress REST API is reachable. If pretty permalinks are off
 * First release.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Adds WooCommerce catalog and store settings sync with live stock protection. Update both sites.
 
 = 1.1.0 =
 New admin screen, diff preview, one-click restore, history, exclude patterns and Media Library sync. Update both sites.

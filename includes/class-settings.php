@@ -22,7 +22,7 @@ class Settings {
 	 * @return string[]
 	 */
 	public static function scopes() {
-		return array( 'theme', 'plugins', 'content', 'uploads' );
+		return array( 'theme', 'plugins', 'content', 'uploads', 'woocommerce' );
 	}
 
 	/**
@@ -42,6 +42,10 @@ class Settings {
 			'notify_email'  => '',
 			'backup_keep'   => 20,
 			'media_library' => true,
+			'wc_products'   => true,
+			'wc_taxonomies' => true,
+			'wc_coupons'    => true,
+			'wc_settings'   => true,
 		);
 	}
 
@@ -94,7 +98,12 @@ class Settings {
 		$schedule = isset( $in['schedule'] ) ? sanitize_key( (string) $in['schedule'] ) : $current['schedule'];
 		$email    = isset( $in['notify_email'] ) ? sanitize_email( trim( (string) $in['notify_email'] ) ) : $current['notify_email'];
 		$keep     = isset( $in['backup_keep'] ) ? max( 0, min( 200, absint( $in['backup_keep'] ) ) ) : (int) $current['backup_keep'];
-		return array(
+		$wc = array();
+		foreach ( array( 'wc_products', 'wc_taxonomies', 'wc_coupons', 'wc_settings' ) as $opt ) {
+			// Unticked checkboxes are absent from the POST: only trust that when the form says it rendered them.
+			$wc[ $opt ] = ! empty( $in['wc_opts_present'] ) ? ( ! empty( $in[ $opt ] ) && '0' !== (string) $in[ $opt ] ) : ! empty( $current[ $opt ] );
+		}
+		return $wc + array(
 			'remote_url'    => $url,
 			'remote_key'    => '' !== $key ? $key : $current['remote_key'],
 			'scopes'        => array_values( array_intersect( self::scopes(), isset( $in['scopes'] ) ? (array) $in['scopes'] : array() ) ),

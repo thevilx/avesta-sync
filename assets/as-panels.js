@@ -54,6 +54,15 @@
 	/* ---------- Dashboard ---------- */
 	var dash = { data: null, conn: null, grid: null };
 
+	function connOf( d ) {
+		return {
+			connected: d.connected,
+			error: d.error,
+			remote: d.remote,
+			wcInfo: { wc: d.wc, wc_block: d.wc_block, wc_warn: d.wc_warn, wc_message: d.wc_message }
+		};
+	}
+
 	function connectionCard( d, loading ) {
 		var c = card( t.cardConnection, 'admin-links', 'as-card--wide' );
 		if ( loading ) {
@@ -73,7 +82,7 @@
 			}, 'admin-generic' ) );
 			return c;
 		}
-		var conn = d.connected === null ? dash.conn : { connected: d.connected, error: d.error, remote: d.remote };
+		var conn = d.connected === null ? dash.conn : connOf( d );
 		if ( ! conn ) {
 			c.appendChild( el( 'p', 'as-muted', t.notChecked ) );
 			UI.setPill( 'idle' );
@@ -88,7 +97,23 @@
 			kv( dl, t.pluginVersion, conn.remote.version || '-' );
 			kv( dl, t.wpVersion, conn.remote.wp || '-' );
 			kv( dl, t.phpVersion, conn.remote.php || '-' );
+			if ( d.scopes && d.scopes.indexOf( 'woocommerce' ) !== -1 && conn.wcInfo ) {
+				var w = conn.wcInfo;
+				var ver = function ( s ) {
+					return s && s.active ? ( s.version || '-' ) : t.wcNotActive;
+				};
+				kv( dl, t.wcLabel, UI.msg( 'wcVersions', null, [ ver( w.wc && w.wc.local ), ver( w.wc && w.wc.remote ) ] ) );
+			}
 			c.appendChild( dl );
+			if ( d.scopes && d.scopes.indexOf( 'woocommerce' ) !== -1 && conn.wcInfo && conn.wcInfo.wc_message && ( conn.wcInfo.wc_block || conn.wcInfo.wc_warn ) ) {
+				var wn = el( 'div', 'as-alert as-alert--' + ( conn.wcInfo.wc_block ? 'warning' : 'info' ) );
+				wn.setAttribute( 'role', 'status' );
+				wn.appendChild( UI.icon( conn.wcInfo.wc_block ? 'warning' : 'info' ) );
+				var wt = el( 'div', 'as-alert__text', conn.wcInfo.wc_message );
+				wt.setAttribute( 'dir', 'auto' );
+				wn.appendChild( wt );
+				c.appendChild( wn );
+			}
 		} else {
 			UI.setPill( 'bad' );
 			var box = el( 'div', 'as-alert as-alert--error' );
@@ -156,7 +181,7 @@
 			e.appendChild( UI.icon( 'warning' ) );
 			e.appendChild( el( 'span', '', k.error ) );
 			c.appendChild( e );
-		} else if ( ! k.total ) {
+		} else if ( ! k.total && ! k.wc_skipped ) {
 			var ok = el( 'p', 'as-card__meta is-ok' );
 			ok.appendChild( UI.icon( 'yes-alt' ) );
 			ok.appendChild( UI.msg( 'inSync', null, [ UI.num( k.identical ) ] ) );
@@ -172,6 +197,12 @@
 				}
 			} );
 			c.appendChild( ul );
+		}
+		if ( k.wc_skipped && ! k.error ) {
+			var sk = el( 'p', 'as-card__meta as-muted' );
+			sk.appendChild( UI.icon( 'info' ) );
+			sk.appendChild( el( 'span', '', t.wcNotChecked ) );
+			c.appendChild( sk );
 		}
 		c.appendChild( link( t.reviewSync, function () {
 			UI.showTab( 'sync' );
@@ -238,7 +269,7 @@
 		}
 		UI.post( 'avesta_sync_dashboard', { ping: ping ? '1' : '0' } ).then( function ( d ) {
 			if ( d.connected !== null ) {
-				dash.conn = { connected: d.connected, error: d.error, remote: d.remote };
+				dash.conn = connOf( d );
 			}
 			dash.data = d;
 			drawDash( d, false );
@@ -298,154 +329,6 @@
 		} );
 		return b;
 	}
-
-	/* ---------- Backups ---------- */
-	var flash = null;
-
-	function backupItems( run, panel, resetLoaded ) {
-		UI.clear( panel ).appendChild( UI.loading() );
-		UI.post( 'avesta_sync_backup_items', { run: run.run } ).then( function ( d ) {
-			UI.clear( panel );
-			if ( ! d.items.length ) {
-				panel.appendChild( el( 'p', 'as-muted', t.noItems ) );
-				return;
-			}
-			var ul = el( 'ul', 'as-items' );
-			d.items.forEach( function ( it ) {
-				var li = el( 'li', 'as-item' );
-				var main = el( 'div', 'as-item__main' );
-				var path = el( 'span', it.type === 'content' ? 'as-label' : 'as-path', it.path );
-				path.setAttribute( 'dir', it.type === 'content' ? 'auto' : 'ltr' );
-				main.appendChild( path );
-				main.appendChild( el( 'span', 'as-tag', it.type === 'content' ? t.typeContent : t.typeFile ) );
-				if ( it.size ) {
-					main.appendChild( el( 'bdi', 'as-muted as-item__size', UI.fmtSize( it.size ) ) );
-				}
-				li.appendChild( main );
-				var res = el( 'span', 'as-inline-result' );
-				res.setAttribute( 'role', 'status' );
-				var rb = UI.btn( t.restore, 'as-btn--secondary as-btn--sm', function () {
-					UI.confirm( {
-						title: t.restoreTitle,
-						message: UI.fmt( t.restoreConfirm, it.path ),
-						confirmLabel: t.restore,
-						onConfirm: function () {
-							rb.disabled = true;
-							res.className = 'as-inline-result';
-							res.textContent = t.working;
-							UI.post( 'avesta_sync_restore', { run: run.run, path: it.path } ).then( function ( r ) {
-								res.className = 'as-inline-result is-ok';
-								res.textContent = r.message;
-								rb.disabled = false;
-								/* A restore changes local files and adds a pre-restore backup run. */
-								flash = { run: run.run, path: it.path, msg: r.message };
-								dash.data = null;
-								if ( UI.sync && UI.sync.markStale ) {
-									UI.sync.markStale();
-								}
-								loadBackups( function () {
-									var tg = document.querySelector( '#as-backups-list [data-run="' + run.run + '"] .as-acc__toggle' );
-									if ( tg ) {
-										tg.click();
-										tg.focus();
-									}
-								} );
-							} ).catch( function ( e ) {
-								res.className = 'as-inline-result is-err';
-								res.textContent = e.message;
-								rb.disabled = false;
-							} );
-						}
-					} );
-				}, 'undo' );
-				rb.setAttribute( 'aria-label', UI.fmt( t.restoreFor, it.path ) );
-				li.appendChild( rb );
-				if ( flash && flash.run === run.run && flash.path === it.path ) {
-					res.className = 'as-inline-result is-ok';
-					res.textContent = flash.msg;
-					flash = null;
-				}
-				li.appendChild( res );
-				ul.appendChild( li );
-			} );
-			panel.appendChild( ul );
-		} ).catch( function ( e ) {
-			UI.clear( panel ).appendChild( UI.errorBox( e.message, function () {
-				backupItems( run, panel, resetLoaded );
-			} ) );
-		} );
-	}
-
-	function drawBackups( runs ) {
-		var host = UI.clear( $( 'as-backups-list' ) );
-		if ( ! runs.length ) {
-			host.appendChild( UI.empty( 'backup', t.noBackups, t.noBackupsText ) );
-			return;
-		}
-		runs.forEach( function ( run ) {
-			var item = el( 'div', 'as-acc' );
-			item.setAttribute( 'data-run', run.run );
-			var head = el( 'div', 'as-acc__head' );
-			var info = el( 'span', 'as-acc__info' );
-			info.appendChild( UI.timeNode( run.time ) );
-			var sub = el( 'span', 'as-muted as-acc__sub' );
-			sub.appendChild( UI.msg( 'nFilesSize', run.files, [ UI.num( run.files ), UI.fmtSize( run.size ) ] ) );
-			info.appendChild( sub );
-			var tb = headBtn( [ info ] );
-			head.appendChild( tb );
-			var del = UI.btn( t.delete, 'as-btn--danger-link as-btn--sm', function () {
-				UI.confirm( {
-					title: t.deleteBackupTitle,
-					message: t.deleteBackupText,
-					confirmLabel: t.delete,
-					danger: true,
-					onConfirm: function () {
-						UI.post( 'avesta_sync_backup_delete', { run: run.run } ).then( function () {
-							UI.announce( t.backupDeleted );
-							loadBackups();
-							dash.data = null;
-						} ).catch( function ( e ) {
-							item.appendChild( UI.errorBox( e.message ) );
-						} );
-					}
-				} );
-			}, 'trash' );
-			del.setAttribute( 'aria-label', UI.fmt( t.deleteBackupFor, UI.fmtDate( run.time ) ) );
-			head.appendChild( del );
-			var panel = el( 'div', 'as-acc__panel' );
-			panel.hidden = true;
-			disclosure( tb, panel, function ( reset ) {
-				backupItems( run, panel, reset );
-			} );
-			item.appendChild( head );
-			item.appendChild( panel );
-			host.appendChild( item );
-		} );
-	}
-
-	function loadBackups( after ) {
-		var host = UI.clear( $( 'as-backups-list' ) );
-		host.appendChild( UI.loading() );
-		UI.post( 'avesta_sync_backups', {} ).then( function ( d ) {
-			drawBackups( d.runs );
-			if ( typeof after === 'function' ) {
-				after();
-			}
-		} ).catch( function ( e ) {
-			UI.clear( host ).appendChild( UI.errorBox( e.message, function () {
-				loadBackups();
-			} ) );
-		} );
-	}
-
-	UI.modules.backups = {
-		init: function () {
-			loadBackups();
-		},
-		show: function () {
-			loadBackups();
-		}
-	};
 
 	UI.kit = {
 		disclosure: disclosure,

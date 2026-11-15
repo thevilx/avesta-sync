@@ -125,6 +125,41 @@
 		return node;
 	};
 
+	/*
+	 * Prose label (names, titles) with an optional trailing "(SKU)". Name and SKU are isolated
+	 * separately so a Persian name followed by a Latin SKU keeps its logical order in RTL.
+	 */
+	UI.proseLabel = function ( text, sku, name ) {
+		var out = document.createElement( 'span' );
+		out.className = 'as-label';
+		var m;
+		text = String( text || '' );
+		if ( sku && text.slice( -( sku.length + 3 ) ) === ' (' + sku + ')' ) {
+			name = name || text.slice( 0, -( sku.length + 3 ) );
+		} else if ( ! sku && ( m = /^(.*\S) \(([\x21-\x7E]+)\)$/.exec( text ) ) && /[^\x00-\x7F]/.test( m[ 1 ] ) ) {
+			name = m[ 1 ];
+			sku = m[ 2 ];
+		} else {
+			name = null;
+		}
+		if ( name === null ) {
+			var all = document.createElement( 'bdi' );
+			all.textContent = text;
+			out.appendChild( all );
+			return out;
+		}
+		var n = document.createElement( 'bdi' );
+		n.textContent = name;
+		out.appendChild( n );
+		out.appendChild( document.createTextNode( ' ' ) );
+		var s = document.createElement( 'bdi' );
+		s.setAttribute( 'dir', 'ltr' );
+		s.className = 'as-sku';
+		s.textContent = '(' + sku + ')';
+		out.appendChild( s );
+		return out;
+	};
+
 	UI.modalOpen = function () {
 		return modalStack.length > 0;
 	};
@@ -348,11 +383,21 @@
 		var closed = false;
 		var api = { overlay: overlay, dlg: dlg, body: body, foot: foot };
 
+		/* Esc must close the modal wherever focus is (even on <body> after a DOM update). */
+		var docKey = function ( e ) {
+			if ( ( e.key === 'Escape' || e.key === 'Esc' ) && modalStack[ modalStack.length - 1 ] === api ) {
+				e.preventDefault();
+				api.close();
+			}
+		};
+		document.addEventListener( 'keydown', docKey, true );
+
 		api.close = function () {
 			if ( closed ) {
 				return;
 			}
 			closed = true;
+			document.removeEventListener( 'keydown', docKey, true );
 			overlay.parentNode && overlay.parentNode.removeChild( overlay );
 			modalStack.splice( modalStack.indexOf( api ), 1 );
 			var below = modalStack[ modalStack.length - 1 ];

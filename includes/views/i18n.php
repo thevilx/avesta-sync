@@ -26,8 +26,8 @@ return array(
 	'failed'          => __( 'Failed', 'avesta-sync' ),
 	'local'           => __( 'Local', 'avesta-sync' ),
 	'remote'          => __( 'Remote', 'avesta-sync' ),
-	'present'         => __( 'present', 'avesta-sync' ),
-	'absent'          => __( 'missing', 'avesta-sync' ),
+	'notLocal'        => __( 'Not on this site', 'avesta-sync' ),
+	'notRemote'       => __( 'Not on the remote site', 'avesta-sync' ),
 	'errTitle'        => __( 'Something went wrong', 'avesta-sync' ),
 	'errGeneric'      => __( 'The request failed.', 'avesta-sync' ),
 	/* translators: %s: start of the unexpected server response. */
@@ -49,7 +49,46 @@ return array(
 		'plugins' => __( 'Plugins', 'avesta-sync' ),
 		'content' => __( 'Content', 'avesta-sync' ),
 		'uploads' => __( 'Media', 'avesta-sync' ),
+		'woocommerce' => __( 'WooCommerce', 'avesta-sync' ),
 	),
+	'wcGroups'        => array(
+		'wc_attributes' => __( 'Attributes', 'avesta-sync' ),
+		'wc_terms'      => __( 'Categories and tags', 'avesta-sync' ),
+		'wc_products'   => __( 'Products', 'avesta-sync' ),
+		'wc_coupons'    => __( 'Coupons', 'avesta-sync' ),
+		'wc_settings'   => __( 'Store settings', 'avesta-sync' ),
+	),
+	'wcTypes'         => array(
+		'variable' => __( 'Variable', 'avesta-sync' ),
+		'grouped'  => __( 'Grouped', 'avesta-sync' ),
+		'external' => __( 'External', 'avesta-sync' ),
+	),
+	/* translators: %s: number of product variations. */
+	'nVariations'     => array(
+		/* translators: %s: number of product variations. */
+		'one'   => _n( '%s variation', '%s variations', 1, 'avesta-sync' ),
+		/* translators: %s: number of product variations. */
+		'other' => _n( '%s variation', '%s variations', 2, 'avesta-sync' ),
+	),
+	/* translators: %s: number of items. */
+	'wcSkipped'       => array(
+		/* translators: %s: number of items. */
+		'one'   => _n( '%s item was not synced', '%s items were not synced', 1, 'avesta-sync' ),
+		/* translators: %s: number of items. */
+		'other' => _n( '%s item was not synced', '%s items were not synced', 2, 'avesta-sync' ),
+	),
+	'wcOthersTitle'   => __( 'The other sections you selected are identical.', 'avesta-sync' ),
+	'wcLabel'         => __( 'WooCommerce', 'avesta-sync' ),
+	'wcNotActive'     => __( 'not active', 'avesta-sync' ),
+	/* translators: 1: WooCommerce version on this site, 2: WooCommerce version on the remote site. */
+	'wcVersions'      => __( 'This site: %1$s, remote site: %2$s', 'avesta-sync' ),
+	'stockLabel'      => __( 'Also overwrite stock quantities', 'avesta-sync' ),
+	'stockHint'       => __( 'Stock is normally left alone, so sales made since the last sync stay correct. Tick this to copy stock from the sending site: to the remote site for a push, to this site for a pull.', 'avesta-sync' ),
+	'stockWarn'       => __( 'Stock quantities of the selected products will be overwritten on the site that receives them.', 'avesta-sync' ),
+	'diffStockNote'   => __( 'Stock levels are not compared here. They are only copied when you tick "Also overwrite stock quantities" while applying.', 'avesta-sync' ),
+	'wcNotChecked'    => __( 'WooCommerce items were not checked.', 'avesta-sync' ),
+	'wcBlockedGeneric' => __( 'WooCommerce sync is unavailable.', 'avesta-sync' ),
+	'stockSummary'    => __( 'Stock quantities were also copied for the products in this run.', 'avesta-sync' ),
 	'schedules'       => array(
 		'off'        => __( 'Off', 'avesta-sync' ),
 		'hourly'     => __( 'Hourly', 'avesta-sync' ),
@@ -58,11 +97,11 @@ return array(
 	),
 	'status'          => array(
 		'local-new'      => __( 'New on this site', 'avesta-sync' ),
-		'local-changed'  => __( 'Changed locally', 'avesta-sync' ),
-		'remote-new'     => __( 'New on remote', 'avesta-sync' ),
-		'remote-changed' => __( 'Changed on remote', 'avesta-sync' ),
-		'local-deleted'  => __( 'Deleted locally', 'avesta-sync' ),
-		'remote-deleted' => __( 'Deleted on remote', 'avesta-sync' ),
+		'local-changed'  => __( 'Changed on this site', 'avesta-sync' ),
+		'remote-new'     => __( 'New on the remote site', 'avesta-sync' ),
+		'remote-changed' => __( 'Changed on the remote site', 'avesta-sync' ),
+		'local-deleted'  => __( 'Deleted on this site', 'avesta-sync' ),
+		'remote-deleted' => __( 'Deleted on the remote site', 'avesta-sync' ),
 		'conflict'       => __( 'Conflict', 'avesta-sync' ),
 	),
 	'srcAdmin'        => __( 'Admin', 'avesta-sync' ),
@@ -120,12 +159,12 @@ return array(
 	'pull'            => __( 'Pull', 'avesta-sync' ),
 	'pushHint'        => __( 'From this site to the remote site', 'avesta-sync' ),
 	'pullHint'        => __( 'From the remote site to this site', 'avesta-sync' ),
-	'pushDel'         => __( 'Push (delete on remote)', 'avesta-sync' ),
-	'pullDel'         => __( 'Pull (delete locally)', 'avesta-sync' ),
-	'pushRestore'     => __( 'Push (restore on remote)', 'avesta-sync' ),
-	'pullRestore'     => __( 'Pull (restore locally)', 'avesta-sync' ),
+	'pushDel'         => __( 'Push: delete it on the remote site', 'avesta-sync' ),
+	'pullDel'         => __( 'Pull: delete it on this site', 'avesta-sync' ),
+	'pushRestore'     => __( 'Push: bring it back on the remote site', 'avesta-sync' ),
+	'pullRestore'     => __( 'Pull: bring it back to this site', 'avesta-sync' ),
 	'comparing'       => __( 'Comparing both sites. This can take a while on large sites...', 'avesta-sync' ),
-	'nothingTitle'    => __( 'Everything in the selected scopes is identical.', 'avesta-sync' ),
+	'nothingTitle'    => __( 'Everything you selected is identical.', 'avesta-sync' ),
 	/* translators: %s: number of identical items. */
 	'nothingText'     => __( '%s items checked, nothing to sync.', 'avesta-sync' ),
 	/* translators: 1: number of differences, 2: number of identical items. */
@@ -137,9 +176,9 @@ return array(
 	'selectGroup'     => __( 'Select all shown items in %s', 'avesta-sync' ),
 	/* translators: %s: file path. */
 	'directionFor'    => __( 'Direction for %s', 'avesta-sync' ),
-	'viewDiff'        => __( 'View diff', 'avesta-sync' ),
+	'viewDiff'        => __( 'View changes', 'avesta-sync' ),
 	/* translators: %s: file path. */
-	'viewDiffFor'     => __( 'View diff for %s', 'avesta-sync' ),
+	'viewDiffFor'     => __( 'View changes for %s', 'avesta-sync' ),
 	/* translators: %s: number of items. */
 	'nItems' => array(
 		/* translators: %s: number of items. */
@@ -183,15 +222,15 @@ return array(
 	),
 	'sumPush'         => __( 'will be pushed to the remote site', 'avesta-sync' ),
 	'sumPull'         => __( 'will be pulled to this site', 'avesta-sync' ),
-	'sumDelete'       => __( 'will be deleted on the receiving side', 'avesta-sync' ),
+	'sumDelete'       => __( 'will be deleted', 'avesta-sync' ),
 	/* translators: %s: number of deletions. */
 	'deleteWarn' => array(
 		/* translators: %s: number of deletions. */
-		'one'   => _n( '%s item will be DELETED. A backup is kept on the site that receives the change.', '%s items will be DELETED. A backup is kept on the site that receives the change.', 1, 'avesta-sync' ),
+		'one'   => _n( '%s item will be deleted. A backup is saved on the site where it is deleted.', '%s items will be deleted. A backup is saved on the site where they are deleted.', 1, 'avesta-sync' ),
 		/* translators: %s: number of deletions. */
-		'other' => _n( '%s item will be DELETED. A backup is kept on the site that receives the change.', '%s items will be DELETED. A backup is kept on the site that receives the change.', 2, 'avesta-sync' ),
+		'other' => _n( '%s item will be deleted. A backup is saved on the site where it is deleted.', '%s items will be deleted. A backup is saved on the site where they are deleted.', 2, 'avesta-sync' ),
 	),
-	'backupNote'      => __( 'Anything overwritten or deleted on this site is saved under Backups first.', 'avesta-sync' ),
+	'backupNote'      => __( 'Before anything is overwritten or deleted, the site that receives the change saves a backup of it.', 'avesta-sync' ),
 	/* translators: %s: number of items. */
 	'applyN' => array(
 		/* translators: %s: number of items. */
@@ -216,8 +255,8 @@ return array(
 	'mediaNote'       => __( 'Media files were copied. If new files do not show up in the Media Library, enable "Include Media Library entries" in Settings or regenerate thumbnails.', 'avesta-sync' ),
 	'logPush'         => __( 'push', 'avesta-sync' ),
 	'logPull'         => __( 'pull', 'avesta-sync' ),
-	'logDelRemote'    => __( 'delete on remote', 'avesta-sync' ),
-	'logDelLocal'     => __( 'delete locally', 'avesta-sync' ),
+	'logDelRemote'    => __( 'delete on the remote site', 'avesta-sync' ),
+	'logDelLocal'     => __( 'delete on this site', 'avesta-sync' ),
 	/* translators: 1: item number, 2: total, 3: action, 4: path. */
 	'logItem'         => __( '[%1$s/%2$s] %3$s %4$s', 'avesta-sync' ),
 
@@ -227,16 +266,16 @@ return array(
 	'diffTooLarge'    => __( 'This file is too large to preview.', 'avesta-sync' ),
 	'diffNone'        => __( 'Nothing to show for this item.', 'avesta-sync' ),
 	'diffIdentical'   => __( 'Both versions are identical.', 'avesta-sync' ),
-	'missingLocal'    => __( 'Does not exist locally', 'avesta-sync' ),
-	'missingRemote'   => __( 'Does not exist on remote', 'avesta-sync' ),
+	'missingLocal'    => __( 'Does not exist on this site', 'avesta-sync' ),
+	'missingRemote'   => __( 'Does not exist on the remote site', 'avesta-sync' ),
 	/* translators: %s: maximum number of lines. */
 	'diffCap'         => __( 'The file has more than %s lines, so the versions are shown side by side without alignment.', 'avesta-sync' ),
 	'diffComplex'     => __( 'The versions differ too much to align line by line, so they are shown side by side.', 'avesta-sync' ),
-	'diffView'        => __( 'Diff layout', 'avesta-sync' ),
+	'diffView'        => __( 'Layout', 'avesta-sync' ),
 	'diffSide'        => __( 'Side by side', 'avesta-sync' ),
 	'diffUnified'     => __( 'Unified', 'avesta-sync' ),
 	'diffEolOnly'     => __( 'Only line endings or a trailing newline differ.', 'avesta-sync' ),
-	'diffRegion'      => __( 'Diff', 'avesta-sync' ),
+	'diffRegion'      => __( 'Differences', 'avesta-sync' ),
 	/* translators: %s: number of unchanged lines. */
 	'diffUnchanged' => array(
 		/* translators: %s: number of unchanged lines. */
@@ -247,9 +286,9 @@ return array(
 	/* translators: %s: number of lines. */
 	'diffAdded' => array(
 		/* translators: %s: number of lines. */
-		'one'   => _n( '%s line only on remote', '%s lines only on remote', 1, 'avesta-sync' ),
+		'one'   => _n( '%s line only on the remote site', '%s lines only on the remote site', 1, 'avesta-sync' ),
 		/* translators: %s: number of lines. */
-		'other' => _n( '%s line only on remote', '%s lines only on remote', 2, 'avesta-sync' ),
+		'other' => _n( '%s line only on the remote site', '%s lines only on the remote site', 2, 'avesta-sync' ),
 	),
 	/* translators: %s: number of lines. */
 	'diffRemoved' => array(
@@ -271,8 +310,8 @@ return array(
 	),
 	'actPush'         => __( 'Push', 'avesta-sync' ),
 	'actPull'         => __( 'Pull', 'avesta-sync' ),
-	'actDelRemote'    => __( 'Deleted on remote', 'avesta-sync' ),
-	'actDelLocal'     => __( 'Deleted locally', 'avesta-sync' ),
+	'actDelRemote'    => __( 'Deleted on the remote site', 'avesta-sync' ),
+	'actDelLocal'     => __( 'Deleted on this site', 'avesta-sync' ),
 	'noItems'         => __( 'No items.', 'avesta-sync' ),
 	'restore'         => __( 'Restore', 'avesta-sync' ),
 	/* translators: %s: file path. */
@@ -294,7 +333,7 @@ return array(
 
 	// Settings.
 	/* translators: 1: site URL, 2: plugin version, 3: PHP version, 4: post_max_size, 5: chunk size. */
-	'testOk'          => __( 'Connected to %1$s (Avesta Sync %2$s, PHP %3$s, post_max_size %4$s, chunk %5$s)', 'avesta-sync' ),
+	'testOk'          => __( 'Connected to %1$s (Avesta Sync %2$s, PHP %3$s, upload limit %4$s, transfer size %5$s)', 'avesta-sync' ),
 	'regenTitle'      => __( 'Regenerate this site\'s key?', 'avesta-sync' ),
 	'confirmRegen'    => __( 'The other site will stop working until you paste the new key into its settings.', 'avesta-sync' ),
 	'regenerate'      => __( 'Regenerate key', 'avesta-sync' ),

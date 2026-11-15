@@ -19,9 +19,10 @@ class Importer {
 	 *
 	 * @param array  $items key => data.
 	 * @param string $run   Run id.
+	 * @param array  $opts  {stock:bool} Overwrite WooCommerce stock on existing products.
 	 * @return array List of {key,ok,message}.
 	 */
-	public static function import( array $items, $run ) {
+	public static function import( array $items, $run, array $opts = array() ) {
 		$results = array();
 		$run     = Backup::clean_run( $run );
 		foreach ( $items as $key => $data ) {
@@ -30,14 +31,36 @@ class Importer {
 				$results[] = array(
 					'key'     => $key,
 					'ok'      => false,
-					'message' => __( 'Malformed item.', 'avesta-sync' ),
+					'message' => __( 'This item could not be read.', 'avesta-sync' ),
 				);
 				continue;
+			}
+			$trusted = ! empty( $opts['trusted'] ); // Restore from a local backup: the receiving gates do not apply.
+			if ( ! $trusted && ! Woo::key_matches( $key, $data['type'] ) ) {
+				$results[] = array(
+					'key'     => $key,
+					'ok'      => false,
+					'message' => __( 'This item has the wrong type for its name, so it was ignored.', 'avesta-sync' ),
+				);
+				continue;
+			}
+			if ( ! $trusted && in_array( $data['type'], Woo::TYPES, true ) ) {
+				$gate = Woo::receive_gate( $data['type'] );
+				if ( is_wp_error( $gate ) ) {
+					$results[] = array(
+						'key'     => $key,
+						'ok'      => false,
+						'message' => $gate->get_error_message(),
+					);
+					continue;
+				}
 			}
 			if ( 'menu' === $data['type'] ) {
 				$r = Menus::import( $data, $run );
 			} elseif ( 'media' === $data['type'] ) {
 				$r = self::media_on() ? Media::import( $data, $run ) : self::media_off();
+			} elseif ( in_array( $data['type'], Woo::TYPES, true ) ) {
+				$r = Woo::import( $data, $run, $opts );
 			} elseif ( 'option' === $data['type'] ) {
 				$r = self::import_option( $data );
 			} else {
@@ -68,7 +91,7 @@ class Importer {
 	 * @return \WP_Error
 	 */
 	private static function media_off() {
-		return new \WP_Error( 'avesta_sync_media_off', __( 'Media library sync is disabled on this site.', 'avesta-sync' ) );
+		return new \WP_Error( 'avesta_sync_media_off', __( 'Syncing the media library is switched off on the site receiving this change.', 'avesta-sync' ) );
 	}
 
 	/**
@@ -123,10 +146,10 @@ class Importer {
 		$allowed = array_merge( Content::post_types(), Content::THEME_TYPE, array( 'wp_navigation' ) );
 		if ( '' !== $slug && ! post_type_exists( $type ) ) {
 			/* translators: %s: post type. */
-			return new \WP_Error( 'avesta_sync_type', sprintf( __( 'Post type %s is not registered on this site.', 'avesta-sync' ), $type ) );
+			return new \WP_Error( 'avesta_sync_type', sprintf( __( 'The content type "%s" does not exist on the receiving site.', 'avesta-sync' ), $type ) );
 		}
 		if ( '' === $slug || ! in_array( $type, $allowed, true ) ) {
-			return new \WP_Error( 'avesta_sync_type', sprintf( /* translators: %s: post type. */ __( 'Unknown or disallowed item type (update Avesta Sync on both sites?) or missing slug: %s', 'avesta-sync' ), $type ) );
+			return new \WP_Error( 'avesta_sync_type', sprintf( /* translators: %s: post type. */ __( 'This kind of content is not supported, or it has no URL name ("%s"). Update Avesta Sync on both sites.', 'avesta-sync' ), $type ) );
 		}
 		$status = isset( $d['status'] ) && in_array( $d['status'], Content::STATUSES, true ) ? $d['status'] : 'draft';
 		$post   = array(
@@ -147,7 +170,7 @@ class Importer {
 		if ( is_post_type_hierarchical( $type ) && '' !== $parent ) {
 			$par = get_page_by_path( $parent, OBJECT, $type );
 			if ( ! $par ) {
-				return new \WP_Error( 'avesta_sync_parent', sprintf( /* translators: %s: parent page path. */ __( 'Parent not found: %s (sync parent first).', 'avesta-sync' ), $parent ) );
+				return new \WP_Error( 'avesta_sync_parent', sprintf( /* translators: %s: parent page path. */ __( 'The parent page "%s" does not exist on the receiving site yet. Sync it first.', 'avesta-sync' ), $parent ) );
 			}
 			$post['post_parent'] = $par->ID;
 		} elseif ( is_post_type_hierarchical( $type ) ) {
@@ -184,12 +207,12 @@ class Importer {
 			if ( $att ) {
 				set_post_thumbnail( $id, (int) $att[0] );
 			} else {
-				$notes = ' ' . __( '(featured image attachment not found here; sync the media library first)', 'avesta-sync' );
+				$notes = ' ' . __( 'The featured image was not found on the receiving site. Sync the media library first.', 'avesta-sync' );
 			}
 		} else {
 			delete_post_thumbnail( $id );
 		}
-		return ( $existing ? __( 'updated', 'avesta-sync' ) : __( 'created', 'avesta-sync' ) ) . ' #' . $id . $notes;
+		return ( $existing ? __( 'Updated.', 'avesta-sync' ) : __( 'Created.', 'avesta-sync' ) ) . $notes;
 	}
 
 	/**
@@ -257,18 +280,18 @@ class Importer {
 	private static function import_option( array $d ) {
 		$name = isset( $d['name'] ) ? (string) $d['name'] : '';
 		if ( ! in_array( $name, Content::OPTIONS, true ) ) {
-			return new \WP_Error( 'avesta_sync_option', __( 'Option not whitelisted.', 'avesta-sync' ) );
+			return new \WP_Error( 'avesta_sync_option', __( 'This setting is not one that Avesta Sync syncs.', 'avesta-sync' ) );
 		}
 		$val = isset( $d['value'] ) ? $d['value'] : '';
 		if ( in_array( $name, array( 'page_on_front', 'page_for_posts' ), true ) ) {
 			$uri = is_array( $val ) && isset( $val['page'] ) ? (string) $val['page'] : '';
 			if ( '' === $uri ) {
 				update_option( $name, 0 );
-				return __( 'cleared', 'avesta-sync' );
+				return __( 'Cleared.', 'avesta-sync' );
 			}
 			$page = get_page_by_path( $uri, OBJECT, 'page' );
 			if ( ! $page ) {
-				return new \WP_Error( 'avesta_sync_option', sprintf( /* translators: %s: page path. */ __( 'Page not found: %s (sync pages first).', 'avesta-sync' ), $uri ) );
+				return new \WP_Error( 'avesta_sync_option', sprintf( /* translators: %s: page path. */ __( 'The page "%s" does not exist on the receiving site yet. Sync pages first.', 'avesta-sync' ), $uri ) );
 			}
 			update_option( $name, $page->ID );
 		} elseif ( 'show_on_front' === $name ) {
@@ -276,7 +299,7 @@ class Importer {
 		} else {
 			update_option( $name, sanitize_text_field( (string) $val ) );
 		}
-		return __( 'updated', 'avesta-sync' );
+		return __( 'Updated.', 'avesta-sync' );
 	}
 
 	/**
@@ -294,13 +317,18 @@ class Importer {
 			$key = (string) $key;
 			$rec = isset( $current[ $key ] ) ? $current[ $key ] : null;
 			$ok  = false;
-			$msg = __( 'Not found.', 'avesta-sync' );
-			if ( $rec && 'option' === $rec['data']['type'] ) {
+			$msg = __( 'It was not found.', 'avesta-sync' );
+			if ( Woo::is_key( $key ) ) {
+				$gate = Woo::receive_gate( substr( $key, 0, (int) strpos( $key, ':' ) ) );
+				$res  = is_wp_error( $gate ) ? $gate : Woo::delete( $key, $run );
+				$ok  = ! is_wp_error( $res );
+				$msg = $ok ? (string) $res : $res->get_error_message();
+			} elseif ( $rec && 'option' === $rec['data']['type'] ) {
 				$msg = __( 'Options cannot be deleted.', 'avesta-sync' );
 			} elseif ( $rec && 'menu' === $rec['data']['type'] ) {
 				Backup::save_json( $key, $rec['data'], $run );
 				$ok  = Menus::delete( $rec['data']['slug'] );
-				$msg = $ok ? __( 'menu deleted', 'avesta-sync' ) : __( 'delete failed', 'avesta-sync' );
+				$msg = $ok ? __( 'Menu deleted.', 'avesta-sync' ) : __( 'Delete failed.', 'avesta-sync' );
 			} elseif ( $rec && 'media' === $rec['data']['type'] ) {
 				$msg = self::media_on() ? Media::delete( $rec['data'], $key, $run ) : self::media_off();
 				$ok  = ! is_wp_error( $msg );
@@ -311,7 +339,7 @@ class Importer {
 				if ( $found ) {
 					Backup::save_json( $key, $d, $run );
 					$ok  = (bool) wp_trash_post( $found->ID );
-					$msg = $ok ? __( 'moved to trash', 'avesta-sync' ) : __( 'trash failed', 'avesta-sync' );
+					$msg = $ok ? __( 'Moved to Trash.', 'avesta-sync' ) : __( 'It could not be moved to the Trash.', 'avesta-sync' );
 				}
 			}
 			$results[] = array(

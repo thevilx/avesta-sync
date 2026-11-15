@@ -92,6 +92,7 @@ class Rest {
 			'upload_max_filesize' => (int) wp_convert_hr_to_bytes( (string) ini_get( 'upload_max_filesize' ) ),
 			'themes'              => $themes,
 			'plugins'             => Settings::plugin_folders(),
+			'wc'                  => Woo::info(),
 			'time'                => time(),
 		);
 	}
@@ -163,6 +164,14 @@ class Rest {
 		$b     = self::body( $r );
 		$types = isset( $b['types'] ) && is_array( $b['types'] ) ? array_map( 'strval', $b['types'] ) : array( 'all' );
 		$keys  = isset( $b['keys'] ) && is_array( $b['keys'] ) ? array_map( 'strval', $b['keys'] ) : null;
+		foreach ( (array) $keys as $k ) {
+			if ( Woo::is_key( $k ) ) {
+				$gate = Woo::export_gate( substr( $k, 0, (int) strpos( $k, ':' ) ) );
+				if ( is_wp_error( $gate ) ) {
+					return new \WP_Error( $gate->get_error_code(), $gate->get_error_message(), array( 'status' => 403 ) );
+				}
+			}
+		}
 		return array( 'items' => Content::export( $types, ! empty( $b['hashes_only'] ), $keys ) );
 	}
 
@@ -175,7 +184,7 @@ class Rest {
 	public static function content_import( $r ) {
 		self::heavy();
 		$b = self::body( $r );
-		return array( 'results' => Importer::import( isset( $b['items'] ) && is_array( $b['items'] ) ? $b['items'] : array(), isset( $b['run'] ) ? $b['run'] : '' ) );
+		return array( 'results' => Importer::import( isset( $b['items'] ) && is_array( $b['items'] ) ? $b['items'] : array(), isset( $b['run'] ) ? $b['run'] : '', array( 'stock' => ! empty( $b['stock'] ) ) ) );
 	}
 
 	/**

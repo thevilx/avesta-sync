@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="as-panel__head">
 		<div>
 			<h2 class="as-panel__title"><?php esc_html_e( 'Sync', 'avesta-sync' ); ?></h2>
-			<p class="as-panel__lead"><?php esc_html_e( 'Compare both sites, review every difference, then choose what to push or pull. Nothing changes until you apply.', 'avesta-sync' ); ?></p>
+			<p class="as-panel__lead"><?php esc_html_e( 'Compare both sites, review every difference, then choose what to do with each item. Push sends the version on this site to the remote site; pull brings the version on the remote site to this site. Nothing changes until you apply.', 'avesta-sync' ); ?></p>
 		</div>
 		<button type="button" class="as-btn as-btn--primary" id="as-compare">
 			<span class="dashicons dashicons-update" aria-hidden="true"></span>
@@ -19,6 +19,7 @@ defined( 'ABSPATH' ) || exit;
 		</button>
 	</div>
 
+	<div id="as-wc-notices"></div>
 	<div id="as-state"></div>
 	<div id="as-stale" class="as-alert as-alert--warning" role="status" hidden><span class="dashicons dashicons-warning" aria-hidden="true"></span><div class="as-alert__text"><?php esc_html_e( 'Results may be out of date. Compare again.', 'avesta-sync' ); ?></div></div>
 	<div id="as-chips" class="as-chips" role="group" aria-label="<?php esc_attr_e( 'Filter by status', 'avesta-sync' ); ?>" hidden></div>
@@ -30,13 +31,14 @@ defined( 'ABSPATH' ) || exit;
 				<input type="search" id="as-q" class="as-input" placeholder="<?php esc_attr_e( 'Filter by path or name', 'avesta-sync' ); ?>" autocomplete="off">
 			</div>
 			<div class="as-field">
-				<label for="as-scope"><?php esc_html_e( 'Scope', 'avesta-sync' ); ?></label>
+				<label for="as-scope"><?php esc_html_e( 'Section', 'avesta-sync' ); ?></label>
 				<select id="as-scope" class="as-input">
 					<option value="all"><?php esc_html_e( 'All', 'avesta-sync' ); ?></option>
 					<option value="theme"><?php esc_html_e( 'Theme', 'avesta-sync' ); ?></option>
 					<option value="plugins"><?php esc_html_e( 'Plugins', 'avesta-sync' ); ?></option>
 					<option value="content"><?php esc_html_e( 'Content', 'avesta-sync' ); ?></option>
 					<option value="uploads"><?php esc_html_e( 'Media', 'avesta-sync' ); ?></option>
+					<option value="woocommerce"><?php esc_html_e( 'WooCommerce', 'avesta-sync' ); ?></option>
 				</select>
 			</div>
 			<p class="as-filter-count as-muted" id="as-filter-count" role="status"></p>

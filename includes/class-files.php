@@ -304,7 +304,7 @@ class Files {
 			return array( 'ok' => true );
 		}
 		if ( ! Backup::save_file( $abs, $rel, $run ) ) {
-			return new \WP_Error( 'avesta_sync_backup', __( 'Backup failed; not deleted.', 'avesta-sync' ), array( 'status' => 500 ) );
+			return new \WP_Error( 'avesta_sync_backup', __( 'The backup failed, so nothing was deleted.', 'avesta-sync' ), array( 'status' => 500 ) );
 		}
 		if ( ! wp_delete_file( $abs ) && is_file( $abs ) ) {
 			return new \WP_Error( 'avesta_sync_delete', __( 'Cannot delete file.', 'avesta-sync' ), array( 'status' => 500 ) );

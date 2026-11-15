@@ -187,8 +187,12 @@ class Backup {
 		$dir = self::dir() . '/' . self::clean_run( $run ) . '/content';
 		wp_mkdir_p( $dir );
 		self::invalidate( $dir, $run );
-		$safe = trim( preg_replace( '/[^A-Za-z0-9._-]+/', '_', $name ), '._' );
-		return false !== file_put_contents( $dir . '/' . substr( $safe, 0, 150 ) . '.json', wp_json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		$file = substr( trim( preg_replace( '/[^A-Za-z0-9._-]+/', '_', $name ), '._' ), 0, 150 ) . '.json';
+		$ok   = false !== file_put_contents( $dir . '/' . $file, wp_json_encode( $data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		if ( $ok ) {
+			Backup_Labels::save( $dir, $file, $name, $data );
+		}
+		return $ok;
 	}
 
 	/**
@@ -239,7 +243,7 @@ class Backup {
 		$size  = 0;
 		$it    = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $dir, \FilesystemIterator::SKIP_DOTS ) );
 		foreach ( $it as $f ) {
-			if ( $f->isFile() && ! $f->isLink() && '.stats.json' !== $f->getFilename() ) {
+			if ( $f->isFile() && ! $f->isLink() && ! in_array( $f->getFilename(), array( '.stats.json', Backup_Labels::FILE ), true ) ) {
 				++$files;
 				$size += $f->getSize();
 			}
@@ -315,22 +319,23 @@ class Backup {
 	 * Items inside a run.
 	 *
 	 * @param string $run Run id.
-	 * @return array|\WP_Error List of {path,type,size}.
+	 * @return array|\WP_Error List of {path,type,size,label?}.
 	 */
 	public static function items( $run ) {
 		$dir = self::run_dir( $run );
 		if ( is_wp_error( $dir ) ) {
 			return $dir;
 		}
-		$out = array();
-		$it  = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $dir, \FilesystemIterator::SKIP_DOTS ) );
+		$out    = array();
+		$labels = null;
+		$it     = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $dir, \FilesystemIterator::SKIP_DOTS ) );
 		foreach ( $it as $f ) {
 			if ( ! $f->isFile() || $f->isLink() ) {
 				continue;
 			}
 			$rel = ltrim( substr( wp_normalize_path( $f->getPathname() ), strlen( wp_normalize_path( $dir ) ) ), '/' );
 			if ( 0 === strpos( $rel, 'content/' ) ) {
-				if ( '.stats.json' === basename( $rel ) ) {
+				if ( in_array( basename( $rel ), array( '.stats.json', Backup_Labels::FILE ), true ) ) {
 					continue;
 				}
 				$type = 'content';
@@ -342,11 +347,12 @@ class Backup {
 			} else {
 				continue;
 			}
-			$out[] = array(
-				'path' => $rel,
-				'type' => $type,
-				'size' => $f->getSize(),
-			);
+			$row = array( 'path' => $rel, 'type' => $type, 'size' => $f->getSize() );
+			if ( 'content' === $type ) {
+				$labels = null === $labels ? Backup_Labels::read( $dir ) : $labels;
+				$row   += isset( $labels[ basename( $rel ) ] ) ? array( 'label' => $labels[ basename( $rel ) ] ) : array();
+			}
+			$out[] = $row;
 		}
 		usort(
 			$out,
@@ -405,7 +411,7 @@ class Backup {
 		Files::forget( $path );
 		Files::flush();
 		/* translators: %s: relative file path. */
-		return sprintf( __( 'Restored %s (the previous version was backed up).', 'avesta-sync' ), $path );
+		return sprintf( __( 'Restored: %s. The previous version was backed up.', 'avesta-sync' ), $path );
 	}
 
 	/**
@@ -421,12 +427,13 @@ class Backup {
 		if ( ! is_array( $data ) || empty( $data['type'] ) || ! is_string( $data['type'] ) ) {
 			return new \WP_Error( 'avesta_sync_restore', __( 'This backup is not in a restorable format.', 'avesta-sync' ) );
 		}
-		$res = Importer::import( array( basename( $file, '.json' ) => $data ), $new );
+		$res = Importer::import( array( basename( $file, '.json' ) => $data ), $new, array( 'trusted' => true ) );
 		if ( empty( $res[0]['ok'] ) ) {
 			return new \WP_Error( 'avesta_sync_restore', isset( $res[0]['message'] ) ? (string) $res[0]['message'] : __( 'Restore failed.', 'avesta-sync' ) );
 		}
-		/* translators: %s: importer result message. */
-		return sprintf( __( 'Content restored (%s).', 'avesta-sync' ), $res[0]['message'] );
+		$label = Backup_Labels::read( dirname( dirname( $file ) ) )[ basename( $file ) ] ?? '';
+		/* translators: %s: name of the restored item (e.g. a product with its SKU). */
+		return '' !== $label ? sprintf( __( 'Restored: %s. The previous version was backed up.', 'avesta-sync' ), $label ) : __( 'Restored. The previous version was backed up.', 'avesta-sync' );
 	}
 
 	/**

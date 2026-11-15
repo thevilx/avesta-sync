@@ -20,7 +20,7 @@ class Cli {
 	 * ## OPTIONS
 	 *
 	 * [--scope=<scopes>]
-	 * : Comma list of theme,plugins,content,uploads. Defaults to saved settings.
+	 * : Comma list of theme,plugins,content,uploads,woocommerce. Defaults to saved settings.
 	 *
 	 * @param array $args  Positional.
 	 * @param array $assoc Flags.
@@ -37,7 +37,10 @@ class Cli {
 	 * ## OPTIONS
 	 *
 	 * [--scope=<scopes>]
-	 * : Comma list of theme,plugins,content,uploads.
+	 * : Comma list of theme,plugins,content,uploads,woocommerce.
+	 *
+	 * [--stock]
+	 * : Also overwrite WooCommerce stock quantity and status of existing products (default: stock is left alone).
 	 *
 	 * [--yes]
 	 * : Skip confirmation.
@@ -58,7 +61,10 @@ class Cli {
 	 * ## OPTIONS
 	 *
 	 * [--scope=<scopes>]
-	 * : Comma list of theme,plugins,content,uploads.
+	 * : Comma list of theme,plugins,content,uploads,woocommerce.
+	 *
+	 * [--stock]
+	 * : Also overwrite WooCommerce stock quantity and status of existing products (default: stock is left alone).
 	 *
 	 * [--yes]
 	 * : Skip confirmation.
@@ -148,6 +154,14 @@ class Cli {
 		Diff::flush();
 		Files::flush();
 		Schedule::store( $res );
+		if ( ! empty( $res['wc_block'] ) && in_array( 'woocommerce', $s['scopes'], true ) ) {
+			\WP_CLI::warning( $res['wc_message'] );
+		} elseif ( ! empty( $res['wc_warn'] ) && in_array( 'woocommerce', $s['scopes'], true ) ) {
+			\WP_CLI::warning( $res['wc_message'] );
+		}
+		foreach ( (array) $res['wc_notes'] as $note ) {
+			\WP_CLI::warning( $note );
+		}
 		$res['settings'] = $s;
 		$res['client']   = $c;
 		return $res;
@@ -217,6 +231,7 @@ class Cli {
 					'id'     => $r['id'],
 					'action' => $dir,
 					'del'    => false,
+					'stock'  => ! empty( $assoc['stock'] ),
 				),
 				$run
 			);

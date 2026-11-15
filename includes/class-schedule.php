@@ -78,6 +78,11 @@ class Schedule {
 			}
 			$rec['total']     = count( $res['rows'] );
 			$rec['identical'] = (int) $res['identical'];
+			if ( ! empty( $res['wc_skipped'] ) ) {
+				// The WooCommerce scope is on but was not compared (blocked or no sub-option ticked): not "in sync".
+				$rec['wc_skipped'] = true;
+				$rec['wc_block']   = ! empty( $res['wc_block'] ) ? (string) $res['wc_block'] : 'no_options';
+			}
 		}
 		update_option( self::LAST, $rec, false );
 		return $rec;

@@ -59,7 +59,8 @@ class Menus {
 			} ) );
 			sort( $locs );
 			$out[ 'menu:' . $menu->slug ] = array(
-				'label' => 'menu: ' . $menu->name,
+				/* translators: %s: menu name. */
+				'label' => sprintf( __( 'Menu: %s', 'avesta-sync' ), $menu->name ),
 				'data'  => array(
 					'type'      => 'menu',
 					'slug'      => $menu->slug,
@@ -155,7 +156,8 @@ class Menus {
 			}
 		}
 		set_theme_mod( 'nav_menu_locations', $locs );
-		return sprintf( /* translators: %d: number of menu items. */ __( 'menu replaced (%d items)', 'avesta-sync' ), count( $ids ) );
+		/* translators: %d: number of menu items. */
+		return sprintf( _n( 'Menu replaced: %d item.', 'Menu replaced: %d items.', count( $ids ), 'avesta-sync' ), count( $ids ) );
 	}
 
 	/**

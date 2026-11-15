@@ -69,20 +69,25 @@
 		activate( name, opts );
 	};
 
+	/* ?tab= always wins over a leftover #hash on load; the URL is normalised afterwards. */
 	function initial() {
-		var fromQuery = /[?&]tab=([a-z]+)/.exec( window.location.search );
-		if ( fromQuery && valid( fromQuery[ 1 ] ) && /[?&]as_msg=/.test( window.location.search ) ) {
-			return fromQuery[ 1 ]; /* just redirected after a save: ?tab= beats a stale #hash */
+		var q = /[?&]tab=([a-z]+)/.exec( window.location.search );
+		if ( q && valid( q[ 1 ] ) ) {
+			return q[ 1 ];
 		}
 		var hash = ( window.location.hash || '' ).replace( '#', '' );
-		if ( valid( hash ) ) {
-			return hash;
+		return valid( hash ) ? hash : 'dashboard';
+	}
+
+	function normaliseUrl( tab ) {
+		if ( ! window.history || ! history.replaceState ) {
+			return;
 		}
-		var m = /[?&]tab=([a-z]+)/.exec( window.location.search );
-		if ( m && valid( m[ 1 ] ) ) {
-			return m[ 1 ];
-		}
-		return 'dashboard';
+		var params = new URLSearchParams( window.location.search );
+		params.delete( 'tab' );
+		params.delete( 'as_msg' );
+		var qs = params.toString();
+		history.replaceState( null, '', window.location.pathname + ( qs ? '?' + qs : '' ) + '#' + tab );
 	}
 
 	function init() {
@@ -123,13 +128,6 @@
 				UI.showTab( h, { noHash: true } );
 			}
 		} );
-		var start = initial();
-		var redirected = /[?&]as_msg=/.test( window.location.search );
-		/* Drop the one-shot notice arg from the URL but keep the tab. */
-		if ( window.history && history.replaceState && /[?&]as_msg=/.test( window.location.search ) ) {
-			var url = window.location.search.replace( /([?&])as_msg=[^&]*&?/, '$1' ).replace( /[?&]$/, '' );
-			history.replaceState( null, '', window.location.pathname + url + ( redirected ? '' : window.location.hash ) );
-		}
 		var fades = function () {
 			var max = list.scrollWidth - list.clientWidth;
 			var sl = list.scrollLeft;
@@ -142,7 +140,9 @@
 		list.addEventListener( 'scroll', fades );
 		window.addEventListener( 'resize', fades );
 		UI.updateTabFades = fades;
-		activate( start, { noHash: ! redirected && ! window.location.hash && ! /[?&]tab=/.test( window.location.search ) } );
+		var start = initial();
+		activate( start, { noHash: true } );
+		normaliseUrl( start );
 	}
 
 	/* Run a tab's init once without showing it (e.g. to fill the header pill). */

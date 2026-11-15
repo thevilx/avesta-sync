@@ -123,7 +123,7 @@ class Diff {
 				$action = 'pull';
 			}
 			$src    = $l ? $l : $r;
-			$rows[] = array(
+			$row    = array(
 				'id'     => $id,
 				'status' => $status,
 				'action' => $action,
@@ -132,6 +132,10 @@ class Diff {
 				'local'  => $l ? array( 'sha' => $l['sha'], 'size' => isset( $l['size'] ) ? $l['size'] : null ) : null,
 				'remote' => $r ? array( 'sha' => $r['sha'], 'size' => isset( $r['size'] ) ? $r['size'] : null ) : null,
 			);
+			if ( isset( $src['meta'] ) && is_array( $src['meta'] ) ) {
+				$row['meta'] = $src['meta'];
+			}
+			$rows[] = $row;
 		}
 		return array(
 			'rows'      => $rows,

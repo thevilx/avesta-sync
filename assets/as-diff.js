@@ -169,17 +169,50 @@
 	}
 
 	/* Mark equal runs longer than FOLD_MIN as foldable (keeping CONTEXT lines around changes). */
+	/*
+	 * JSON previews: keep the "heading" lines (the lines that open an enclosing object/array) of every
+	 * changed line visible, at every level. One pass with a stack of open headings, no DOM measuring.
+	 * textOf(row) gives the line text (or null to ignore the row), changedOf(row) whether it differs,
+	 * structural(row) whether it may open/close a level (false for added lines in a unified view).
+	 */
+	function pinHeadings( rows, textOf, changedOf, structural ) {
+		var stack = [];
+		var i, k, row, text, indent, trimmed;
+		for ( i = 0; i < rows.length; i++ ) {
+			row = rows[ i ];
+			text = textOf( row );
+			if ( text === null || text.trim() === '' ) {
+				continue;
+			}
+			indent = /^[ \t]*/.exec( text )[ 0 ].replace( /\t/g, '    ' ).length;
+			if ( structural( row ) ) {
+				while ( stack.length && stack[ stack.length - 1 ].indent >= indent ) {
+					stack.pop();
+				}
+			}
+			if ( changedOf( row ) ) {
+				for ( k = 0; k < stack.length; k++ ) {
+					stack[ k ].row.pin = true;
+				}
+			}
+			trimmed = text.trim();
+			if ( structural( row ) && /[\[{],?$/.test( trimmed ) ) {
+				stack.push( { indent: indent, row: row } );
+			}
+		}
+	}
+
 	function plan( rows ) {
 		var out = [];
 		var i = 0;
 		var j, start, end, run;
 		while ( i < rows.length ) {
-			if ( ! rows[ i ].eq ) {
+			if ( ! rows[ i ].eq || rows[ i ].pin ) {
 				out.push( rows[ i++ ] );
 				continue;
 			}
 			j = i;
-			while ( j < rows.length && rows[ j ].eq ) {
+			while ( j < rows.length && rows[ j ].eq && ! rows[ j ].pin ) {
 				j++;
 			}
 			run = j - i;
@@ -205,6 +238,15 @@
 		return c;
 	}
 
+	/* Hanging indent: wrapped continuation lines of a code line start deeper than its own indent. */
+	function hang( c, text ) {
+		var lead = /^[ \t]*/.exec( text )[ 0 ].replace( /\t/g, '    ' ).length;
+		lead = Math.min( lead, 24 );
+		/* The first 2.4ch of the cell is a gutter for the +/- marker (an inline block pulled back into it), clear of the line number. */
+		c.style.paddingLeft = ( lead + 5.4 ) + 'ch';
+		c.style.textIndent = '-' + ( lead + 3 ) + 'ch';
+	}
+
 	function mark( ty ) {
 		return ty === '+' ? '+' : ( ty === '-' ? '-' : '' );
 	}
@@ -218,15 +260,21 @@
 			item.fold.forEach( function ( r ) {
 				frag.appendChild( build( r ) );
 			} );
+			var first = frag.firstChild;
 			tbody.insertBefore( frag, tr );
 			tbody.removeChild( tr );
+			/* Keep keyboard focus inside the modal: the clicked button is gone, so move it to the first revealed row. */
+			if ( first ) {
+				first.tabIndex = -1;
+				first.focus();
+			}
 		}, 'arrow-down-alt2' );
 		td.appendChild( b );
 		tr.appendChild( td );
 		return tr;
 	}
 
-	function renderSide( ops ) {
+	function renderSide( ops, json ) {
 		var table = el( 'table', 'as-diff__table as-diff__table--side' );
 		var tbody = el( 'tbody' );
 		function build( r ) {
@@ -234,6 +282,7 @@
 			tr.appendChild( cell( 'as-diff__n', r.l ? String( r.l.n ) : '' ) );
 			var lt = cell( 'as-diff__c' + ( r.l && r.l.t ? ' is-del' : ( r.l ? '' : ' is-empty' ) ) );
 			if ( r.l ) {
+				hang( lt, r.l.text );
 				lt.appendChild( el( 'span', 'as-diff__m', mark( r.l.t ) ) );
 				lt.appendChild( document.createTextNode( r.l.text ) );
 			}
@@ -241,6 +290,7 @@
 			tr.appendChild( cell( 'as-diff__n', r.r ? String( r.r.n ) : '' ) );
 			var rt = cell( 'as-diff__c' + ( r.r && r.r.t ? ' is-add' : ( r.r ? '' : ' is-empty' ) ) );
 			if ( r.r ) {
+				hang( rt, r.r.text );
 				rt.appendChild( el( 'span', 'as-diff__m', mark( r.r.t ) ) );
 				rt.appendChild( document.createTextNode( r.r.text ) );
 			}
@@ -248,7 +298,17 @@
 			return tr;
 		}
 		var frag = document.createDocumentFragment();
-		plan( sideRows( ops ) ).forEach( function ( item ) {
+		var srows = sideRows( ops );
+		if ( json ) {
+			pinHeadings( srows, function ( r ) {
+				return r.l ? r.l.text : ( r.r ? r.r.text : null );
+			}, function ( r ) {
+				return ! r.eq;
+			}, function () {
+				return true;
+			} );
+		}
+		plan( srows ).forEach( function ( item ) {
 			frag.appendChild( item.fold ? foldRow( item, 4, build, tbody ) : build( item ) );
 		} );
 		tbody.appendChild( frag );
@@ -256,7 +316,7 @@
 		return table;
 	}
 
-	function renderUnified( ops ) {
+	function renderUnified( ops, json ) {
 		var table = el( 'table', 'as-diff__table as-diff__table--uni' );
 		var tbody = el( 'tbody' );
 		function build( r ) {
@@ -264,13 +324,24 @@
 			tr.appendChild( cell( 'as-diff__n', r.a ? String( r.a ) : '' ) );
 			tr.appendChild( cell( 'as-diff__n', r.b ? String( r.b ) : '' ) );
 			var c = cell( 'as-diff__c' + ( r.t === '+' ? ' is-add' : ( r.t === '-' ? ' is-del' : '' ) ) );
+			hang( c, r.text );
 			c.appendChild( el( 'span', 'as-diff__m', mark( r.t ) ) );
 			c.appendChild( document.createTextNode( r.text ) );
 			tr.appendChild( c );
 			return tr;
 		}
 		var frag = document.createDocumentFragment();
-		plan( unifiedRows( ops ) ).forEach( function ( item ) {
+		var urows = unifiedRows( ops );
+		if ( json ) {
+			pinHeadings( urows, function ( r ) {
+				return r.text;
+			}, function ( r ) {
+				return ! r.eq;
+			}, function ( r ) {
+				return r.t !== '+';
+			} );
+		}
+		plan( urows ).forEach( function ( item ) {
 			frag.appendChild( item.fold ? foldRow( item, 3, build, tbody ) : build( item ) );
 		} );
 		tbody.appendChild( frag );
@@ -333,7 +404,8 @@
 	}
 
 	/* Fill the modal body from a preview response. */
-	function fill( body, d ) {
+	function fill( body, d, opts ) {
+		var json = !! ( opts && opts.json );
 		UI.clear( body );
 		if ( d.binary ) {
 			body.appendChild( UI.empty( 'media-default', t.diffBinary ) );
@@ -391,7 +463,7 @@
 			scroller.tabIndex = 0;
 			scroller.setAttribute( 'aria-label', t.diffRegion );
 			scroller.setAttribute( 'dir', 'ltr' );
-			scroller.appendChild( mode === 'side' ? renderSide( ops ) : renderUnified( ops ) );
+			scroller.appendChild( mode === 'side' ? renderSide( ops, json ) : renderUnified( ops, json ) );
 			holder.appendChild( scroller );
 			Object.keys( btns ).forEach( function ( k ) {
 				btns[ k ].setAttribute( 'aria-pressed', k === mode ? 'true' : 'false' );
@@ -411,46 +483,5 @@
 		draw();
 	}
 
-	/*
-	 * Open the diff modal. row: sync row, api: {dirLabel(row,dir), setDir(row,dir), isLocked(row)}.
-	 */
-	UI.openDiff = function ( row, api ) {
-		var body = el( 'div', 'as-diffwrap' );
-		body.appendChild( UI.loading() );
-		var m;
-		var foot = [];
-		if ( ! api.isLocked( row ) ) {
-			foot.push( UI.btn( api.dirLabel( row, 'skip' ), 'as-btn--secondary', function () {
-				api.setDir( row, 'skip' );
-				m.close();
-			} ) );
-			var del = UI.sync && UI.sync.isDeletion;
-			foot.push( UI.btn( api.dirLabel( row, 'pull' ), del && del( row, 'pull' ) ? 'as-btn--danger' : 'as-btn--remote', function () {
-				api.setDir( row, 'pull' );
-				m.close();
-			}, 'arrow-left-alt' ) );
-			foot.push( UI.btn( api.dirLabel( row, 'push' ), del( row, 'push' ) ? 'as-btn--danger' : 'as-btn--primary', function () {
-				api.setDir( row, 'push' );
-				m.close();
-			}, 'arrow-right-alt' ) );
-		}
-		foot.unshift( UI.btn( t.close, 'as-btn--link', function () {
-			m.close();
-		} ) );
-		var path = el( 'p', 'as-diff__path', row.scope === 'content' ? row.label : row.id );
-		path.setAttribute( 'dir', row.scope === 'content' ? 'auto' : 'ltr' );
-		var wrap = el( 'div', 'as-diffouter' );
-		wrap.appendChild( path );
-		wrap.appendChild( body );
-		m = UI.modal( { title: t.diffTitle, body: wrap, footer: foot, wide: true } );
-		if ( ! m ) {
-			return;
-		}
-		UI.post( 'avesta_sync_preview', { scope: row.scope, id: row.id } ).then( function ( d ) {
-			fill( body, d );
-		} ).catch( function ( e ) {
-			UI.clear( body );
-			body.appendChild( UI.errorBox( e.message ) );
-		} );
-	};
+	UI.diffFill = fill;
 }() );

@@ -120,7 +120,7 @@ class Ajax {
 			$s['remote_key'] = $key;
 		}
 		$c    = self::client( $s );
-		$info = $c->info();
+		$info = $c->info( true );
 		if ( is_wp_error( $info ) ) {
 			self::fail( $info );
 		}
@@ -133,7 +133,7 @@ class Ajax {
 				'post_max_size' => size_format( isset( $info['post_max_size'] ) ? (int) $info['post_max_size'] : 0 ),
 				'chunk'         => size_format( $c->chunk_size() ),
 				'themes'        => array_values( array_map( 'strval', wp_list_pluck( isset( $info['themes'] ) ? (array) $info['themes'] : array(), 'slug' ) ) ),
-			)
+			) + Woo::preflight( $info )
 		);
 	}
 
@@ -174,6 +174,7 @@ class Ajax {
 			'id'     => isset( $raw['id'] ) && is_string( $raw['id'] ) ? $raw['id'] : '',
 			'action' => isset( $raw['action'] ) && is_string( $raw['action'] ) ? sanitize_key( $raw['action'] ) : '',
 			'del'    => ! empty( $raw['del'] ),
+			'stock'  => ! empty( $raw['stock'] ),
 			'label'  => isset( $raw['label'] ) && is_string( $raw['label'] ) ? mb_substr( sanitize_text_field( $raw['label'] ), 0, 300, 'UTF-8' ) : '',
 		);
 		$run  = Backup::clean_run( self::post_str( 'run', 20 ) );
@@ -213,9 +214,10 @@ class Ajax {
 		$connected  = null;
 		$error      = '';
 		$remote     = null;
+		$wc         = Woo::preflight( array(), false );
 		if ( $configured && '1' === self::post_str( 'ping', 4 ) ) {
 			$c    = Client::from_settings( $s );
-			$info = is_wp_error( $c ) ? $c : $c->info();
+			$info = is_wp_error( $c ) ? $c : $c->info( true );
 			if ( is_wp_error( $info ) ) {
 				$connected = false;
 				$error     = $info->get_error_message();
@@ -228,6 +230,7 @@ class Ajax {
 					'wp'      => isset( $info['wp_version'] ) ? (string) $info['wp_version'] : '',
 					'php'     => isset( $info['php_version'] ) ? (string) $info['php_version'] : '',
 				);
+				$wc        = Woo::preflight( $info );
 			}
 		}
 		$hist = History::all();
@@ -249,7 +252,9 @@ class Ajax {
 				'total'     => (int) $check['total'],
 				'identical' => (int) $check['identical'],
 				'counts'    => (object) $check['counts'],
-				'error'     => (string) $check['error'],
+				'error'      => (string) $check['error'],
+				'wc_skipped' => ! empty( $check['wc_skipped'] ),
+				'wc_block'   => isset( $check['wc_block'] ) ? (string) $check['wc_block'] : '',
 			);
 		}
 		$runs = Backup::runs();
@@ -270,7 +275,7 @@ class Ajax {
 					'next' => Schedule::next(),
 				),
 				'scopes'     => array_values( $s['scopes'] ),
-			)
+			) + $wc
 		);
 	}
 

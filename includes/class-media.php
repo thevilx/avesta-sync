@@ -132,7 +132,8 @@ class Media {
 		$gmt = '0000-00-00 00:00:00' === $p->post_date_gmt ? '' : $p->post_date_gmt;
 		return array(
 			'key'   => self::PREFIX . $file,
-			'label' => 'media: ' . ( '' !== $p->post_title ? $p->post_title : basename( $file ) ),
+			/* translators: %s: media title or file name. */
+			'label' => sprintf( __( 'Media: %s', 'avesta-sync' ), '' !== $p->post_title ? $p->post_title : basename( $file ) ),
 			'data'  => array(
 				'type'        => 'media',
 				'file'        => $file,
@@ -261,7 +262,7 @@ class Media {
 		} else {
 			delete_post_meta( $id, '_wp_attachment_metadata' );
 		}
-		return ( $existing ? __( 'updated', 'avesta-sync' ) : __( 'created', 'avesta-sync' ) ) . ' #' . $id;
+		return $existing ? __( 'Updated.', 'avesta-sync' ) : __( 'Created.', 'avesta-sync' );
 	}
 
 	/**
@@ -276,14 +277,14 @@ class Media {
 	public static function delete( array $d, $key, $run ) {
 		$p = self::find( self::str( $d, 'file' ) );
 		if ( ! $p ) {
-			return new \WP_Error( 'avesta_sync_media', __( 'Not found.', 'avesta-sync' ) );
+			return new \WP_Error( 'avesta_sync_media', __( 'It was not found.', 'avesta-sync' ) );
 		}
 		if ( ! Backup::save_json( $key, $d, $run ) ) {
-			return new \WP_Error( 'avesta_sync_backup', __( 'Backup failed; not deleted.', 'avesta-sync' ) );
+			return new \WP_Error( 'avesta_sync_backup', __( 'The backup failed, so nothing was deleted.', 'avesta-sync' ) );
 		}
 		add_filter( 'wp_delete_file', '__return_empty_string', PHP_INT_MAX );
 		$res = wp_delete_attachment( $p->ID, true );
 		remove_filter( 'wp_delete_file', '__return_empty_string', PHP_INT_MAX );
-		return $res ? __( 'media row deleted (files kept)', 'avesta-sync' ) : new \WP_Error( 'avesta_sync_media', __( 'delete failed', 'avesta-sync' ) );
+		return $res ? __( 'Media entry deleted. The files were kept.', 'avesta-sync' ) : new \WP_Error( 'avesta_sync_media', __( 'Delete failed.', 'avesta-sync' ) );
 	}
 }

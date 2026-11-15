@@ -43,10 +43,12 @@ class Admin {
 			'core'     => 'as-core.js',
 			'tabs'     => 'as-tabs.js',
 			'diff'     => 'as-diff.js',
+			'diffmodal' => 'as-diff-modal.js',
 			'sync'     => 'as-sync.js',
 			'syncrun'  => 'as-sync-run.js',
 			'apply'    => 'as-apply.js',
 			'panels'   => 'as-panels.js',
+			'backups'  => 'as-backups.js',
 			'history'  => 'as-history.js',
 			'settings' => 'as-settings.js',
 		);

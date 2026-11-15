@@ -38,6 +38,42 @@
 		$( 'as-chips' ).hidden = ! on;
 	}
 
+	/* Preflight notices: blocked / version warning / skipped items. */
+	function wcNotices( d ) {
+		var host = UI.clear( $( 'as-wc-notices' ) );
+		if ( d.wc_block ) {
+			/* Any block reason (current or future): the server's ready-made message, with a generic fallback. */
+			host.appendChild( notice( 'warning', 'warning', d.wc_message || t.wcBlockedGeneric ) );
+		} else if ( d.wc_warn && d.wc_message ) {
+			host.appendChild( notice( 'info', 'info', d.wc_message ) );
+		}
+		var notes = d.wc_notes || [];
+		if ( notes.length ) {
+			var det = el( 'details', 'as-skipped' );
+			var sm = el( 'summary', 'as-skipped__sum' );
+			sm.appendChild( UI.msg( 'wcSkipped', notes.length, [ UI.num( notes.length ) ] ) );
+			det.appendChild( sm );
+			var ul = el( 'ul', 'as-skipped__list' );
+			notes.forEach( function ( n ) {
+				var li = el( 'li', '', n );
+				li.setAttribute( 'dir', 'auto' );
+				ul.appendChild( li );
+			} );
+			det.appendChild( ul );
+			host.appendChild( det );
+		}
+	}
+
+	function notice( kind, icon, text ) {
+		var box = el( 'div', 'as-alert as-alert--' + kind );
+		box.setAttribute( 'role', 'status' );
+		box.appendChild( UI.icon( icon ) );
+		var tx = el( 'div', 'as-alert__text', text );
+		tx.setAttribute( 'dir', 'auto' );
+		box.appendChild( tx );
+		return box;
+	}
+
 	function compare() {
 		if ( S.busy ) {
 			return;
@@ -48,6 +84,7 @@
 		btn.classList.add( 'is-loading' );
 		showResults( false );
 		$( 'as-stale' ).hidden = true;
+		UI.clear( $( 'as-wc-notices' ) );
 		S.stale = false;
 		$( 'as-run' ).hidden = true;
 		setState( UI.loading( t.comparing ) );
@@ -72,6 +109,12 @@
 			S.groups.forEach( function ( g, i ) {
 				g.expanded = S.rows.length <= 300 || i < 3;
 			} );
+			wcNotices( d );
+			if ( ! S.rows.length && d.wc_block ) {
+				/* Blocked WooCommerce: do not claim everything is identical, only what was actually compared. */
+				setState( d.identical ? UI.empty( 'yes-alt', t.wcOthersTitle, UI.msgText( 'nothingText', null, [ UI.num( d.identical ) ] ) ) : null );
+				return;
+			}
 			if ( ! S.rows.length ) {
 				setState( UI.empty( 'yes-alt', t.nothingTitle, UI.msgText( 'nothingText', null, [ UI.num( d.identical ) ] ) ) );
 				UI.announce( t.nothingTitle );

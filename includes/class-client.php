@@ -185,17 +185,30 @@ class Client {
 	}
 
 	/**
-	 * Remote info.
+	 * Remote info (cached on this object, and for 60 seconds per remote URL so that a bulk of
+	 * separate apply requests does not ask again for every item).
 	 *
+	 * @param bool $fresh Ignore the caches (connection tests, compare).
 	 * @return array|\WP_Error
 	 */
-	public function info() {
+	public function info( $fresh = false ) {
+		$key = 'avesta_sync_info_' . md5( $this->base );
+		if ( $fresh ) {
+			$this->info = null;
+		}
+		if ( null === $this->info && ! $fresh ) {
+			$hit = get_transient( $key );
+			if ( is_array( $hit ) ) {
+				$this->info = $hit;
+			}
+		}
 		if ( null === $this->info ) {
 			$r = $this->request( 'GET', 'info' );
 			if ( is_wp_error( $r ) ) {
 				return $r;
 			}
 			$this->info = $r;
+			set_transient( $key, $r, 60 );
 		}
 		return $this->info;
 	}
@@ -251,10 +264,15 @@ class Client {
 	 *
 	 * @param array  $items key => data.
 	 * @param string $run   Run id.
+	 * @param bool   $stock Overwrite WooCommerce stock on existing products.
 	 * @return array|\WP_Error
 	 */
-	public function content_import( array $items, $run ) {
-		return $this->request( 'POST', 'content/import', array( 'items' => $items, 'run' => $run ) );
+	public function content_import( array $items, $run, $stock = false ) {
+		$payload = array( 'items' => $items, 'run' => $run );
+		if ( $stock ) {
+			$payload['stock'] = true;
+		}
+		return $this->request( 'POST', 'content/import', $payload );
 	}
 
 	/**

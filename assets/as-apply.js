@@ -27,6 +27,10 @@
 		return li;
 	}
 
+	function isProduct( r ) {
+		return r.scope === 'woocommerce' && r.group === 'wc_products';
+	}
+
 	function confirmModal( items ) {
 		var c = sync.counts();
 		var body = el( 'div', 'as-confirm' );
@@ -44,6 +48,28 @@
 			w.appendChild( UI.msg( 'deleteWarn', c.del, [ UI.num( c.del ) ] ) );
 			body.appendChild( w );
 		}
+		var stockCb = null;
+		if ( sync.selected().some( isProduct ) ) {
+			/* Always starts unticked: live stock is only overwritten by an explicit choice per run. */
+			var box = el( 'label', 'as-stockopt' );
+			stockCb = el( 'input' );
+			stockCb.type = 'checkbox';
+			stockCb.checked = false;
+			var sb = el( 'span', 'as-stockopt__body' );
+			sb.appendChild( el( 'span', 'as-stockopt__title', t.stockLabel ) );
+			sb.appendChild( el( 'span', 'as-stockopt__hint as-muted', t.stockHint ) );
+			box.appendChild( stockCb );
+			box.appendChild( sb );
+			body.appendChild( box );
+			var warn = el( 'p', 'as-summary__stock' );
+			warn.appendChild( UI.icon( 'warning' ) );
+			warn.appendChild( el( 'span', '', t.stockWarn ) );
+			warn.hidden = true;
+			body.appendChild( warn );
+			stockCb.addEventListener( 'change', function () {
+				warn.hidden = ! stockCb.checked;
+			} );
+		}
 		body.appendChild( el( 'p', 'as-muted as-modal__text', t.backupNote ) );
 		UI.confirm( {
 			title: t.applyTitle,
@@ -51,7 +77,7 @@
 			confirmLabel: UI.msgText( 'applyN', c.total, [ UI.num( c.total ) ] ),
 			danger: c.del > 0,
 			onConfirm: function () {
-				run( sync.selected() );
+				run( sync.selected(), stockCb ? stockCb.checked : false );
 			}
 		} );
 	}
@@ -85,7 +111,7 @@
 		confirmModal( { pushDel: pd, pullDel: ld } );
 	}
 
-	function finish( okN, failN, left, failed, media ) {
+	function finish( okN, failN, left, failed, media, stockUsed ) {
 		window.removeEventListener( 'beforeunload', onBeforeUnload );
 		sync.setBusy( false );
 		$( 'as-stop' ).hidden = true;
@@ -102,6 +128,12 @@
 			sp.appendChild( UI.msg( 'stopped', left, [ UI.num( left ) ] ) );
 			sum.appendChild( sp );
 		}
+		if ( stockUsed ) {
+			var so = el( 'p', 'as-summary__line as-summary__stock' );
+			so.appendChild( UI.icon( 'warning' ) );
+			so.appendChild( el( 'span', '', t.stockSummary ) );
+			sum.appendChild( so );
+		}
 		if ( media ) {
 			sum.appendChild( el( 'p', 'as-summary__line as-muted', t.mediaNote ) );
 		}
@@ -115,7 +147,7 @@
 					return ! r.done && r.dir !== 'skip';
 				} );
 				if ( again.length ) {
-					run( again );
+					run( again, stockUsed );
 				}
 			}, 'update' );
 			if ( S.stale ) {
@@ -128,7 +160,7 @@
 		sync.refreshBar();
 	}
 
-	function run( rows ) {
+	function run( rows, stock ) {
 		var queue = rows.slice().sort( function ( a, b ) {
 			return a.ord - b.ord;
 		} );
@@ -137,6 +169,7 @@
 		var failN = 0;
 		var failed = [];
 		var media = false;
+		var stockUsed = !! stock && rows.some( isProduct );
 		stopRequested = false;
 		window.addEventListener( 'beforeunload', onBeforeUnload );
 		queue.forEach( function ( r ) {
@@ -165,7 +198,7 @@
 		function next( i ) {
 			progressText( i );
 			if ( stopRequested || i >= total ) {
-				finish( okN, failN, total - i, failed, media );
+				finish( okN, failN, total - i, failed, media, stockUsed );
 				return;
 			}
 			var r = queue[ i ];
@@ -176,7 +209,7 @@
 			logLine( UI.fmt( t.logItem, UI.num( i + 1 ), UI.num( total ), verb, sync.label( r ) ) + ( size ? ' (' + UI.fmtSize( size ) + ')' : '' ) + ' ...' );
 			UI.post( 'avesta_sync_apply', {
 				run: S.run,
-				item: JSON.stringify( { scope: r.scope, id: r.id, action: dir, del: del, label: r.label } )
+				item: JSON.stringify( { scope: r.scope, id: r.id, action: dir, del: del, label: r.label, stock: stockUsed && isProduct( r ) } )
 			} ).then( function ( d ) {
 				okN++;
 				if ( r.scope === 'uploads' && ! del ) {

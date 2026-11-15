@@ -64,7 +64,7 @@
 				var main = el( 'div', 'as-item__main' );
 				main.appendChild( el( 'span', 'as-status ' + ( it.ok ? 'st-ok' : 'st-conflict' ), it.ok ? t.ok : t.failed ) );
 				main.appendChild( el( 'span', 'as-tag', actionText( it ) ) );
-				var isContent = it.scope === 'content';
+				var isContent = it.scope === 'content' || it.scope === 'woocommerce';
 				var p = el( 'span', isContent ? 'as-label' : 'as-path', isContent ? it.label : it.id );
 				p.setAttribute( 'dir', isContent ? 'auto' : 'ltr' );
 				main.appendChild( p );

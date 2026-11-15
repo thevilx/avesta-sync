@@ -78,6 +78,10 @@ class Content {
 	public static function post_types() {
 		$all = get_post_types( array( 'show_ui' => true ), 'names' );
 		$ex  = array( 'attachment', 'nav_menu_item', 'revision', 'customize_changeset', 'oembed_cache', 'user_request', 'wp_font_family', 'wp_font_face', 'wp_navigation', 'wp_template', 'wp_template_part', 'wp_global_styles' );
+		if ( Woo::active() ) {
+			// Products, variations, coupons and orders are handled by the WooCommerce scope (or not at all), never as raw posts.
+			$ex = array_merge( $ex, array( 'product', 'product_variation', 'shop_coupon' ) );
+		}
 		$out = array();
 		foreach ( array_diff( $all, $ex ) as $t ) {
 			if ( 0 !== strpos( $t, 'flamingo_' ) && 0 !== strpos( $t, 'shop_order' ) ) {
@@ -117,7 +121,7 @@ class Content {
 	/**
 	 * Export items.
 	 *
-	 * @param array      $groups      Any of posts, templates, menus, options, media (or 'all' = all but media).
+	 * @param array      $groups      Any of posts, templates, menus, options, media, wc_* (or 'all' = all but media).
 	 * @param bool       $hashes_only Omit data.
 	 * @param array|null $keys        Restrict to these keys.
 	 * @return array key => {hash,label,ord,data?}
@@ -158,13 +162,19 @@ class Content {
 			foreach ( self::OPTIONS as $name ) {
 				$key = 'option:' . $name;
 				if ( null === $keys || in_array( $key, $keys, true ) ) {
-					$out[ $key ] = self::pack( self::export_option( $name ), $name, 90, $hashes_only );
+					$out[ $key ] = self::pack( self::export_option( $name ), self::option_label( $name ), 90, $hashes_only );
 				}
 			}
 		}
 		if ( in_array( 'media', $groups, true ) ) {
 			foreach ( Media::export( $keys ) as $key => $item ) {
 				$out[ $key ] = self::pack( $item['data'], $item['label'], 5, $hashes_only );
+			}
+		}
+		$wc = array_values( array_intersect( $groups, Woo::GROUPS ) );
+		if ( $wc ) {
+			foreach ( Woo::export( $wc, $hashes_only, $keys ) as $key => $rec ) {
+				$out[ $key ] = $rec;
 			}
 		}
 		return $out;
@@ -278,9 +288,37 @@ class Content {
 		return array(
 			'key'   => $key,
 			'data'  => $data,
-			'label' => $type . ': ' . ( '' !== $p->post_title ? $p->post_title : $p->post_name ),
+			'label' => self::type_label( $type ) . ': ' . ( '' !== $p->post_title ? $p->post_title : $p->post_name ),
 			'ord'   => 10 + substr_count( $key, '/' ) + ( '' !== $theme ? -2 : 0 ),
 		);
+	}
+
+	/**
+	 * Plain-language singular name of a post type.
+	 *
+	 * @param string $type Post type.
+	 * @return string
+	 */
+	public static function type_label( $type ) {
+		$o = get_post_type_object( $type );
+		return $o && ! empty( $o->labels->singular_name ) ? (string) $o->labels->singular_name : $type;
+	}
+
+	/**
+	 * Plain-language name of a synced option.
+	 *
+	 * @param string $name Option name.
+	 * @return string
+	 */
+	public static function option_label( $name ) {
+		$map = array(
+			'blogname'        => __( 'Site title', 'avesta-sync' ),
+			'blogdescription' => __( 'Tagline', 'avesta-sync' ),
+			'show_on_front'   => __( 'Homepage displays', 'avesta-sync' ),
+			'page_on_front'   => __( 'Homepage', 'avesta-sync' ),
+			'page_for_posts'  => __( 'Posts page', 'avesta-sync' ),
+		);
+		return isset( $map[ $name ] ) ? $map[ $name ] : $name;
 	}
 
 	/**

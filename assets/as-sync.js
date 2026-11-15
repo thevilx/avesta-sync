@@ -20,7 +20,8 @@
 		'remote-deleted': 'trash',
 		conflict: 'warning'
 	};
-	var SCOPE_ORDER = { theme: 1, plugins: 2, content: 3, uploads: 4 };
+	var SCOPE_ORDER = { theme: 1, plugins: 2, content: 3, uploads: 4, woocommerce: 5 };
+	var WC_ORDER = { wc_attributes: 1, wc_terms: 2, wc_products: 3, wc_coupons: 4, wc_settings: 5 };
 	var PAGE = 100;
 
 	var S = {
@@ -79,8 +80,17 @@
 		setDir( r, on ? ( r.last || defaultDir( r ) ) : 'skip' );
 	}
 
+	/* Content and WooCommerce rows are prose labels, not file paths. */
+	function isProse( scope ) {
+		return scope === 'content' || scope === 'woocommerce';
+	}
+
 	function label( r ) {
-		return r.scope === 'content' ? r.label : r.id;
+		return isProse( r.scope ) ? r.label : r.id;
+	}
+
+	function groupTitle( scope, name ) {
+		return scope === 'woocommerce' && t.wcGroups[ name ] ? t.wcGroups[ name ] : name;
 	}
 
 	function visible( r ) {
@@ -95,11 +105,18 @@
 	}
 
 	/* ---------- row & group DOM ---------- */
-	function sideText( s, lbl ) {
-		var span = el( 'span', 'as-size' );
+	/* Size info per side. Items without byte sizes (content, WooCommerce) show nothing when present; a side lacking the item says so. */
+	function sideText( s, lbl, missing, side ) {
+		if ( ! s ) {
+			return el( 'span', 'as-size as-size--missing', missing );
+		}
+		if ( s.size === null || s.size === undefined ) {
+			return null;
+		}
+		var span = el( 'span', 'as-size as-size--' + side );
 		span.appendChild( el( 'span', 'as-size__k', lbl ) );
 		var v = el( 'span', 'as-size__v' );
-		v.appendChild( el( 'bdi', '', s ? ( s.size !== null && s.size !== undefined ? UI.fmtSize( s.size ) : t.present ) : t.absent ) );
+		v.appendChild( el( 'bdi', '', UI.fmtSize( s.size ) ) );
 		span.appendChild( v );
 		return span;
 	}
@@ -117,10 +134,23 @@
 		li.appendChild( cbl );
 
 		var main = el( 'div', 'as-row__main' );
-		var isContent = r.scope === 'content';
-		var path = el( 'span', isContent ? 'as-label' : 'as-path', label( r ) );
-		path.setAttribute( 'dir', isContent ? 'auto' : 'ltr' );
+		var path;
+		if ( isProse( r.scope ) ) {
+			path = UI.proseLabel( r.label, r.meta && r.meta.sku, r.meta && r.meta.name );
+		} else {
+			path = el( 'span', 'as-path', label( r ) );
+			path.setAttribute( 'dir', 'ltr' );
+		}
 		main.appendChild( path );
+		if ( r.scope === 'woocommerce' && r.meta && r.meta.type && r.meta.type !== 'simple' ) {
+			var tb = el( 'span', 'as-tag as-tag--wctype', t.wcTypes[ r.meta.type ] || r.meta.type );
+			main.appendChild( tb );
+			if ( r.meta.type === 'variable' && r.meta.variations ) {
+				var nv = el( 'span', 'as-muted as-row__vars' );
+				nv.appendChild( UI.msg( 'nVariations', r.meta.variations, [ UI.num( r.meta.variations ) ] ) );
+				main.appendChild( nv );
+			}
+		}
 		var st = el( 'span', 'as-status st-' + r.status );
 		st.appendChild( UI.icon( STATUS_ICON[ r.status ] || 'marker' ) );
 		st.appendChild( el( 'span', '', t.status[ r.status ] || r.status ) );
@@ -130,8 +160,11 @@
 		li.appendChild( main );
 
 		var sizes = el( 'div', 'as-row__sizes' );
-		sizes.appendChild( sideText( r.local, t.local ) );
-		sizes.appendChild( sideText( r.remote, t.remote ) );
+		[ sideText( r.local, t.local, t.notLocal, 'local' ), sideText( r.remote, t.remote, t.notRemote, 'remote' ) ].forEach( function ( n ) {
+			if ( n ) {
+				sizes.appendChild( n );
+			}
+		} );
 		li.appendChild( sizes );
 
 		var dirWrap = el( 'div', 'as-row__dir' );
@@ -201,7 +234,7 @@
 		var cbl = el( 'label', 'as-group__check' );
 		var cb = el( 'input' );
 		cb.type = 'checkbox';
-		cb.setAttribute( 'aria-label', UI.fmt( t.selectGroup, g.name ) );
+		cb.setAttribute( 'aria-label', UI.fmt( t.selectGroup, groupTitle( g.scope, g.name ) ) );
 		cb.addEventListener( 'change', function () {
 			g.vis.forEach( function ( r ) {
 				if ( ! r.done ) {
@@ -215,8 +248,9 @@
 		var tg = el( 'button', 'as-group__toggle' );
 		tg.type = 'button';
 		tg.appendChild( UI.icon( 'arrow-down-alt2' ) );
-		var nm = el( 'span', 'as-group__name', g.name );
-		nm.setAttribute( 'dir', 'ltr' );
+		var prose = g.scope === 'woocommerce';
+		var nm = el( 'span', 'as-group__name' + ( prose ? ' is-prose' : '' ), groupTitle( g.scope, g.name ) );
+		nm.setAttribute( 'dir', prose ? 'auto' : 'ltr' );
 		tg.appendChild( el( 'span', 'as-tag as-tag--' + g.scope, t.scopes[ g.scope ] || g.scope ) );
 		tg.appendChild( nm );
 		var cnt = el( 'span', 'as-group__count as-muted' );
@@ -356,7 +390,14 @@
 			map[ key ].rows.push( r );
 		} );
 		groups.sort( function ( a, b ) {
-			return ( ( SCOPE_ORDER[ a.scope ] || 9 ) - ( SCOPE_ORDER[ b.scope ] || 9 ) ) || a.name.localeCompare( b.name );
+			var so = ( SCOPE_ORDER[ a.scope ] || 9 ) - ( SCOPE_ORDER[ b.scope ] || 9 );
+			if ( so ) {
+				return so;
+			}
+			if ( a.scope === 'woocommerce' ) {
+				return ( WC_ORDER[ a.name ] || 9 ) - ( WC_ORDER[ b.name ] || 9 );
+			}
+			return a.name.localeCompare( b.name );
 		} );
 		groups.forEach( function ( g ) {
 			g.rows.sort( function ( a, b ) {

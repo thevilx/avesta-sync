@@ -27,13 +27,24 @@ Free and open source (GPL-2.0-or-later). Two-way sync (push/pull) of theme files
 
 ## CLI
 ```
-wp avesta-sync status  [--scope=theme,plugins,content,uploads]
-wp avesta-sync push    [--scope=...] [--dry-run] [--yes]
-wp avesta-sync pull    [--scope=...] [--dry-run] [--yes]
+wp avesta-sync status  [--scope=theme,plugins,content,uploads,woocommerce]
+wp avesta-sync push    [--scope=...] [--dry-run] [--stock] [--yes]
+wp avesta-sync pull    [--scope=...] [--dry-run] [--stock] [--yes]
 wp avesta-sync backups
 wp avesta-sync restore <run> <path>
 ```
 On Studio: `studio wp avesta-sync ...`. CLI push/pull applies only the default direction; conflicts and deletions are left for the admin UI.
+
+## WooCommerce
+Optional section, must be enabled on both sites (same major WooCommerce version). Spec: `SPEC.md`.
+
+- Items: `wc_attr:<slug>`, `wc_term:<taxonomy>:<slug>`, `wc_product:sku:<sku>` or `wc_product:slug:<slug>` (variations embedded), `wc_coupon:<code>`, `wc_set:<group>`.
+- All writes go through the WooCommerce CRUD API; references (linked products, terms, images) travel as SKU, slug or file path, never IDs.
+- Never written: orders, customers, sessions, reviews, sales counts, coupon usage, gateway settings, API keys, webhooks, email settings.
+- Stock state (manage stock, backorders, quantity, status, low-stock amount) is excluded from hashes and written only on create or when the run carries the stock flag (`--stock` on the CLI, the checkbox in the apply dialog).
+- Store settings are an allow-list with typed values (`includes/woo/class-woo-settings.php`); shipping methods are limited to flat rate, free shipping and local pickup.
+- The receiving site enforces its own section and sub-option switches for import, delete and export.
+- Filters: `avesta_sync_wc_product_types`, `avesta_sync_wc_setting_keys` (remove only), `avesta_sync_wc_shipping_methods` (add only).
 
 ## Exclude patterns
 One glob per line in Settings, matched against the relative path (`themes/my-theme/src/*`). A pattern without `/` matches the file name (`*.map`). They filter the compare list on both sides; they are a convenience, not a security boundary.
