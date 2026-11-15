@@ -1,6 +1,10 @@
+<p align="center">
+  <img src=".wordpress-org/banner-1544x500.png" alt="Avesta Sync: push and pull only what changed between two WordPress sites. 100% free and open source." width="100%">
+</p>
+
 # Avesta Sync
 
-Two-way sync (push/pull) of theme files, plugin folders, content and media between two WordPress sites. Only items whose SHA-256 differs are transferred, in chunks, over a signed REST API. The user-facing description lives in `readme.txt`; this file is for developers.
+Free and open source (GPL-2.0-or-later). Two-way sync (push/pull) of theme files, plugin folders, content and media between two WordPress sites. Only items whose SHA-256 differs are transferred, in chunks, over a signed REST API. The user-facing description lives in `readme.txt`; this file is for developers.
 
 ## Setup
 1. Install and activate the plugin on both sites (a secret key is generated on activation).
