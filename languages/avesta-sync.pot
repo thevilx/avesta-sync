@@ -1,0 +1,1491 @@
+# Copyright (C) 2026 AvestaTech
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Avesta Sync 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/avesta-sync\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-15T18:48:40+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: avesta-sync\n"
+
+#. Plugin Name of the plugin
+#: avesta-sync.php
+#: includes/class-admin.php:33
+#: includes/class-admin.php:154
+#: includes/views/i18n.php:88
+msgid "Avesta Sync"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: avesta-sync.php
+msgid "https://avestatech.ir"
+msgstr ""
+
+#. Description of the plugin
+#: avesta-sync.php
+msgid "Hash-based two-way sync (push/pull) of theme files, custom plugins, content and media between a local site and production over a signed REST API. Only changed items are transferred."
+msgstr ""
+
+#. Author of the plugin
+#: avesta-sync.php
+msgid "AvestaTech"
+msgstr ""
+
+#: includes/class-admin.php:89
+#: includes/class-admin.php:104
+#: includes/class-admin.php:136
+#: includes/class-ajax.php:46
+msgid "Not allowed."
+msgstr ""
+
+#: includes/class-admin.php:143
+#: includes/views/dashboard.php:12
+msgid "Dashboard"
+msgstr ""
+
+#: includes/class-admin.php:144
+#: includes/views/sync.php:13
+msgid "Sync"
+msgstr ""
+
+#: includes/class-admin.php:145
+#: includes/views/backups.php:12
+#: includes/views/i18n.php:77
+#: includes/views/settings.php:155
+msgid "Backups"
+msgstr ""
+
+#: includes/class-admin.php:146
+#: includes/views/history.php:12
+msgid "History"
+msgstr ""
+
+#: includes/class-admin.php:147
+#: includes/views/settings.php:29
+msgid "Settings"
+msgstr ""
+
+#: includes/class-admin.php:157
+#: includes/views/i18n.php:42
+msgid "Checking connection..."
+msgstr ""
+
+#: includes/class-admin.php:161
+msgid "Avesta Sync sections"
+msgstr ""
+
+#: includes/class-ajax.php:36
+msgid "POST required."
+msgstr ""
+
+#: includes/class-ajax.php:148
+msgid "No scope selected. Tick at least one scope and save settings."
+msgstr ""
+
+#: includes/class-ajax.php:170
+msgid "Bad request."
+msgstr ""
+
+#: includes/class-ajax.php:319
+#: includes/views/i18n.php:287
+msgid "Backup deleted."
+msgstr ""
+
+#: includes/class-ajax.php:336
+#: includes/views/i18n.php:293
+msgid "History cleared."
+msgstr ""
+
+#: includes/class-auth.php:82
+msgid "Too many failed attempts. Try again later."
+msgstr ""
+
+#: includes/class-auth.php:86
+msgid "Sync is not configured on this site."
+msgstr ""
+
+#: includes/class-auth.php:106
+msgid "Invalid or expired signature."
+msgstr ""
+
+#: includes/class-backup.php:212
+#: includes/class-backup.php:446
+msgid "Invalid backup run."
+msgstr ""
+
+#: includes/class-backup.php:216
+msgid "Backup run not found."
+msgstr ""
+
+#: includes/class-backup.php:389
+msgid "Backup file not found."
+msgstr ""
+
+#: includes/class-backup.php:392
+#: includes/class-files.php:225
+msgid "Target is a directory."
+msgstr ""
+
+#: includes/class-backup.php:395
+#: includes/class-files.php:274
+msgid "Refused: PHP file fails to parse."
+msgstr ""
+
+#: includes/class-backup.php:398
+#: includes/class-files.php:277
+msgid "Backup of existing file failed; not overwritten."
+msgstr ""
+
+#: includes/class-backup.php:402
+#: includes/class-files.php:282
+msgid "Cannot move file into place."
+msgstr ""
+
+#. translators: %s: relative file path.
+#: includes/class-backup.php:408
+#, php-format
+msgid "Restored %s (the previous version was backed up)."
+msgstr ""
+
+#: includes/class-backup.php:422
+msgid "This backup is not in a restorable format."
+msgstr ""
+
+#: includes/class-backup.php:426
+msgid "Restore failed."
+msgstr ""
+
+#. translators: %s: importer result message.
+#: includes/class-backup.php:429
+#, php-format
+msgid "Content restored (%s)."
+msgstr ""
+
+#: includes/class-backup.php:457
+msgid "Could not delete the backup run."
+msgstr ""
+
+#: includes/class-client.php:65
+msgid "Remote URL and key are not configured."
+msgstr ""
+
+#: includes/class-client.php:98
+msgid "Invalid remote URL."
+msgstr ""
+
+#: includes/class-client.php:101
+msgid "Remote URL must use HTTPS."
+msgstr ""
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:144
+#, php-format
+msgid "Remote redirected (HTTP %d). Use the final HTTPS URL of the remote site."
+msgstr ""
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:152
+#, php-format
+msgid "Unexpected response from remote (HTTP %d). Is Avesta Sync active there?"
+msgstr ""
+
+#: includes/class-client.php:299
+msgid "Cannot read local file."
+msgstr ""
+
+#: includes/class-client.php:353
+#: includes/class-client.php:381
+msgid "Corrupt chunk from remote."
+msgstr ""
+
+#: includes/class-client.php:389
+msgid "Remote returned an empty chunk."
+msgstr ""
+
+#: includes/class-files.php:109
+msgid "Unknown scope."
+msgstr ""
+
+#: includes/class-files.php:178
+msgid "File not found."
+msgstr ""
+
+#: includes/class-files.php:185
+msgid "Cannot read file."
+msgstr ""
+
+#: includes/class-files.php:222
+msgid "Invalid chunk parameters."
+msgstr ""
+
+#: includes/class-files.php:233
+msgid "Chunk offset mismatch."
+msgstr ""
+
+#: includes/class-files.php:238
+msgid "Cannot write temp file."
+msgstr ""
+
+#: includes/class-files.php:271
+msgid "Size or SHA-256 mismatch after transfer."
+msgstr ""
+
+#: includes/class-files.php:307
+#: includes/class-media.php:282
+msgid "Backup failed; not deleted."
+msgstr ""
+
+#: includes/class-files.php:310
+msgid "Cannot delete file."
+msgstr ""
+
+#: includes/class-importer.php:33
+msgid "Malformed item."
+msgstr ""
+
+#: includes/class-importer.php:71
+msgid "Media library sync is disabled on this site."
+msgstr ""
+
+#. translators: %s: post type.
+#: includes/class-importer.php:126
+#, php-format
+msgid "Post type %s is not registered on this site."
+msgstr ""
+
+#. translators: %s: post type.
+#: includes/class-importer.php:129
+#, php-format
+msgid "Unknown or disallowed item type (update Avesta Sync on both sites?) or missing slug: %s"
+msgstr ""
+
+#. translators: %s: parent page path.
+#: includes/class-importer.php:150
+#, php-format
+msgid "Parent not found: %s (sync parent first)."
+msgstr ""
+
+#: includes/class-importer.php:187
+msgid "(featured image attachment not found here; sync the media library first)"
+msgstr ""
+
+#: includes/class-importer.php:192
+#: includes/class-importer.php:279
+#: includes/class-media.php:264
+msgid "updated"
+msgstr ""
+
+#: includes/class-importer.php:192
+#: includes/class-media.php:264
+msgid "created"
+msgstr ""
+
+#: includes/class-importer.php:260
+msgid "Option not whitelisted."
+msgstr ""
+
+#: includes/class-importer.php:267
+msgid "cleared"
+msgstr ""
+
+#. translators: %s: page path.
+#: includes/class-importer.php:271
+#, php-format
+msgid "Page not found: %s (sync pages first)."
+msgstr ""
+
+#: includes/class-importer.php:297
+#: includes/class-media.php:279
+msgid "Not found."
+msgstr ""
+
+#: includes/class-importer.php:299
+msgid "Options cannot be deleted."
+msgstr ""
+
+#: includes/class-importer.php:303
+msgid "menu deleted"
+msgstr ""
+
+#: includes/class-importer.php:303
+#: includes/class-media.php:287
+msgid "delete failed"
+msgstr ""
+
+#: includes/class-importer.php:314
+msgid "moved to trash"
+msgstr ""
+
+#: includes/class-importer.php:314
+msgid "trash failed"
+msgstr ""
+
+#: includes/class-media.php:204
+msgid "Invalid media file path."
+msgstr ""
+
+#: includes/class-media.php:211
+msgid "File is missing on this site: sync the file first (Media uploads scope)."
+msgstr ""
+
+#: includes/class-media.php:287
+msgid "media row deleted (files kept)"
+msgstr ""
+
+#: includes/class-menus.php:86
+msgid "Menu slug missing."
+msgstr ""
+
+#. translators: %d: number of menu items.
+#: includes/class-menus.php:158
+#, php-format
+msgid "menu replaced (%d items)"
+msgstr ""
+
+#: includes/class-paths.php:56
+msgid "Invalid path."
+msgstr ""
+
+#: includes/class-paths.php:60
+msgid "Invalid path segment."
+msgstr ""
+
+#: includes/class-paths.php:166
+msgid "Path root not allowed."
+msgstr ""
+
+#: includes/class-paths.php:173
+msgid "Path too short."
+msgstr ""
+
+#: includes/class-paths.php:176
+msgid "File modifications are disabled on this site (DISALLOW_FILE_MODS)."
+msgstr ""
+
+#: includes/class-paths.php:179
+msgid "Invalid folder name."
+msgstr ""
+
+#: includes/class-paths.php:182
+msgid "Path is excluded from sync."
+msgstr ""
+
+#: includes/class-paths.php:185
+msgid "File type not allowed in uploads."
+msgstr ""
+
+#: includes/class-paths.php:190
+msgid "Symlinks are not allowed."
+msgstr ""
+
+#: includes/class-paths.php:199
+msgid "Path cannot be resolved."
+msgstr ""
+
+#: includes/class-paths.php:204
+msgid "Path escapes its root."
+msgstr ""
+
+#: includes/class-schedule.php:105
+msgid "No scope selected."
+msgstr ""
+
+#. translators: %s: site name.
+#: includes/class-schedule.php:146
+#, php-format
+msgid "[%s] Avesta Sync: differences found"
+msgstr ""
+
+#. translators: 1: number of differing items, 2: number of identical items.
+#: includes/class-schedule.php:149
+#, php-format
+msgid "The scheduled check found %1$d differing item(s) (%2$d identical)."
+msgstr ""
+
+#: includes/class-schedule.php:152
+msgid "Review and apply:"
+msgstr ""
+
+#: includes/class-sync.php:198
+#: includes/class-sync.php:236
+msgid "Invalid item."
+msgstr ""
+
+#: includes/class-sync.php:202
+#: includes/class-sync.php:247
+msgid "Content scope is not enabled."
+msgstr ""
+
+#: includes/class-sync.php:208
+#: includes/class-sync.php:267
+msgid "Item is outside the selected scope."
+msgstr ""
+
+#: includes/class-sync.php:314
+msgid "pushed"
+msgstr ""
+
+#: includes/class-sync.php:317
+msgid "Local file is missing; choose Pull or confirm deletion."
+msgstr ""
+
+#: includes/class-sync.php:324
+msgid "deleted on remote (backed up there)"
+msgstr ""
+
+#: includes/class-sync.php:341
+msgid "Remote file is missing; choose Push or confirm deletion."
+msgstr ""
+
+#: includes/class-sync.php:348
+msgid "deleted locally (backed up)"
+msgstr ""
+
+#: includes/class-sync.php:351
+msgid "pulled"
+msgstr ""
+
+#: includes/class-sync.php:371
+msgid "No result for item."
+msgstr ""
+
+#: includes/class-sync.php:387
+msgid "Local item is missing; choose Pull or confirm deletion."
+msgstr ""
+
+#: includes/class-sync.php:412
+msgid "Remote item is missing; choose Push or confirm deletion."
+msgstr ""
+
+#: includes/views/backups.php:13
+msgid "Before a sync overwrites or deletes something on this site, the previous version is saved here. Restoring an item is itself backed up first."
+msgstr ""
+
+#: includes/views/dashboard.php:13
+msgid "The state of your connection and your latest activity at a glance."
+msgstr ""
+
+#: includes/views/dashboard.php:17
+msgid "Compare now"
+msgstr ""
+
+#: includes/views/history.php:13
+msgid "Every sync run, who started it and what happened to each item."
+msgstr ""
+
+#: includes/views/history.php:17
+#: includes/views/i18n.php:290
+msgid "Clear history"
+msgstr ""
+
+#: includes/views/i18n.php:14
+msgid "Working..."
+msgstr ""
+
+#: includes/views/i18n.php:15
+msgid "Loading..."
+msgstr ""
+
+#: includes/views/i18n.php:16
+msgid "Close"
+msgstr ""
+
+#: includes/views/i18n.php:17
+msgid "Cancel"
+msgstr ""
+
+#: includes/views/i18n.php:18
+msgid "Confirm"
+msgstr ""
+
+#: includes/views/i18n.php:19
+msgid "Delete"
+msgstr ""
+
+#: includes/views/i18n.php:20
+msgid "Try again"
+msgstr ""
+
+#: includes/views/i18n.php:21
+#: includes/views/settings.php:55
+#: includes/views/settings.php:72
+msgid "Show"
+msgstr ""
+
+#: includes/views/i18n.php:22
+msgid "Hide"
+msgstr ""
+
+#: includes/views/i18n.php:23
+#: includes/views/settings.php:73
+msgid "Copy"
+msgstr ""
+
+#: includes/views/i18n.php:24
+msgid "Copied"
+msgstr ""
+
+#: includes/views/i18n.php:25
+msgid "OK"
+msgstr ""
+
+#: includes/views/i18n.php:26
+msgid "Failed"
+msgstr ""
+
+#: includes/views/i18n.php:27
+msgid "Local"
+msgstr ""
+
+#: includes/views/i18n.php:28
+msgid "Remote"
+msgstr ""
+
+#: includes/views/i18n.php:29
+msgid "present"
+msgstr ""
+
+#: includes/views/i18n.php:30
+msgid "missing"
+msgstr ""
+
+#: includes/views/i18n.php:31
+msgid "Something went wrong"
+msgstr ""
+
+#: includes/views/i18n.php:32
+msgid "The request failed."
+msgstr ""
+
+#. translators: %s: start of the unexpected server response.
+#: includes/views/i18n.php:34
+#, php-format
+msgid "Unexpected server response: %s"
+msgstr ""
+
+#: includes/views/i18n.php:36
+msgctxt "bytes"
+msgid "B"
+msgstr ""
+
+#: includes/views/i18n.php:37
+msgctxt "kilobytes"
+msgid "KB"
+msgstr ""
+
+#: includes/views/i18n.php:38
+msgctxt "megabytes"
+msgid "MB"
+msgstr ""
+
+#: includes/views/i18n.php:39
+msgctxt "gigabytes"
+msgid "GB"
+msgstr ""
+
+#: includes/views/i18n.php:43
+msgid "Connected"
+msgstr ""
+
+#: includes/views/i18n.php:44
+msgid "Not connected"
+msgstr ""
+
+#: includes/views/i18n.php:45
+msgid "Not configured"
+msgstr ""
+
+#: includes/views/i18n.php:48
+#: includes/views/sync.php:36
+msgid "Theme"
+msgstr ""
+
+#: includes/views/i18n.php:49
+#: includes/views/sync.php:37
+msgid "Plugins"
+msgstr ""
+
+#: includes/views/i18n.php:50
+#: includes/views/i18n.php:71
+#: includes/views/settings.php:17
+#: includes/views/sync.php:38
+msgid "Content"
+msgstr ""
+
+#: includes/views/i18n.php:51
+#: includes/views/sync.php:39
+msgid "Media"
+msgstr ""
+
+#: includes/views/i18n.php:54
+#: includes/views/settings.php:21
+msgid "Off"
+msgstr ""
+
+#: includes/views/i18n.php:55
+#: includes/views/settings.php:22
+msgid "Hourly"
+msgstr ""
+
+#: includes/views/i18n.php:56
+#: includes/views/settings.php:23
+msgid "Twice daily"
+msgstr ""
+
+#: includes/views/i18n.php:57
+#: includes/views/settings.php:24
+msgid "Daily"
+msgstr ""
+
+#: includes/views/i18n.php:60
+msgid "New on this site"
+msgstr ""
+
+#: includes/views/i18n.php:61
+msgid "Changed locally"
+msgstr ""
+
+#: includes/views/i18n.php:62
+msgid "New on remote"
+msgstr ""
+
+#: includes/views/i18n.php:63
+msgid "Changed on remote"
+msgstr ""
+
+#: includes/views/i18n.php:64
+#: includes/views/i18n.php:275
+msgid "Deleted locally"
+msgstr ""
+
+#: includes/views/i18n.php:65
+#: includes/views/i18n.php:274
+msgid "Deleted on remote"
+msgstr ""
+
+#: includes/views/i18n.php:66
+msgid "Conflict"
+msgstr ""
+
+#: includes/views/i18n.php:68
+msgid "Admin"
+msgstr ""
+
+#: includes/views/i18n.php:69
+msgid "WP-CLI"
+msgstr ""
+
+#: includes/views/i18n.php:70
+msgid "File"
+msgstr ""
+
+#: includes/views/i18n.php:74
+#: includes/views/settings.php:45
+msgid "Connection"
+msgstr ""
+
+#: includes/views/i18n.php:75
+msgid "Last sync"
+msgstr ""
+
+#: includes/views/i18n.php:76
+msgid "Last check"
+msgstr ""
+
+#: includes/views/i18n.php:78
+#: includes/views/settings.php:136
+msgid "Scheduled check"
+msgstr ""
+
+#: includes/views/i18n.php:79
+msgid "Contacting the remote site..."
+msgstr ""
+
+#: includes/views/i18n.php:80
+msgid "Connection not checked yet."
+msgstr ""
+
+#: includes/views/i18n.php:81
+msgid "Get started in three steps:"
+msgstr ""
+
+#: includes/views/i18n.php:82
+msgid "Install Avesta Sync on both sites."
+msgstr ""
+
+#: includes/views/i18n.php:83
+msgid "Copy this site's key into the other site's settings, and the other site's key and URL into this one."
+msgstr ""
+
+#: includes/views/i18n.php:84
+msgid "Click Compare, review the differences and apply what you want."
+msgstr ""
+
+#: includes/views/i18n.php:85
+msgid "Go to settings"
+msgstr ""
+
+#: includes/views/i18n.php:86
+msgid "Cannot reach the remote site"
+msgstr ""
+
+#: includes/views/i18n.php:87
+msgid "Remote site"
+msgstr ""
+
+#: includes/views/i18n.php:89
+msgid "WordPress"
+msgstr ""
+
+#: includes/views/i18n.php:90
+msgid "PHP"
+msgstr ""
+
+#: includes/views/i18n.php:91
+msgid "No sync has been run yet."
+msgstr ""
+
+#. translators: %s: user display name.
+#: includes/views/i18n.php:93
+#, php-format
+msgid "by %s"
+msgstr ""
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:95
+#, php-format
+msgid "%s ok"
+msgstr ""
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:97
+#, php-format
+msgid "%s failed"
+msgstr ""
+
+#: includes/views/i18n.php:98
+msgid "View history"
+msgstr ""
+
+#: includes/views/i18n.php:99
+msgid "No comparison has been run yet."
+msgstr ""
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:101
+#, php-format
+msgid "In sync (%s identical items)"
+msgstr ""
+
+#: includes/views/i18n.php:102
+msgid "Review in Sync"
+msgstr ""
+
+#. translators: %s: number of backup runs.
+#: includes/views/i18n.php:106
+#: includes/views/i18n.php:108
+#, php-format
+msgid "%s backup run"
+msgid_plural "%s backup runs"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: size such as 1.2 MB.
+#: includes/views/i18n.php:111
+#, php-format
+msgid "%s in total"
+msgstr ""
+
+#: includes/views/i18n.php:112
+msgid "Nothing backed up yet."
+msgstr ""
+
+#: includes/views/i18n.php:113
+msgid "Manage backups"
+msgstr ""
+
+#: includes/views/i18n.php:114
+msgid "Next run:"
+msgstr ""
+
+#: includes/views/i18n.php:115
+msgid "Change schedule"
+msgstr ""
+
+#: includes/views/i18n.php:118
+msgid "Skip"
+msgstr ""
+
+#: includes/views/i18n.php:119
+#: includes/views/i18n.php:272
+msgid "Push"
+msgstr ""
+
+#: includes/views/i18n.php:120
+#: includes/views/i18n.php:273
+msgid "Pull"
+msgstr ""
+
+#: includes/views/i18n.php:121
+msgid "From this site to the remote site"
+msgstr ""
+
+#: includes/views/i18n.php:122
+msgid "From the remote site to this site"
+msgstr ""
+
+#: includes/views/i18n.php:123
+msgid "Push (delete on remote)"
+msgstr ""
+
+#: includes/views/i18n.php:124
+msgid "Pull (delete locally)"
+msgstr ""
+
+#: includes/views/i18n.php:125
+msgid "Push (restore on remote)"
+msgstr ""
+
+#: includes/views/i18n.php:126
+msgid "Pull (restore locally)"
+msgstr ""
+
+#: includes/views/i18n.php:127
+msgid "Comparing both sites. This can take a while on large sites..."
+msgstr ""
+
+#: includes/views/i18n.php:128
+msgid "Everything in the selected scopes is identical."
+msgstr ""
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:130
+#, php-format
+msgid "%s items checked, nothing to sync."
+msgstr ""
+
+#. translators: 1: number of differences, 2: number of identical items.
+#: includes/views/i18n.php:132
+#, php-format
+msgid "Comparison finished: %1$s differences, %2$s identical."
+msgstr ""
+
+#: includes/views/i18n.php:133
+msgid "identical"
+msgstr ""
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:135
+#, php-format
+msgid "Select %s"
+msgstr ""
+
+#. translators: %s: group name.
+#: includes/views/i18n.php:137
+#, php-format
+msgid "Select all shown items in %s"
+msgstr ""
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:139
+#, php-format
+msgid "Direction for %s"
+msgstr ""
+
+#: includes/views/i18n.php:140
+msgid "View diff"
+msgstr ""
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:142
+#, php-format
+msgid "View diff for %s"
+msgstr ""
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:146
+#: includes/views/i18n.php:148
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of selected items.
+#: includes/views/i18n.php:153
+#: includes/views/i18n.php:155
+#, php-format
+msgid "%s selected"
+msgid_plural "%s selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of rows to load now, 2: number of rows remaining.
+#: includes/views/i18n.php:158
+#, php-format
+msgid "Show %1$s more (%2$s left)"
+msgstr ""
+
+#. translators: 1: rows shown, 2: total rows.
+#: includes/views/i18n.php:160
+#, php-format
+msgid "Showing %1$s of %2$s items"
+msgstr ""
+
+#. translators: 1: selected, 2: pushes, 3: pulls, 4: deletions.
+#: includes/views/i18n.php:164
+#: includes/views/i18n.php:166
+#, php-format
+msgid "%1$s item selected (%2$s push, %3$s pull, %4$s delete)"
+msgid_plural "%1$s items selected (%2$s push, %3$s pull, %4$s delete)"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of selected items hidden by filters.
+#: includes/views/i18n.php:169
+#, php-format
+msgid "%s of them are hidden by your filters."
+msgstr ""
+
+#: includes/views/i18n.php:170
+msgid "Nothing selected to apply."
+msgstr ""
+
+#: includes/views/i18n.php:171
+msgid "Done"
+msgstr ""
+
+#. translators: %s: error message.
+#: includes/views/i18n.php:173
+#, php-format
+msgid "Failed: %s"
+msgstr ""
+
+#: includes/views/i18n.php:176
+msgid "Apply selected changes?"
+msgstr ""
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:180
+#: includes/views/i18n.php:182
+#, php-format
+msgid "You are about to apply %s item:"
+msgid_plural "You are about to apply %s items:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/views/i18n.php:184
+msgid "will be pushed to the remote site"
+msgstr ""
+
+#: includes/views/i18n.php:185
+msgid "will be pulled to this site"
+msgstr ""
+
+#: includes/views/i18n.php:186
+msgid "will be deleted on the receiving side"
+msgstr ""
+
+#. translators: %s: number of deletions.
+#: includes/views/i18n.php:190
+#: includes/views/i18n.php:192
+#, php-format
+msgid "%s item will be DELETED. A backup is kept on the site that receives the change."
+msgid_plural "%s items will be DELETED. A backup is kept on the site that receives the change."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/views/i18n.php:194
+msgid "Anything overwritten or deleted on this site is saved under Backups first."
+msgstr ""
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:198
+#: includes/views/i18n.php:200
+#, php-format
+msgid "Apply %s item"
+msgid_plural "Apply %s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: current item, 2: total items.
+#: includes/views/i18n.php:203
+#, php-format
+msgid "Applied %1$s of %2$s"
+msgstr ""
+
+#: includes/views/i18n.php:204
+msgid "Stopping after the current item..."
+msgstr ""
+
+#. translators: 1: number ok, 2: number failed.
+#: includes/views/i18n.php:206
+#, php-format
+msgid "Finished: %1$s ok, %2$s failed."
+msgstr ""
+
+#. translators: %s: number of items not processed.
+#: includes/views/i18n.php:210
+#: includes/views/i18n.php:212
+#, php-format
+msgid "Stopped. %s item was not applied and is still selected."
+msgid_plural "Stopped. %s items were not applied and are still selected."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of failed items.
+#: includes/views/i18n.php:215
+#, php-format
+msgid "Retry %s failed"
+msgstr ""
+
+#: includes/views/i18n.php:216
+msgid "Media files were copied. If new files do not show up in the Media Library, enable \"Include Media Library entries\" in Settings or regenerate thumbnails."
+msgstr ""
+
+#: includes/views/i18n.php:217
+msgid "push"
+msgstr ""
+
+#: includes/views/i18n.php:218
+msgid "pull"
+msgstr ""
+
+#: includes/views/i18n.php:219
+msgid "delete on remote"
+msgstr ""
+
+#: includes/views/i18n.php:220
+msgid "delete locally"
+msgstr ""
+
+#. translators: 1: item number, 2: total, 3: action, 4: path.
+#: includes/views/i18n.php:222
+#, php-format
+msgid "[%1$s/%2$s] %3$s %4$s"
+msgstr ""
+
+#: includes/views/i18n.php:225
+msgid "Compare versions"
+msgstr ""
+
+#: includes/views/i18n.php:226
+msgid "Binary file - no preview"
+msgstr ""
+
+#: includes/views/i18n.php:227
+msgid "This file is too large to preview."
+msgstr ""
+
+#: includes/views/i18n.php:228
+msgid "Nothing to show for this item."
+msgstr ""
+
+#: includes/views/i18n.php:229
+msgid "Both versions are identical."
+msgstr ""
+
+#: includes/views/i18n.php:230
+msgid "Does not exist locally"
+msgstr ""
+
+#: includes/views/i18n.php:231
+msgid "Does not exist on remote"
+msgstr ""
+
+#. translators: %s: maximum number of lines.
+#: includes/views/i18n.php:233
+#, php-format
+msgid "The file has more than %s lines, so the versions are shown side by side without alignment."
+msgstr ""
+
+#: includes/views/i18n.php:234
+msgid "The versions differ too much to align line by line, so they are shown side by side."
+msgstr ""
+
+#: includes/views/i18n.php:235
+msgid "Diff layout"
+msgstr ""
+
+#: includes/views/i18n.php:236
+msgid "Side by side"
+msgstr ""
+
+#: includes/views/i18n.php:237
+msgid "Unified"
+msgstr ""
+
+#: includes/views/i18n.php:238
+msgid "Only line endings or a trailing newline differ."
+msgstr ""
+
+#: includes/views/i18n.php:239
+msgid "Diff"
+msgstr ""
+
+#. translators: %s: number of unchanged lines.
+#: includes/views/i18n.php:243
+#: includes/views/i18n.php:245
+#, php-format
+msgid "Show %s unchanged line"
+msgid_plural "Show %s unchanged lines"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:250
+#: includes/views/i18n.php:252
+#, php-format
+msgid "%s line only on remote"
+msgid_plural "%s lines only on remote"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:257
+#: includes/views/i18n.php:259
+#, php-format
+msgid "%s line only on this site"
+msgid_plural "%s lines only on this site"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/views/i18n.php:263
+msgid "No backups yet"
+msgstr ""
+
+#: includes/views/i18n.php:264
+msgid "Backups appear here after a sync overwrites or deletes something on this site."
+msgstr ""
+
+#. translators: 1: number of files, 2: size such as 1.2 MB.
+#: includes/views/i18n.php:268
+#: includes/views/i18n.php:270
+#, php-format
+msgid "%1$s file · %2$s"
+msgid_plural "%1$s files · %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/views/i18n.php:276
+msgid "No items."
+msgstr ""
+
+#: includes/views/i18n.php:277
+msgid "Restore"
+msgstr ""
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:279
+#, php-format
+msgid "Restore %s"
+msgstr ""
+
+#: includes/views/i18n.php:280
+msgid "Restore this item?"
+msgstr ""
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:282
+#, php-format
+msgid "The backed-up version of %s will replace the current one. The current version is backed up first."
+msgstr ""
+
+#. translators: %s: date.
+#: includes/views/i18n.php:284
+#, php-format
+msgid "Delete backup from %s"
+msgstr ""
+
+#: includes/views/i18n.php:285
+msgid "Delete this backup?"
+msgstr ""
+
+#: includes/views/i18n.php:286
+msgid "This permanently deletes every file in this backup run. This cannot be undone."
+msgstr ""
+
+#: includes/views/i18n.php:288
+msgid "No history yet"
+msgstr ""
+
+#: includes/views/i18n.php:289
+msgid "Applied sync items are recorded here."
+msgstr ""
+
+#: includes/views/i18n.php:291
+msgid "Clear the history?"
+msgstr ""
+
+#: includes/views/i18n.php:292
+msgid "All recorded sync runs will be removed. Backups are not affected."
+msgstr ""
+
+#. translators: 1: site URL, 2: plugin version, 3: PHP version, 4: post_max_size, 5: chunk size.
+#: includes/views/i18n.php:297
+#, php-format
+msgid "Connected to %1$s (Avesta Sync %2$s, PHP %3$s, post_max_size %4$s, chunk %5$s)"
+msgstr ""
+
+#: includes/views/i18n.php:298
+msgid "Regenerate this site's key?"
+msgstr ""
+
+#: includes/views/i18n.php:299
+msgid "The other site will stop working until you paste the new key into its settings."
+msgstr ""
+
+#: includes/views/i18n.php:300
+#: includes/views/settings.php:77
+msgid "Regenerate key"
+msgstr ""
+
+#: includes/views/i18n.php:301
+msgid "Discard unsaved changes?"
+msgstr ""
+
+#: includes/views/i18n.php:302
+msgid "You changed settings but did not save them. Your edits stay in the form until you reload the page."
+msgstr ""
+
+#: includes/views/i18n.php:303
+msgid "Leave without saving"
+msgstr ""
+
+#: includes/views/i18n.php:304
+msgid "Stay here"
+msgstr ""
+
+#: includes/views/settings.php:15
+msgid "Theme files"
+msgstr ""
+
+#: includes/views/settings.php:15
+msgid "Templates, styles and assets of the themes you pick."
+msgstr ""
+
+#: includes/views/settings.php:16
+msgid "Custom plugins"
+msgstr ""
+
+#: includes/views/settings.php:16
+msgid "Files of the plugin folders you pick. Activation state is never synced."
+msgstr ""
+
+#: includes/views/settings.php:17
+msgid "Pages, posts, templates, menus and a few options."
+msgstr ""
+
+#: includes/views/settings.php:18
+msgid "Media uploads"
+msgstr ""
+
+#: includes/views/settings.php:18
+msgid "Files in the uploads folder."
+msgstr ""
+
+#: includes/views/settings.php:30
+msgid "Connect this site to the other one and choose what is synced."
+msgstr ""
+
+#: includes/views/settings.php:35
+msgid "Settings saved."
+msgstr ""
+
+#: includes/views/settings.php:37
+msgid "A new key was generated. Update it on the other site."
+msgstr ""
+
+#: includes/views/settings.php:47
+msgid "Remote site URL"
+msgstr ""
+
+#: includes/views/settings.php:49
+msgid "HTTPS is required (localhost and *.test excepted)."
+msgstr ""
+
+#: includes/views/settings.php:52
+msgid "Remote secret key"
+msgstr ""
+
+#: includes/views/settings.php:54
+msgid "Saved - leave blank to keep"
+msgstr ""
+
+#: includes/views/settings.php:57
+msgid "Copy it from the Settings tab of the other site."
+msgstr ""
+
+#: includes/views/settings.php:60
+msgid "Test connection"
+msgstr ""
+
+#: includes/views/settings.php:66
+msgid "This site's key"
+msgstr ""
+
+#: includes/views/settings.php:67
+msgid "Paste this key into the \"Remote secret key\" field of the other site so it can call this site."
+msgstr ""
+
+#: includes/views/settings.php:69
+msgid "Key to copy to the other site"
+msgstr ""
+
+#: includes/views/settings.php:76
+msgid "Whoever holds this key can write files to this site. Share it only with the other site and regenerate it if it may have leaked."
+msgstr ""
+
+#: includes/views/settings.php:81
+msgid "What to sync"
+msgstr ""
+
+#: includes/views/settings.php:83
+msgid "Scopes"
+msgstr ""
+
+#: includes/views/settings.php:98
+msgid "Themes to sync"
+msgstr ""
+
+#: includes/views/settings.php:107
+msgid "Plugin folders to sync"
+msgstr ""
+
+#: includes/views/settings.php:113
+msgid "Only files are synced; plugin activation state never is. Avesta Sync itself is excluded."
+msgstr ""
+
+#: includes/views/settings.php:120
+msgid "Include Media Library entries"
+msgstr ""
+
+#: includes/views/settings.php:121
+msgid "Also sync the attachment records (titles, captions, alt text) of synced uploads."
+msgstr ""
+
+#: includes/views/settings.php:127
+msgid "Exclude patterns"
+msgstr ""
+
+#: includes/views/settings.php:129
+msgid "Paths to leave out"
+msgstr ""
+
+#: includes/views/settings.php:131
+msgid "One pattern per line. Examples:"
+msgstr ""
+
+#: includes/views/settings.php:137
+msgid "A scheduled check only compares both sites and reports differences. It never changes anything."
+msgstr ""
+
+#: includes/views/settings.php:140
+msgid "Check how often"
+msgstr ""
+
+#: includes/views/settings.php:148
+msgid "Email the result to"
+msgstr ""
+
+#: includes/views/settings.php:157
+msgid "Backup runs to keep"
+msgstr ""
+
+#: includes/views/settings.php:159
+msgid "0 keeps all backups. Older runs are deleted automatically."
+msgstr ""
+
+#: includes/views/settings.php:164
+msgid "Save settings"
+msgstr ""
+
+#: includes/views/settings.php:165
+msgid "You have unsaved changes."
+msgstr ""
+
+#: includes/views/sync.php:14
+msgid "Compare both sites, review every difference, then choose what to push or pull. Nothing changes until you apply."
+msgstr ""
+
+#: includes/views/sync.php:18
+msgid "Compare"
+msgstr ""
+
+#: includes/views/sync.php:23
+msgid "Results may be out of date. Compare again."
+msgstr ""
+
+#: includes/views/sync.php:24
+msgid "Filter by status"
+msgstr ""
+
+#: includes/views/sync.php:29
+msgid "Search"
+msgstr ""
+
+#: includes/views/sync.php:30
+msgid "Filter by path or name"
+msgstr ""
+
+#: includes/views/sync.php:33
+msgid "Scope"
+msgstr ""
+
+#: includes/views/sync.php:35
+msgid "All"
+msgstr ""
+
+#: includes/views/sync.php:44
+msgid "Bulk actions for the rows shown"
+msgstr ""
+
+#: includes/views/sync.php:45
+msgid "Select all pushes"
+msgstr ""
+
+#: includes/views/sync.php:46
+msgid "Select all pulls"
+msgstr ""
+
+#: includes/views/sync.php:47
+msgid "Conflicts: push"
+msgstr ""
+
+#: includes/views/sync.php:48
+msgid "Conflicts: pull"
+msgstr ""
+
+#: includes/views/sync.php:49
+msgid "Clear selection"
+msgstr ""
+
+#: includes/views/sync.php:55
+msgid "No items match your filters."
+msgstr ""
+
+#: includes/views/sync.php:56
+msgid "Clear filters"
+msgstr ""
+
+#: includes/views/sync.php:63
+msgid "Sync progress"
+msgstr ""
+
+#: includes/views/sync.php:66
+msgid "Sync log"
+msgstr ""
+
+#: includes/views/sync.php:77
+msgid "Stop after this item"
+msgstr ""
+
+#: includes/views/sync.php:81
+msgid "Apply selected"
+msgstr ""

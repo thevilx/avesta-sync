@@ -1,0 +1,1546 @@
+# Copyright (C) 2026 AvestaTech
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Avesta Sync 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/avesta-sync\n"
+"POT-Creation-Date: 2026-11-15T18:48:40+00:00\n"
+"PO-Revision-Date: 2026-11-15 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Persian\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: avesta-sync\n"
+
+#. Plugin Name of the plugin
+#: avesta-sync.php includes/class-admin.php:33 includes/class-admin.php:154
+#: includes/views/i18n.php:88
+msgid "Avesta Sync"
+msgstr "Avesta Sync"
+
+#. Plugin URI of the plugin
+#: avesta-sync.php
+msgid "https://avestatech.ir"
+msgstr "https://avestatech.ir"
+
+#. Description of the plugin
+#: avesta-sync.php
+msgid ""
+"Hash-based two-way sync (push/pull) of theme files, custom plugins, content "
+"and media between a local site and production over a signed REST API. Only "
+"changed items are transferred."
+msgstr ""
+"همگام‌سازی دوطرفهٔ مبتنی بر هش (ارسال/دریافت) پرونده‌های پوسته، افزونه‌های "
+"سفارشی، محتوا و رسانه میان سایت محلی و سایت اصلی از طریق REST API امضاشده. "
+"فقط موارد تغییریافته منتقل می‌شوند."
+
+#. Author of the plugin
+#: avesta-sync.php
+msgid "AvestaTech"
+msgstr "AvestaTech"
+
+#: includes/class-admin.php:89 includes/class-admin.php:104
+#: includes/class-admin.php:136 includes/class-ajax.php:46
+msgid "Not allowed."
+msgstr "مجاز نیست."
+
+#: includes/class-admin.php:143 includes/views/dashboard.php:12
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+#: includes/class-admin.php:144 includes/views/sync.php:13
+msgid "Sync"
+msgstr "همگام‌سازی"
+
+#: includes/class-admin.php:145 includes/views/backups.php:12
+#: includes/views/i18n.php:77 includes/views/settings.php:155
+msgid "Backups"
+msgstr "پشتیبان‌ها"
+
+#: includes/class-admin.php:146 includes/views/history.php:12
+msgid "History"
+msgstr "تاریخچه"
+
+#: includes/class-admin.php:147 includes/views/settings.php:29
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: includes/class-admin.php:157 includes/views/i18n.php:42
+msgid "Checking connection..."
+msgstr "در حال بررسی اتصال…"
+
+#: includes/class-admin.php:161
+msgid "Avesta Sync sections"
+msgstr "بخش‌های Avesta Sync"
+
+#: includes/class-ajax.php:36
+msgid "POST required."
+msgstr "درخواست POST لازم است."
+
+#: includes/class-ajax.php:148
+msgid "No scope selected. Tick at least one scope and save settings."
+msgstr ""
+"هیچ دامنه‌ای انتخاب نشده است. دست‌کم یک دامنه را علامت بزنید و تنظیمات را "
+"ذخیره کنید."
+
+#: includes/class-ajax.php:170
+msgid "Bad request."
+msgstr "درخواست نامعتبر است."
+
+#: includes/class-ajax.php:319 includes/views/i18n.php:287
+msgid "Backup deleted."
+msgstr "پشتیبان حذف شد."
+
+#: includes/class-ajax.php:336 includes/views/i18n.php:293
+msgid "History cleared."
+msgstr "تاریخچه پاک شد."
+
+#: includes/class-auth.php:82
+msgid "Too many failed attempts. Try again later."
+msgstr "تعداد تلاش‌های ناموفق بیش از حد است. بعداً دوباره امتحان کنید."
+
+#: includes/class-auth.php:86
+msgid "Sync is not configured on this site."
+msgstr "همگام‌سازی در این سایت پیکربندی نشده است."
+
+#: includes/class-auth.php:106
+msgid "Invalid or expired signature."
+msgstr "امضا نامعتبر است یا منقضی شده است."
+
+#: includes/class-backup.php:212 includes/class-backup.php:446
+msgid "Invalid backup run."
+msgstr "اجرای پشتیبان‌گیری نامعتبر است."
+
+#: includes/class-backup.php:216
+msgid "Backup run not found."
+msgstr "اجرای پشتیبان‌گیری یافت نشد."
+
+#: includes/class-backup.php:389
+msgid "Backup file not found."
+msgstr "پروندهٔ پشتیبان یافت نشد."
+
+#: includes/class-backup.php:392 includes/class-files.php:225
+msgid "Target is a directory."
+msgstr "مقصد یک پوشه است."
+
+#: includes/class-backup.php:395 includes/class-files.php:274
+msgid "Refused: PHP file fails to parse."
+msgstr "رد شد: پروندهٔ PHP قابل تجزیه نیست."
+
+#: includes/class-backup.php:398 includes/class-files.php:277
+msgid "Backup of existing file failed; not overwritten."
+msgstr "پشتیبان‌گیری از پروندهٔ موجود ناموفق بود؛ پرونده بازنویسی نشد."
+
+#: includes/class-backup.php:402 includes/class-files.php:282
+msgid "Cannot move file into place."
+msgstr "انتقال پرونده به مسیر مقصد ممکن نیست."
+
+#. translators: %s: relative file path.
+#: includes/class-backup.php:408
+#, php-format
+msgid "Restored %s (the previous version was backed up)."
+msgstr "«%s» بازگردانی شد (نسخهٔ قبلی پشتیبان‌گیری شد)."
+
+#: includes/class-backup.php:422
+msgid "This backup is not in a restorable format."
+msgstr "قالب این پشتیبان قابل بازگردانی نیست."
+
+#: includes/class-backup.php:426
+msgid "Restore failed."
+msgstr "بازگردانی ناموفق بود."
+
+#. translators: %s: importer result message.
+#: includes/class-backup.php:429
+#, php-format
+msgid "Content restored (%s)."
+msgstr "محتوا بازگردانی شد (%s)."
+
+#: includes/class-backup.php:457
+msgid "Could not delete the backup run."
+msgstr "حذف اجرای پشتیبان‌گیری ممکن نشد."
+
+#: includes/class-client.php:65
+msgid "Remote URL and key are not configured."
+msgstr "نشانی و کلید سایت راه دور پیکربندی نشده است."
+
+#: includes/class-client.php:98
+msgid "Invalid remote URL."
+msgstr "نشانی سایت راه دور نامعتبر است."
+
+#: includes/class-client.php:101
+msgid "Remote URL must use HTTPS."
+msgstr "نشانی سایت راه دور باید از HTTPS استفاده کند."
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:144
+#, php-format
+msgid ""
+"Remote redirected (HTTP %d). Use the final HTTPS URL of the remote site."
+msgstr ""
+"سایت راه دور تغییر مسیر داد (HTTP %d). از نشانی HTTPS نهایی سایت راه دور "
+"استفاده کنید."
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:152
+#, php-format
+msgid "Unexpected response from remote (HTTP %d). Is Avesta Sync active there?"
+msgstr ""
+"پاسخ غیرمنتظره از سایت راه دور (HTTP %d). آیا Avesta Sync در آنجا فعال است؟"
+
+#: includes/class-client.php:299
+msgid "Cannot read local file."
+msgstr "خواندن پروندهٔ محلی ممکن نیست."
+
+#: includes/class-client.php:353 includes/class-client.php:381
+msgid "Corrupt chunk from remote."
+msgstr "قطعهٔ دریافت‌شده از سایت راه دور خراب است."
+
+#: includes/class-client.php:389
+msgid "Remote returned an empty chunk."
+msgstr "سایت راه دور یک قطعهٔ خالی برگرداند."
+
+#: includes/class-files.php:109
+msgid "Unknown scope."
+msgstr "دامنهٔ ناشناخته."
+
+#: includes/class-files.php:178
+msgid "File not found."
+msgstr "پرونده یافت نشد."
+
+#: includes/class-files.php:185
+msgid "Cannot read file."
+msgstr "خواندن پرونده ممکن نیست."
+
+#: includes/class-files.php:222
+msgid "Invalid chunk parameters."
+msgstr "پارامترهای قطعه نامعتبر هستند."
+
+#: includes/class-files.php:233
+msgid "Chunk offset mismatch."
+msgstr "آفست قطعه مطابقت ندارد."
+
+#: includes/class-files.php:238
+msgid "Cannot write temp file."
+msgstr "نوشتن پروندهٔ موقت ممکن نیست."
+
+#: includes/class-files.php:271
+msgid "Size or SHA-256 mismatch after transfer."
+msgstr "اندازه یا SHA-256 پس از انتقال مطابقت ندارد."
+
+#: includes/class-files.php:307 includes/class-media.php:282
+msgid "Backup failed; not deleted."
+msgstr "پشتیبان‌گیری ناموفق بود؛ پرونده حذف نشد."
+
+#: includes/class-files.php:310
+msgid "Cannot delete file."
+msgstr "حذف پرونده ممکن نیست."
+
+#: includes/class-importer.php:33
+msgid "Malformed item."
+msgstr "مورد نامعتبر است."
+
+#: includes/class-importer.php:71
+msgid "Media library sync is disabled on this site."
+msgstr "همگام‌سازی کتابخانهٔ پرونده‌های چندرسانه‌ای در این سایت غیرفعال است."
+
+#. translators: %s: post type.
+#: includes/class-importer.php:126
+#, php-format
+msgid "Post type %s is not registered on this site."
+msgstr "نوع نوشته «%s» در این سایت ثبت نشده است."
+
+#. translators: %s: post type.
+#: includes/class-importer.php:129
+#, php-format
+msgid ""
+"Unknown or disallowed item type (update Avesta Sync on both sites?) or "
+"missing slug: %s"
+msgstr ""
+"نوع مورد ناشناخته یا غیرمجاز است (Avesta Sync را در هر دو سایت به‌روزرسانی "
+"کرده‌اید؟) یا نامک وجود ندارد: %s"
+
+#. translators: %s: parent page path.
+#: includes/class-importer.php:150
+#, php-format
+msgid "Parent not found: %s (sync parent first)."
+msgstr "والد یافت نشد: %s (ابتدا والد را همگام‌سازی کنید)."
+
+#: includes/class-importer.php:187
+msgid ""
+"(featured image attachment not found here; sync the media library first)"
+msgstr ""
+"(پیوست تصویر شاخص در اینجا یافت نشد؛ ابتدا کتابخانهٔ پرونده‌های چندرسانه‌ای را "
+"همگام‌سازی کنید)"
+
+#: includes/class-importer.php:192 includes/class-importer.php:279
+#: includes/class-media.php:264
+msgid "updated"
+msgstr "به‌روزرسانی شد"
+
+#: includes/class-importer.php:192 includes/class-media.php:264
+msgid "created"
+msgstr "ایجاد شد"
+
+#: includes/class-importer.php:260
+msgid "Option not whitelisted."
+msgstr "این گزینه در فهرست مجاز نیست."
+
+#: includes/class-importer.php:267
+msgid "cleared"
+msgstr "پاک شد"
+
+#. translators: %s: page path.
+#: includes/class-importer.php:271
+#, php-format
+msgid "Page not found: %s (sync pages first)."
+msgstr "صفحه یافت نشد: %s (ابتدا صفحه‌ها را همگام‌سازی کنید)."
+
+#: includes/class-importer.php:297 includes/class-media.php:279
+msgid "Not found."
+msgstr "یافت نشد."
+
+#: includes/class-importer.php:299
+msgid "Options cannot be deleted."
+msgstr "گزینه‌ها قابل حذف نیستند."
+
+#: includes/class-importer.php:303
+msgid "menu deleted"
+msgstr "منو حذف شد"
+
+#: includes/class-importer.php:303 includes/class-media.php:287
+msgid "delete failed"
+msgstr "حذف ناموفق بود"
+
+#: includes/class-importer.php:314
+msgid "moved to trash"
+msgstr "به زباله‌دان منتقل شد"
+
+#: includes/class-importer.php:314
+msgid "trash failed"
+msgstr "انتقال به زباله‌دان ناموفق بود"
+
+#: includes/class-media.php:204
+msgid "Invalid media file path."
+msgstr "مسیر پروندهٔ رسانه نامعتبر است."
+
+#: includes/class-media.php:211
+msgid ""
+"File is missing on this site: sync the file first (Media uploads scope)."
+msgstr ""
+"پرونده در این سایت وجود ندارد: ابتدا پرونده را همگام‌سازی کنید (دامنهٔ "
+"بارگذاری‌های رسانه)."
+
+#: includes/class-media.php:287
+msgid "media row deleted (files kept)"
+msgstr "ردیف رسانه حذف شد (پرونده‌ها حفظ شدند)"
+
+#: includes/class-menus.php:86
+msgid "Menu slug missing."
+msgstr "نامک منو وجود ندارد."
+
+#. translators: %d: number of menu items.
+#: includes/class-menus.php:158
+#, php-format
+msgid "menu replaced (%d items)"
+msgstr "منو جایگزین شد (%d مورد)"
+
+#: includes/class-paths.php:56
+msgid "Invalid path."
+msgstr "مسیر نامعتبر است."
+
+#: includes/class-paths.php:60
+msgid "Invalid path segment."
+msgstr "بخش مسیر نامعتبر است."
+
+#: includes/class-paths.php:166
+msgid "Path root not allowed."
+msgstr "ریشهٔ مسیر مجاز نیست."
+
+#: includes/class-paths.php:173
+msgid "Path too short."
+msgstr "مسیر بیش از حد کوتاه است."
+
+#: includes/class-paths.php:176
+msgid "File modifications are disabled on this site (DISALLOW_FILE_MODS)."
+msgstr "ویرایش پرونده‌ها در این سایت غیرفعال است (DISALLOW_FILE_MODS)."
+
+#: includes/class-paths.php:179
+msgid "Invalid folder name."
+msgstr "نام پوشه نامعتبر است."
+
+#: includes/class-paths.php:182
+msgid "Path is excluded from sync."
+msgstr "این مسیر از همگام‌سازی مستثنا شده است."
+
+#: includes/class-paths.php:185
+msgid "File type not allowed in uploads."
+msgstr "نوع پرونده در بارگذاری‌ها مجاز نیست."
+
+#: includes/class-paths.php:190
+msgid "Symlinks are not allowed."
+msgstr "پیوند نمادین (symlink) مجاز نیست."
+
+#: includes/class-paths.php:199
+msgid "Path cannot be resolved."
+msgstr "مسیر قابل تشخیص نیست."
+
+#: includes/class-paths.php:204
+msgid "Path escapes its root."
+msgstr "مسیر از ریشهٔ خود خارج می‌شود."
+
+#: includes/class-schedule.php:105
+msgid "No scope selected."
+msgstr "هیچ دامنه‌ای انتخاب نشده است."
+
+#. translators: %s: site name.
+#: includes/class-schedule.php:146
+#, php-format
+msgid "[%s] Avesta Sync: differences found"
+msgstr "[%s] Avesta Sync: تفاوت‌هایی یافت شد"
+
+#. translators: 1: number of differing items, 2: number of identical items.
+#: includes/class-schedule.php:149
+#, php-format
+msgid "The scheduled check found %1$d differing item(s) (%2$d identical)."
+msgstr "بررسی زمان‌بندی‌شده %1$d مورد متفاوت پیدا کرد (%2$d مورد یکسان)."
+
+#: includes/class-schedule.php:152
+msgid "Review and apply:"
+msgstr "بررسی و اعمال:"
+
+#: includes/class-sync.php:198 includes/class-sync.php:236
+msgid "Invalid item."
+msgstr "مورد نامعتبر است."
+
+#: includes/class-sync.php:202 includes/class-sync.php:247
+msgid "Content scope is not enabled."
+msgstr "دامنهٔ محتوا فعال نیست."
+
+#: includes/class-sync.php:208 includes/class-sync.php:267
+msgid "Item is outside the selected scope."
+msgstr "این مورد خارج از دامنهٔ انتخاب‌شده است."
+
+#: includes/class-sync.php:314
+msgid "pushed"
+msgstr "ارسال شد"
+
+#: includes/class-sync.php:317
+msgid "Local file is missing; choose Pull or confirm deletion."
+msgstr "پروندهٔ محلی وجود ندارد؛ «دریافت» را انتخاب یا حذف را تأیید کنید."
+
+#: includes/class-sync.php:324
+msgid "deleted on remote (backed up there)"
+msgstr "در سایت راه دور حذف شد (در آنجا پشتیبان‌گیری شد)"
+
+#: includes/class-sync.php:341
+msgid "Remote file is missing; choose Push or confirm deletion."
+msgstr ""
+"پروندهٔ سایت راه دور وجود ندارد؛ «ارسال» را انتخاب یا حذف را تأیید کنید."
+
+#: includes/class-sync.php:348
+msgid "deleted locally (backed up)"
+msgstr "به‌صورت محلی حذف شد (پشتیبان‌گیری شد)"
+
+#: includes/class-sync.php:351
+msgid "pulled"
+msgstr "دریافت شد"
+
+#: includes/class-sync.php:371
+msgid "No result for item."
+msgstr "نتیجه‌ای برای این مورد وجود ندارد."
+
+#: includes/class-sync.php:387
+msgid "Local item is missing; choose Pull or confirm deletion."
+msgstr "مورد محلی وجود ندارد؛ «دریافت» را انتخاب یا حذف را تأیید کنید."
+
+#: includes/class-sync.php:412
+msgid "Remote item is missing; choose Push or confirm deletion."
+msgstr "مورد سایت راه دور وجود ندارد؛ «ارسال» را انتخاب یا حذف را تأیید کنید."
+
+#: includes/views/backups.php:13
+msgid ""
+"Before a sync overwrites or deletes something on this site, the previous "
+"version is saved here. Restoring an item is itself backed up first."
+msgstr ""
+"پیش از آنکه همگام‌سازی چیزی را در این سایت بازنویسی یا حذف کند، نسخهٔ قبلی آن "
+"اینجا ذخیره می‌شود. بازگردانی یک مورد نیز ابتدا از آن پشتیبان می‌گیرد."
+
+#: includes/views/dashboard.php:13
+msgid "The state of your connection and your latest activity at a glance."
+msgstr "وضعیت اتصال و آخرین فعالیت‌های شما در یک نگاه."
+
+#: includes/views/dashboard.php:17
+msgid "Compare now"
+msgstr "اکنون مقایسه کن"
+
+#: includes/views/history.php:13
+msgid "Every sync run, who started it and what happened to each item."
+msgstr "هر اجرای همگام‌سازی، آغازکنندهٔ آن و نتیجهٔ هر مورد."
+
+#: includes/views/history.php:17 includes/views/i18n.php:290
+msgid "Clear history"
+msgstr "پاک کردن تاریخچه"
+
+#: includes/views/i18n.php:14
+msgid "Working..."
+msgstr "در حال انجام…"
+
+#: includes/views/i18n.php:15
+msgid "Loading..."
+msgstr "در حال بارگذاری…"
+
+#: includes/views/i18n.php:16
+msgid "Close"
+msgstr "بستن"
+
+#: includes/views/i18n.php:17
+msgid "Cancel"
+msgstr "انصراف"
+
+#: includes/views/i18n.php:18
+msgid "Confirm"
+msgstr "تأیید"
+
+#: includes/views/i18n.php:19
+msgid "Delete"
+msgstr "حذف"
+
+#: includes/views/i18n.php:20
+msgid "Try again"
+msgstr "تلاش دوباره"
+
+#: includes/views/i18n.php:21 includes/views/settings.php:55
+#: includes/views/settings.php:72
+msgid "Show"
+msgstr "نمایش"
+
+#: includes/views/i18n.php:22
+msgid "Hide"
+msgstr "پنهان کردن"
+
+#: includes/views/i18n.php:23 includes/views/settings.php:73
+msgid "Copy"
+msgstr "رونوشت"
+
+#: includes/views/i18n.php:24
+msgid "Copied"
+msgstr "رونوشت شد"
+
+#: includes/views/i18n.php:25
+msgid "OK"
+msgstr "موفق"
+
+#: includes/views/i18n.php:26
+msgid "Failed"
+msgstr "ناموفق"
+
+#: includes/views/i18n.php:27
+msgid "Local"
+msgstr "محلی"
+
+#: includes/views/i18n.php:28
+msgid "Remote"
+msgstr "راه دور"
+
+#: includes/views/i18n.php:29
+msgid "present"
+msgstr "موجود"
+
+#: includes/views/i18n.php:30
+msgid "missing"
+msgstr "ناموجود"
+
+#: includes/views/i18n.php:31
+msgid "Something went wrong"
+msgstr "مشکلی پیش آمد"
+
+#: includes/views/i18n.php:32
+msgid "The request failed."
+msgstr "درخواست ناموفق بود."
+
+#. translators: %s: start of the unexpected server response.
+#: includes/views/i18n.php:34
+#, php-format
+msgid "Unexpected server response: %s"
+msgstr "پاسخ غیرمنتظرهٔ کارگزار: %s"
+
+#: includes/views/i18n.php:36
+msgctxt "bytes"
+msgid "B"
+msgstr "بایت"
+
+#: includes/views/i18n.php:37
+msgctxt "kilobytes"
+msgid "KB"
+msgstr "کیلوبایت"
+
+#: includes/views/i18n.php:38
+msgctxt "megabytes"
+msgid "MB"
+msgstr "مگابایت"
+
+#: includes/views/i18n.php:39
+msgctxt "gigabytes"
+msgid "GB"
+msgstr "گیگابایت"
+
+#: includes/views/i18n.php:43
+msgid "Connected"
+msgstr "متصل"
+
+#: includes/views/i18n.php:44
+msgid "Not connected"
+msgstr "متصل نیست"
+
+#: includes/views/i18n.php:45
+msgid "Not configured"
+msgstr "پیکربندی نشده"
+
+#: includes/views/i18n.php:48 includes/views/sync.php:36
+msgid "Theme"
+msgstr "پوسته"
+
+#: includes/views/i18n.php:49 includes/views/sync.php:37
+msgid "Plugins"
+msgstr "افزونه‌ها"
+
+#: includes/views/i18n.php:50 includes/views/i18n.php:71
+#: includes/views/settings.php:17 includes/views/sync.php:38
+msgid "Content"
+msgstr "محتوا"
+
+#: includes/views/i18n.php:51 includes/views/sync.php:39
+msgid "Media"
+msgstr "رسانه"
+
+#: includes/views/i18n.php:54 includes/views/settings.php:21
+msgid "Off"
+msgstr "خاموش"
+
+#: includes/views/i18n.php:55 includes/views/settings.php:22
+msgid "Hourly"
+msgstr "ساعتی"
+
+#: includes/views/i18n.php:56 includes/views/settings.php:23
+msgid "Twice daily"
+msgstr "دو بار در روز"
+
+#: includes/views/i18n.php:57 includes/views/settings.php:24
+msgid "Daily"
+msgstr "روزانه"
+
+#: includes/views/i18n.php:60
+msgid "New on this site"
+msgstr "جدید در این سایت"
+
+#: includes/views/i18n.php:61
+msgid "Changed locally"
+msgstr "تغییر‌یافته در این سایت"
+
+#: includes/views/i18n.php:62
+msgid "New on remote"
+msgstr "جدید در سایت راه دور"
+
+#: includes/views/i18n.php:63
+msgid "Changed on remote"
+msgstr "تغییر‌یافته در سایت راه دور"
+
+#: includes/views/i18n.php:64 includes/views/i18n.php:275
+msgid "Deleted locally"
+msgstr "حذف‌شده در این سایت"
+
+#: includes/views/i18n.php:65 includes/views/i18n.php:274
+msgid "Deleted on remote"
+msgstr "حذف‌شده در سایت راه دور"
+
+#: includes/views/i18n.php:66
+msgid "Conflict"
+msgstr "تداخل"
+
+#: includes/views/i18n.php:68
+msgid "Admin"
+msgstr "مدیر"
+
+#: includes/views/i18n.php:69
+msgid "WP-CLI"
+msgstr "WP-CLI"
+
+#: includes/views/i18n.php:70
+msgid "File"
+msgstr "پرونده"
+
+#: includes/views/i18n.php:74 includes/views/settings.php:45
+msgid "Connection"
+msgstr "اتصال"
+
+#: includes/views/i18n.php:75
+msgid "Last sync"
+msgstr "آخرین همگام‌سازی"
+
+#: includes/views/i18n.php:76
+msgid "Last check"
+msgstr "آخرین بررسی"
+
+#: includes/views/i18n.php:78 includes/views/settings.php:136
+msgid "Scheduled check"
+msgstr "بررسی زمان‌بندی‌شده"
+
+#: includes/views/i18n.php:79
+msgid "Contacting the remote site..."
+msgstr "در حال برقراری ارتباط با سایت راه دور…"
+
+#: includes/views/i18n.php:80
+msgid "Connection not checked yet."
+msgstr "اتصال هنوز بررسی نشده است."
+
+#: includes/views/i18n.php:81
+msgid "Get started in three steps:"
+msgstr "شروع کار در سه گام:"
+
+#: includes/views/i18n.php:82
+msgid "Install Avesta Sync on both sites."
+msgstr "Avesta Sync را روی هر دو سایت نصب کنید."
+
+#: includes/views/i18n.php:83
+msgid ""
+"Copy this site's key into the other site's settings, and the other site's "
+"key and URL into this one."
+msgstr ""
+"کلید این سایت را در تنظیمات سایت دیگر، و کلید و نشانی سایت دیگر را در "
+"تنظیمات این سایت وارد کنید."
+
+#: includes/views/i18n.php:84
+msgid "Click Compare, review the differences and apply what you want."
+msgstr ""
+"روی «مقایسه» کلیک کنید، تفاوت‌ها را بررسی کنید و آنچه را می‌خواهید اعمال کنید."
+
+#: includes/views/i18n.php:85
+msgid "Go to settings"
+msgstr "رفتن به تنظیمات"
+
+#: includes/views/i18n.php:86
+msgid "Cannot reach the remote site"
+msgstr "دسترسی به سایت راه دور ممکن نیست"
+
+#: includes/views/i18n.php:87
+msgid "Remote site"
+msgstr "سایت راه دور"
+
+#: includes/views/i18n.php:89
+msgid "WordPress"
+msgstr "وردپرس"
+
+#: includes/views/i18n.php:90
+msgid "PHP"
+msgstr "PHP"
+
+#: includes/views/i18n.php:91
+msgid "No sync has been run yet."
+msgstr "هنوز همگام‌سازی‌ای اجرا نشده است."
+
+#. translators: %s: user display name.
+#: includes/views/i18n.php:93
+#, php-format
+msgid "by %s"
+msgstr "توسط %s"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:95
+#, php-format
+msgid "%s ok"
+msgstr "%s موفق"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:97
+#, php-format
+msgid "%s failed"
+msgstr "%s ناموفق"
+
+#: includes/views/i18n.php:98
+msgid "View history"
+msgstr "مشاهدهٔ تاریخچه"
+
+#: includes/views/i18n.php:99
+msgid "No comparison has been run yet."
+msgstr "هنوز مقایسه‌ای انجام نشده است."
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:101
+#, php-format
+msgid "In sync (%s identical items)"
+msgstr "همگام (%s مورد یکسان)"
+
+#: includes/views/i18n.php:102
+msgid "Review in Sync"
+msgstr "بررسی در همگام‌سازی"
+
+#. translators: %s: number of backup runs.
+#: includes/views/i18n.php:106 includes/views/i18n.php:108
+#, php-format
+msgid "%s backup run"
+msgid_plural "%s backup runs"
+msgstr[0] "%s اجرای پشتیبان‌گیری"
+msgstr[1] "%s اجرای پشتیبان‌گیری"
+
+#. translators: %s: size such as 1.2 MB.
+#: includes/views/i18n.php:111
+#, php-format
+msgid "%s in total"
+msgstr "در مجموع %s"
+
+#: includes/views/i18n.php:112
+msgid "Nothing backed up yet."
+msgstr "هنوز چیزی پشتیبان‌گیری نشده است."
+
+#: includes/views/i18n.php:113
+msgid "Manage backups"
+msgstr "مدیریت پشتیبان‌ها"
+
+#: includes/views/i18n.php:114
+msgid "Next run:"
+msgstr "اجرای بعدی:"
+
+#: includes/views/i18n.php:115
+msgid "Change schedule"
+msgstr "تغییر زمان‌بندی"
+
+#: includes/views/i18n.php:118
+msgid "Skip"
+msgstr "رد کردن"
+
+#: includes/views/i18n.php:119 includes/views/i18n.php:272
+msgid "Push"
+msgstr "ارسال"
+
+#: includes/views/i18n.php:120 includes/views/i18n.php:273
+msgid "Pull"
+msgstr "دریافت"
+
+#: includes/views/i18n.php:121
+msgid "From this site to the remote site"
+msgstr "از این سایت به سایت راه دور"
+
+#: includes/views/i18n.php:122
+msgid "From the remote site to this site"
+msgstr "از سایت راه دور به این سایت"
+
+#: includes/views/i18n.php:123
+msgid "Push (delete on remote)"
+msgstr "ارسال (حذف در سایت راه دور)"
+
+#: includes/views/i18n.php:124
+msgid "Pull (delete locally)"
+msgstr "دریافت (حذف در این سایت)"
+
+#: includes/views/i18n.php:125
+msgid "Push (restore on remote)"
+msgstr "ارسال (بازگردانی در سایت راه دور)"
+
+#: includes/views/i18n.php:126
+msgid "Pull (restore locally)"
+msgstr "دریافت (بازگردانی در این سایت)"
+
+#: includes/views/i18n.php:127
+msgid "Comparing both sites. This can take a while on large sites..."
+msgstr "در حال مقایسهٔ هر دو سایت. در سایت‌های بزرگ ممکن است مدتی طول بکشد…"
+
+#: includes/views/i18n.php:128
+msgid "Everything in the selected scopes is identical."
+msgstr "همهٔ موارد در دامنه‌های انتخاب‌شده یکسان هستند."
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:130
+#, php-format
+msgid "%s items checked, nothing to sync."
+msgstr "%s مورد بررسی شد؛ چیزی برای همگام‌سازی وجود ندارد."
+
+#. translators: 1: number of differences, 2: number of identical items.
+#: includes/views/i18n.php:132
+#, php-format
+msgid "Comparison finished: %1$s differences, %2$s identical."
+msgstr "مقایسه پایان یافت: %1$s تفاوت، %2$s مورد یکسان."
+
+#: includes/views/i18n.php:133
+msgid "identical"
+msgstr "یکسان"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:135
+#, php-format
+msgid "Select %s"
+msgstr "انتخاب %s"
+
+#. translators: %s: group name.
+#: includes/views/i18n.php:137
+#, php-format
+msgid "Select all shown items in %s"
+msgstr "انتخاب همهٔ موارد نمایش‌داده‌شده در %s"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:139
+#, php-format
+msgid "Direction for %s"
+msgstr "جهت برای %s"
+
+#: includes/views/i18n.php:140
+msgid "View diff"
+msgstr "مشاهدهٔ تفاوت‌ها"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:142
+#, php-format
+msgid "View diff for %s"
+msgstr "مشاهدهٔ تفاوت‌های %s"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:146 includes/views/i18n.php:148
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s مورد"
+msgstr[1] "%s مورد"
+
+#. translators: %s: number of selected items.
+#: includes/views/i18n.php:153 includes/views/i18n.php:155
+#, php-format
+msgid "%s selected"
+msgid_plural "%s selected"
+msgstr[0] "%s مورد انتخاب‌شده"
+msgstr[1] "%s مورد انتخاب‌شده"
+
+#. translators: 1: number of rows to load now, 2: number of rows remaining.
+#: includes/views/i18n.php:158
+#, php-format
+msgid "Show %1$s more (%2$s left)"
+msgstr "نمایش %1$s مورد دیگر (%2$s مورد باقی‌مانده)"
+
+#. translators: 1: rows shown, 2: total rows.
+#: includes/views/i18n.php:160
+#, php-format
+msgid "Showing %1$s of %2$s items"
+msgstr "نمایش %1$s از %2$s مورد"
+
+#. translators: 1: selected, 2: pushes, 3: pulls, 4: deletions.
+#: includes/views/i18n.php:164 includes/views/i18n.php:166
+#, php-format
+msgid "%1$s item selected (%2$s push, %3$s pull, %4$s delete)"
+msgid_plural "%1$s items selected (%2$s push, %3$s pull, %4$s delete)"
+msgstr[0] "%1$s مورد انتخاب شد (%2$s ارسال، %3$s دریافت، %4$s حذف)"
+msgstr[1] "%1$s مورد انتخاب شد (%2$s ارسال، %3$s دریافت، %4$s حذف)"
+
+#. translators: %s: number of selected items hidden by filters.
+#: includes/views/i18n.php:169
+#, php-format
+msgid "%s of them are hidden by your filters."
+msgstr "%s مورد از آن‌ها به‌دلیل فیلترهای شما پنهان است."
+
+#: includes/views/i18n.php:170
+msgid "Nothing selected to apply."
+msgstr "موردی برای اعمال انتخاب نشده است."
+
+#: includes/views/i18n.php:171
+msgid "Done"
+msgstr "انجام شد"
+
+#. translators: %s: error message.
+#: includes/views/i18n.php:173
+#, php-format
+msgid "Failed: %s"
+msgstr "ناموفق: %s"
+
+#: includes/views/i18n.php:176
+msgid "Apply selected changes?"
+msgstr "تغییرات انتخاب‌شده اعمال شوند؟"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:180 includes/views/i18n.php:182
+#, php-format
+msgid "You are about to apply %s item:"
+msgid_plural "You are about to apply %s items:"
+msgstr[0] "در شرف اعمال %s مورد هستید:"
+msgstr[1] "در شرف اعمال %s مورد هستید:"
+
+#: includes/views/i18n.php:184
+msgid "will be pushed to the remote site"
+msgstr "به سایت راه دور ارسال می‌شود"
+
+#: includes/views/i18n.php:185
+msgid "will be pulled to this site"
+msgstr "به این سایت دریافت می‌شود"
+
+#: includes/views/i18n.php:186
+msgid "will be deleted on the receiving side"
+msgstr "در سمت دریافت‌کننده حذف می‌شود"
+
+#. translators: %s: number of deletions.
+#: includes/views/i18n.php:190 includes/views/i18n.php:192
+#, php-format
+msgid ""
+"%s item will be DELETED. A backup is kept on the site that receives the "
+"change."
+msgid_plural ""
+"%s items will be DELETED. A backup is kept on the site that receives the "
+"change."
+msgstr[0] ""
+"%s مورد «حذف» خواهد شد. از آن در سایتی که تغییر را دریافت می‌کند پشتیبان "
+"نگهداری می‌شود."
+msgstr[1] ""
+"%s مورد «حذف» خواهد شد. از آن‌ها در سایتی که تغییر را دریافت می‌کند پشتیبان "
+"نگهداری می‌شود."
+
+#: includes/views/i18n.php:194
+msgid ""
+"Anything overwritten or deleted on this site is saved under Backups first."
+msgstr ""
+"هر چیزی که در این سایت بازنویسی یا حذف شود، ابتدا در بخش «پشتیبان‌ها» ذخیره "
+"می‌شود."
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:198 includes/views/i18n.php:200
+#, php-format
+msgid "Apply %s item"
+msgid_plural "Apply %s items"
+msgstr[0] "اعمال %s مورد"
+msgstr[1] "اعمال %s مورد"
+
+#. translators: 1: current item, 2: total items.
+#: includes/views/i18n.php:203
+#, php-format
+msgid "Applied %1$s of %2$s"
+msgstr "%1$s از %2$s اعمال شد"
+
+#: includes/views/i18n.php:204
+msgid "Stopping after the current item..."
+msgstr "توقف پس از مورد جاری…"
+
+#. translators: 1: number ok, 2: number failed.
+#: includes/views/i18n.php:206
+#, php-format
+msgid "Finished: %1$s ok, %2$s failed."
+msgstr "پایان یافت: %1$s موفق، %2$s ناموفق."
+
+#. translators: %s: number of items not processed.
+#: includes/views/i18n.php:210 includes/views/i18n.php:212
+#, php-format
+msgid "Stopped. %s item was not applied and is still selected."
+msgid_plural "Stopped. %s items were not applied and are still selected."
+msgstr[0] "متوقف شد. %s مورد اعمال نشد و همچنان انتخاب‌شده است."
+msgstr[1] "متوقف شد. %s مورد اعمال نشد و همچنان انتخاب‌شده‌اند."
+
+#. translators: %s: number of failed items.
+#: includes/views/i18n.php:215
+#, php-format
+msgid "Retry %s failed"
+msgstr "تلاش دوباره برای %s مورد ناموفق"
+
+#: includes/views/i18n.php:216
+msgid ""
+"Media files were copied. If new files do not show up in the Media Library, "
+"enable \"Include Media Library entries\" in Settings or regenerate "
+"thumbnails."
+msgstr ""
+"پرونده‌های رسانه کپی شدند. اگر پرونده‌های جدید در کتابخانهٔ پرونده‌های "
+"چندرسانه‌ای نمایش داده نشدند، گزینهٔ «شامل ورودی‌های کتابخانهٔ پرونده‌های "
+"چندرسانه‌ای» را در تنظیمات فعال کنید یا بندانگشتی‌ها را بازسازی کنید."
+
+#: includes/views/i18n.php:217
+msgid "push"
+msgstr "ارسال"
+
+#: includes/views/i18n.php:218
+msgid "pull"
+msgstr "دریافت"
+
+#: includes/views/i18n.php:219
+msgid "delete on remote"
+msgstr "حذف در سایت راه دور"
+
+#: includes/views/i18n.php:220
+msgid "delete locally"
+msgstr "حذف در این سایت"
+
+#. translators: 1: item number, 2: total, 3: action, 4: path.
+#: includes/views/i18n.php:222
+#, php-format
+msgid "[%1$s/%2$s] %3$s %4$s"
+msgstr "[%1$s/%2$s] %3$s %4$s"
+
+#: includes/views/i18n.php:225
+msgid "Compare versions"
+msgstr "مقایسهٔ نسخه‌ها"
+
+#: includes/views/i18n.php:226
+msgid "Binary file - no preview"
+msgstr "پروندهٔ باینری - بدون پیش‌نمایش"
+
+#: includes/views/i18n.php:227
+msgid "This file is too large to preview."
+msgstr "این پرونده برای پیش‌نمایش بیش از حد بزرگ است."
+
+#: includes/views/i18n.php:228
+msgid "Nothing to show for this item."
+msgstr "چیزی برای نمایش این مورد وجود ندارد."
+
+#: includes/views/i18n.php:229
+msgid "Both versions are identical."
+msgstr "هر دو نسخه یکسان هستند."
+
+#: includes/views/i18n.php:230
+msgid "Does not exist locally"
+msgstr "در این سایت وجود ندارد"
+
+#: includes/views/i18n.php:231
+msgid "Does not exist on remote"
+msgstr "در سایت راه دور وجود ندارد"
+
+#. translators: %s: maximum number of lines.
+#: includes/views/i18n.php:233
+#, php-format
+msgid ""
+"The file has more than %s lines, so the versions are shown side by side "
+"without alignment."
+msgstr ""
+"این پرونده بیش از %s خط دارد، بنابراین نسخه‌ها بدون تراز‌بندی کنار هم نمایش "
+"داده می‌شوند."
+
+#: includes/views/i18n.php:234
+msgid ""
+"The versions differ too much to align line by line, so they are shown side "
+"by side."
+msgstr ""
+"نسخه‌ها آن‌قدر متفاوت‌اند که تراز‌بندی خط به خط ممکن نیست، بنابراین کنار هم "
+"نمایش داده می‌شوند."
+
+#: includes/views/i18n.php:235
+msgid "Diff layout"
+msgstr "چیدمان تفاوت‌ها"
+
+#: includes/views/i18n.php:236
+msgid "Side by side"
+msgstr "کنار هم"
+
+#: includes/views/i18n.php:237
+msgid "Unified"
+msgstr "یکپارچه"
+
+#: includes/views/i18n.php:238
+msgid "Only line endings or a trailing newline differ."
+msgstr "فقط پایان‌خط‌ها یا خط خالی انتهایی متفاوت است."
+
+#: includes/views/i18n.php:239
+msgid "Diff"
+msgstr "تفاوت‌ها"
+
+#. translators: %s: number of unchanged lines.
+#: includes/views/i18n.php:243 includes/views/i18n.php:245
+#, php-format
+msgid "Show %s unchanged line"
+msgid_plural "Show %s unchanged lines"
+msgstr[0] "نمایش %s خط بدون تغییر"
+msgstr[1] "نمایش %s خط بدون تغییر"
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:250 includes/views/i18n.php:252
+#, php-format
+msgid "%s line only on remote"
+msgid_plural "%s lines only on remote"
+msgstr[0] "%s خط فقط در سایت راه دور"
+msgstr[1] "%s خط فقط در سایت راه دور"
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:257 includes/views/i18n.php:259
+#, php-format
+msgid "%s line only on this site"
+msgid_plural "%s lines only on this site"
+msgstr[0] "%s خط فقط در این سایت"
+msgstr[1] "%s خط فقط در این سایت"
+
+#: includes/views/i18n.php:263
+msgid "No backups yet"
+msgstr "هنوز پشتیبانی وجود ندارد"
+
+#: includes/views/i18n.php:264
+msgid ""
+"Backups appear here after a sync overwrites or deletes something on this "
+"site."
+msgstr ""
+"پس از آنکه همگام‌سازی چیزی را در این سایت بازنویسی یا حذف کند، پشتیبان‌ها "
+"اینجا نمایش داده می‌شوند."
+
+#. translators: 1: number of files, 2: size such as 1.2 MB.
+#: includes/views/i18n.php:268 includes/views/i18n.php:270
+#, php-format
+msgid "%1$s file · %2$s"
+msgid_plural "%1$s files · %2$s"
+msgstr[0] "%1$s پرونده · %2$s"
+msgstr[1] "%1$s پرونده · %2$s"
+
+#: includes/views/i18n.php:276
+msgid "No items."
+msgstr "موردی وجود ندارد."
+
+#: includes/views/i18n.php:277
+msgid "Restore"
+msgstr "بازگردانی"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:279
+#, php-format
+msgid "Restore %s"
+msgstr "بازگردانی %s"
+
+#: includes/views/i18n.php:280
+msgid "Restore this item?"
+msgstr "این مورد بازگردانی شود؟"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:282
+#, php-format
+msgid ""
+"The backed-up version of %s will replace the current one. The current "
+"version is backed up first."
+msgstr ""
+"نسخهٔ پشتیبان «%s» جایگزین نسخهٔ فعلی می‌شود. ابتدا از نسخهٔ فعلی پشتیبان‌گیری "
+"می‌شود."
+
+#. translators: %s: date.
+#: includes/views/i18n.php:284
+#, php-format
+msgid "Delete backup from %s"
+msgstr "حذف پشتیبان %s"
+
+#: includes/views/i18n.php:285
+msgid "Delete this backup?"
+msgstr "این پشتیبان حذف شود؟"
+
+#: includes/views/i18n.php:286
+msgid ""
+"This permanently deletes every file in this backup run. This cannot be "
+"undone."
+msgstr ""
+"همهٔ پرونده‌های این اجرای پشتیبان‌گیری برای همیشه حذف می‌شوند. این کار قابل "
+"بازگشت نیست."
+
+#: includes/views/i18n.php:288
+msgid "No history yet"
+msgstr "هنوز تاریخچه‌ای وجود ندارد"
+
+#: includes/views/i18n.php:289
+msgid "Applied sync items are recorded here."
+msgstr "موارد همگام‌سازی‌شدهٔ اعمال‌شده اینجا ثبت می‌شوند."
+
+#: includes/views/i18n.php:291
+msgid "Clear the history?"
+msgstr "تاریخچه پاک شود؟"
+
+#: includes/views/i18n.php:292
+msgid "All recorded sync runs will be removed. Backups are not affected."
+msgstr ""
+"همهٔ اجراهای ثبت‌شدهٔ همگام‌سازی حذف می‌شوند. پشتیبان‌ها تحت تأثیر قرار نمی‌گیرند."
+
+#. translators: 1: site URL, 2: plugin version, 3: PHP version, 4: post_max_size, 5: chunk size.
+#: includes/views/i18n.php:297
+#, php-format
+msgid ""
+"Connected to %1$s (Avesta Sync %2$s, PHP %3$s, post_max_size %4$s, chunk "
+"%5$s)"
+msgstr ""
+"متصل به %1$s (Avesta Sync %2$s، PHP %3$s، post_max_size %4$s، قطعه %5$s)"
+
+#: includes/views/i18n.php:298
+msgid "Regenerate this site's key?"
+msgstr "کلید این سایت بازتولید شود؟"
+
+#: includes/views/i18n.php:299
+msgid ""
+"The other site will stop working until you paste the new key into its "
+"settings."
+msgstr ""
+"تا زمانی که کلید جدید را در تنظیمات سایت دیگر وارد نکنید، آن سایت کار نخواهد "
+"کرد."
+
+#: includes/views/i18n.php:300 includes/views/settings.php:77
+msgid "Regenerate key"
+msgstr "بازتولید کلید"
+
+#: includes/views/i18n.php:301
+msgid "Discard unsaved changes?"
+msgstr "تغییرات ذخیره‌نشده نادیده گرفته شوند؟"
+
+#: includes/views/i18n.php:302
+msgid ""
+"You changed settings but did not save them. Your edits stay in the form "
+"until you reload the page."
+msgstr ""
+"تنظیمات را تغییر داده‌اید اما ذخیره نکرده‌اید. ویرایش‌های شما تا زمان بارگذاری "
+"مجدد صفحه در فرم باقی می‌مانند."
+
+#: includes/views/i18n.php:303
+msgid "Leave without saving"
+msgstr "خروج بدون ذخیره"
+
+#: includes/views/i18n.php:304
+msgid "Stay here"
+msgstr "ماندن در اینجا"
+
+#: includes/views/settings.php:15
+msgid "Theme files"
+msgstr "پرونده‌های پوسته"
+
+#: includes/views/settings.php:15
+msgid "Templates, styles and assets of the themes you pick."
+msgstr "قالب‌ها، سبک‌ها و دارایی‌های پوسته‌هایی که انتخاب می‌کنید."
+
+#: includes/views/settings.php:16
+msgid "Custom plugins"
+msgstr "افزونه‌های سفارشی"
+
+#: includes/views/settings.php:16
+msgid "Files of the plugin folders you pick. Activation state is never synced."
+msgstr ""
+"پرونده‌های پوشهٔ افزونه‌هایی که انتخاب می‌کنید. وضعیت فعال‌سازی هرگز همگام‌سازی "
+"نمی‌شود."
+
+#: includes/views/settings.php:17
+msgid "Pages, posts, templates, menus and a few options."
+msgstr "برگه‌ها، نوشته‌ها، قالب‌ها، منوها و چند گزینه."
+
+#: includes/views/settings.php:18
+msgid "Media uploads"
+msgstr "بارگذاری‌های رسانه"
+
+#: includes/views/settings.php:18
+msgid "Files in the uploads folder."
+msgstr "پرونده‌های موجود در پوشهٔ بارگذاری‌ها."
+
+#: includes/views/settings.php:30
+msgid "Connect this site to the other one and choose what is synced."
+msgstr ""
+"این سایت را به سایت دیگر متصل کنید و انتخاب کنید چه چیزی همگام‌سازی شود."
+
+#: includes/views/settings.php:35
+msgid "Settings saved."
+msgstr "تنظیمات ذخیره شد."
+
+#: includes/views/settings.php:37
+msgid "A new key was generated. Update it on the other site."
+msgstr "کلید جدیدی ساخته شد. آن را در سایت دیگر به‌روزرسانی کنید."
+
+#: includes/views/settings.php:47
+msgid "Remote site URL"
+msgstr "نشانی سایت راه دور"
+
+#: includes/views/settings.php:49
+msgid "HTTPS is required (localhost and *.test excepted)."
+msgstr "استفاده از HTTPS الزامی است (localhost و *.test مستثنا هستند)."
+
+#: includes/views/settings.php:52
+msgid "Remote secret key"
+msgstr "کلید محرمانهٔ سایت راه دور"
+
+#: includes/views/settings.php:54
+msgid "Saved - leave blank to keep"
+msgstr "ذخیره‌شده - برای حفظ، خالی بگذارید"
+
+#: includes/views/settings.php:57
+msgid "Copy it from the Settings tab of the other site."
+msgstr "آن را از زبانهٔ تنظیمات سایت دیگر رونوشت کنید."
+
+#: includes/views/settings.php:60
+msgid "Test connection"
+msgstr "آزمایش اتصال"
+
+#: includes/views/settings.php:66
+msgid "This site's key"
+msgstr "کلید این سایت"
+
+#: includes/views/settings.php:67
+msgid ""
+"Paste this key into the \"Remote secret key\" field of the other site so it "
+"can call this site."
+msgstr ""
+"این کلید را در فیلد «کلید محرمانهٔ سایت راه دور» سایت دیگر وارد کنید تا "
+"بتواند این سایت را فراخوانی کند."
+
+#: includes/views/settings.php:69
+msgid "Key to copy to the other site"
+msgstr "کلید برای رونوشت در سایت دیگر"
+
+#: includes/views/settings.php:76
+msgid ""
+"Whoever holds this key can write files to this site. Share it only with the "
+"other site and regenerate it if it may have leaked."
+msgstr ""
+"هر کسی که این کلید را داشته باشد می‌تواند در این سایت پرونده بنویسد. آن را "
+"فقط با سایت دیگر به‌اشتراک بگذارید و اگر احتمال افشا وجود دارد، بازتولیدش "
+"کنید."
+
+#: includes/views/settings.php:81
+msgid "What to sync"
+msgstr "چه چیزی همگام‌سازی شود"
+
+#: includes/views/settings.php:83
+msgid "Scopes"
+msgstr "دامنه‌ها"
+
+#: includes/views/settings.php:98
+msgid "Themes to sync"
+msgstr "پوسته‌های مورد همگام‌سازی"
+
+#: includes/views/settings.php:107
+msgid "Plugin folders to sync"
+msgstr "پوشهٔ افزونه‌های مورد همگام‌سازی"
+
+#: includes/views/settings.php:113
+msgid ""
+"Only files are synced; plugin activation state never is. Avesta Sync itself "
+"is excluded."
+msgstr ""
+"فقط پرونده‌ها همگام‌سازی می‌شوند؛ وضعیت فعال‌سازی افزونه هرگز همگام‌سازی نمی‌شود. "
+"خود Avesta Sync مستثنا است."
+
+#: includes/views/settings.php:120
+msgid "Include Media Library entries"
+msgstr "شامل ورودی‌های کتابخانهٔ پرونده‌های چندرسانه‌ای"
+
+#: includes/views/settings.php:121
+msgid ""
+"Also sync the attachment records (titles, captions, alt text) of synced "
+"uploads."
+msgstr ""
+"رکوردهای پیوست (عنوان، شرح، متن جایگزین) بارگذاری‌های همگام‌سازی‌شده نیز "
+"همگام‌سازی شوند."
+
+#: includes/views/settings.php:127
+msgid "Exclude patterns"
+msgstr "الگوهای استثنا"
+
+#: includes/views/settings.php:129
+msgid "Paths to leave out"
+msgstr "مسیرهای کنار‌گذاشته‌شده"
+
+#: includes/views/settings.php:131
+msgid "One pattern per line. Examples:"
+msgstr "هر الگو در یک خط. نمونه‌ها:"
+
+#: includes/views/settings.php:137
+msgid ""
+"A scheduled check only compares both sites and reports differences. It never "
+"changes anything."
+msgstr ""
+"بررسی زمان‌بندی‌شده فقط هر دو سایت را مقایسه و تفاوت‌ها را گزارش می‌کند. هرگز "
+"چیزی را تغییر نمی‌دهد."
+
+#: includes/views/settings.php:140
+msgid "Check how often"
+msgstr "فاصلهٔ بررسی"
+
+#: includes/views/settings.php:148
+msgid "Email the result to"
+msgstr "ارسال نتیجه با ایمیل به"
+
+#: includes/views/settings.php:157
+msgid "Backup runs to keep"
+msgstr "تعداد اجراهای پشتیبان‌گیری برای نگهداری"
+
+#: includes/views/settings.php:159
+msgid "0 keeps all backups. Older runs are deleted automatically."
+msgstr ""
+"مقدار 0 همهٔ پشتیبان‌ها را نگه می‌دارد. اجراهای قدیمی‌تر به‌صورت خودکار حذف "
+"می‌شوند."
+
+#: includes/views/settings.php:164
+msgid "Save settings"
+msgstr "ذخیرهٔ تنظیمات"
+
+#: includes/views/settings.php:165
+msgid "You have unsaved changes."
+msgstr "تغییرات ذخیره‌نشده دارید."
+
+#: includes/views/sync.php:14
+msgid ""
+"Compare both sites, review every difference, then choose what to push or "
+"pull. Nothing changes until you apply."
+msgstr ""
+"هر دو سایت را مقایسه کنید، همهٔ تفاوت‌ها را بررسی کنید و سپس انتخاب کنید چه "
+"چیزی ارسال یا دریافت شود. تا زمانی که اعمال نکنید، چیزی تغییر نمی‌کند."
+
+#: includes/views/sync.php:18
+msgid "Compare"
+msgstr "مقایسه"
+
+#: includes/views/sync.php:23
+msgid "Results may be out of date. Compare again."
+msgstr "ممکن است نتایج قدیمی باشند. دوباره مقایسه کنید."
+
+#: includes/views/sync.php:24
+msgid "Filter by status"
+msgstr "فیلتر بر اساس وضعیت"
+
+#: includes/views/sync.php:29
+msgid "Search"
+msgstr "جست‌وجو"
+
+#: includes/views/sync.php:30
+msgid "Filter by path or name"
+msgstr "فیلتر بر اساس مسیر یا نام"
+
+#: includes/views/sync.php:33
+msgid "Scope"
+msgstr "دامنه"
+
+#: includes/views/sync.php:35
+msgid "All"
+msgstr "همه"
+
+#: includes/views/sync.php:44
+msgid "Bulk actions for the rows shown"
+msgstr "اقدام‌های گروهی برای ردیف‌های نمایش‌داده‌شده"
+
+#: includes/views/sync.php:45
+msgid "Select all pushes"
+msgstr "انتخاب همهٔ ارسال‌ها"
+
+#: includes/views/sync.php:46
+msgid "Select all pulls"
+msgstr "انتخاب همهٔ دریافت‌ها"
+
+#: includes/views/sync.php:47
+msgid "Conflicts: push"
+msgstr "تداخل‌ها: ارسال"
+
+#: includes/views/sync.php:48
+msgid "Conflicts: pull"
+msgstr "تداخل‌ها: دریافت"
+
+#: includes/views/sync.php:49
+msgid "Clear selection"
+msgstr "پاک کردن انتخاب"
+
+#: includes/views/sync.php:55
+msgid "No items match your filters."
+msgstr "هیچ موردی با فیلترهای شما مطابقت ندارد."
+
+#: includes/views/sync.php:56
+msgid "Clear filters"
+msgstr "پاک کردن فیلترها"
+
+#: includes/views/sync.php:63
+msgid "Sync progress"
+msgstr "پیشرفت همگام‌سازی"
+
+#: includes/views/sync.php:66
+msgid "Sync log"
+msgstr "گزارش همگام‌سازی"
+
+#: includes/views/sync.php:77
+msgid "Stop after this item"
+msgstr "توقف پس از این مورد"
+
+#: includes/views/sync.php:81
+msgid "Apply selected"
+msgstr "اعمال موارد انتخاب‌شده"

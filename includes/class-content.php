@@ -101,30 +101,45 @@ class Content {
 	}
 
 	/**
+	 * Content groups ('all' = posts, templates, menus, options; media is opt-in).
+	 *
+	 * @param bool $media Include the media library group.
+	 * @return string[]
+	 */
+	public static function groups( $media ) {
+		$groups = array( 'posts', 'templates', 'menus', 'options' );
+		if ( $media ) {
+			$groups[] = 'media';
+		}
+		return $groups;
+	}
+
+	/**
 	 * Export items.
 	 *
-	 * @param array      $groups      Any of posts, templates, menus, options (or 'all').
+	 * @param array      $groups      Any of posts, templates, menus, options, media (or 'all' = all but media).
 	 * @param bool       $hashes_only Omit data.
 	 * @param array|null $keys        Restrict to these keys.
 	 * @return array key => {hash,label,ord,data?}
 	 */
 	public static function export( array $groups, $hashes_only = false, $keys = null ) {
 		if ( in_array( 'all', $groups, true ) || ! $groups ) {
-			$groups = array( 'posts', 'templates', 'menus', 'options' );
+			$groups = array_unique( array_merge( self::groups( false ), array_diff( $groups, array( 'all' ) ) ) );
 		}
 		$out = array();
 		foreach ( array_intersect( $groups, array( 'posts', 'templates' ) ) as $group ) {
-			$posts = get_posts(
+			$query = new \WP_Query(
 				array(
-					'post_type'        => self::group_types( $group ),
-					'post_status'      => self::STATUSES,
-					'numberposts'      => -1,
-					'orderby'          => 'ID',
-					'order'            => 'ASC',
-					'no_found_rows'    => true,
-					'suppress_filters' => true,
+					'post_type'           => self::group_types( $group ),
+					'post_status'         => self::STATUSES,
+					'posts_per_page'      => -1,
+					'orderby'             => 'ID',
+					'order'               => 'ASC',
+					'no_found_rows'       => true,
+					'ignore_sticky_posts' => true,
 				)
 			);
+			$posts = $query->posts;
 			foreach ( $posts as $p ) {
 				$item = self::export_post( $p );
 				if ( $item && ( null === $keys || in_array( $item['key'], $keys, true ) ) ) {
@@ -145,6 +160,11 @@ class Content {
 				if ( null === $keys || in_array( $key, $keys, true ) ) {
 					$out[ $key ] = self::pack( self::export_option( $name ), $name, 90, $hashes_only );
 				}
+			}
+		}
+		if ( in_array( 'media', $groups, true ) ) {
+			foreach ( Media::export( $keys ) as $key => $item ) {
+				$out[ $key ] = self::pack( $item['data'], $item['label'], 5, $hashes_only );
 			}
 		}
 		return $out;

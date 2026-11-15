@@ -69,7 +69,7 @@ class Files {
 	 *
 	 * @param string $rel Relative path.
 	 */
-	private static function forget( $rel ) {
+	public static function forget( $rel ) {
 		self::hash_cache_init();
 		unset( self::$cache[ $rel ] );
 		self::$dirty = true;
@@ -90,10 +90,11 @@ class Files {
 	 * Build a manifest for a scope.
 	 *
 	 * @param string $scope theme|plugins|uploads.
-	 * @param array  $items Folder slugs (theme/plugins).
+	 * @param array  $items    Folder slugs (theme/plugins).
+	 * @param array  $excludes User exclude patterns (listing filter only).
 	 * @return array|\WP_Error List of {path,size,sha256}.
 	 */
-	public static function manifest( $scope, array $items ) {
+	public static function manifest( $scope, array $items, array $excludes = array() ) {
 		$roots = array();
 		if ( 'uploads' === $scope ) {
 			$roots[] = 'uploads';
@@ -105,7 +106,7 @@ class Files {
 				}
 			}
 		} else {
-			return new \WP_Error( 'avesta_sync_scope', 'Unknown scope.', array( 'status' => 400 ) );
+			return new \WP_Error( 'avesta_sync_scope', __( 'Unknown scope.', 'avesta-sync' ), array( 'status' => 400 ) );
 		}
 		$out = array();
 		foreach ( array_unique( $roots ) as $rel_root ) {
@@ -113,7 +114,7 @@ class Files {
 			if ( is_wp_error( $abs ) || ! is_dir( $abs ) ) {
 				continue;
 			}
-			self::walk( $rel_root, $abs, $out );
+			self::walk( $rel_root, $abs, $out, $excludes );
 		}
 		usort(
 			$out,
@@ -130,14 +131,15 @@ class Files {
 	 * @param string $rel_root Relative root.
 	 * @param string $abs      Absolute root.
 	 * @param array  $out      Output.
+	 * @param array  $excludes User exclude patterns.
 	 */
-	private static function walk( $rel_root, $abs, array &$out ) {
-		$filter = static function ( \SplFileInfo $cur ) use ( $abs, $rel_root ) {
+	private static function walk( $rel_root, $abs, array &$out, array $excludes = array() ) {
+		$filter = static function ( \SplFileInfo $cur ) use ( $abs, $rel_root, $excludes ) {
 			if ( $cur->isLink() ) {
 				return false;
 			}
 			$rel = $rel_root . substr( wp_normalize_path( $cur->getPathname() ), strlen( $abs ) );
-			if ( Paths::is_excluded( $rel ) ) {
+			if ( Paths::is_excluded( $rel ) || Paths::matches_user_exclude( $rel, $excludes ) ) {
 				return false;
 			}
 			return ! ( $cur->isFile() && Paths::ext_blocked( $rel ) );
@@ -173,14 +175,14 @@ class Files {
 			return $abs;
 		}
 		if ( ! is_file( $abs ) ) {
-			return new \WP_Error( 'avesta_sync_not_found', 'File not found.', array( 'status' => 404 ) );
+			return new \WP_Error( 'avesta_sync_not_found', __( 'File not found.', 'avesta-sync' ), array( 'status' => 404 ) );
 		}
 		$offset = max( 0, (int) $offset );
 		$length = max( 1, min( self::MAX_CHUNK, (int) $length ) );
 		$size   = filesize( $abs );
 		$fh     = fopen( $abs, 'rb' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		if ( ! $fh ) {
-			return new \WP_Error( 'avesta_sync_read', 'Cannot read file.', array( 'status' => 500 ) );
+			return new \WP_Error( 'avesta_sync_read', __( 'Cannot read file.', 'avesta-sync' ), array( 'status' => 500 ) );
 		}
 		fseek( $fh, $offset );
 		$data = (string) fread( $fh, $length ); // phpcs:ignore WordPress.WP.AlternativeFunctions
@@ -217,10 +219,10 @@ class Files {
 		$total  = (int) $total;
 		$data   = base64_decode( (string) $chunk64, true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions
 		if ( false === $data || ! preg_match( '/^[a-f0-9]{64}$/', $sha ) || $offset < 0 || $total < 0 || $total > self::MAX_TOTAL || strlen( $data ) > self::MAX_CHUNK ) {
-			return new \WP_Error( 'avesta_sync_bad_chunk', 'Invalid chunk parameters.', array( 'status' => 400 ) );
+			return new \WP_Error( 'avesta_sync_bad_chunk', __( 'Invalid chunk parameters.', 'avesta-sync' ), array( 'status' => 400 ) );
 		}
 		if ( is_dir( $abs ) ) {
-			return new \WP_Error( 'avesta_sync_isdir', 'Target is a directory.', array( 'status' => 400 ) );
+			return new \WP_Error( 'avesta_sync_isdir', __( 'Target is a directory.', 'avesta-sync' ), array( 'status' => 400 ) );
 		}
 		$tmp = Backup::tmp_dir() . '/' . hash( 'sha256', $rel ) . '.part';
 		if ( 0 === $offset ) {
@@ -228,12 +230,12 @@ class Files {
 		} else {
 			clearstatcache( true, $tmp );
 			if ( ! is_file( $tmp ) || filesize( $tmp ) !== $offset ) {
-				return new \WP_Error( 'avesta_sync_offset', 'Chunk offset mismatch.', array( 'status' => 409 ) );
+				return new \WP_Error( 'avesta_sync_offset', __( 'Chunk offset mismatch.', 'avesta-sync' ), array( 'status' => 409 ) );
 			}
 			$ok = false !== file_put_contents( $tmp, $data, FILE_APPEND | LOCK_EX ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		}
 		if ( ! $ok ) {
-			return new \WP_Error( 'avesta_sync_write', 'Cannot write temp file.', array( 'status' => 500 ) );
+			return new \WP_Error( 'avesta_sync_write', __( 'Cannot write temp file.', 'avesta-sync' ), array( 'status' => 500 ) );
 		}
 		clearstatcache( true, $tmp );
 		if ( ! $final ) {
@@ -266,18 +268,18 @@ class Files {
 	 */
 	private static function install( $tmp, $abs, $rel, $total, $sha, $run ) {
 		if ( filesize( $tmp ) !== $total || ! hash_equals( $sha, (string) hash_file( 'sha256', $tmp ) ) ) {
-			return new \WP_Error( 'avesta_sync_hash', 'Size or SHA-256 mismatch after transfer.', array( 'status' => 422 ) );
+			return new \WP_Error( 'avesta_sync_hash', __( 'Size or SHA-256 mismatch after transfer.', 'avesta-sync' ), array( 'status' => 422 ) );
 		}
 		if ( preg_match( '/\.php$/i', $rel ) && ! self::php_ok( $tmp ) ) {
-			return new \WP_Error( 'avesta_sync_syntax', 'Refused: PHP file fails to parse.', array( 'status' => 422 ) );
+			return new \WP_Error( 'avesta_sync_syntax', __( 'Refused: PHP file fails to parse.', 'avesta-sync' ), array( 'status' => 422 ) );
 		}
 		if ( ! Backup::save_file( $abs, $rel, $run ) ) {
-			return new \WP_Error( 'avesta_sync_backup', 'Backup of existing file failed; not overwritten.', array( 'status' => 500 ) );
+			return new \WP_Error( 'avesta_sync_backup', __( 'Backup of existing file failed; not overwritten.', 'avesta-sync' ), array( 'status' => 500 ) );
 		}
 		wp_mkdir_p( dirname( $abs ) );
 		if ( ! @rename( $tmp, $abs ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions
 			if ( ! copy( $tmp, $abs ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions
-				return new \WP_Error( 'avesta_sync_move', 'Cannot move file into place.', array( 'status' => 500 ) );
+				return new \WP_Error( 'avesta_sync_move', __( 'Cannot move file into place.', 'avesta-sync' ), array( 'status' => 500 ) );
 			}
 			wp_delete_file( $tmp );
 		}
@@ -302,10 +304,10 @@ class Files {
 			return array( 'ok' => true );
 		}
 		if ( ! Backup::save_file( $abs, $rel, $run ) ) {
-			return new \WP_Error( 'avesta_sync_backup', 'Backup failed; not deleted.', array( 'status' => 500 ) );
+			return new \WP_Error( 'avesta_sync_backup', __( 'Backup failed; not deleted.', 'avesta-sync' ), array( 'status' => 500 ) );
 		}
 		if ( ! wp_delete_file( $abs ) && is_file( $abs ) ) {
-			return new \WP_Error( 'avesta_sync_delete', 'Cannot delete file.', array( 'status' => 500 ) );
+			return new \WP_Error( 'avesta_sync_delete', __( 'Cannot delete file.', 'avesta-sync' ), array( 'status' => 500 ) );
 		}
 		self::forget( $rel );
 		return array( 'ok' => true );

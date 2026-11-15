@@ -65,7 +65,7 @@ class Rest {
 	 * Raise limits for heavy calls.
 	 */
 	private static function heavy() {
-		// phpcs:ignore WordPress.PHP.NoSilencedErrors
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors, Squiz.PHP.DiscouragedFunctions.Discouraged -- long-running sync step; the host may disable set_time_limit.
 		@set_time_limit( 300 );
 		ignore_user_abort( true );
 	}
@@ -106,7 +106,7 @@ class Rest {
 		self::heavy();
 		$b     = self::body( $r );
 		$items = isset( $b['items'] ) && is_array( $b['items'] ) ? array_map( 'strval', $b['items'] ) : array();
-		$files = Files::manifest( isset( $b['scope'] ) ? (string) $b['scope'] : '', $items );
+		$files = Files::manifest( isset( $b['scope'] ) ? (string) $b['scope'] : '', $items, Settings::clean_excludes( isset( $b['excludes'] ) ? $b['excludes'] : array() ) );
 		return is_wp_error( $files ) ? $files : array( 'files' => $files );
 	}
 

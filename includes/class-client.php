@@ -62,7 +62,7 @@ class Client {
 	public static function from_settings( $settings = null ) {
 		$s = $settings ? $settings : Settings::get();
 		if ( '' === $s['remote_url'] || '' === $s['remote_key'] ) {
-			return new \WP_Error( 'avesta_sync_config', 'Remote URL and key are not configured.' );
+			return new \WP_Error( 'avesta_sync_config', __( 'Remote URL and key are not configured.', 'avesta-sync' ) );
 		}
 		return new self( $s['remote_url'], $s['remote_key'] );
 	}
@@ -95,10 +95,10 @@ class Client {
 	public function check() {
 		$p = wp_parse_url( $this->base );
 		if ( empty( $p['scheme'] ) || empty( $p['host'] ) || ! in_array( $p['scheme'], array( 'http', 'https' ), true ) ) {
-			return new \WP_Error( 'avesta_sync_url', 'Invalid remote URL.' );
+			return new \WP_Error( 'avesta_sync_url', __( 'Invalid remote URL.', 'avesta-sync' ) );
 		}
 		if ( 'https' !== $p['scheme'] && ! self::is_local_host( $p['host'] ) ) {
-			return new \WP_Error( 'avesta_sync_https', 'Remote URL must use HTTPS.' );
+			return new \WP_Error( 'avesta_sync_https', __( 'Remote URL must use HTTPS.', 'avesta-sync' ) );
 		}
 		return true;
 	}
@@ -115,6 +115,10 @@ class Client {
 		$ok = $this->check();
 		if ( is_wp_error( $ok ) ) {
 			return $ok;
+		}
+		if ( is_array( $payload ) ) {
+			// Unique per request, so two identical calls in the same second do not share a signature (replay check).
+			$payload['_nonce'] = wp_generate_password( 16, false, false );
 		}
 		$body  = null === $payload ? '' : wp_json_encode( $payload );
 		$route = '/avesta-sync/v1/' . $ep;
@@ -137,7 +141,7 @@ class Client {
 		$raw  = preg_replace( '/^\xEF\xBB\xBF/', '', trim( wp_remote_retrieve_body( $res ) ) );
 		$data = json_decode( $raw, true );
 		if ( $code >= 300 && $code < 400 ) {
-			return new \WP_Error( 'avesta_sync_redirect', 'Remote redirected (HTTP ' . $code . '). Use the final HTTPS URL of the remote site.' );
+			return new \WP_Error( 'avesta_sync_redirect', sprintf( /* translators: %d: HTTP status code. */ __( 'Remote redirected (HTTP %d). Use the final HTTPS URL of the remote site.', 'avesta-sync' ), $code ) );
 		}
 		if ( $code >= 400 ) {
 			$msg = is_array( $data ) && isset( $data['message'] ) ? (string) $data['message'] : 'HTTP ' . $code;
@@ -145,7 +149,7 @@ class Client {
 			return new \WP_Error( $c, $msg, array( 'status' => $code ) );
 		}
 		if ( ! is_array( $data ) ) {
-			return new \WP_Error( 'avesta_sync_response', 'Unexpected response from remote (HTTP ' . $code . '). Is Avesta Sync active there?' );
+			return new \WP_Error( 'avesta_sync_response', sprintf( /* translators: %d: HTTP status code. */ __( 'Unexpected response from remote (HTTP %d). Is Avesta Sync active there?', 'avesta-sync' ), $code ) );
 		}
 		return $data;
 	}
@@ -166,7 +170,8 @@ class Client {
 			'method'      => $method,
 			'timeout'     => 60,
 			'redirection' => 0,
-			'sslverify'   => ! self::is_local_host( $p['host'] ),
+			// Certificates are verified for every remote; only local dev hosts (self-signed certs are the norm there) are exempt by default.
+			'sslverify'   => (bool) apply_filters( 'avesta_sync_sslverify', ! self::is_local_host( $p['host'] ), $p['host'] ),
 			'headers'     => array(
 				'Content-Type'   => 'application/json',
 				'X-AS-Timestamp' => $ts,
@@ -211,11 +216,20 @@ class Client {
 	 * Remote file manifest.
 	 *
 	 * @param string $scope Scope.
-	 * @param array  $items Items.
+	 * @param array  $items    Items.
+	 * @param array  $excludes User exclude patterns.
 	 * @return array|\WP_Error
 	 */
-	public function manifest( $scope, array $items ) {
-		$r = $this->request( 'POST', 'manifest', array( 'scope' => $scope, 'items' => array_values( $items ) ) );
+	public function manifest( $scope, array $items, array $excludes = array() ) {
+		$r = $this->request(
+			'POST',
+			'manifest',
+			array(
+				'scope'    => $scope,
+				'items'    => array_values( $items ),
+				'excludes' => array_values( $excludes ),
+			)
+		);
 		return is_wp_error( $r ) ? $r : ( isset( $r['files'] ) ? (array) $r['files'] : array() );
 	}
 
@@ -282,7 +296,7 @@ class Client {
 		$size = filesize( $abs );
 		$fh   = fopen( $abs, 'rb' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		if ( ! $fh ) {
-			return new \WP_Error( 'avesta_sync_read', 'Cannot read local file.' );
+			return new \WP_Error( 'avesta_sync_read', __( 'Cannot read local file.', 'avesta-sync' ) );
 		}
 		$offset = 0;
 		do {
@@ -312,6 +326,42 @@ class Client {
 	}
 
 	/**
+	 * Read a remote file into memory (for previews; nothing is written to disk).
+	 *
+	 * @param string $rel Path.
+	 * @param int    $max Maximum size in bytes.
+	 * @return array|\WP_Error {missing:true} | {too_large:true} | {data:string}
+	 */
+	public function read_text( $rel, $max ) {
+		$chunk  = $this->chunk_size();
+		$offset = 0;
+		$data   = '';
+		$loops  = 0;
+		do {
+			if ( ++$loops > 64 ) {
+				return array( 'too_large' => true );
+			}
+			$r = $this->request( 'POST', 'file/get', array( 'path' => $rel, 'offset' => $offset, 'length' => $chunk ) );
+			if ( is_wp_error( $r ) ) {
+				return 'avesta_sync_not_found' === $r->get_error_code() && 0 === $offset ? array( 'missing' => true ) : $r;
+			}
+			if ( (int) $r['size'] > $max ) {
+				return array( 'too_large' => true );
+			}
+			$raw = base64_decode( (string) $r['chunk'], true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions
+			if ( false === $raw || ( '' === $raw && empty( $r['eof'] ) ) ) {
+				return new \WP_Error( 'avesta_sync_chunk', __( 'Corrupt chunk from remote.', 'avesta-sync' ) );
+			}
+			$data  .= $raw;
+			if ( strlen( $data ) > $max ) {
+				return array( 'too_large' => true );
+			}
+			$offset = strlen( $data );
+		} while ( empty( $r['eof'] ) );
+		return array( 'data' => $data );
+	}
+
+	/**
 	 * Download a remote file into the local site (via Files::write).
 	 *
 	 * @param string $rel Path.
@@ -328,7 +378,7 @@ class Client {
 			}
 			$raw = base64_decode( (string) $r['chunk'], true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions
 			if ( false === $raw ) {
-				return new \WP_Error( 'avesta_sync_chunk', 'Corrupt chunk from remote.' );
+				return new \WP_Error( 'avesta_sync_chunk', __( 'Corrupt chunk from remote.', 'avesta-sync' ) );
 			}
 			$next = $offset + strlen( $raw );
 			$w    = Files::write( $rel, $offset, (int) $r['size'], (string) $r['sha256'], (string) $r['chunk'], ! empty( $r['eof'] ), $run );
@@ -336,7 +386,7 @@ class Client {
 				return $w;
 			}
 			if ( strlen( $raw ) === 0 && empty( $r['eof'] ) ) {
-				return new \WP_Error( 'avesta_sync_chunk', 'Remote returned an empty chunk.' );
+				return new \WP_Error( 'avesta_sync_chunk', __( 'Remote returned an empty chunk.', 'avesta-sync' ) );
 			}
 			$offset = $next;
 		} while ( empty( $r['eof'] ) );

@@ -4,3 +4,4 @@ vendor/
 *.zip
 .env
 avesta-sync-backups-*/
+dist/

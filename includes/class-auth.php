@@ -79,11 +79,11 @@ class Auth {
 		$tkey   = 'avesta_sync_fail_' . md5( $remote );
 		$fails  = (int) get_transient( $tkey );
 		if ( $fails >= self::MAX_FAILS ) {
-			return new \WP_Error( 'avesta_sync_throttled', 'Too many failed attempts. Try again later.', array( 'status' => 429 ) );
+			return new \WP_Error( 'avesta_sync_throttled', __( 'Too many failed attempts. Try again later.', 'avesta-sync' ), array( 'status' => 429 ) );
 		}
 		$key = self::key();
 		if ( '' === $key ) {
-			return new \WP_Error( 'avesta_sync_nokey', 'Sync is not configured on this site.', array( 'status' => 503 ) );
+			return new \WP_Error( 'avesta_sync_nokey', __( 'Sync is not configured on this site.', 'avesta-sync' ), array( 'status' => 503 ) );
 		}
 		$ts  = (string) $request->get_header( 'X-AS-Timestamp' );
 		$sig = strtolower( (string) $request->get_header( 'X-AS-Signature' ) );
@@ -92,7 +92,10 @@ class Auth {
 			$expected = self::sign( $key, $request->get_method(), $request->get_route(), $ts, $request->get_body() );
 			$ok       = hash_equals( $expected, $sig );
 			$seen     = 'avesta_sync_sig_' . md5( $sig );
-			if ( $ok && get_transient( $seen ) ) {
+			if ( $ok && 'GET' === $request->get_method() ) {
+				// Read-only and body-less: two identical GETs in the same second sign identically, so replay tracking is skipped.
+				$seen = '';
+			} elseif ( $ok && get_transient( $seen ) ) {
 				$ok = false;
 			} elseif ( $ok ) {
 				set_transient( $seen, 1, self::MAX_SKEW );
@@ -100,7 +103,7 @@ class Auth {
 		}
 		if ( ! $ok ) {
 			set_transient( $tkey, $fails + 1, 300 );
-			return new \WP_Error( 'avesta_sync_forbidden', 'Invalid or expired signature.', array( 'status' => 401 ) );
+			return new \WP_Error( 'avesta_sync_forbidden', __( 'Invalid or expired signature.', 'avesta-sync' ), array( 'status' => 401 ) );
 		}
 		$verified[ $sig ] = true;
 		return true;

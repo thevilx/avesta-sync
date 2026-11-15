@@ -53,11 +53,11 @@ class Paths {
 	 */
 	public static function normalize( $rel ) {
 		if ( ! is_string( $rel ) || '' === $rel || strlen( $rel ) > 1024 || preg_match( '/[\x00-\x1f\x7f\\\\]/', $rel ) || preg_match( '#^([A-Za-z]:|/)#', $rel ) ) {
-			return self::err( 'Invalid path.' );
+			return self::err( __( 'Invalid path.', 'avesta-sync' ) );
 		}
 		foreach ( explode( '/', $rel ) as $seg ) {
 			if ( '' === $seg || '.' === $seg || '..' === $seg ) {
-				return self::err( 'Invalid path segment.' );
+				return self::err( __( 'Invalid path segment.', 'avesta-sync' ) );
 			}
 		}
 		return $rel;
@@ -99,6 +99,41 @@ class Paths {
 	}
 
 	/**
+	 * Whether a path matches one of the user's exclude patterns (listing filter only,
+	 * NOT a security boundary). Glob: * and ? ; a pattern without "/" matches the basename;
+	 * a pattern naming a folder also covers everything below it.
+	 *
+	 * @param string   $rel      Relative path.
+	 * @param string[] $patterns Patterns.
+	 * @return bool
+	 */
+	public static function matches_user_exclude( $rel, array $patterns ) {
+		if ( ! $patterns ) {
+			return false;
+		}
+		$base = basename( $rel );
+		foreach ( $patterns as $pat ) {
+			if ( ! is_string( $pat ) || '' === $pat ) {
+				continue;
+			}
+			$pat   = ltrim( $pat, '/' );
+			$pat   = (string) preg_replace( '/\*{2,}/', '*', $pat );
+			$re    = '#^' . str_replace( array( '\\*', '\\?' ), array( '.*', '.' ), preg_quote( rtrim( $pat, '/' ), '#' ) ) . '$#s';
+			$re_in = substr( $re, 0, -3 ) . '/.*$#s';
+			if ( false === strpos( $pat, '/' ) ) {
+				if ( preg_match( $re, $base ) ) {
+					return true;
+				}
+				continue;
+			}
+			if ( preg_match( $re, $rel ) || preg_match( $re_in, $rel ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Executable / server-config file inside uploads.
 	 *
 	 * @param string $rel Relative path.
@@ -128,28 +163,31 @@ class Paths {
 		$segs = explode( '/', $rel );
 		$root = $segs[0];
 		if ( ! in_array( $root, self::ROOTS, true ) ) {
-			return self::err( 'Path root not allowed.' );
+			return self::err( __( 'Path root not allowed.', 'avesta-sync' ) );
 		}
 		$need = 'uploads' === $root ? 2 : 3;
 		if ( $dir_ok ) {
 			$need = 'uploads' === $root ? 1 : 2;
 		}
 		if ( count( $segs ) < $need ) {
-			return self::err( 'Path too short.' );
+			return self::err( __( 'Path too short.', 'avesta-sync' ) );
+		}
+		if ( $write && 'uploads' !== $root && ! wp_is_file_mod_allowed( 'avesta_sync' ) ) {
+			return self::err( __( 'File modifications are disabled on this site (DISALLOW_FILE_MODS).', 'avesta-sync' ) );
 		}
 		if ( 'uploads' !== $root && ! self::valid_slug( $segs[1] ) ) {
-			return self::err( 'Invalid folder name.' );
+			return self::err( __( 'Invalid folder name.', 'avesta-sync' ) );
 		}
 		if ( self::is_excluded( $rel ) ) {
-			return self::err( 'Path is excluded from sync.' );
+			return self::err( __( 'Path is excluded from sync.', 'avesta-sync' ) );
 		}
 		if ( $write && self::ext_blocked( $rel ) ) {
-			return self::err( 'File type not allowed in uploads.' );
+			return self::err( __( 'File type not allowed in uploads.', 'avesta-sync' ) );
 		}
 		$base = self::root_dir( $root );
 		$abs  = $base . substr( $rel, strlen( $root ) );
 		if ( is_link( $abs ) ) {
-			return self::err( 'Symlinks are not allowed.' );
+			return self::err( __( 'Symlinks are not allowed.', 'avesta-sync' ) );
 		}
 		$probe = $abs;
 		while ( ! file_exists( $probe ) && ! is_link( $probe ) && dirname( $probe ) !== $probe ) {
@@ -158,12 +196,12 @@ class Paths {
 		$real      = realpath( $probe );
 		$real_base = realpath( $base );
 		if ( false === $real || false === $real_base ) {
-			return self::err( 'Path cannot be resolved.' );
+			return self::err( __( 'Path cannot be resolved.', 'avesta-sync' ) );
 		}
 		$real      = wp_normalize_path( $real );
 		$real_base = wp_normalize_path( $real_base );
 		if ( $real !== $real_base && 0 !== strpos( $real, $real_base . '/' ) ) {
-			return self::err( 'Path escapes its root.' );
+			return self::err( __( 'Path escapes its root.', 'avesta-sync' ) );
 		}
 		return $abs;
 	}

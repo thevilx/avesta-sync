@@ -42,6 +42,9 @@ class Cli {
 	 * [--yes]
 	 * : Skip confirmation.
 	 *
+	 * [--dry-run]
+	 * : Only print what would be applied.
+	 *
 	 * @param array $args  Positional.
 	 * @param array $assoc Flags.
 	 */
@@ -60,11 +63,64 @@ class Cli {
 	 * [--yes]
 	 * : Skip confirmation.
 	 *
+	 * [--dry-run]
+	 * : Only print what would be applied.
+	 *
 	 * @param array $args  Positional.
 	 * @param array $assoc Flags.
 	 */
 	public function push( $args, $assoc ) {
 		$this->run( 'push', $assoc );
+	}
+
+	/**
+	 * List backup runs.
+	 *
+	 * @param array $args  Positional.
+	 * @param array $assoc Flags.
+	 */
+	public function backups( $args, $assoc ) {
+		$out = array();
+		foreach ( Backup::runs() as $r ) {
+			$out[] = array(
+				'run'   => $r['run'],
+				'time'  => gmdate( 'Y-m-d H:i:s', $r['time'] ) . ' UTC',
+				'files' => $r['files'],
+				'size'  => size_format( $r['size'] ),
+			);
+		}
+		if ( ! $out ) {
+			\WP_CLI::success( 'No backups.' );
+			return;
+		}
+		\WP_CLI\Utils\format_items( 'table', $out, array( 'run', 'time', 'files', 'size' ) );
+	}
+
+	/**
+	 * Restore one backed-up item (the current version is backed up first).
+	 *
+	 * ## OPTIONS
+	 *
+	 * <run>
+	 * : Run id, e.g. 20260101-120000 (see `backups`).
+	 *
+	 * <path>
+	 * : Item path, e.g. themes/my-theme/style.css or content/page_about.json.
+	 *
+	 * [--yes]
+	 * : Skip confirmation.
+	 *
+	 * @param array $args  Positional.
+	 * @param array $assoc Flags.
+	 */
+	public function restore( $args, $assoc ) {
+		\WP_CLI::confirm( sprintf( 'Restore %s from backup %s?', $args[1], $args[0] ), $assoc );
+		$msg = Backup::restore( $args[0], $args[1] );
+		Diff::flush();
+		if ( is_wp_error( $msg ) ) {
+			\WP_CLI::error( $msg->get_error_message() );
+		}
+		\WP_CLI::success( $msg );
 	}
 
 	/**
@@ -91,6 +147,7 @@ class Cli {
 		}
 		Diff::flush();
 		Files::flush();
+		Schedule::store( $res );
 		$res['settings'] = $s;
 		$res['client']   = $c;
 		return $res;
@@ -142,8 +199,12 @@ class Cli {
 			return;
 		}
 		$this->print_rows( $todo );
+		if ( ! empty( $assoc['dry-run'] ) ) {
+			\WP_CLI::success( sprintf( 'Dry run: %d item(s) would be applied (%s), %d left for manual review. Nothing was changed.', count( $todo ), $dir, $skipped ) );
+			return;
+		}
 		\WP_CLI::confirm( sprintf( 'Apply %d item(s) (%s)?', count( $todo ), $dir ), $assoc );
-		@set_time_limit( 0 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+		@set_time_limit( 0 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, Squiz.PHP.DiscouragedFunctions.Discouraged -- long-running sync step.
 		$run  = Backup::new_run();
 		$fail = 0;
 		$bar  = \WP_CLI\Utils\make_progress_bar( ucfirst( $dir ), count( $todo ) );
@@ -159,6 +220,20 @@ class Cli {
 				),
 				$run
 			);
+			History::log_item(
+				$run,
+				'cli',
+				$ctx['client']->url(),
+				array(
+					'scope'  => $r['scope'],
+					'id'     => $r['id'],
+					'label'  => $r['label'],
+					'action' => $dir,
+					'del'    => false,
+				),
+				! is_wp_error( $msg ),
+				$msg
+			);
 			if ( is_wp_error( $msg ) ) {
 				++$fail;
 				\WP_CLI::warning( $r['id'] . ': ' . $msg->get_error_message() );
@@ -169,7 +244,7 @@ class Cli {
 		Diff::flush();
 		Files::flush();
 		if ( $fail ) {
-			\WP_CLI::error( sprintf( '%d of %d failed. Backups (if any): uploads/avesta-sync-backups/%s', $fail, count( $todo ), $run ) );
+			\WP_CLI::error( sprintf( '%d of %d failed (run %s). Overwritten items are backed up; see the Backups tab or `wp avesta-sync backups`.', $fail, count( $todo ), $run ) );
 		}
 		\WP_CLI::success( sprintf( '%d item(s) synced. %d left for manual review.', count( $todo ), $skipped ) );
 	}

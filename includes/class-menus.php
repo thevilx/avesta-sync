@@ -83,7 +83,7 @@ class Menus {
 		$slug = sanitize_title( isset( $d['slug'] ) ? $d['slug'] : '' );
 		$name = sanitize_text_field( isset( $d['name'] ) ? $d['name'] : $slug );
 		if ( '' === $slug ) {
-			return new \WP_Error( 'avesta_sync_menu', 'Menu slug missing.' );
+			return new \WP_Error( 'avesta_sync_menu', __( 'Menu slug missing.', 'avesta-sync' ) );
 		}
 		$menu = wp_get_nav_menu_object( $slug );
 		if ( $menu ) {
@@ -155,7 +155,7 @@ class Menus {
 			}
 		}
 		set_theme_mod( 'nav_menu_locations', $locs );
-		return 'menu replaced (' . count( $ids ) . ' items)';
+		return sprintf( /* translators: %d: number of menu items. */ __( 'menu replaced (%d items)', 'avesta-sync' ), count( $ids ) );
 	}
 
 	/**

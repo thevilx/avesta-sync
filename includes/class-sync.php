@@ -14,6 +14,30 @@ defined( 'ABSPATH' ) || exit;
  */
 class Sync {
 
+	const TEXT_EXT    = array( 'php', 'css', 'scss', 'js', 'mjs', 'ts', 'tsx', 'jsx', 'json', 'html', 'htm', 'txt', 'md', 'svg', 'xml', 'yml', 'yaml', 'twig', 'pot', 'po', 'ini', 'csv' );
+	const PREVIEW_MAX = 524288;
+
+	/**
+	 * Content groups for this site's settings.
+	 *
+	 * @param array $settings Settings.
+	 * @return string[]
+	 */
+	public static function groups( array $settings ) {
+		return Content::groups( ! empty( $settings['media_library'] ) );
+	}
+
+	/**
+	 * Whether an item can be shown in the diff viewer.
+	 *
+	 * @param string $scope Scope.
+	 * @param string $id    Item id.
+	 * @return bool
+	 */
+	public static function previewable( $scope, $id ) {
+		return 'content' === $scope || in_array( strtolower( pathinfo( $id, PATHINFO_EXTENSION ) ), self::TEXT_EXT, true );
+	}
+
 	/**
 	 * Normalise a file manifest into id => {sha,size}.
 	 *
@@ -72,15 +96,17 @@ class Sync {
 		foreach ( array_intersect( Settings::scopes(), $scopes ) as $scope ) {
 			$items = Settings::scope_items( $scope, $settings );
 			if ( 'content' === $scope ) {
-				$local  = self::content_map( Content::export( array( 'all' ), true ) );
-				$remote = $client->content_export( array( 'all' ), true );
+				$groups = self::groups( $settings );
+				$local  = self::content_map( Content::export( $groups, true ) );
+				$remote = $client->content_export( $groups, true );
 				if ( is_wp_error( $remote ) ) {
 					return $remote;
 				}
 				$remote = self::content_map( $remote );
 			} else {
-				$lf = Files::manifest( $scope, $items );
-				$rf = $client->manifest( $scope, $items );
+				$ex = isset( $settings['excludes'] ) ? (array) $settings['excludes'] : array();
+				$lf = Files::manifest( $scope, $items, $ex );
+				$rf = $client->manifest( $scope, $items, $ex );
 				if ( is_wp_error( $lf ) ) {
 					return $lf;
 				}
@@ -89,6 +115,12 @@ class Sync {
 				}
 				$local  = self::files_map( $lf );
 				$remote = self::files_map( $rf );
+				// A remote running an older version ignores the exclude list, so filter here too.
+				foreach ( array_keys( $remote ) as $rid ) {
+					if ( Paths::matches_user_exclude( (string) $rid, $ex ) ) {
+						unset( $remote[ $rid ] );
+					}
+				}
 			}
 			$res = Diff::classify( $local, $remote, $base );
 			foreach ( $res['identical'] as $id ) {
@@ -101,6 +133,7 @@ class Sync {
 			foreach ( $res['rows'] as $row ) {
 				$row['scope'] = $scope;
 				$row['group'] = self::group_of( $scope, $row['id'] );
+				$row['previewable'] = self::previewable( $scope, $row['id'] );
 				$rows[]       = $row;
 			}
 		}
@@ -162,18 +195,105 @@ class Sync {
 		$del    = ! empty( $item['del'] );
 		$run    = Backup::clean_run( $run );
 		if ( ! in_array( $action, array( 'push', 'pull' ), true ) || ! in_array( $scope, Settings::scopes(), true ) ) {
-			return new \WP_Error( 'avesta_sync_item', 'Invalid item.' );
+			return new \WP_Error( 'avesta_sync_item', __( 'Invalid item.', 'avesta-sync' ) );
 		}
 		if ( 'content' === $scope ) {
 			if ( ! in_array( 'content', $settings['scopes'], true ) ) {
-				return new \WP_Error( 'avesta_sync_item', 'Content scope is not enabled.' );
+				return new \WP_Error( 'avesta_sync_item', __( 'Content scope is not enabled.', 'avesta-sync' ) );
 			}
-			return 'push' === $action ? self::push_content( $client, $id, $del, $run ) : self::pull_content( $client, $id, $del, $run );
+			$groups = self::groups( $settings );
+			return 'push' === $action ? self::push_content( $client, $id, $del, $run, $groups ) : self::pull_content( $client, $id, $del, $run, $groups );
 		}
 		if ( ! self::selected( $id, $settings ) ) {
-			return new \WP_Error( 'avesta_sync_item', 'Item is outside the selected scope.' );
+			return new \WP_Error( 'avesta_sync_item', __( 'Item is outside the selected scope.', 'avesta-sync' ) );
 		}
 		return 'push' === $action ? self::push_file( $client, $id, $del, $run ) : self::pull_file( $client, $id, $del, $run );
+	}
+
+	/**
+	 * Is a string displayable text (valid UTF-8, no NUL)?
+	 *
+	 * @param string $s Body.
+	 * @return bool
+	 */
+	private static function is_text( $s ) {
+		return false === strpos( $s, "\0" ) && (bool) preg_match( '//u', $s );
+	}
+
+	/**
+	 * Side-by-side preview data for one item (nothing is written anywhere).
+	 *
+	 * @param Client $client   Remote client.
+	 * @param array  $settings Settings.
+	 * @param string $scope    Scope.
+	 * @param string $id       Item id.
+	 * @return array|\WP_Error {label,binary,too_large,local,remote}
+	 */
+	public static function preview( Client $client, array $settings, $scope, $id ) {
+		$scope = (string) $scope;
+		$id    = (string) $id;
+		if ( ! in_array( $scope, Settings::scopes(), true ) ) {
+			return new \WP_Error( 'avesta_sync_item', __( 'Invalid item.', 'avesta-sync' ) );
+		}
+		$out = array(
+			'label'     => $id,
+			'binary'    => false,
+			'too_large' => false,
+			'local'     => null,
+			'remote'    => null,
+		);
+		if ( 'content' === $scope ) {
+			if ( ! in_array( 'content', $settings['scopes'], true ) ) {
+				return new \WP_Error( 'avesta_sync_item', __( 'Content scope is not enabled.', 'avesta-sync' ) );
+			}
+			$groups = self::groups( $settings );
+			$flags  = JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+			$local  = Content::export( $groups, false, array( $id ) );
+			$remote = $client->content_export( $groups, false, array( $id ) );
+			if ( is_wp_error( $remote ) ) {
+				return $remote;
+			}
+			if ( isset( $local[ $id ] ) ) {
+				$out['label'] = (string) $local[ $id ]['label'];
+				$out['local'] = (string) wp_json_encode( $local[ $id ]['data'], $flags );
+			}
+			if ( isset( $remote[ $id ]['data'] ) ) {
+				$out['label']  = isset( $remote[ $id ]['label'] ) && ! isset( $local[ $id ] ) ? (string) $remote[ $id ]['label'] : $out['label'];
+				$out['remote'] = (string) wp_json_encode( $remote[ $id ]['data'], $flags );
+			}
+			return $out;
+		}
+		if ( ! self::selected( $id, $settings ) || ! self::previewable( $scope, $id ) ) {
+			return new \WP_Error( 'avesta_sync_item', __( 'Item is outside the selected scope.', 'avesta-sync' ) );
+		}
+		$abs = Paths::resolve( $id );
+		if ( is_wp_error( $abs ) ) {
+			return $abs;
+		}
+		if ( is_file( $abs ) ) {
+			if ( filesize( $abs ) > self::PREVIEW_MAX ) {
+				$out['too_large'] = true;
+			} else {
+				$out['local'] = (string) file_get_contents( $abs ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+			}
+		}
+		$remote = $client->read_text( $id, self::PREVIEW_MAX );
+		if ( is_wp_error( $remote ) ) {
+			return $remote;
+		}
+		if ( ! empty( $remote['too_large'] ) ) {
+			$out['too_large'] = true;
+		} elseif ( isset( $remote['data'] ) ) {
+			$out['remote'] = $remote['data'];
+		}
+		if ( ! $out['too_large'] && ( ( null !== $out['local'] && ! self::is_text( $out['local'] ) ) || ( null !== $out['remote'] && ! self::is_text( $out['remote'] ) ) ) ) {
+			$out['binary'] = true;
+		}
+		if ( $out['binary'] || $out['too_large'] ) {
+			$out['local']  = null;
+			$out['remote'] = null;
+		}
+		return $out;
 	}
 
 	/**
@@ -191,17 +311,17 @@ class Sync {
 				return $r;
 			}
 			Diff::record( $c->url(), $id, $sha );
-			return 'pushed';
+			return __( 'pushed', 'avesta-sync' );
 		}
 		if ( ! $del ) {
-			return new \WP_Error( 'avesta_sync_item', 'Local file is missing; choose Pull or confirm deletion.' );
+			return new \WP_Error( 'avesta_sync_item', __( 'Local file is missing; choose Pull or confirm deletion.', 'avesta-sync' ) );
 		}
 		$r = $c->delete_file( $id, $run );
 		if ( is_wp_error( $r ) ) {
 			return $r;
 		}
 		Diff::record( $c->url(), $id, null );
-		return 'deleted on remote (backed up there)';
+		return __( 'deleted on remote (backed up there)', 'avesta-sync' );
 	}
 
 	/**
@@ -218,17 +338,17 @@ class Sync {
 		}
 		if ( ! empty( $r['missing'] ) ) {
 			if ( ! $del ) {
-				return new \WP_Error( 'avesta_sync_item', 'Remote file is missing; choose Push or confirm deletion.' );
+				return new \WP_Error( 'avesta_sync_item', __( 'Remote file is missing; choose Push or confirm deletion.', 'avesta-sync' ) );
 			}
 			$d = Files::delete( $id, $run );
 			if ( is_wp_error( $d ) ) {
 				return $d;
 			}
 			Diff::record( $c->url(), $id, null );
-			return 'deleted locally (backed up)';
+			return __( 'deleted locally (backed up)', 'avesta-sync' );
 		}
 		Diff::record( $c->url(), $id, $r['sha'] );
-		return 'pulled';
+		return __( 'pulled', 'avesta-sync' );
 	}
 
 	/**
@@ -248,14 +368,14 @@ class Sync {
 				return ! empty( $row['ok'] ) ? (string) $row['message'] : new \WP_Error( 'avesta_sync_content', (string) $row['message'] );
 			}
 		}
-		return new \WP_Error( 'avesta_sync_content', 'No result for item.' );
+		return new \WP_Error( 'avesta_sync_content', __( 'No result for item.', 'avesta-sync' ) );
 	}
 
 	/**
 	 * Push a content item.
 	 */
-	private static function push_content( Client $c, $key, $del, $run ) {
-		$exp = Content::export( array( 'all' ), false, array( $key ) );
+	private static function push_content( Client $c, $key, $del, $run, array $groups ) {
+		$exp = Content::export( $groups, false, array( $key ) );
 		if ( isset( $exp[ $key ] ) ) {
 			$msg = self::result_of( $c->content_import( array( $key => $exp[ $key ]['data'] ), $run ), $key );
 			if ( ! is_wp_error( $msg ) ) {
@@ -264,7 +384,7 @@ class Sync {
 			return $msg;
 		}
 		if ( ! $del ) {
-			return new \WP_Error( 'avesta_sync_item', 'Local item is missing; choose Pull or confirm deletion.' );
+			return new \WP_Error( 'avesta_sync_item', __( 'Local item is missing; choose Pull or confirm deletion.', 'avesta-sync' ) );
 		}
 		$msg = self::result_of( $c->content_delete( array( $key ), $run ), $key );
 		if ( ! is_wp_error( $msg ) ) {
@@ -276,8 +396,8 @@ class Sync {
 	/**
 	 * Pull a content item.
 	 */
-	private static function pull_content( Client $c, $key, $del, $run ) {
-		$items = $c->content_export( array( 'all' ), false, array( $key ) );
+	private static function pull_content( Client $c, $key, $del, $run, array $groups ) {
+		$items = $c->content_export( $groups, false, array( $key ) );
 		if ( is_wp_error( $items ) ) {
 			return $items;
 		}
@@ -289,7 +409,7 @@ class Sync {
 			return $msg;
 		}
 		if ( ! $del ) {
-			return new \WP_Error( 'avesta_sync_item', 'Remote item is missing; choose Push or confirm deletion.' );
+			return new \WP_Error( 'avesta_sync_item', __( 'Remote item is missing; choose Push or confirm deletion.', 'avesta-sync' ) );
 		}
 		$msg = self::result_of( Importer::delete( array( $key ), $run ), $key );
 		if ( ! is_wp_error( $msg ) ) {
