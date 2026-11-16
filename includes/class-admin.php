@@ -65,6 +65,11 @@ class Admin {
 		}
 		wp_enqueue_style( 'avesta-sync-admin', AVESTA_SYNC_URL . 'assets/admin.css', array( 'dashicons' ), AVESTA_SYNC_VERSION );
 		wp_enqueue_style( 'avesta-sync-sync', AVESTA_SYNC_URL . 'assets/as-sync.css', array( 'avesta-sync-admin' ), AVESTA_SYNC_VERSION );
+		if ( 0 === strpos( (string) get_user_locale(), 'fa' ) ) {
+			// Persian UI: Vazirmatn web font, loaded from Google Fonts on this screen only (disclosed in readme.txt).
+			wp_enqueue_style( 'avesta-sync-vazirmatn', 'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap', array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- a ver query arg breaks the Google Fonts URL.
+			wp_add_inline_style( 'avesta-sync-admin', '.avesta-sync{font-family:Vazirmatn,Tahoma,sans-serif}' );
+		}
 		$prev = array();
 		foreach ( self::scripts() as $name => $file ) {
 			$handle = 'avesta-sync-' . $name;

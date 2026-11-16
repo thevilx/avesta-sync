@@ -1,0 +1,2164 @@
+# Copyright (C) 2026 AvestaTech
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Avesta Sync 1.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/avesta-sync\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (China)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-15T21:21:16+00:00\n"
+"PO-Revision-Date: 2026-11-16 12:00+0000\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: avesta-sync\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Plugin Name of the plugin
+#: avesta-sync.php
+#: includes/class-admin.php:33
+#: includes/class-admin.php:156
+#: includes/views/i18n.php:127
+msgid "Avesta Sync"
+msgstr "Avesta Sync"
+
+#. Plugin URI of the plugin
+#: avesta-sync.php
+msgid "https://avestatech.ir"
+msgstr "https://avestatech.ir"
+
+#. Description of the plugin
+#: avesta-sync.php
+msgid "Hash-based two-way sync (push/pull) of theme files, custom plugins, content, media and WooCommerce catalog and settings between a local site and production over a signed REST API. Only changed items are transferred."
+msgstr "在本地站点与线上站点之间，通过签名的 REST API 对主题文件、自定义插件、内容、媒体以及 WooCommerce 商品目录和设置进行基于哈希的双向同步（推送/拉取）。仅传输有变化的项目。"
+
+#. Author of the plugin
+#: avesta-sync.php
+msgid "AvestaTech"
+msgstr "AvestaTech"
+
+#: includes/class-admin.php:91
+#: includes/class-admin.php:106
+#: includes/class-admin.php:138
+#: includes/class-ajax.php:46
+msgid "Not allowed."
+msgstr "不允许此操作。"
+
+#: includes/class-admin.php:145
+#: includes/views/dashboard.php:12
+msgid "Dashboard"
+msgstr "仪表盘"
+
+#: includes/class-admin.php:146
+#: includes/views/sync.php:13
+msgid "Sync"
+msgstr "同步"
+
+#: includes/class-admin.php:147
+#: includes/views/backups.php:12
+#: includes/views/i18n.php:116
+#: includes/views/settings.php:206
+msgid "Backups"
+msgstr "备份"
+
+#: includes/class-admin.php:148
+#: includes/views/history.php:12
+msgid "History"
+msgstr "历史记录"
+
+#: includes/class-admin.php:149
+#: includes/views/settings.php:36
+msgid "Settings"
+msgstr "设置"
+
+#: includes/class-admin.php:159
+#: includes/views/i18n.php:42
+msgid "Checking connection..."
+msgstr "正在检查连接……"
+
+#: includes/class-admin.php:163
+msgid "Avesta Sync sections"
+msgstr "Avesta Sync 分区"
+
+#: includes/class-ajax.php:36
+msgid "POST required."
+msgstr "需要 POST 请求。"
+
+#: includes/class-ajax.php:148
+msgid "No scope selected. Tick at least one scope and save settings."
+msgstr "未选择任何范围。请至少勾选一个范围并保存设置。"
+
+#: includes/class-ajax.php:170
+msgid "Bad request."
+msgstr "请求无效。"
+
+#: includes/class-ajax.php:324
+#: includes/views/i18n.php:326
+msgid "Backup deleted."
+msgstr "备份已删除。"
+
+#: includes/class-ajax.php:341
+#: includes/views/i18n.php:332
+msgid "History cleared."
+msgstr "历史记录已清除。"
+
+#: includes/class-auth.php:82
+msgid "Too many failed attempts. Try again later."
+msgstr "失败尝试次数过多，请稍后再试。"
+
+#: includes/class-auth.php:86
+msgid "Sync is not configured on this site."
+msgstr "此站点尚未配置同步。"
+
+#: includes/class-auth.php:106
+msgid "Invalid or expired signature."
+msgstr "签名无效或已过期。"
+
+#. translators: %s: attribute label.
+#: includes/class-backup-labels.php:41
+#: includes/woo/class-woo-taxonomies.php:64
+#, php-format
+msgid "Attribute: %s"
+msgstr "属性：%s"
+
+#. translators: %s: coupon code.
+#: includes/class-backup-labels.php:45
+#: includes/woo/class-woo-coupons.php:78
+#, php-format
+msgid "Coupon: %s"
+msgstr "优惠券：%s"
+
+#. translators: %s: settings group.
+#. translators: %s: settings group (general, products, tax, ...).
+#: includes/class-backup-labels.php:49
+#: includes/woo/class-woo-settings.php:180
+#, php-format
+msgid "Store settings: %s"
+msgstr "商店设置：%s"
+
+#. translators: %s: media title or file name.
+#: includes/class-backup-labels.php:53
+#: includes/class-media.php:136
+#, php-format
+msgid "Media: %s"
+msgstr "媒体：%s"
+
+#. translators: %s: menu name.
+#: includes/class-backup-labels.php:57
+#: includes/class-menus.php:63
+#, php-format
+msgid "Menu: %s"
+msgstr "菜单：%s"
+
+#: includes/class-backup.php:216
+#: includes/class-backup.php:453
+msgid "Invalid backup run."
+msgstr "备份记录无效。"
+
+#: includes/class-backup.php:220
+msgid "Backup run not found."
+msgstr "未找到备份记录。"
+
+#: includes/class-backup.php:395
+msgid "Backup file not found."
+msgstr "未找到备份文件。"
+
+#: includes/class-backup.php:398
+#: includes/class-files.php:225
+msgid "Target is a directory."
+msgstr "目标是一个目录。"
+
+#: includes/class-backup.php:401
+#: includes/class-files.php:274
+msgid "Refused: PHP file fails to parse."
+msgstr "已拒绝：PHP 文件解析失败。"
+
+#: includes/class-backup.php:404
+#: includes/class-files.php:277
+msgid "Backup of existing file failed; not overwritten."
+msgstr "现有文件备份失败，未执行覆盖。"
+
+#: includes/class-backup.php:408
+#: includes/class-files.php:282
+msgid "Cannot move file into place."
+msgstr "无法将文件移动到目标位置。"
+
+#. translators: %s: relative file path.
+#. translators: %s: name of the restored item (e.g. a product with its SKU).
+#: includes/class-backup.php:414
+#: includes/class-backup.php:436
+#, php-format
+msgid "Restored: %s. The previous version was backed up."
+msgstr "已还原：%s。还原前的版本已备份。"
+
+#: includes/class-backup.php:428
+msgid "This backup is not in a restorable format."
+msgstr "此备份不是可还原的格式。"
+
+#: includes/class-backup.php:432
+msgid "Restore failed."
+msgstr "还原失败。"
+
+#. translators: %s: name of the restored item (e.g. a product with its SKU).
+#: includes/class-backup.php:436
+msgid "Restored. The previous version was backed up."
+msgstr "已还原。还原前的版本已备份。"
+
+#: includes/class-backup.php:464
+msgid "Could not delete the backup run."
+msgstr "无法删除该备份记录。"
+
+#: includes/class-client.php:65
+msgid "Remote URL and key are not configured."
+msgstr "尚未配置远程站点 URL 和密钥。"
+
+#: includes/class-client.php:98
+msgid "Invalid remote URL."
+msgstr "远程站点 URL 无效。"
+
+#: includes/class-client.php:101
+msgid "Remote URL must use HTTPS."
+msgstr "远程站点 URL 必须使用 HTTPS。"
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:144
+#, php-format
+msgid "Remote redirected (HTTP %d). Use the final HTTPS URL of the remote site."
+msgstr "远程站点发生了重定向（HTTP %d）。请使用远程站点最终的 HTTPS URL。"
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:152
+#, php-format
+msgid "Unexpected response from remote (HTTP %d). Is Avesta Sync active there?"
+msgstr "远程站点返回了意外的响应（HTTP %d）。对方站点是否已启用 Avesta Sync？"
+
+#: includes/class-client.php:317
+msgid "Cannot read local file."
+msgstr "无法读取本地文件。"
+
+#: includes/class-client.php:371
+#: includes/class-client.php:399
+msgid "Corrupt chunk from remote."
+msgstr "来自远程站点的数据块已损坏。"
+
+#: includes/class-client.php:407
+msgid "Remote returned an empty chunk."
+msgstr "远程站点返回了空数据块。"
+
+#: includes/class-content.php:315
+msgid "Site title"
+msgstr "站点标题"
+
+#: includes/class-content.php:316
+msgid "Tagline"
+msgstr "副标题"
+
+#: includes/class-content.php:317
+msgid "Homepage displays"
+msgstr "首页显示"
+
+#: includes/class-content.php:318
+msgid "Homepage"
+msgstr "首页"
+
+#: includes/class-content.php:319
+msgid "Posts page"
+msgstr "文章页面"
+
+#: includes/class-files.php:109
+msgid "Unknown scope."
+msgstr "未知的范围。"
+
+#: includes/class-files.php:178
+msgid "File not found."
+msgstr "未找到文件。"
+
+#: includes/class-files.php:185
+msgid "Cannot read file."
+msgstr "无法读取文件。"
+
+#: includes/class-files.php:222
+msgid "Invalid chunk parameters."
+msgstr "数据块参数无效。"
+
+#: includes/class-files.php:233
+msgid "Chunk offset mismatch."
+msgstr "数据块偏移量不匹配。"
+
+#: includes/class-files.php:238
+msgid "Cannot write temp file."
+msgstr "无法写入临时文件。"
+
+#: includes/class-files.php:271
+msgid "Size or SHA-256 mismatch after transfer."
+msgstr "传输后大小或 SHA-256 不匹配。"
+
+#: includes/class-files.php:307
+#: includes/class-media.php:283
+#: includes/woo/class-woo-coupons.php:251
+#: includes/woo/class-woo-products.php:354
+#: includes/woo/class-woo-taxonomies.php:265
+#: includes/woo/class-woo-terms.php:292
+msgid "The backup failed, so nothing was deleted."
+msgstr "备份失败，因此未删除任何内容。"
+
+#: includes/class-files.php:310
+msgid "Cannot delete file."
+msgstr "无法删除文件。"
+
+#: includes/class-importer.php:34
+msgid "This item could not be read."
+msgstr "无法读取此项目。"
+
+#: includes/class-importer.php:43
+msgid "This item has the wrong type for its name, so it was ignored."
+msgstr "此项目的类型与其名称不符，已被忽略。"
+
+#: includes/class-importer.php:94
+msgid "Syncing the media library is switched off on the site receiving this change."
+msgstr "接收此更改的站点已关闭媒体库同步。"
+
+#. translators: %s: post type.
+#: includes/class-importer.php:149
+#, php-format
+msgid "The content type \"%s\" does not exist on the receiving site."
+msgstr "接收站点上不存在内容类型“%s”。"
+
+#. translators: %s: post type.
+#: includes/class-importer.php:152
+#, php-format
+msgid "This kind of content is not supported, or it has no URL name (\"%s\"). Update Avesta Sync on both sites."
+msgstr "不支持此类内容，或其没有 URL 别名（“%s”）。请在两个站点上都更新 Avesta Sync。"
+
+#. translators: %s: parent page path.
+#: includes/class-importer.php:173
+#, php-format
+msgid "The parent page \"%s\" does not exist on the receiving site yet. Sync it first."
+msgstr "接收站点上尚不存在父页面“%s”。请先同步它。"
+
+#: includes/class-importer.php:210
+msgid "The featured image was not found on the receiving site. Sync the media library first."
+msgstr "在接收站点上未找到特色图片。请先同步媒体库。"
+
+#: includes/class-importer.php:215
+#: includes/class-importer.php:302
+#: includes/class-media.php:265
+#: includes/woo/class-woo-coupons.php:232
+#: includes/woo/class-woo-taxonomies.php:191
+#: includes/woo/class-woo-terms.php:213
+msgid "Updated."
+msgstr "已更新。"
+
+#: includes/class-importer.php:215
+#: includes/class-media.php:265
+#: includes/woo/class-woo-coupons.php:232
+#: includes/woo/class-woo-taxonomies.php:191
+#: includes/woo/class-woo-terms.php:213
+msgid "Created."
+msgstr "已创建。"
+
+#: includes/class-importer.php:283
+msgid "This setting is not one that Avesta Sync syncs."
+msgstr "此设置不属于 Avesta Sync 同步的范围。"
+
+#: includes/class-importer.php:290
+msgid "Cleared."
+msgstr "已清除。"
+
+#. translators: %s: page path.
+#: includes/class-importer.php:294
+#, php-format
+msgid "The page \"%s\" does not exist on the receiving site yet. Sync pages first."
+msgstr "接收站点上尚不存在页面“%s”。请先同步页面。"
+
+#: includes/class-importer.php:320
+#: includes/class-media.php:280
+#: includes/woo/class-woo-coupons.php:246
+#: includes/woo/class-woo-products.php:350
+#: includes/woo/class-woo-taxonomies.php:257
+#: includes/woo/class-woo-terms.php:277
+msgid "It was not found."
+msgstr "未找到该项目。"
+
+#: includes/class-importer.php:327
+msgid "Options cannot be deleted."
+msgstr "无法删除选项。"
+
+#: includes/class-importer.php:331
+msgid "Menu deleted."
+msgstr "菜单已删除。"
+
+#: includes/class-importer.php:331
+#: includes/class-media.php:288
+#: includes/woo/class-woo-taxonomies.php:267
+msgid "Delete failed."
+msgstr "删除失败。"
+
+#: includes/class-importer.php:342
+#: includes/woo/class-woo-coupons.php:253
+#: includes/woo/class-woo-products.php:356
+msgid "Moved to Trash."
+msgstr "已移至回收站。"
+
+#: includes/class-importer.php:342
+#: includes/woo/class-woo-coupons.php:253
+#: includes/woo/class-woo-products.php:356
+msgid "It could not be moved to the Trash."
+msgstr "无法移至回收站。"
+
+#: includes/class-media.php:205
+msgid "Invalid media file path."
+msgstr "媒体文件路径无效。"
+
+#: includes/class-media.php:212
+msgid "File is missing on this site: sync the file first (Media uploads scope)."
+msgstr "此站点上缺少该文件：请先同步文件（“媒体上传”范围）。"
+
+#: includes/class-media.php:288
+msgid "Media entry deleted. The files were kept."
+msgstr "媒体条目已删除，文件已保留。"
+
+#: includes/class-menus.php:87
+msgid "Menu slug missing."
+msgstr "缺少菜单别名。"
+
+#. translators: %d: number of menu items.
+#: includes/class-menus.php:160
+#, php-format
+msgid "Menu replaced: %d item."
+msgid_plural "Menu replaced: %d items."
+msgstr[0] "菜单已替换：%d 项。"
+
+#: includes/class-paths.php:56
+msgid "Invalid path."
+msgstr "路径无效。"
+
+#: includes/class-paths.php:60
+msgid "Invalid path segment."
+msgstr "路径片段无效。"
+
+#: includes/class-paths.php:166
+msgid "Path root not allowed."
+msgstr "不允许使用该路径根目录。"
+
+#: includes/class-paths.php:173
+msgid "Path too short."
+msgstr "路径太短。"
+
+#: includes/class-paths.php:176
+msgid "File modifications are disabled on this site (DISALLOW_FILE_MODS)."
+msgstr "此站点已禁止修改文件（DISALLOW_FILE_MODS）。"
+
+#: includes/class-paths.php:179
+msgid "Invalid folder name."
+msgstr "文件夹名称无效。"
+
+#: includes/class-paths.php:182
+msgid "Path is excluded from sync."
+msgstr "该路径已被同步排除。"
+
+#: includes/class-paths.php:185
+msgid "File type not allowed in uploads."
+msgstr "上传目录中不允许此文件类型。"
+
+#: includes/class-paths.php:190
+msgid "Symlinks are not allowed."
+msgstr "不允许使用符号链接。"
+
+#: includes/class-paths.php:199
+msgid "Path cannot be resolved."
+msgstr "无法解析该路径。"
+
+#: includes/class-paths.php:204
+msgid "Path escapes its root."
+msgstr "路径超出了其根目录。"
+
+#: includes/class-schedule.php:110
+msgid "No scope selected."
+msgstr "未选择任何范围。"
+
+#. translators: %s: site name.
+#: includes/class-schedule.php:151
+#, php-format
+msgid "[%s] Avesta Sync: differences found"
+msgstr "[%s] Avesta Sync：发现差异"
+
+#. translators: 1: number of differing items, 2: number of identical items.
+#: includes/class-schedule.php:154
+#, php-format
+msgid "The scheduled check found %1$d differing item(s) (%2$d identical)."
+msgstr "定时检查发现 %1$d 个不同项目（%2$d 个相同）。"
+
+#: includes/class-schedule.php:157
+msgid "Review and apply:"
+msgstr "查看并应用："
+
+#: includes/class-sync.php:112
+msgid "No WooCommerce options are turned on under Settings > What to sync, so nothing was compared."
+msgstr "“设置 > 同步内容”中未开启任何 WooCommerce 选项，因此未进行比较。"
+
+#: includes/class-sync.php:227
+#: includes/class-sync.php:296
+#: includes/class-sync.php:310
+msgid "Invalid item."
+msgstr "项目无效。"
+
+#: includes/class-sync.php:239
+#: includes/class-sync.php:245
+#: includes/class-sync.php:260
+#: includes/class-sync.php:307
+#: includes/class-sync.php:336
+msgid "This item is not part of what you chose to sync."
+msgstr "此项目不在您所选的同步范围内。"
+
+#: includes/class-sync.php:267
+#: includes/woo/class-woo.php:97
+msgid "The other site runs an older version of Avesta Sync that cannot sync WooCommerce. Update Avesta Sync on both sites."
+msgstr "对方站点运行的 Avesta Sync 版本较旧，无法同步 WooCommerce。请在两个站点上都更新 Avesta Sync。"
+
+#: includes/class-sync.php:383
+msgid "Pushed."
+msgstr "已推送。"
+
+#: includes/class-sync.php:386
+msgid "Local file is missing; choose Pull or confirm deletion."
+msgstr "本地文件缺失；请选择“拉取”或确认删除。"
+
+#: includes/class-sync.php:393
+msgid "Deleted on the remote site. A backup was kept there."
+msgstr "已在远程站点上删除，并在那里保留了备份。"
+
+#: includes/class-sync.php:410
+msgid "Remote file is missing; choose Push or confirm deletion."
+msgstr "远程文件缺失；请选择“推送”或确认删除。"
+
+#: includes/class-sync.php:417
+msgid "Deleted on this site. A backup was kept."
+msgstr "已在此站点上删除，并保留了备份。"
+
+#: includes/class-sync.php:420
+msgid "Pulled."
+msgstr "已拉取。"
+
+#: includes/class-sync.php:440
+msgid "No result for item."
+msgstr "该项目没有结果。"
+
+#. translators: 1: item size, 2: remote post_max_size.
+#: includes/class-sync.php:455
+#, php-format
+msgid "This item (%1$s) is too large for the other site, which accepts up to %2$s per request. Ask its host to raise the post_max_size setting."
+msgstr "此项目（%1$s）对对方站点而言过大，对方站点每次请求最多接受 %2$s。请联系其主机商提高 post_max_size 设置。"
+
+#: includes/class-sync.php:465
+msgid "Local item is missing; choose Pull or confirm deletion."
+msgstr "本地项目缺失；请选择“拉取”或确认删除。"
+
+#: includes/class-sync.php:490
+msgid "Remote item is missing; choose Push or confirm deletion."
+msgstr "远程项目缺失；请选择“推送”或确认删除。"
+
+#: includes/views/backups.php:13
+msgid "Before a sync overwrites or deletes something on this site, the previous version is saved here. Restoring an item is itself backed up first."
+msgstr "在同步覆盖或删除此站点上的内容之前，会先将旧版本保存在这里。还原项目本身也会先进行备份。"
+
+#: includes/views/dashboard.php:13
+msgid "The state of your connection and your latest activity at a glance."
+msgstr "一目了然地查看连接状态和最近的活动。"
+
+#: includes/views/dashboard.php:17
+msgid "Compare now"
+msgstr "立即比较"
+
+#: includes/views/history.php:13
+msgid "Every sync run, who started it and what happened to each item."
+msgstr "每一次同步的记录：由谁发起，以及每个项目的处理结果。"
+
+#: includes/views/history.php:17
+#: includes/views/i18n.php:329
+msgid "Clear history"
+msgstr "清除历史记录"
+
+#: includes/views/i18n.php:14
+msgid "Working..."
+msgstr "处理中……"
+
+#: includes/views/i18n.php:15
+msgid "Loading..."
+msgstr "加载中……"
+
+#: includes/views/i18n.php:16
+msgid "Close"
+msgstr "关闭"
+
+#: includes/views/i18n.php:17
+msgid "Cancel"
+msgstr "取消"
+
+#: includes/views/i18n.php:18
+msgid "Confirm"
+msgstr "确认"
+
+#: includes/views/i18n.php:19
+msgid "Delete"
+msgstr "删除"
+
+#: includes/views/i18n.php:20
+msgid "Try again"
+msgstr "重试"
+
+#: includes/views/i18n.php:21
+#: includes/views/settings.php:62
+#: includes/views/settings.php:79
+msgid "Show"
+msgstr "显示"
+
+#: includes/views/i18n.php:22
+msgid "Hide"
+msgstr "隐藏"
+
+#: includes/views/i18n.php:23
+#: includes/views/settings.php:80
+msgid "Copy"
+msgstr "复制"
+
+#: includes/views/i18n.php:24
+msgid "Copied"
+msgstr "已复制"
+
+#: includes/views/i18n.php:25
+msgid "OK"
+msgstr "确定"
+
+#: includes/views/i18n.php:26
+msgid "Failed"
+msgstr "失败"
+
+#: includes/views/i18n.php:27
+msgid "Local"
+msgstr "本地"
+
+#: includes/views/i18n.php:28
+msgid "Remote"
+msgstr "远程"
+
+#: includes/views/i18n.php:29
+msgid "Not on this site"
+msgstr "此站点上没有"
+
+#: includes/views/i18n.php:30
+msgid "Not on the remote site"
+msgstr "远程站点上没有"
+
+#: includes/views/i18n.php:31
+msgid "Something went wrong"
+msgstr "出了点问题"
+
+#: includes/views/i18n.php:32
+msgid "The request failed."
+msgstr "请求失败。"
+
+#. translators: %s: start of the unexpected server response.
+#: includes/views/i18n.php:34
+#, php-format
+msgid "Unexpected server response: %s"
+msgstr "服务器返回了意外的响应：%s"
+
+#: includes/views/i18n.php:36
+msgctxt "bytes"
+msgid "B"
+msgstr "B"
+
+#: includes/views/i18n.php:37
+msgctxt "kilobytes"
+msgid "KB"
+msgstr "KB"
+
+#: includes/views/i18n.php:38
+msgctxt "megabytes"
+msgid "MB"
+msgstr "MB"
+
+#: includes/views/i18n.php:39
+msgctxt "gigabytes"
+msgid "GB"
+msgstr "GB"
+
+#: includes/views/i18n.php:43
+msgid "Connected"
+msgstr "已连接"
+
+#: includes/views/i18n.php:44
+msgid "Not connected"
+msgstr "未连接"
+
+#: includes/views/i18n.php:45
+msgid "Not configured"
+msgstr "未配置"
+
+#: includes/views/i18n.php:48
+#: includes/views/sync.php:37
+msgid "Theme"
+msgstr "主题"
+
+#: includes/views/i18n.php:49
+#: includes/views/sync.php:38
+msgid "Plugins"
+msgstr "插件"
+
+#: includes/views/i18n.php:50
+#: includes/views/i18n.php:110
+#: includes/views/settings.php:17
+#: includes/views/sync.php:39
+msgid "Content"
+msgstr "内容"
+
+#: includes/views/i18n.php:51
+#: includes/views/sync.php:40
+msgid "Media"
+msgstr "媒体"
+
+#: includes/views/i18n.php:52
+#: includes/views/i18n.php:81
+#: includes/views/settings.php:105
+#: includes/views/settings.php:113
+#: includes/views/sync.php:41
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/views/i18n.php:55
+msgid "Attributes"
+msgstr "属性"
+
+#: includes/views/i18n.php:56
+msgid "Categories and tags"
+msgstr "分类和标签"
+
+#: includes/views/i18n.php:57
+#: includes/views/settings.php:22
+#: includes/woo/class-woo.php:151
+msgid "Products"
+msgstr "商品"
+
+#: includes/views/i18n.php:58
+#: includes/views/settings.php:24
+#: includes/woo/class-woo.php:152
+msgid "Coupons"
+msgstr "优惠券"
+
+#: includes/views/i18n.php:59
+#: includes/views/settings.php:25
+#: includes/woo/class-woo.php:153
+msgid "Store settings"
+msgstr "商店设置"
+
+#: includes/views/i18n.php:62
+msgid "Variable"
+msgstr "可变商品"
+
+#: includes/views/i18n.php:63
+msgid "Grouped"
+msgstr "组合商品"
+
+#: includes/views/i18n.php:64
+msgid "External"
+msgstr "外部商品"
+
+#. translators: %s: number of product variations.
+#: includes/views/i18n.php:69
+#: includes/views/i18n.php:71
+#, php-format
+msgid "%s variation"
+msgid_plural "%s variations"
+msgstr[0] "%s 个变体"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:76
+#: includes/views/i18n.php:78
+#, php-format
+msgid "%s item was not synced"
+msgid_plural "%s items were not synced"
+msgstr[0] "%s 个项目未同步"
+
+#: includes/views/i18n.php:80
+msgid "The other sections you selected are identical."
+msgstr "您选择的其他分区完全相同。"
+
+#: includes/views/i18n.php:82
+msgid "not active"
+msgstr "未启用"
+
+#. translators: 1: WooCommerce version on this site, 2: WooCommerce version on the remote site.
+#: includes/views/i18n.php:84
+#, php-format
+msgid "This site: %1$s, remote site: %2$s"
+msgstr "此站点：%1$s，远程站点：%2$s"
+
+#: includes/views/i18n.php:85
+msgid "Also overwrite stock quantities"
+msgstr "同时覆盖库存数量"
+
+#: includes/views/i18n.php:86
+msgid "Stock is normally left alone, so sales made since the last sync stay correct. Tick this to copy stock from the sending site: to the remote site for a push, to this site for a pull."
+msgstr "库存通常不会被改动，这样自上次同步以来产生的销量依然准确。勾选此项后，将从发送方站点复制库存：推送时复制到远程站点，拉取时复制到此站点。"
+
+#: includes/views/i18n.php:87
+msgid "Stock quantities of the selected products will be overwritten on the site that receives them."
+msgstr "所选商品的库存数量将在接收站点上被覆盖。"
+
+#: includes/views/i18n.php:88
+msgid "Stock levels are not compared here. They are only copied when you tick \"Also overwrite stock quantities\" while applying."
+msgstr "此处不会比较库存水平。仅当您在应用时勾选“同时覆盖库存数量”，库存才会被复制。"
+
+#: includes/views/i18n.php:89
+msgid "WooCommerce items were not checked."
+msgstr "未检查 WooCommerce 项目。"
+
+#: includes/views/i18n.php:90
+msgid "WooCommerce sync is unavailable."
+msgstr "WooCommerce 同步不可用。"
+
+#: includes/views/i18n.php:91
+msgid "Stock quantities were also copied for the products in this run."
+msgstr "本次同步中商品的库存数量也已一并复制。"
+
+#: includes/views/i18n.php:93
+#: includes/views/settings.php:28
+msgid "Off"
+msgstr "关闭"
+
+#: includes/views/i18n.php:94
+#: includes/views/settings.php:29
+msgid "Hourly"
+msgstr "每小时"
+
+#: includes/views/i18n.php:95
+#: includes/views/settings.php:30
+msgid "Twice daily"
+msgstr "每天两次"
+
+#: includes/views/i18n.php:96
+#: includes/views/settings.php:31
+msgid "Daily"
+msgstr "每天"
+
+#: includes/views/i18n.php:99
+msgid "New on this site"
+msgstr "此站点新增"
+
+#: includes/views/i18n.php:100
+msgid "Changed on this site"
+msgstr "此站点已更改"
+
+#: includes/views/i18n.php:101
+msgid "New on the remote site"
+msgstr "远程站点新增"
+
+#: includes/views/i18n.php:102
+msgid "Changed on the remote site"
+msgstr "远程站点已更改"
+
+#: includes/views/i18n.php:103
+#: includes/views/i18n.php:314
+msgid "Deleted on this site"
+msgstr "此站点已删除"
+
+#: includes/views/i18n.php:104
+#: includes/views/i18n.php:313
+msgid "Deleted on the remote site"
+msgstr "远程站点已删除"
+
+#: includes/views/i18n.php:105
+msgid "Conflict"
+msgstr "冲突"
+
+#: includes/views/i18n.php:107
+msgid "Admin"
+msgstr "管理员"
+
+#: includes/views/i18n.php:108
+msgid "WP-CLI"
+msgstr "WP-CLI"
+
+#: includes/views/i18n.php:109
+msgid "File"
+msgstr "文件"
+
+#: includes/views/i18n.php:113
+#: includes/views/settings.php:52
+msgid "Connection"
+msgstr "连接"
+
+#: includes/views/i18n.php:114
+msgid "Last sync"
+msgstr "上次同步"
+
+#: includes/views/i18n.php:115
+msgid "Last check"
+msgstr "上次检查"
+
+#: includes/views/i18n.php:117
+#: includes/views/settings.php:187
+msgid "Scheduled check"
+msgstr "定时检查"
+
+#: includes/views/i18n.php:118
+msgid "Contacting the remote site..."
+msgstr "正在联系远程站点……"
+
+#: includes/views/i18n.php:119
+msgid "Connection not checked yet."
+msgstr "尚未检查连接。"
+
+#: includes/views/i18n.php:120
+msgid "Get started in three steps:"
+msgstr "三步即可开始："
+
+#: includes/views/i18n.php:121
+msgid "Install Avesta Sync on both sites."
+msgstr "在两个站点上都安装 Avesta Sync。"
+
+#: includes/views/i18n.php:122
+msgid "Copy this site's key into the other site's settings, and the other site's key and URL into this one."
+msgstr "将本站点的密钥复制到对方站点的设置中，并将对方站点的密钥和 URL 复制到本站点。"
+
+#: includes/views/i18n.php:123
+msgid "Click Compare, review the differences and apply what you want."
+msgstr "点击“比较”，查看差异并应用您需要的更改。"
+
+#: includes/views/i18n.php:124
+msgid "Go to settings"
+msgstr "前往设置"
+
+#: includes/views/i18n.php:125
+msgid "Cannot reach the remote site"
+msgstr "无法连接到远程站点"
+
+#: includes/views/i18n.php:126
+msgid "Remote site"
+msgstr "远程站点"
+
+#: includes/views/i18n.php:128
+msgid "WordPress"
+msgstr "WordPress"
+
+#: includes/views/i18n.php:129
+msgid "PHP"
+msgstr "PHP"
+
+#: includes/views/i18n.php:130
+msgid "No sync has been run yet."
+msgstr "尚未运行过同步。"
+
+#. translators: %s: user display name.
+#: includes/views/i18n.php:132
+#, php-format
+msgid "by %s"
+msgstr "由 %s 执行"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:134
+#, php-format
+msgid "%s ok"
+msgstr "%s 成功"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:136
+#, php-format
+msgid "%s failed"
+msgstr "%s 失败"
+
+#: includes/views/i18n.php:137
+msgid "View history"
+msgstr "查看历史记录"
+
+#: includes/views/i18n.php:138
+msgid "No comparison has been run yet."
+msgstr "尚未运行过比较。"
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:140
+#, php-format
+msgid "In sync (%s identical items)"
+msgstr "已同步（%s 个项目相同）"
+
+#: includes/views/i18n.php:141
+msgid "Review in Sync"
+msgstr "在“同步”中查看"
+
+#. translators: %s: number of backup runs.
+#: includes/views/i18n.php:145
+#: includes/views/i18n.php:147
+#, php-format
+msgid "%s backup run"
+msgid_plural "%s backup runs"
+msgstr[0] "%s 次备份"
+
+#. translators: %s: size such as 1.2 MB.
+#: includes/views/i18n.php:150
+#, php-format
+msgid "%s in total"
+msgstr "共 %s"
+
+#: includes/views/i18n.php:151
+msgid "Nothing backed up yet."
+msgstr "尚无备份。"
+
+#: includes/views/i18n.php:152
+msgid "Manage backups"
+msgstr "管理备份"
+
+#: includes/views/i18n.php:153
+msgid "Next run:"
+msgstr "下次运行："
+
+#: includes/views/i18n.php:154
+msgid "Change schedule"
+msgstr "更改计划"
+
+#: includes/views/i18n.php:157
+msgid "Skip"
+msgstr "跳过"
+
+#: includes/views/i18n.php:158
+#: includes/views/i18n.php:311
+msgid "Push"
+msgstr "推送"
+
+#: includes/views/i18n.php:159
+#: includes/views/i18n.php:312
+msgid "Pull"
+msgstr "拉取"
+
+#: includes/views/i18n.php:160
+msgid "From this site to the remote site"
+msgstr "从此站点到远程站点"
+
+#: includes/views/i18n.php:161
+msgid "From the remote site to this site"
+msgstr "从远程站点到此站点"
+
+#: includes/views/i18n.php:162
+msgid "Push: delete it on the remote site"
+msgstr "推送：在远程站点上删除"
+
+#: includes/views/i18n.php:163
+msgid "Pull: delete it on this site"
+msgstr "拉取：在此站点上删除"
+
+#: includes/views/i18n.php:164
+msgid "Push: bring it back on the remote site"
+msgstr "推送：在远程站点上恢复"
+
+#: includes/views/i18n.php:165
+msgid "Pull: bring it back to this site"
+msgstr "拉取：恢复到此站点"
+
+#: includes/views/i18n.php:166
+msgid "Comparing both sites. This can take a while on large sites..."
+msgstr "正在比较两个站点。站点较大时可能需要一些时间……"
+
+#: includes/views/i18n.php:167
+msgid "Everything you selected is identical."
+msgstr "您选择的所有内容都相同。"
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:169
+#, php-format
+msgid "%s items checked, nothing to sync."
+msgstr "已检查 %s 个项目，无需同步。"
+
+#. translators: 1: number of differences, 2: number of identical items.
+#: includes/views/i18n.php:171
+#, php-format
+msgid "Comparison finished: %1$s differences, %2$s identical."
+msgstr "比较完成：%1$s 个差异，%2$s 个相同。"
+
+#: includes/views/i18n.php:172
+msgid "identical"
+msgstr "相同"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:174
+#, php-format
+msgid "Select %s"
+msgstr "选择 %s"
+
+#. translators: %s: group name.
+#: includes/views/i18n.php:176
+#, php-format
+msgid "Select all shown items in %s"
+msgstr "选择 %s 中所有显示的项目"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:178
+#, php-format
+msgid "Direction for %s"
+msgstr "%s 的同步方向"
+
+#: includes/views/i18n.php:179
+msgid "View changes"
+msgstr "查看更改"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:181
+#, php-format
+msgid "View changes for %s"
+msgstr "查看 %s 的更改"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:185
+#: includes/views/i18n.php:187
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s 个项目"
+
+#. translators: %s: number of selected items.
+#: includes/views/i18n.php:192
+#: includes/views/i18n.php:194
+#, php-format
+msgid "%s selected"
+msgid_plural "%s selected"
+msgstr[0] "已选择 %s 项"
+
+#. translators: 1: number of rows to load now, 2: number of rows remaining.
+#: includes/views/i18n.php:197
+#, php-format
+msgid "Show %1$s more (%2$s left)"
+msgstr "再显示 %1$s 项（还剩 %2$s 项）"
+
+#. translators: 1: rows shown, 2: total rows.
+#: includes/views/i18n.php:199
+#, php-format
+msgid "Showing %1$s of %2$s items"
+msgstr "显示 %2$s 个项目中的 %1$s 个"
+
+#. translators: 1: selected, 2: pushes, 3: pulls, 4: deletions.
+#: includes/views/i18n.php:203
+#: includes/views/i18n.php:205
+#, php-format
+msgid "%1$s item selected (%2$s push, %3$s pull, %4$s delete)"
+msgid_plural "%1$s items selected (%2$s push, %3$s pull, %4$s delete)"
+msgstr[0] "已选择 %1$s 个项目（%2$s 个推送，%3$s 个拉取，%4$s 个删除）"
+
+#. translators: %s: number of selected items hidden by filters.
+#: includes/views/i18n.php:208
+#, php-format
+msgid "%s of them are hidden by your filters."
+msgstr "其中 %s 项被您的筛选条件隐藏。"
+
+#: includes/views/i18n.php:209
+msgid "Nothing selected to apply."
+msgstr "没有选择要应用的项目。"
+
+#: includes/views/i18n.php:210
+msgid "Done"
+msgstr "完成"
+
+#. translators: %s: error message.
+#: includes/views/i18n.php:212
+#, php-format
+msgid "Failed: %s"
+msgstr "失败：%s"
+
+#: includes/views/i18n.php:215
+msgid "Apply selected changes?"
+msgstr "要应用所选更改吗？"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:219
+#: includes/views/i18n.php:221
+#, php-format
+msgid "You are about to apply %s item:"
+msgid_plural "You are about to apply %s items:"
+msgstr[0] "您即将应用 %s 个项目："
+
+#: includes/views/i18n.php:223
+msgid "will be pushed to the remote site"
+msgstr "将被推送到远程站点"
+
+#: includes/views/i18n.php:224
+msgid "will be pulled to this site"
+msgstr "将被拉取到此站点"
+
+#: includes/views/i18n.php:225
+msgid "will be deleted"
+msgstr "将被删除"
+
+#. translators: %s: number of deletions.
+#: includes/views/i18n.php:229
+#: includes/views/i18n.php:231
+#, php-format
+msgid "%s item will be deleted. A backup is saved on the site where it is deleted."
+msgid_plural "%s items will be deleted. A backup is saved on the site where they are deleted."
+msgstr[0] "将删除 %s 个项目。备份会保存在执行删除的站点上。"
+
+#: includes/views/i18n.php:233
+msgid "Before anything is overwritten or deleted, the site that receives the change saves a backup of it."
+msgstr "在任何内容被覆盖或删除之前，接收更改的站点会先为其保存备份。"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:237
+#: includes/views/i18n.php:239
+#, php-format
+msgid "Apply %s item"
+msgid_plural "Apply %s items"
+msgstr[0] "应用 %s 个项目"
+
+#. translators: 1: current item, 2: total items.
+#: includes/views/i18n.php:242
+#, php-format
+msgid "Applied %1$s of %2$s"
+msgstr "已应用 %1$s / %2$s"
+
+#: includes/views/i18n.php:243
+msgid "Stopping after the current item..."
+msgstr "将在当前项目完成后停止……"
+
+#. translators: 1: number ok, 2: number failed.
+#: includes/views/i18n.php:245
+#, php-format
+msgid "Finished: %1$s ok, %2$s failed."
+msgstr "已完成：%1$s 个成功，%2$s 个失败。"
+
+#. translators: %s: number of items not processed.
+#: includes/views/i18n.php:249
+#: includes/views/i18n.php:251
+#, php-format
+msgid "Stopped. %s item was not applied and is still selected."
+msgid_plural "Stopped. %s items were not applied and are still selected."
+msgstr[0] "已停止。%s 个项目尚未应用，仍处于选中状态。"
+
+#. translators: %s: number of failed items.
+#: includes/views/i18n.php:254
+#, php-format
+msgid "Retry %s failed"
+msgstr "重试 %s 个失败项"
+
+#: includes/views/i18n.php:255
+msgid "Media files were copied. If new files do not show up in the Media Library, enable \"Include Media Library entries\" in Settings or regenerate thumbnails."
+msgstr "媒体文件已复制。如果新文件没有显示在媒体库中，请在“设置”中启用“包含媒体库条目”，或重新生成缩略图。"
+
+#: includes/views/i18n.php:256
+msgid "push"
+msgstr "推送"
+
+#: includes/views/i18n.php:257
+msgid "pull"
+msgstr "拉取"
+
+#: includes/views/i18n.php:258
+msgid "delete on the remote site"
+msgstr "在远程站点上删除"
+
+#: includes/views/i18n.php:259
+msgid "delete on this site"
+msgstr "在此站点上删除"
+
+#. translators: 1: item number, 2: total, 3: action, 4: path.
+#: includes/views/i18n.php:261
+#, php-format
+msgid "[%1$s/%2$s] %3$s %4$s"
+msgstr "[%1$s/%2$s] %3$s %4$s"
+
+#: includes/views/i18n.php:264
+msgid "Compare versions"
+msgstr "比较版本"
+
+#: includes/views/i18n.php:265
+msgid "Binary file - no preview"
+msgstr "二进制文件，无法预览"
+
+#: includes/views/i18n.php:266
+msgid "This file is too large to preview."
+msgstr "此文件过大，无法预览。"
+
+#: includes/views/i18n.php:267
+msgid "Nothing to show for this item."
+msgstr "此项目没有可显示的内容。"
+
+#: includes/views/i18n.php:268
+msgid "Both versions are identical."
+msgstr "两个版本完全相同。"
+
+#: includes/views/i18n.php:269
+msgid "Does not exist on this site"
+msgstr "此站点上不存在"
+
+#: includes/views/i18n.php:270
+msgid "Does not exist on the remote site"
+msgstr "远程站点上不存在"
+
+#. translators: %s: maximum number of lines.
+#: includes/views/i18n.php:272
+#, php-format
+msgid "The file has more than %s lines, so the versions are shown side by side without alignment."
+msgstr "该文件超过 %s 行，因此两个版本将并排显示，不进行对齐。"
+
+#: includes/views/i18n.php:273
+msgid "The versions differ too much to align line by line, so they are shown side by side."
+msgstr "两个版本差异过大，无法逐行对齐，因此将并排显示。"
+
+#: includes/views/i18n.php:274
+msgid "Layout"
+msgstr "布局"
+
+#: includes/views/i18n.php:275
+msgid "Side by side"
+msgstr "并排"
+
+#: includes/views/i18n.php:276
+msgid "Unified"
+msgstr "统一视图"
+
+#: includes/views/i18n.php:277
+msgid "Only line endings or a trailing newline differ."
+msgstr "仅换行符或末尾换行不同。"
+
+#: includes/views/i18n.php:278
+msgid "Differences"
+msgstr "差异"
+
+#. translators: %s: number of unchanged lines.
+#: includes/views/i18n.php:282
+#: includes/views/i18n.php:284
+#, php-format
+msgid "Show %s unchanged line"
+msgid_plural "Show %s unchanged lines"
+msgstr[0] "显示 %s 行未更改的内容"
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:289
+#: includes/views/i18n.php:291
+#, php-format
+msgid "%s line only on the remote site"
+msgid_plural "%s lines only on the remote site"
+msgstr[0] "%s 行仅在远程站点上"
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:296
+#: includes/views/i18n.php:298
+#, php-format
+msgid "%s line only on this site"
+msgid_plural "%s lines only on this site"
+msgstr[0] "%s 行仅在此站点上"
+
+#: includes/views/i18n.php:302
+msgid "No backups yet"
+msgstr "暂无备份"
+
+#: includes/views/i18n.php:303
+msgid "Backups appear here after a sync overwrites or deletes something on this site."
+msgstr "在同步覆盖或删除此站点上的内容后，备份会显示在这里。"
+
+#. translators: 1: number of files, 2: size such as 1.2 MB.
+#: includes/views/i18n.php:307
+#: includes/views/i18n.php:309
+#, php-format
+msgid "%1$s file · %2$s"
+msgid_plural "%1$s files · %2$s"
+msgstr[0] "%1$s 个文件 · %2$s"
+
+#: includes/views/i18n.php:315
+msgid "No items."
+msgstr "没有项目。"
+
+#: includes/views/i18n.php:316
+msgid "Restore"
+msgstr "还原"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:318
+#, php-format
+msgid "Restore %s"
+msgstr "还原 %s"
+
+#: includes/views/i18n.php:319
+msgid "Restore this item?"
+msgstr "要还原此项目吗？"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:321
+#, php-format
+msgid "The backed-up version of %s will replace the current one. The current version is backed up first."
+msgstr "%s 的备份版本将替换当前版本。当前版本会先被备份。"
+
+#. translators: %s: date.
+#: includes/views/i18n.php:323
+#, php-format
+msgid "Delete backup from %s"
+msgstr "删除 %s 的备份"
+
+#: includes/views/i18n.php:324
+msgid "Delete this backup?"
+msgstr "要删除此备份吗？"
+
+#: includes/views/i18n.php:325
+msgid "This permanently deletes every file in this backup run. This cannot be undone."
+msgstr "这将永久删除此备份记录中的所有文件，且无法撤销。"
+
+#: includes/views/i18n.php:327
+msgid "No history yet"
+msgstr "暂无历史记录"
+
+#: includes/views/i18n.php:328
+msgid "Applied sync items are recorded here."
+msgstr "已应用的同步项目会记录在这里。"
+
+#: includes/views/i18n.php:330
+msgid "Clear the history?"
+msgstr "要清除历史记录吗？"
+
+#: includes/views/i18n.php:331
+msgid "All recorded sync runs will be removed. Backups are not affected."
+msgstr "所有已记录的同步记录都将被移除。备份不受影响。"
+
+#. translators: 1: site URL, 2: plugin version, 3: PHP version, 4: post_max_size, 5: chunk size.
+#: includes/views/i18n.php:336
+#, php-format
+msgid "Connected to %1$s (Avesta Sync %2$s, PHP %3$s, upload limit %4$s, transfer size %5$s)"
+msgstr "已连接到 %1$s（Avesta Sync %2$s，PHP %3$s，上传限制 %4$s，传输块大小 %5$s）"
+
+#: includes/views/i18n.php:337
+msgid "Regenerate this site's key?"
+msgstr "要重新生成此站点的密钥吗？"
+
+#: includes/views/i18n.php:338
+msgid "The other site will stop working until you paste the new key into its settings."
+msgstr "在您将新密钥粘贴到对方站点的设置中之前，对方站点将无法工作。"
+
+#: includes/views/i18n.php:339
+#: includes/views/settings.php:84
+msgid "Regenerate key"
+msgstr "重新生成密钥"
+
+#: includes/views/i18n.php:340
+msgid "Discard unsaved changes?"
+msgstr "要放弃未保存的更改吗？"
+
+#: includes/views/i18n.php:341
+msgid "You changed settings but did not save them. Your edits stay in the form until you reload the page."
+msgstr "您更改了设置但尚未保存。在您重新加载页面之前，修改内容会保留在表单中。"
+
+#: includes/views/i18n.php:342
+msgid "Leave without saving"
+msgstr "不保存并离开"
+
+#: includes/views/i18n.php:343
+msgid "Stay here"
+msgstr "留在此页"
+
+#: includes/views/settings.php:15
+msgid "Theme files"
+msgstr "主题文件"
+
+#: includes/views/settings.php:15
+msgid "Templates, styles and assets of the themes you pick."
+msgstr "您所选主题的模板、样式和资源文件。"
+
+#: includes/views/settings.php:16
+msgid "Custom plugins"
+msgstr "自定义插件"
+
+#: includes/views/settings.php:16
+msgid "Files of the plugin folders you pick. Activation state is never synced."
+msgstr "您所选插件文件夹中的文件。插件的启用状态不会被同步。"
+
+#: includes/views/settings.php:17
+msgid "Pages, posts, templates, menus and a few options."
+msgstr "页面、文章、模板、菜单和部分选项。"
+
+#: includes/views/settings.php:18
+msgid "Media uploads"
+msgstr "媒体上传"
+
+#: includes/views/settings.php:18
+msgid "Files in the uploads folder."
+msgstr "上传文件夹中的文件。"
+
+#: includes/views/settings.php:22
+msgid "Simple, variable, grouped and external products, including their variations."
+msgstr "简单商品、可变商品、组合商品和外部商品，包括其变体。"
+
+#: includes/views/settings.php:23
+#: includes/woo/class-woo.php:149
+#: includes/woo/class-woo.php:150
+msgid "Categories, tags and attributes"
+msgstr "分类、标签和属性"
+
+#: includes/views/settings.php:23
+msgid "Product categories, tags and global attributes with their terms."
+msgstr "商品分类、标签和全局属性及其项。"
+
+#: includes/views/settings.php:24
+msgid "Discount codes and their restrictions."
+msgstr "折扣码及其使用限制。"
+
+#: includes/views/settings.php:25
+msgid "General, tax and shipping settings. Payment gateways and API keys are never synced."
+msgstr "常规、税费和配送设置。支付网关和 API 密钥不会被同步。"
+
+#: includes/views/settings.php:37
+msgid "Connect this site to the other one and choose what is synced."
+msgstr "将此站点连接到对方站点，并选择要同步的内容。"
+
+#: includes/views/settings.php:42
+msgid "Settings saved."
+msgstr "设置已保存。"
+
+#: includes/views/settings.php:44
+msgid "A new key was generated. Update it on the other site."
+msgstr "已生成新密钥。请在对方站点上更新它。"
+
+#: includes/views/settings.php:54
+msgid "Remote site URL"
+msgstr "远程站点 URL"
+
+#: includes/views/settings.php:56
+msgid "HTTPS is required (localhost and *.test excepted)."
+msgstr "必须使用 HTTPS（localhost 和 *.test 除外）。"
+
+#: includes/views/settings.php:59
+msgid "Remote secret key"
+msgstr "远程站点密钥"
+
+#: includes/views/settings.php:61
+msgid "Saved - leave blank to keep"
+msgstr "已保存 - 留空则保持不变"
+
+#: includes/views/settings.php:64
+msgid "Copy it from the Settings tab of the other site."
+msgstr "请从对方站点的“设置”选项卡中复制。"
+
+#: includes/views/settings.php:67
+msgid "Test connection"
+msgstr "测试连接"
+
+#: includes/views/settings.php:73
+msgid "This site's key"
+msgstr "此站点的密钥"
+
+#: includes/views/settings.php:74
+msgid "Paste this key into the \"Remote secret key\" field of the other site so it can call this site."
+msgstr "将此密钥粘贴到对方站点的“远程站点密钥”字段中，以便它调用本站点。"
+
+#: includes/views/settings.php:76
+msgid "Key to copy to the other site"
+msgstr "要复制到对方站点的密钥"
+
+#: includes/views/settings.php:83
+msgid "Whoever holds this key can write files to this site. Share it only with the other site and regenerate it if it may have leaked."
+msgstr "任何持有此密钥的人都可以向本站点写入文件。请仅与对方站点共享，如果可能已泄露，请重新生成。"
+
+#: includes/views/settings.php:88
+#: includes/views/settings.php:90
+msgid "What to sync"
+msgstr "同步内容"
+
+#: includes/views/settings.php:106
+msgid "Products, categories and attributes, coupons and store settings. Orders and customers are never touched."
+msgstr "商品、分类和属性、优惠券以及商店设置。订单和客户永远不会被改动。"
+
+#: includes/views/settings.php:114
+msgid "WooCommerce is not active on this site, so its products and store settings cannot be synced."
+msgstr "此站点未启用 WooCommerce，因此无法同步其商品和商店设置。"
+
+#: includes/views/settings.php:125
+msgid "Themes to sync"
+msgstr "要同步的主题"
+
+#: includes/views/settings.php:134
+msgid "Plugin folders to sync"
+msgstr "要同步的插件文件夹"
+
+#: includes/views/settings.php:140
+msgid "Only files are synced; plugin activation state never is. Avesta Sync itself is excluded."
+msgstr "仅同步文件，插件的启用状态不会被同步。Avesta Sync 自身已被排除。"
+
+#: includes/views/settings.php:146
+msgid "WooCommerce items to sync"
+msgstr "要同步的 WooCommerce 项目"
+
+#: includes/views/settings.php:171
+msgid "Include Media Library entries"
+msgstr "包含媒体库条目"
+
+#: includes/views/settings.php:172
+msgid "Also sync the attachment records (titles, captions, alt text) of synced uploads."
+msgstr "同时同步已同步上传文件的附件记录（标题、说明文字、替代文本）。"
+
+#: includes/views/settings.php:178
+msgid "Exclude patterns"
+msgstr "排除规则"
+
+#: includes/views/settings.php:180
+msgid "Paths to leave out"
+msgstr "要排除的路径"
+
+#: includes/views/settings.php:182
+msgid "One pattern per line. Examples:"
+msgstr "每行一个规则。示例："
+
+#: includes/views/settings.php:188
+msgid "A scheduled check only compares both sites and reports differences. It never changes anything."
+msgstr "定时检查仅比较两个站点并报告差异，不会更改任何内容。"
+
+#: includes/views/settings.php:191
+msgid "Check how often"
+msgstr "检查频率"
+
+#: includes/views/settings.php:199
+msgid "Email the result to"
+msgstr "将结果发送邮件至"
+
+#: includes/views/settings.php:208
+msgid "Backup runs to keep"
+msgstr "保留的备份数量"
+
+#: includes/views/settings.php:210
+msgid "0 keeps all backups. Older runs are deleted automatically."
+msgstr "0 表示保留所有备份。较旧的备份会被自动删除。"
+
+#: includes/views/settings.php:215
+msgid "Save settings"
+msgstr "保存设置"
+
+#: includes/views/settings.php:216
+msgid "You have unsaved changes."
+msgstr "您有未保存的更改。"
+
+#: includes/views/sync.php:14
+msgid "Compare both sites, review every difference, then choose what to do with each item. Push sends the version on this site to the remote site; pull brings the version on the remote site to this site. Nothing changes until you apply."
+msgstr "比较两个站点，查看每一处差异，然后为每个项目选择处理方式。“推送”会将此站点的版本发送到远程站点；“拉取”会将远程站点的版本带到此站点。在您应用之前不会有任何更改。"
+
+#: includes/views/sync.php:18
+msgid "Compare"
+msgstr "比较"
+
+#: includes/views/sync.php:24
+msgid "Results may be out of date. Compare again."
+msgstr "结果可能已过期，请重新比较。"
+
+#: includes/views/sync.php:25
+msgid "Filter by status"
+msgstr "按状态筛选"
+
+#: includes/views/sync.php:30
+msgid "Search"
+msgstr "搜索"
+
+#: includes/views/sync.php:31
+msgid "Filter by path or name"
+msgstr "按路径或名称筛选"
+
+#: includes/views/sync.php:34
+msgid "Section"
+msgstr "分区"
+
+#: includes/views/sync.php:36
+msgid "All"
+msgstr "全部"
+
+#: includes/views/sync.php:46
+msgid "Bulk actions for the rows shown"
+msgstr "对所显示行的批量操作"
+
+#: includes/views/sync.php:47
+msgid "Select all pushes"
+msgstr "选择所有推送项"
+
+#: includes/views/sync.php:48
+msgid "Select all pulls"
+msgstr "选择所有拉取项"
+
+#: includes/views/sync.php:49
+msgid "Conflicts: push"
+msgstr "冲突：推送"
+
+#: includes/views/sync.php:50
+msgid "Conflicts: pull"
+msgstr "冲突：拉取"
+
+#: includes/views/sync.php:51
+msgid "Clear selection"
+msgstr "清除选择"
+
+#: includes/views/sync.php:57
+msgid "No items match your filters."
+msgstr "没有符合筛选条件的项目。"
+
+#: includes/views/sync.php:58
+msgid "Clear filters"
+msgstr "清除筛选"
+
+#: includes/views/sync.php:65
+msgid "Sync progress"
+msgstr "同步进度"
+
+#: includes/views/sync.php:68
+msgid "Sync log"
+msgstr "同步日志"
+
+#: includes/views/sync.php:79
+msgid "Stop after this item"
+msgstr "完成此项后停止"
+
+#: includes/views/sync.php:83
+msgid "Apply selected"
+msgstr "应用所选项"
+
+#: includes/woo/class-woo-coupons.php:170
+msgid "The coupon has no code."
+msgstr "该优惠券没有代码。"
+
+#: includes/woo/class-woo-coupons.php:176
+#: includes/woo/class-woo-product-import.php:54
+#: includes/woo/class-woo-settings.php:302
+#: includes/woo/class-woo-taxonomies.php:181
+#: includes/woo/class-woo-terms.php:200
+msgid "The backup failed, so nothing was changed."
+msgstr "备份失败，因此未更改任何内容。"
+
+#: includes/woo/class-woo-coupons.php:204
+msgid "coupon products"
+msgstr "优惠券适用商品"
+
+#: includes/woo/class-woo-coupons.php:206
+msgid "excluded products"
+msgstr "排除的商品"
+
+#: includes/woo/class-woo-coupons.php:208
+msgid "coupon categories"
+msgstr "优惠券适用分类"
+
+#: includes/woo/class-woo-coupons.php:210
+msgid "excluded categories"
+msgstr "排除的分类"
+
+#. translators: %s: variation SKU.
+#: includes/woo/class-woo-preview.php:106
+#, php-format
+msgid "SKU %s"
+msgstr "SKU %s"
+
+#: includes/woo/class-woo-preview.php:113
+msgid "Any"
+msgstr "任意"
+
+#: includes/woo/class-woo-preview.php:116
+msgid "Variation"
+msgstr "变体"
+
+#. translators: %s: product type.
+#: includes/woo/class-woo-product-import.php:32
+#, php-format
+msgid "Product type \"%s\" is not supported."
+msgstr "不支持商品类型“%s”。"
+
+#. translators: %s: product name.
+#: includes/woo/class-woo-product-import.php:38
+#: includes/woo/class-woo-products.php:69
+#, php-format
+msgid "Skipped \"%s\": it has no SKU and no URL name yet, so it cannot be matched."
+msgstr "已跳过“%s”：它还没有 SKU 和 URL 别名，因此无法匹配。"
+
+#: includes/woo/class-woo-product-import.php:49
+msgid "The matching item on the receiving site is not a product."
+msgstr "接收站点上匹配的项目不是商品。"
+
+#: includes/woo/class-woo-product-import.php:75
+msgid "The URL name is already used by another product on the receiving site"
+msgstr "该 URL 别名已被接收站点上的另一件商品使用"
+
+#: includes/woo/class-woo-product-import.php:78
+msgid "Updated"
+msgstr "已更新"
+
+#: includes/woo/class-woo-product-import.php:78
+msgid "Created"
+msgstr "已创建"
+
+#: includes/woo/class-woo-product-import.php:193
+#: includes/woo/class-woo-variations.php:247
+msgid "shipping classes"
+msgstr "配送类别"
+
+#: includes/woo/class-woo-product-import.php:237
+msgid "categories"
+msgstr "分类"
+
+#: includes/woo/class-woo-product-import.php:242
+msgid "tags"
+msgstr "标签"
+
+#: includes/woo/class-woo-product-import.php:258
+msgid "Brands were skipped because the receiving site has no product brands"
+msgstr "已跳过品牌，因为接收站点没有商品品牌"
+
+#: includes/woo/class-woo-product-import.php:262
+msgid "brands"
+msgstr "品牌"
+
+#. translators: %s: file path.
+#: includes/woo/class-woo-product-import.php:281
+#: includes/woo/class-woo-terms.php:240
+#: includes/woo/class-woo-variations.php:261
+#, php-format
+msgid "Image \"%s\" was not found on the receiving site. Sync the media library first"
+msgstr "在接收站点上未找到图片“%s”。请先同步媒体库"
+
+#. translators: %d: number of gallery images.
+#: includes/woo/class-woo-product-import.php:295
+#, php-format
+msgid "%d gallery image was not found on the receiving site. Sync the media library first"
+msgid_plural "%d gallery images were not found on the receiving site. Sync the media library first"
+msgstr[0] "在接收站点上未找到 %d 张图库图片。请先同步媒体库"
+
+#: includes/woo/class-woo-product-import.php:311
+msgid "upsells"
+msgstr "追加销售"
+
+#: includes/woo/class-woo-product-import.php:312
+msgid "cross-sells"
+msgstr "交叉销售"
+
+#: includes/woo/class-woo-product-import.php:315
+msgid "grouped products"
+msgstr "组合商品"
+
+#. translators: %s: error.
+#: includes/woo/class-woo-product-import.php:394
+#, php-format
+msgid "WooCommerce did not accept a downloadable file: %s"
+msgstr "WooCommerce 未接受某个可下载文件：%s"
+
+#. translators: 1: product name, 2: product type.
+#: includes/woo/class-woo-products.php:64
+#, php-format
+msgid "Skipped \"%1$s\": product type \"%2$s\" is not supported."
+msgstr "已跳过“%1$s”：不支持商品类型“%2$s”。"
+
+#. translators: 1: "SKU" or "slug", 2: the shared SKU or slug, 3: list of product names.
+#: includes/woo/class-woo-products.php:93
+#, php-format
+msgid "Several products share the %1$s \"%2$s\", so none of them was synced: %3$s."
+msgstr "多件商品共用 %1$s“%2$s”，因此均未同步：%3$s。"
+
+#: includes/woo/class-woo-products.php:94
+msgid "SKU"
+msgstr "SKU"
+
+#: includes/woo/class-woo-products.php:94
+msgid "URL name"
+msgstr "URL 别名"
+
+#. translators: 1: field (upsells, cross-sells, grouped products), 2: list of product references (SKUs).
+#: includes/woo/class-woo-refs.php:174
+#, php-format
+msgid "%1$s that do not exist on the receiving site yet will be linked on a later sync: %2$s"
+msgstr "接收站点上尚不存在的%1$s将在以后的同步中关联：%2$s"
+
+#. translators: 1: field (categories, tags, brands, shipping class), 2: list of slugs.
+#: includes/woo/class-woo-refs.php:247
+#, php-format
+msgid "Some %1$s do not exist on the receiving site yet: %2$s. Sync categories, tags and attributes first"
+msgstr "接收站点上尚不存在部分%1$s：%2$s。请先同步分类、标签和属性"
+
+#: includes/woo/class-woo-settings.php:107
+msgid "General"
+msgstr "常规"
+
+#: includes/woo/class-woo-settings.php:108
+msgid "Products and inventory"
+msgstr "商品和库存"
+
+#: includes/woo/class-woo-settings.php:109
+msgid "Tax options"
+msgstr "税费选项"
+
+#: includes/woo/class-woo-settings.php:110
+msgid "Tax rates"
+msgstr "税率"
+
+#: includes/woo/class-woo-settings.php:111
+msgid "Shipping zones"
+msgstr "配送区域"
+
+#: includes/woo/class-woo-settings.php:112
+msgid "Shipping options"
+msgstr "配送选项"
+
+#: includes/woo/class-woo-settings.php:113
+msgid "Accounts and privacy"
+msgstr "账户和隐私"
+
+#. translators: %s: name of a store setting (e.g. "price num decimals").
+#: includes/woo/class-woo-settings.php:239
+#, php-format
+msgid "The value of the store setting \"%s\" is not valid, so nothing in this group was changed."
+msgstr "商店设置“%s”的值无效，因此此组中的任何内容都未更改。"
+
+#: includes/woo/class-woo-settings.php:298
+msgid "This group of store settings is not known."
+msgstr "无法识别此商店设置组。"
+
+#. translators: %d: number of settings.
+#: includes/woo/class-woo-settings.php:327
+#, php-format
+msgid "Updated: %d setting."
+msgid_plural "Updated: %d settings."
+msgstr[0] "已更新：%d 项设置。"
+
+#: includes/woo/class-woo-shipping.php:121
+msgid "Locations not covered by your other zones"
+msgstr "未被其他区域覆盖的地区"
+
+#. translators: 1: shipping method name, 2: shipping zone name.
+#: includes/woo/class-woo-shipping.php:125
+#, php-format
+msgid "Skipped shipping method \"%1$s\" in zone \"%2$s\": its settings look like they hold credentials."
+msgstr "已跳过区域“%2$s”中的配送方式“%1$s”：其设置似乎包含凭据。"
+
+#. translators: 1: shipping method name, 2: shipping zone name.
+#: includes/woo/class-woo-shipping.php:127
+#, php-format
+msgid "Skipped shipping method \"%1$s\" in zone \"%2$s\": only flat rate, free shipping and local pickup are synced."
+msgstr "已跳过区域“%2$s”中的配送方式“%1$s”：仅同步统一运费、免运费和本地自提。"
+
+#. translators: %s: shipping method id.
+#: includes/woo/class-woo-shipping.php:223
+#: includes/woo/class-woo-shipping.php:249
+#, php-format
+msgid "Skipped shipping method \"%s\": only flat rate, free shipping and local pickup are synced"
+msgstr "已跳过配送方式“%s”：仅同步统一运费、免运费和本地自提"
+
+#. translators: %s: shipping method id.
+#: includes/woo/class-woo-shipping.php:228
+#, php-format
+msgid "Shipping method \"%s\" is not available on the receiving site"
+msgstr "接收站点上没有配送方式“%s”"
+
+#. translators: %s: shipping class slug.
+#: includes/woo/class-woo-shipping.php:238
+#, php-format
+msgid "The shipping class \"%s\" does not exist on the receiving site, so its cost was skipped"
+msgstr "接收站点上不存在配送类别“%s”，因此已跳过其运费"
+
+#. translators: %d: number of shipping zones.
+#: includes/woo/class-woo-shipping.php:286
+#, php-format
+msgid "%d zone"
+msgid_plural "%d zones"
+msgstr[0] "%d 个区域"
+
+#. translators: %d: number of shipping methods.
+#: includes/woo/class-woo-shipping.php:288
+#, php-format
+msgid "%d method"
+msgid_plural "%d methods"
+msgstr[0] "%d 种方式"
+
+#. translators: 1: number of zones (e.g. "2 zones"), 2: number of methods (e.g. "3 methods").
+#. translators: 1: number of tax rates (e.g. "6 rates"), 2: number of tax classes (e.g. "2 tax classes").
+#: includes/woo/class-woo-shipping.php:290
+#: includes/woo/class-woo-tax.php:166
+#, php-format
+msgid "Replaced: %1$s, %2$s."
+msgstr "已替换：%1$s，%2$s。"
+
+#: includes/woo/class-woo-tax.php:116
+msgid "A tax rate uses a tax class that is not part of the settings being synced."
+msgstr "某个税率使用了不属于正在同步的设置的税类。"
+
+#. translators: %d: number of tax rates.
+#: includes/woo/class-woo-tax.php:162
+#, php-format
+msgid "%d rate"
+msgid_plural "%d rates"
+msgstr[0] "%d 个税率"
+
+#. translators: %d: number of tax classes.
+#: includes/woo/class-woo-tax.php:164
+#, php-format
+msgid "%d tax class"
+msgid_plural "%d tax classes"
+msgstr[0] "%d 个税类"
+
+#. translators: %s: list of tax class slugs.
+#: includes/woo/class-woo-tax.php:169
+#, php-format
+msgid "These tax classes were kept because products still use them: %s."
+msgstr "由于仍有商品在使用，以下税类已被保留：%s。"
+
+#. translators: 1: attribute slug, 2: error.
+#: includes/woo/class-woo-taxonomies.php:130
+#, php-format
+msgid "The attribute \"%1$s\" could not be created. WooCommerce said: %2$s"
+msgstr "无法创建属性“%1$s”。WooCommerce 返回：%2$s"
+
+#. translators: %s: attribute slug.
+#: includes/woo/class-woo-taxonomies.php:133
+#, php-format
+msgid "Attribute \"%s\" was created with default settings. Sync attributes to copy its settings"
+msgstr "属性“%s”已使用默认设置创建。请同步属性以复制其设置"
+
+#: includes/woo/class-woo-taxonomies.php:165
+msgid "The attribute has no name."
+msgstr "该属性没有名称。"
+
+#: includes/woo/class-woo-taxonomies.php:261
+msgid "Not deleted: products on the receiving site still use this attribute."
+msgstr "未删除：接收站点上仍有商品在使用此属性。"
+
+#: includes/woo/class-woo-taxonomies.php:267
+msgid "Attribute deleted."
+msgstr "属性已删除。"
+
+#. translators: %s: attribute label (e.g. Color), so "Color value".
+#: includes/woo/class-woo-terms.php:91
+#, php-format
+msgid "%s value"
+msgstr "%s 值"
+
+#: includes/woo/class-woo-terms.php:98
+msgid "Category"
+msgstr "分类"
+
+#: includes/woo/class-woo-terms.php:99
+msgid "Tag"
+msgstr "标签"
+
+#: includes/woo/class-woo-terms.php:100
+msgid "Shipping class"
+msgstr "配送类别"
+
+#: includes/woo/class-woo-terms.php:101
+msgid "Brand"
+msgstr "品牌"
+
+#. translators: %s: taxonomy.
+#: includes/woo/class-woo-terms.php:177
+#, php-format
+msgid "The attribute \"%s\" does not exist on this site yet. Sync attributes first."
+msgstr "属性“%s”在此站点上尚不存在。请先同步属性。"
+
+#. translators: %s: parent term slug.
+#: includes/woo/class-woo-terms.php:189
+#, php-format
+msgid "The parent \"%s\" does not exist on the receiving site yet. Sync it first."
+msgstr "父项“%s”在接收站点上尚不存在。请先同步它。"
+
+#: includes/woo/class-woo-terms.php:288
+msgid "Not deleted: products on the receiving site still use it, or it has child items."
+msgstr "未删除：接收站点上仍有商品在使用它，或它包含子项。"
+
+#: includes/woo/class-woo-terms.php:295
+msgid "Deleted."
+msgstr "已删除。"
+
+#: includes/woo/class-woo-terms.php:295
+msgid "It could not be deleted. The default category cannot be deleted."
+msgstr "无法删除。默认分类无法删除。"
+
+#. translators: 1: variation SKU or attributes, 2: error.
+#: includes/woo/class-woo-variations.php:196
+#, php-format
+msgid "The variation \"%1$s\" could not be saved. WooCommerce said: %2$s"
+msgstr "无法保存变体“%1$s”。WooCommerce 返回：%2$s"
+
+#. translators: %d: number of variations.
+#: includes/woo/class-woo-variations.php:211
+#, php-format
+msgid "%d variation was restored from the Trash"
+msgid_plural "%d variations were restored from the Trash"
+msgstr[0] "已从回收站还原 %d 个变体"
+
+#. translators: 1: variations total, 2: created, 3: moved to Trash.
+#: includes/woo/class-woo-variations.php:216
+#, php-format
+msgid "%1$d variation (%2$d new, %3$d moved to Trash)."
+msgid_plural "%1$d variations (%2$d new, %3$d moved to Trash)."
+msgstr[0] "%1$d 个变体（%2$d 个新增，%3$d 个移至回收站）。"
+
+#: includes/woo/class-woo.php:92
+msgid "WooCommerce is not active on this site, so WooCommerce syncing is not available."
+msgstr "此站点未启用 WooCommerce，因此无法使用 WooCommerce 同步。"
+
+#: includes/woo/class-woo.php:100
+msgid "WooCommerce is not active on the other site, so WooCommerce syncing is not available."
+msgstr "对方站点未启用 WooCommerce，因此无法使用 WooCommerce 同步。"
+
+#: includes/woo/class-woo.php:103
+msgid "WooCommerce syncing is switched off on the other site. Turn it on under Settings > What to sync on both sites."
+msgstr "对方站点已关闭 WooCommerce 同步。请在两个站点上的“设置 > 同步内容”中开启。"
+
+#. translators: 1: local WooCommerce version, 2: remote WooCommerce version.
+#: includes/woo/class-woo.php:107
+#, php-format
+msgid "WooCommerce on the two sites is a different major version (%1$s here, %2$s on the other site). Update the older site before syncing."
+msgstr "两个站点上的 WooCommerce 主版本不同（此处为 %1$s，对方站点为 %2$s）。同步前请先更新较旧的站点。"
+
+#. translators: 1: local WooCommerce version, 2: remote WooCommerce version.
+#: includes/woo/class-woo.php:111
+#, php-format
+msgid "WooCommerce on the two sites is a slightly different version (%1$s here, %2$s on the other site). Syncing works, but update both sites to the same version when you can."
+msgstr "两个站点上的 WooCommerce 版本略有不同（此处为 %1$s，对方站点为 %2$s）。同步可以正常进行，但请尽快将两个站点更新到相同版本。"
+
+#: includes/woo/class-woo.php:145
+msgid "WooCommerce is not active on the site providing this data."
+msgstr "提供此数据的站点未启用 WooCommerce。"
+
+#: includes/woo/class-woo.php:145
+#: includes/woo/class-woo.php:407
+#: includes/woo/class-woo.php:441
+msgid "WooCommerce is not active on the site receiving this change."
+msgstr "接收此更改的站点未启用 WooCommerce。"
+
+#: includes/woo/class-woo.php:149
+#: includes/woo/class-woo.php:150
+msgid "categories, tags and attributes"
+msgstr "分类、标签和属性"
+
+#: includes/woo/class-woo.php:151
+msgid "products"
+msgstr "商品"
+
+#: includes/woo/class-woo.php:152
+msgid "coupons"
+msgstr "优惠券"
+
+#: includes/woo/class-woo.php:153
+msgid "store settings"
+msgstr "商店设置"
+
+#: includes/woo/class-woo.php:156
+#: includes/woo/class-woo.php:427
+msgid "This kind of item is not supported. Update Avesta Sync on both sites."
+msgstr "不支持此类项目。请在两个站点上都更新 Avesta Sync。"
+
+#: includes/woo/class-woo.php:161
+msgid "WooCommerce syncing is switched off on the site providing this data. Turn on \"WooCommerce\" under Settings > What to sync on both sites."
+msgstr "提供此数据的站点已关闭 WooCommerce 同步。请在两个站点上的“设置 > 同步内容”中开启“WooCommerce”。"
+
+#: includes/woo/class-woo.php:161
+msgid "WooCommerce syncing is switched off on the site receiving this change. Turn on \"WooCommerce\" under Settings > What to sync on both sites."
+msgstr "接收此更改的站点已关闭 WooCommerce 同步。请在两个站点上的“设置 > 同步内容”中开启“WooCommerce”。"
+
+#. translators: 1: kind of items (e.g. store settings), 2: the matching option name under Settings > What to sync.
+#: includes/woo/class-woo.php:170
+#, php-format
+msgid "WooCommerce syncing (%1$s) is switched off on the site providing this data. Turn on \"%2$s\" under Settings > What to sync on both sites."
+msgstr "提供此数据的站点已关闭 WooCommerce 同步（%1$s）。请在两个站点上的“设置 > 同步内容”中开启“%2$s”。"
+
+#. translators: 1: kind of items (e.g. store settings), 2: the matching option name under Settings > What to sync.
+#: includes/woo/class-woo.php:172
+#, php-format
+msgid "WooCommerce syncing (%1$s) is switched off on the site receiving this change. Turn on \"%2$s\" under Settings > What to sync on both sites."
+msgstr "接收此更改的站点已关闭 WooCommerce 同步（%1$s）。请在两个站点上的“设置 > 同步内容”中开启“%2$s”。"
+
+#: includes/woo/class-woo.php:456
+msgid "Store settings cannot be deleted."
+msgstr "无法删除商店设置。"

@@ -63,7 +63,7 @@ WooCommerce sync must be enabled in Avesta Sync settings on both sites, and both
 * **Scheduled check** that compares on a schedule and emails you when the sites drift apart. It never applies changes on its own.
 * **WP-CLI**: `wp avesta-sync status`, `push`, `pull` (with `--dry-run`), `backups`, `restore`
 * Large files transfer in chunks sized to the remote server's limits
-* Translation ready, RTL ready
+* Translated into Persian, Arabic, Spanish, French, German, Italian, Portuguese (Brazil), Russian, Turkish, Chinese (Simplified) and Japanese; RTL ready
 
 = Who it is for =
 
@@ -71,7 +71,9 @@ Developers and site builders who work on a local or staging copy and want to shi
 
 = External connections =
 
-Avesta Sync connects only to the remote WordPress site whose URL you enter in its settings, and only when you run a test, compare, sync, or enable the scheduled check. It sends no data to the plugin author or any third party.
+Avesta Sync connects only to the remote WordPress site whose URL you enter in its settings, and only when you run a test, compare, sync, or enable the scheduled check. It sends no data to the plugin author.
+
+One exception, for Persian only: when your WordPress profile language is Persian, the Avesta Sync admin screen loads the Vazirmatn font from Google Fonts. Your browser then contacts `fonts.googleapis.com` and `fonts.gstatic.com`, which receive your IP address and browser details. No site data is sent. This service is provided by Google: [terms of service](https://policies.google.com/terms), [privacy policy](https://policies.google.com/privacy).
 
 == Installation ==
 

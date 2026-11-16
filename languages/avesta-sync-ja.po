@@ -1,0 +1,2164 @@
+# Copyright (C) 2026 AvestaTech
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Avesta Sync 1.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/avesta-sync\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-15T21:21:16+00:00\n"
+"PO-Revision-Date: 2026-11-16 12:00+0000\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: avesta-sync\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Plugin Name of the plugin
+#: avesta-sync.php
+#: includes/class-admin.php:33
+#: includes/class-admin.php:156
+#: includes/views/i18n.php:127
+msgid "Avesta Sync"
+msgstr "Avesta Sync"
+
+#. Plugin URI of the plugin
+#: avesta-sync.php
+msgid "https://avestatech.ir"
+msgstr "https://avestatech.ir"
+
+#. Description of the plugin
+#: avesta-sync.php
+msgid "Hash-based two-way sync (push/pull) of theme files, custom plugins, content, media and WooCommerce catalog and settings between a local site and production over a signed REST API. Only changed items are transferred."
+msgstr "署名付き REST API を使い、ローカルサイトと本番サイトの間で、テーマファイル、独自プラグイン、コンテンツ、メディア、WooCommerce の商品カタログと設定をハッシュ方式で双方向同期（プッシュ／プル）します。変更された項目のみが転送されます。"
+
+#. Author of the plugin
+#: avesta-sync.php
+msgid "AvestaTech"
+msgstr "AvestaTech"
+
+#: includes/class-admin.php:91
+#: includes/class-admin.php:106
+#: includes/class-admin.php:138
+#: includes/class-ajax.php:46
+msgid "Not allowed."
+msgstr "許可されていません。"
+
+#: includes/class-admin.php:145
+#: includes/views/dashboard.php:12
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+#: includes/class-admin.php:146
+#: includes/views/sync.php:13
+msgid "Sync"
+msgstr "同期"
+
+#: includes/class-admin.php:147
+#: includes/views/backups.php:12
+#: includes/views/i18n.php:116
+#: includes/views/settings.php:206
+msgid "Backups"
+msgstr "バックアップ"
+
+#: includes/class-admin.php:148
+#: includes/views/history.php:12
+msgid "History"
+msgstr "履歴"
+
+#: includes/class-admin.php:149
+#: includes/views/settings.php:36
+msgid "Settings"
+msgstr "設定"
+
+#: includes/class-admin.php:159
+#: includes/views/i18n.php:42
+msgid "Checking connection..."
+msgstr "接続を確認しています…"
+
+#: includes/class-admin.php:163
+msgid "Avesta Sync sections"
+msgstr "Avesta Sync のセクション"
+
+#: includes/class-ajax.php:36
+msgid "POST required."
+msgstr "POST リクエストが必要です。"
+
+#: includes/class-ajax.php:148
+msgid "No scope selected. Tick at least one scope and save settings."
+msgstr "同期の対象が選択されていません。対象を 1 つ以上チェックして設定を保存してください。"
+
+#: includes/class-ajax.php:170
+msgid "Bad request."
+msgstr "不正なリクエストです。"
+
+#: includes/class-ajax.php:324
+#: includes/views/i18n.php:326
+msgid "Backup deleted."
+msgstr "バックアップを削除しました。"
+
+#: includes/class-ajax.php:341
+#: includes/views/i18n.php:332
+msgid "History cleared."
+msgstr "履歴を消去しました。"
+
+#: includes/class-auth.php:82
+msgid "Too many failed attempts. Try again later."
+msgstr "失敗した試行が多すぎます。しばらくしてからもう一度お試しください。"
+
+#: includes/class-auth.php:86
+msgid "Sync is not configured on this site."
+msgstr "このサイトでは同期が設定されていません。"
+
+#: includes/class-auth.php:106
+msgid "Invalid or expired signature."
+msgstr "署名が無効、または有効期限が切れています。"
+
+#. translators: %s: attribute label.
+#: includes/class-backup-labels.php:41
+#: includes/woo/class-woo-taxonomies.php:64
+#, php-format
+msgid "Attribute: %s"
+msgstr "属性：%s"
+
+#. translators: %s: coupon code.
+#: includes/class-backup-labels.php:45
+#: includes/woo/class-woo-coupons.php:78
+#, php-format
+msgid "Coupon: %s"
+msgstr "クーポン：%s"
+
+#. translators: %s: settings group.
+#. translators: %s: settings group (general, products, tax, ...).
+#: includes/class-backup-labels.php:49
+#: includes/woo/class-woo-settings.php:180
+#, php-format
+msgid "Store settings: %s"
+msgstr "ストア設定：%s"
+
+#. translators: %s: media title or file name.
+#: includes/class-backup-labels.php:53
+#: includes/class-media.php:136
+#, php-format
+msgid "Media: %s"
+msgstr "メディア：%s"
+
+#. translators: %s: menu name.
+#: includes/class-backup-labels.php:57
+#: includes/class-menus.php:63
+#, php-format
+msgid "Menu: %s"
+msgstr "メニュー：%s"
+
+#: includes/class-backup.php:216
+#: includes/class-backup.php:453
+msgid "Invalid backup run."
+msgstr "無効なバックアップ実行です。"
+
+#: includes/class-backup.php:220
+msgid "Backup run not found."
+msgstr "バックアップ実行が見つかりません。"
+
+#: includes/class-backup.php:395
+msgid "Backup file not found."
+msgstr "バックアップファイルが見つかりません。"
+
+#: includes/class-backup.php:398
+#: includes/class-files.php:225
+msgid "Target is a directory."
+msgstr "対象はディレクトリです。"
+
+#: includes/class-backup.php:401
+#: includes/class-files.php:274
+msgid "Refused: PHP file fails to parse."
+msgstr "拒否しました：PHP ファイルの構文解析に失敗しました。"
+
+#: includes/class-backup.php:404
+#: includes/class-files.php:277
+msgid "Backup of existing file failed; not overwritten."
+msgstr "既存ファイルのバックアップに失敗したため、上書きしませんでした。"
+
+#: includes/class-backup.php:408
+#: includes/class-files.php:282
+msgid "Cannot move file into place."
+msgstr "ファイルを所定の場所に移動できません。"
+
+#. translators: %s: relative file path.
+#. translators: %s: name of the restored item (e.g. a product with its SKU).
+#: includes/class-backup.php:414
+#: includes/class-backup.php:436
+#, php-format
+msgid "Restored: %s. The previous version was backed up."
+msgstr "復元しました：%s。以前のバージョンはバックアップされました。"
+
+#: includes/class-backup.php:428
+msgid "This backup is not in a restorable format."
+msgstr "このバックアップは復元できる形式ではありません。"
+
+#: includes/class-backup.php:432
+msgid "Restore failed."
+msgstr "復元に失敗しました。"
+
+#. translators: %s: name of the restored item (e.g. a product with its SKU).
+#: includes/class-backup.php:436
+msgid "Restored. The previous version was backed up."
+msgstr "復元しました。以前のバージョンはバックアップされました。"
+
+#: includes/class-backup.php:464
+msgid "Could not delete the backup run."
+msgstr "バックアップ実行を削除できませんでした。"
+
+#: includes/class-client.php:65
+msgid "Remote URL and key are not configured."
+msgstr "リモートサイトの URL とキーが設定されていません。"
+
+#: includes/class-client.php:98
+msgid "Invalid remote URL."
+msgstr "リモートサイトの URL が無効です。"
+
+#: includes/class-client.php:101
+msgid "Remote URL must use HTTPS."
+msgstr "リモートサイトの URL には HTTPS を使用する必要があります。"
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:144
+#, php-format
+msgid "Remote redirected (HTTP %d). Use the final HTTPS URL of the remote site."
+msgstr "リモートサイトがリダイレクトされました（HTTP %d）。リモートサイトの最終的な HTTPS URL を使用してください。"
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:152
+#, php-format
+msgid "Unexpected response from remote (HTTP %d). Is Avesta Sync active there?"
+msgstr "リモートサイトから予期しない応答が返されました（HTTP %d）。先方で Avesta Sync は有効になっていますか？"
+
+#: includes/class-client.php:317
+msgid "Cannot read local file."
+msgstr "ローカルファイルを読み取れません。"
+
+#: includes/class-client.php:371
+#: includes/class-client.php:399
+msgid "Corrupt chunk from remote."
+msgstr "リモートサイトから受信したチャンクが破損しています。"
+
+#: includes/class-client.php:407
+msgid "Remote returned an empty chunk."
+msgstr "リモートサイトが空のチャンクを返しました。"
+
+#: includes/class-content.php:315
+msgid "Site title"
+msgstr "サイトのタイトル"
+
+#: includes/class-content.php:316
+msgid "Tagline"
+msgstr "キャッチフレーズ"
+
+#: includes/class-content.php:317
+msgid "Homepage displays"
+msgstr "ホームページの表示"
+
+#: includes/class-content.php:318
+msgid "Homepage"
+msgstr "ホームページ"
+
+#: includes/class-content.php:319
+msgid "Posts page"
+msgstr "投稿ページ"
+
+#: includes/class-files.php:109
+msgid "Unknown scope."
+msgstr "不明な同期対象です。"
+
+#: includes/class-files.php:178
+msgid "File not found."
+msgstr "ファイルが見つかりません。"
+
+#: includes/class-files.php:185
+msgid "Cannot read file."
+msgstr "ファイルを読み取れません。"
+
+#: includes/class-files.php:222
+msgid "Invalid chunk parameters."
+msgstr "チャンクのパラメーターが無効です。"
+
+#: includes/class-files.php:233
+msgid "Chunk offset mismatch."
+msgstr "チャンクのオフセットが一致しません。"
+
+#: includes/class-files.php:238
+msgid "Cannot write temp file."
+msgstr "一時ファイルに書き込めません。"
+
+#: includes/class-files.php:271
+msgid "Size or SHA-256 mismatch after transfer."
+msgstr "転送後のサイズまたは SHA-256 が一致しません。"
+
+#: includes/class-files.php:307
+#: includes/class-media.php:283
+#: includes/woo/class-woo-coupons.php:251
+#: includes/woo/class-woo-products.php:354
+#: includes/woo/class-woo-taxonomies.php:265
+#: includes/woo/class-woo-terms.php:292
+msgid "The backup failed, so nothing was deleted."
+msgstr "バックアップに失敗したため、何も削除しませんでした。"
+
+#: includes/class-files.php:310
+msgid "Cannot delete file."
+msgstr "ファイルを削除できません。"
+
+#: includes/class-importer.php:34
+msgid "This item could not be read."
+msgstr "この項目を読み取れませんでした。"
+
+#: includes/class-importer.php:43
+msgid "This item has the wrong type for its name, so it was ignored."
+msgstr "この項目は名前に対して種類が正しくないため、無視されました。"
+
+#: includes/class-importer.php:94
+msgid "Syncing the media library is switched off on the site receiving this change."
+msgstr "この変更を受け取るサイトでは、メディアライブラリの同期がオフになっています。"
+
+#. translators: %s: post type.
+#: includes/class-importer.php:149
+#, php-format
+msgid "The content type \"%s\" does not exist on the receiving site."
+msgstr "内容タイプ「%s」は受信側サイトに存在しません。"
+
+#. translators: %s: post type.
+#: includes/class-importer.php:152
+#, php-format
+msgid "This kind of content is not supported, or it has no URL name (\"%s\"). Update Avesta Sync on both sites."
+msgstr "この種類のコンテンツはサポートされていないか、URL 名（「%s」）がありません。両方のサイトで Avesta Sync を更新してください。"
+
+#. translators: %s: parent page path.
+#: includes/class-importer.php:173
+#, php-format
+msgid "The parent page \"%s\" does not exist on the receiving site yet. Sync it first."
+msgstr "親ページ「%s」は受信側サイトにまだ存在しません。先に同期してください。"
+
+#: includes/class-importer.php:210
+msgid "The featured image was not found on the receiving site. Sync the media library first."
+msgstr "アイキャッチ画像が受信側サイトで見つかりません。先にメディアライブラリを同期してください。"
+
+#: includes/class-importer.php:215
+#: includes/class-importer.php:302
+#: includes/class-media.php:265
+#: includes/woo/class-woo-coupons.php:232
+#: includes/woo/class-woo-taxonomies.php:191
+#: includes/woo/class-woo-terms.php:213
+msgid "Updated."
+msgstr "更新しました。"
+
+#: includes/class-importer.php:215
+#: includes/class-media.php:265
+#: includes/woo/class-woo-coupons.php:232
+#: includes/woo/class-woo-taxonomies.php:191
+#: includes/woo/class-woo-terms.php:213
+msgid "Created."
+msgstr "作成しました。"
+
+#: includes/class-importer.php:283
+msgid "This setting is not one that Avesta Sync syncs."
+msgstr "この設定は Avesta Sync の同期対象ではありません。"
+
+#: includes/class-importer.php:290
+msgid "Cleared."
+msgstr "消去しました。"
+
+#. translators: %s: page path.
+#: includes/class-importer.php:294
+#, php-format
+msgid "The page \"%s\" does not exist on the receiving site yet. Sync pages first."
+msgstr "ページ「%s」は受信側サイトにまだ存在しません。先にページを同期してください。"
+
+#: includes/class-importer.php:320
+#: includes/class-media.php:280
+#: includes/woo/class-woo-coupons.php:246
+#: includes/woo/class-woo-products.php:350
+#: includes/woo/class-woo-taxonomies.php:257
+#: includes/woo/class-woo-terms.php:277
+msgid "It was not found."
+msgstr "見つかりませんでした。"
+
+#: includes/class-importer.php:327
+msgid "Options cannot be deleted."
+msgstr "オプションは削除できません。"
+
+#: includes/class-importer.php:331
+msgid "Menu deleted."
+msgstr "メニューを削除しました。"
+
+#: includes/class-importer.php:331
+#: includes/class-media.php:288
+#: includes/woo/class-woo-taxonomies.php:267
+msgid "Delete failed."
+msgstr "削除に失敗しました。"
+
+#: includes/class-importer.php:342
+#: includes/woo/class-woo-coupons.php:253
+#: includes/woo/class-woo-products.php:356
+msgid "Moved to Trash."
+msgstr "ゴミ箱に移動しました。"
+
+#: includes/class-importer.php:342
+#: includes/woo/class-woo-coupons.php:253
+#: includes/woo/class-woo-products.php:356
+msgid "It could not be moved to the Trash."
+msgstr "ゴミ箱に移動できませんでした。"
+
+#: includes/class-media.php:205
+msgid "Invalid media file path."
+msgstr "メディアファイルのパスが無効です。"
+
+#: includes/class-media.php:212
+msgid "File is missing on this site: sync the file first (Media uploads scope)."
+msgstr "このサイトにファイルがありません。先にファイルを同期してください（「メディアアップロード」の対象）。"
+
+#: includes/class-media.php:288
+msgid "Media entry deleted. The files were kept."
+msgstr "メディアエントリーを削除しました。ファイルは保持されています。"
+
+#: includes/class-menus.php:87
+msgid "Menu slug missing."
+msgstr "メニューのスラッグがありません。"
+
+#. translators: %d: number of menu items.
+#: includes/class-menus.php:160
+#, php-format
+msgid "Menu replaced: %d item."
+msgid_plural "Menu replaced: %d items."
+msgstr[0] "メニューを置き換えました：%d 項目。"
+
+#: includes/class-paths.php:56
+msgid "Invalid path."
+msgstr "パスが無効です。"
+
+#: includes/class-paths.php:60
+msgid "Invalid path segment."
+msgstr "パスの区間が無効です。"
+
+#: includes/class-paths.php:166
+msgid "Path root not allowed."
+msgstr "このパスのルートは許可されていません。"
+
+#: includes/class-paths.php:173
+msgid "Path too short."
+msgstr "パスが短すぎます。"
+
+#: includes/class-paths.php:176
+msgid "File modifications are disabled on this site (DISALLOW_FILE_MODS)."
+msgstr "このサイトではファイルの変更が無効になっています（DISALLOW_FILE_MODS）。"
+
+#: includes/class-paths.php:179
+msgid "Invalid folder name."
+msgstr "フォルダー名が無効です。"
+
+#: includes/class-paths.php:182
+msgid "Path is excluded from sync."
+msgstr "このパスは同期から除外されています。"
+
+#: includes/class-paths.php:185
+msgid "File type not allowed in uploads."
+msgstr "このファイルタイプはアップロードフォルダーでは許可されていません。"
+
+#: includes/class-paths.php:190
+msgid "Symlinks are not allowed."
+msgstr "シンボリックリンクは許可されていません。"
+
+#: includes/class-paths.php:199
+msgid "Path cannot be resolved."
+msgstr "パスを解決できません。"
+
+#: includes/class-paths.php:204
+msgid "Path escapes its root."
+msgstr "パスがルートの外に出ています。"
+
+#: includes/class-schedule.php:110
+msgid "No scope selected."
+msgstr "同期の対象が選択されていません。"
+
+#. translators: %s: site name.
+#: includes/class-schedule.php:151
+#, php-format
+msgid "[%s] Avesta Sync: differences found"
+msgstr "[%s] Avesta Sync：差分が見つかりました"
+
+#. translators: 1: number of differing items, 2: number of identical items.
+#: includes/class-schedule.php:154
+#, php-format
+msgid "The scheduled check found %1$d differing item(s) (%2$d identical)."
+msgstr "定期チェックで %1$d 件の差分のある項目が見つかりました（%2$d 件は同一）。"
+
+#: includes/class-schedule.php:157
+msgid "Review and apply:"
+msgstr "確認して適用："
+
+#: includes/class-sync.php:112
+msgid "No WooCommerce options are turned on under Settings > What to sync, so nothing was compared."
+msgstr "「設定 > 同期する内容」で WooCommerce のオプションがオンになっていないため、比較は行われませんでした。"
+
+#: includes/class-sync.php:227
+#: includes/class-sync.php:296
+#: includes/class-sync.php:310
+msgid "Invalid item."
+msgstr "無効な項目です。"
+
+#: includes/class-sync.php:239
+#: includes/class-sync.php:245
+#: includes/class-sync.php:260
+#: includes/class-sync.php:307
+#: includes/class-sync.php:336
+msgid "This item is not part of what you chose to sync."
+msgstr "この項目は、選択した同期の対象に含まれていません。"
+
+#: includes/class-sync.php:267
+#: includes/woo/class-woo.php:97
+msgid "The other site runs an older version of Avesta Sync that cannot sync WooCommerce. Update Avesta Sync on both sites."
+msgstr "先方のサイトで動作している Avesta Sync のバージョンが古く、WooCommerce を同期できません。両方のサイトで Avesta Sync を更新してください。"
+
+#: includes/class-sync.php:383
+msgid "Pushed."
+msgstr "プッシュしました。"
+
+#: includes/class-sync.php:386
+msgid "Local file is missing; choose Pull or confirm deletion."
+msgstr "ローカルのファイルがありません。プルを選ぶか、削除を確認してください。"
+
+#: includes/class-sync.php:393
+msgid "Deleted on the remote site. A backup was kept there."
+msgstr "リモートサイトで削除しました。バックアップはそちらに保持されています。"
+
+#: includes/class-sync.php:410
+msgid "Remote file is missing; choose Push or confirm deletion."
+msgstr "リモートのファイルがありません。プッシュを選ぶか、削除を確認してください。"
+
+#: includes/class-sync.php:417
+msgid "Deleted on this site. A backup was kept."
+msgstr "このサイトで削除しました。バックアップは保持されています。"
+
+#: includes/class-sync.php:420
+msgid "Pulled."
+msgstr "プルしました。"
+
+#: includes/class-sync.php:440
+msgid "No result for item."
+msgstr "この項目の結果がありません。"
+
+#. translators: 1: item size, 2: remote post_max_size.
+#: includes/class-sync.php:455
+#, php-format
+msgid "This item (%1$s) is too large for the other site, which accepts up to %2$s per request. Ask its host to raise the post_max_size setting."
+msgstr "この項目（%1$s）は先方のサイトには大きすぎます。先方は 1 回のリクエストで最大 %2$s まで受け付けます。ホスティング会社に post_max_size の設定を引き上げるよう依頼してください。"
+
+#: includes/class-sync.php:465
+msgid "Local item is missing; choose Pull or confirm deletion."
+msgstr "ローカルの項目がありません。プルを選ぶか、削除を確認してください。"
+
+#: includes/class-sync.php:490
+msgid "Remote item is missing; choose Push or confirm deletion."
+msgstr "リモートの項目がありません。プッシュを選ぶか、削除を確認してください。"
+
+#: includes/views/backups.php:13
+msgid "Before a sync overwrites or deletes something on this site, the previous version is saved here. Restoring an item is itself backed up first."
+msgstr "同期によってこのサイトの内容が上書きまたは削除される前に、以前のバージョンがここに保存されます。項目を復元する際も、先に現在の内容がバックアップされます。"
+
+#: includes/views/dashboard.php:13
+msgid "The state of your connection and your latest activity at a glance."
+msgstr "接続の状態と最近のアクティビティを一目で確認できます。"
+
+#: includes/views/dashboard.php:17
+msgid "Compare now"
+msgstr "今すぐ比較"
+
+#: includes/views/history.php:13
+msgid "Every sync run, who started it and what happened to each item."
+msgstr "すべての同期の実行について、開始した人と各項目の結果を確認できます。"
+
+#: includes/views/history.php:17
+#: includes/views/i18n.php:329
+msgid "Clear history"
+msgstr "履歴を消去"
+
+#: includes/views/i18n.php:14
+msgid "Working..."
+msgstr "処理中…"
+
+#: includes/views/i18n.php:15
+msgid "Loading..."
+msgstr "読み込み中…"
+
+#: includes/views/i18n.php:16
+msgid "Close"
+msgstr "閉じる"
+
+#: includes/views/i18n.php:17
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: includes/views/i18n.php:18
+msgid "Confirm"
+msgstr "確認"
+
+#: includes/views/i18n.php:19
+msgid "Delete"
+msgstr "削除"
+
+#: includes/views/i18n.php:20
+msgid "Try again"
+msgstr "再試行"
+
+#: includes/views/i18n.php:21
+#: includes/views/settings.php:62
+#: includes/views/settings.php:79
+msgid "Show"
+msgstr "表示"
+
+#: includes/views/i18n.php:22
+msgid "Hide"
+msgstr "非表示"
+
+#: includes/views/i18n.php:23
+#: includes/views/settings.php:80
+msgid "Copy"
+msgstr "コピー"
+
+#: includes/views/i18n.php:24
+msgid "Copied"
+msgstr "コピーしました"
+
+#: includes/views/i18n.php:25
+msgid "OK"
+msgstr "OK"
+
+#: includes/views/i18n.php:26
+msgid "Failed"
+msgstr "失敗"
+
+#: includes/views/i18n.php:27
+msgid "Local"
+msgstr "ローカル"
+
+#: includes/views/i18n.php:28
+msgid "Remote"
+msgstr "リモート"
+
+#: includes/views/i18n.php:29
+msgid "Not on this site"
+msgstr "このサイトにはありません"
+
+#: includes/views/i18n.php:30
+msgid "Not on the remote site"
+msgstr "リモートサイトにはありません"
+
+#: includes/views/i18n.php:31
+msgid "Something went wrong"
+msgstr "問題が発生しました"
+
+#: includes/views/i18n.php:32
+msgid "The request failed."
+msgstr "リクエストに失敗しました。"
+
+#. translators: %s: start of the unexpected server response.
+#: includes/views/i18n.php:34
+#, php-format
+msgid "Unexpected server response: %s"
+msgstr "サーバーから予期しない応答が返されました：%s"
+
+#: includes/views/i18n.php:36
+msgctxt "bytes"
+msgid "B"
+msgstr "B"
+
+#: includes/views/i18n.php:37
+msgctxt "kilobytes"
+msgid "KB"
+msgstr "KB"
+
+#: includes/views/i18n.php:38
+msgctxt "megabytes"
+msgid "MB"
+msgstr "MB"
+
+#: includes/views/i18n.php:39
+msgctxt "gigabytes"
+msgid "GB"
+msgstr "GB"
+
+#: includes/views/i18n.php:43
+msgid "Connected"
+msgstr "接続済み"
+
+#: includes/views/i18n.php:44
+msgid "Not connected"
+msgstr "未接続"
+
+#: includes/views/i18n.php:45
+msgid "Not configured"
+msgstr "未設定"
+
+#: includes/views/i18n.php:48
+#: includes/views/sync.php:37
+msgid "Theme"
+msgstr "テーマ"
+
+#: includes/views/i18n.php:49
+#: includes/views/sync.php:38
+msgid "Plugins"
+msgstr "プラグイン"
+
+#: includes/views/i18n.php:50
+#: includes/views/i18n.php:110
+#: includes/views/settings.php:17
+#: includes/views/sync.php:39
+msgid "Content"
+msgstr "コンテンツ"
+
+#: includes/views/i18n.php:51
+#: includes/views/sync.php:40
+msgid "Media"
+msgstr "メディア"
+
+#: includes/views/i18n.php:52
+#: includes/views/i18n.php:81
+#: includes/views/settings.php:105
+#: includes/views/settings.php:113
+#: includes/views/sync.php:41
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/views/i18n.php:55
+msgid "Attributes"
+msgstr "属性"
+
+#: includes/views/i18n.php:56
+msgid "Categories and tags"
+msgstr "カテゴリーとタグ"
+
+#: includes/views/i18n.php:57
+#: includes/views/settings.php:22
+#: includes/woo/class-woo.php:151
+msgid "Products"
+msgstr "商品"
+
+#: includes/views/i18n.php:58
+#: includes/views/settings.php:24
+#: includes/woo/class-woo.php:152
+msgid "Coupons"
+msgstr "クーポン"
+
+#: includes/views/i18n.php:59
+#: includes/views/settings.php:25
+#: includes/woo/class-woo.php:153
+msgid "Store settings"
+msgstr "ストア設定"
+
+#: includes/views/i18n.php:62
+msgid "Variable"
+msgstr "バリエーション商品"
+
+#: includes/views/i18n.php:63
+msgid "Grouped"
+msgstr "グループ商品"
+
+#: includes/views/i18n.php:64
+msgid "External"
+msgstr "外部商品"
+
+#. translators: %s: number of product variations.
+#: includes/views/i18n.php:69
+#: includes/views/i18n.php:71
+#, php-format
+msgid "%s variation"
+msgid_plural "%s variations"
+msgstr[0] "%s 個のバリエーション"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:76
+#: includes/views/i18n.php:78
+#, php-format
+msgid "%s item was not synced"
+msgid_plural "%s items were not synced"
+msgstr[0] "%s 件の項目が同期されませんでした"
+
+#: includes/views/i18n.php:80
+msgid "The other sections you selected are identical."
+msgstr "選択した他のセクションは同一です。"
+
+#: includes/views/i18n.php:82
+msgid "not active"
+msgstr "有効化されていません"
+
+#. translators: 1: WooCommerce version on this site, 2: WooCommerce version on the remote site.
+#: includes/views/i18n.php:84
+#, php-format
+msgid "This site: %1$s, remote site: %2$s"
+msgstr "このサイト：%1$s、リモートサイト：%2$s"
+
+#: includes/views/i18n.php:85
+msgid "Also overwrite stock quantities"
+msgstr "在庫数も上書きする"
+
+#: includes/views/i18n.php:86
+msgid "Stock is normally left alone, so sales made since the last sync stay correct. Tick this to copy stock from the sending site: to the remote site for a push, to this site for a pull."
+msgstr "在庫は通常そのままにされるため、前回の同期以降の販売数が正しく保たれます。これをチェックすると、送信側のサイトから在庫がコピーされます。プッシュの場合はリモートサイトへ、プルの場合はこのサイトへコピーされます。"
+
+#: includes/views/i18n.php:87
+msgid "Stock quantities of the selected products will be overwritten on the site that receives them."
+msgstr "選択した商品の在庫数は、受信側サイトで上書きされます。"
+
+#: includes/views/i18n.php:88
+msgid "Stock levels are not compared here. They are only copied when you tick \"Also overwrite stock quantities\" while applying."
+msgstr "ここでは在庫数は比較されません。適用時に「在庫数も上書きする」をチェックした場合にのみコピーされます。"
+
+#: includes/views/i18n.php:89
+msgid "WooCommerce items were not checked."
+msgstr "WooCommerce の項目は確認されませんでした。"
+
+#: includes/views/i18n.php:90
+msgid "WooCommerce sync is unavailable."
+msgstr "WooCommerce の同期は利用できません。"
+
+#: includes/views/i18n.php:91
+msgid "Stock quantities were also copied for the products in this run."
+msgstr "今回の実行では、商品の在庫数もコピーされました。"
+
+#: includes/views/i18n.php:93
+#: includes/views/settings.php:28
+msgid "Off"
+msgstr "オフ"
+
+#: includes/views/i18n.php:94
+#: includes/views/settings.php:29
+msgid "Hourly"
+msgstr "1 時間ごと"
+
+#: includes/views/i18n.php:95
+#: includes/views/settings.php:30
+msgid "Twice daily"
+msgstr "1 日 2 回"
+
+#: includes/views/i18n.php:96
+#: includes/views/settings.php:31
+msgid "Daily"
+msgstr "毎日"
+
+#: includes/views/i18n.php:99
+msgid "New on this site"
+msgstr "このサイトで新規"
+
+#: includes/views/i18n.php:100
+msgid "Changed on this site"
+msgstr "このサイトで変更"
+
+#: includes/views/i18n.php:101
+msgid "New on the remote site"
+msgstr "リモートサイトで新規"
+
+#: includes/views/i18n.php:102
+msgid "Changed on the remote site"
+msgstr "リモートサイトで変更"
+
+#: includes/views/i18n.php:103
+#: includes/views/i18n.php:314
+msgid "Deleted on this site"
+msgstr "このサイトで削除"
+
+#: includes/views/i18n.php:104
+#: includes/views/i18n.php:313
+msgid "Deleted on the remote site"
+msgstr "リモートサイトで削除"
+
+#: includes/views/i18n.php:105
+msgid "Conflict"
+msgstr "競合"
+
+#: includes/views/i18n.php:107
+msgid "Admin"
+msgstr "管理者"
+
+#: includes/views/i18n.php:108
+msgid "WP-CLI"
+msgstr "WP-CLI"
+
+#: includes/views/i18n.php:109
+msgid "File"
+msgstr "ファイル"
+
+#: includes/views/i18n.php:113
+#: includes/views/settings.php:52
+msgid "Connection"
+msgstr "接続"
+
+#: includes/views/i18n.php:114
+msgid "Last sync"
+msgstr "前回の同期"
+
+#: includes/views/i18n.php:115
+msgid "Last check"
+msgstr "前回のチェック"
+
+#: includes/views/i18n.php:117
+#: includes/views/settings.php:187
+msgid "Scheduled check"
+msgstr "定期チェック"
+
+#: includes/views/i18n.php:118
+msgid "Contacting the remote site..."
+msgstr "リモートサイトに接続しています…"
+
+#: includes/views/i18n.php:119
+msgid "Connection not checked yet."
+msgstr "接続はまだ確認されていません。"
+
+#: includes/views/i18n.php:120
+msgid "Get started in three steps:"
+msgstr "3 ステップで始められます："
+
+#: includes/views/i18n.php:121
+msgid "Install Avesta Sync on both sites."
+msgstr "両方のサイトに Avesta Sync をインストールします。"
+
+#: includes/views/i18n.php:122
+msgid "Copy this site's key into the other site's settings, and the other site's key and URL into this one."
+msgstr "このサイトのキーを先方サイトの設定にコピーし、先方サイトのキーと URL をこのサイトにコピーします。"
+
+#: includes/views/i18n.php:123
+msgid "Click Compare, review the differences and apply what you want."
+msgstr "「比較」をクリックして差分を確認し、必要なものを適用します。"
+
+#: includes/views/i18n.php:124
+msgid "Go to settings"
+msgstr "設定へ移動"
+
+#: includes/views/i18n.php:125
+msgid "Cannot reach the remote site"
+msgstr "リモートサイトに接続できません"
+
+#: includes/views/i18n.php:126
+msgid "Remote site"
+msgstr "リモートサイト"
+
+#: includes/views/i18n.php:128
+msgid "WordPress"
+msgstr "WordPress"
+
+#: includes/views/i18n.php:129
+msgid "PHP"
+msgstr "PHP"
+
+#: includes/views/i18n.php:130
+msgid "No sync has been run yet."
+msgstr "まだ同期は実行されていません。"
+
+#. translators: %s: user display name.
+#: includes/views/i18n.php:132
+#, php-format
+msgid "by %s"
+msgstr "実行者：%s"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:134
+#, php-format
+msgid "%s ok"
+msgstr "%s 件成功"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:136
+#, php-format
+msgid "%s failed"
+msgstr "%s 件失敗"
+
+#: includes/views/i18n.php:137
+msgid "View history"
+msgstr "履歴を見る"
+
+#: includes/views/i18n.php:138
+msgid "No comparison has been run yet."
+msgstr "まだ比較は実行されていません。"
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:140
+#, php-format
+msgid "In sync (%s identical items)"
+msgstr "同期済み（同一の項目：%s 件）"
+
+#: includes/views/i18n.php:141
+msgid "Review in Sync"
+msgstr "「同期」で確認"
+
+#. translators: %s: number of backup runs.
+#: includes/views/i18n.php:145
+#: includes/views/i18n.php:147
+#, php-format
+msgid "%s backup run"
+msgid_plural "%s backup runs"
+msgstr[0] "%s 回のバックアップ"
+
+#. translators: %s: size such as 1.2 MB.
+#: includes/views/i18n.php:150
+#, php-format
+msgid "%s in total"
+msgstr "合計 %s"
+
+#: includes/views/i18n.php:151
+msgid "Nothing backed up yet."
+msgstr "まだバックアップはありません。"
+
+#: includes/views/i18n.php:152
+msgid "Manage backups"
+msgstr "バックアップを管理"
+
+#: includes/views/i18n.php:153
+msgid "Next run:"
+msgstr "次回の実行："
+
+#: includes/views/i18n.php:154
+msgid "Change schedule"
+msgstr "スケジュールを変更"
+
+#: includes/views/i18n.php:157
+msgid "Skip"
+msgstr "スキップ"
+
+#: includes/views/i18n.php:158
+#: includes/views/i18n.php:311
+msgid "Push"
+msgstr "プッシュ"
+
+#: includes/views/i18n.php:159
+#: includes/views/i18n.php:312
+msgid "Pull"
+msgstr "プル"
+
+#: includes/views/i18n.php:160
+msgid "From this site to the remote site"
+msgstr "このサイトからリモートサイトへ"
+
+#: includes/views/i18n.php:161
+msgid "From the remote site to this site"
+msgstr "リモートサイトからこのサイトへ"
+
+#: includes/views/i18n.php:162
+msgid "Push: delete it on the remote site"
+msgstr "プッシュ：リモートサイトで削除"
+
+#: includes/views/i18n.php:163
+msgid "Pull: delete it on this site"
+msgstr "プル：このサイトで削除"
+
+#: includes/views/i18n.php:164
+msgid "Push: bring it back on the remote site"
+msgstr "プッシュ：リモートサイトで復元"
+
+#: includes/views/i18n.php:165
+msgid "Pull: bring it back to this site"
+msgstr "プル：このサイトに復元"
+
+#: includes/views/i18n.php:166
+msgid "Comparing both sites. This can take a while on large sites..."
+msgstr "両方のサイトを比較しています。大規模なサイトでは時間がかかることがあります…"
+
+#: includes/views/i18n.php:167
+msgid "Everything you selected is identical."
+msgstr "選択した内容はすべて同一です。"
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:169
+#, php-format
+msgid "%s items checked, nothing to sync."
+msgstr "%s 件の項目を確認しました。同期するものはありません。"
+
+#. translators: 1: number of differences, 2: number of identical items.
+#: includes/views/i18n.php:171
+#, php-format
+msgid "Comparison finished: %1$s differences, %2$s identical."
+msgstr "比較が完了しました：差分 %1$s 件、同一 %2$s 件。"
+
+#: includes/views/i18n.php:172
+msgid "identical"
+msgstr "同一"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:174
+#, php-format
+msgid "Select %s"
+msgstr "%s を選択"
+
+#. translators: %s: group name.
+#: includes/views/i18n.php:176
+#, php-format
+msgid "Select all shown items in %s"
+msgstr "%s に表示されているすべての項目を選択"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:178
+#, php-format
+msgid "Direction for %s"
+msgstr "%s の方向"
+
+#: includes/views/i18n.php:179
+msgid "View changes"
+msgstr "変更を表示"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:181
+#, php-format
+msgid "View changes for %s"
+msgstr "%s の変更を表示"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:185
+#: includes/views/i18n.php:187
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s 件の項目"
+
+#. translators: %s: number of selected items.
+#: includes/views/i18n.php:192
+#: includes/views/i18n.php:194
+#, php-format
+msgid "%s selected"
+msgid_plural "%s selected"
+msgstr[0] "%s 件を選択中"
+
+#. translators: 1: number of rows to load now, 2: number of rows remaining.
+#: includes/views/i18n.php:197
+#, php-format
+msgid "Show %1$s more (%2$s left)"
+msgstr "さらに %1$s 件を表示（残り %2$s 件）"
+
+#. translators: 1: rows shown, 2: total rows.
+#: includes/views/i18n.php:199
+#, php-format
+msgid "Showing %1$s of %2$s items"
+msgstr "%2$s 件中 %1$s 件を表示"
+
+#. translators: 1: selected, 2: pushes, 3: pulls, 4: deletions.
+#: includes/views/i18n.php:203
+#: includes/views/i18n.php:205
+#, php-format
+msgid "%1$s item selected (%2$s push, %3$s pull, %4$s delete)"
+msgid_plural "%1$s items selected (%2$s push, %3$s pull, %4$s delete)"
+msgstr[0] "%1$s 件の項目を選択中（プッシュ %2$s、プル %3$s、削除 %4$s）"
+
+#. translators: %s: number of selected items hidden by filters.
+#: includes/views/i18n.php:208
+#, php-format
+msgid "%s of them are hidden by your filters."
+msgstr "そのうち %s 件はフィルターにより非表示です。"
+
+#: includes/views/i18n.php:209
+msgid "Nothing selected to apply."
+msgstr "適用する項目が選択されていません。"
+
+#: includes/views/i18n.php:210
+msgid "Done"
+msgstr "完了"
+
+#. translators: %s: error message.
+#: includes/views/i18n.php:212
+#, php-format
+msgid "Failed: %s"
+msgstr "失敗：%s"
+
+#: includes/views/i18n.php:215
+msgid "Apply selected changes?"
+msgstr "選択した変更を適用しますか？"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:219
+#: includes/views/i18n.php:221
+#, php-format
+msgid "You are about to apply %s item:"
+msgid_plural "You are about to apply %s items:"
+msgstr[0] "%s 件の項目を適用しようとしています："
+
+#: includes/views/i18n.php:223
+msgid "will be pushed to the remote site"
+msgstr "リモートサイトにプッシュされます"
+
+#: includes/views/i18n.php:224
+msgid "will be pulled to this site"
+msgstr "このサイトにプルされます"
+
+#: includes/views/i18n.php:225
+msgid "will be deleted"
+msgstr "削除されます"
+
+#. translators: %s: number of deletions.
+#: includes/views/i18n.php:229
+#: includes/views/i18n.php:231
+#, php-format
+msgid "%s item will be deleted. A backup is saved on the site where it is deleted."
+msgid_plural "%s items will be deleted. A backup is saved on the site where they are deleted."
+msgstr[0] "%s 件の項目が削除されます。バックアップは削除が行われるサイトに保存されます。"
+
+#: includes/views/i18n.php:233
+msgid "Before anything is overwritten or deleted, the site that receives the change saves a backup of it."
+msgstr "何かが上書きまたは削除される前に、変更を受け取るサイトがそのバックアップを保存します。"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:237
+#: includes/views/i18n.php:239
+#, php-format
+msgid "Apply %s item"
+msgid_plural "Apply %s items"
+msgstr[0] "%s 件の項目を適用"
+
+#. translators: 1: current item, 2: total items.
+#: includes/views/i18n.php:242
+#, php-format
+msgid "Applied %1$s of %2$s"
+msgstr "%1$s / %2$s 件を適用済み"
+
+#: includes/views/i18n.php:243
+msgid "Stopping after the current item..."
+msgstr "現在の項目の完了後に停止します…"
+
+#. translators: 1: number ok, 2: number failed.
+#: includes/views/i18n.php:245
+#, php-format
+msgid "Finished: %1$s ok, %2$s failed."
+msgstr "完了しました：成功 %1$s 件、失敗 %2$s 件。"
+
+#. translators: %s: number of items not processed.
+#: includes/views/i18n.php:249
+#: includes/views/i18n.php:251
+#, php-format
+msgid "Stopped. %s item was not applied and is still selected."
+msgid_plural "Stopped. %s items were not applied and are still selected."
+msgstr[0] "停止しました。%s 件の項目は適用されず、選択されたままです。"
+
+#. translators: %s: number of failed items.
+#: includes/views/i18n.php:254
+#, php-format
+msgid "Retry %s failed"
+msgstr "失敗した %s 件を再試行"
+
+#: includes/views/i18n.php:255
+msgid "Media files were copied. If new files do not show up in the Media Library, enable \"Include Media Library entries\" in Settings or regenerate thumbnails."
+msgstr "メディアファイルをコピーしました。新しいファイルがメディアライブラリに表示されない場合は、設定で「メディアライブラリのエントリーを含める」を有効にするか、サムネイルを再生成してください。"
+
+#: includes/views/i18n.php:256
+msgid "push"
+msgstr "プッシュ"
+
+#: includes/views/i18n.php:257
+msgid "pull"
+msgstr "プル"
+
+#: includes/views/i18n.php:258
+msgid "delete on the remote site"
+msgstr "リモートサイトで削除"
+
+#: includes/views/i18n.php:259
+msgid "delete on this site"
+msgstr "このサイトで削除"
+
+#. translators: 1: item number, 2: total, 3: action, 4: path.
+#: includes/views/i18n.php:261
+#, php-format
+msgid "[%1$s/%2$s] %3$s %4$s"
+msgstr "[%1$s/%2$s] %3$s %4$s"
+
+#: includes/views/i18n.php:264
+msgid "Compare versions"
+msgstr "バージョンを比較"
+
+#: includes/views/i18n.php:265
+msgid "Binary file - no preview"
+msgstr "バイナリファイル - プレビューなし"
+
+#: includes/views/i18n.php:266
+msgid "This file is too large to preview."
+msgstr "このファイルは大きすぎてプレビューできません。"
+
+#: includes/views/i18n.php:267
+msgid "Nothing to show for this item."
+msgstr "この項目に表示できる内容はありません。"
+
+#: includes/views/i18n.php:268
+msgid "Both versions are identical."
+msgstr "両方のバージョンは同一です。"
+
+#: includes/views/i18n.php:269
+msgid "Does not exist on this site"
+msgstr "このサイトには存在しません"
+
+#: includes/views/i18n.php:270
+msgid "Does not exist on the remote site"
+msgstr "リモートサイトには存在しません"
+
+#. translators: %s: maximum number of lines.
+#: includes/views/i18n.php:272
+#, php-format
+msgid "The file has more than %s lines, so the versions are shown side by side without alignment."
+msgstr "このファイルは %s 行を超えているため、両方のバージョンは位置を揃えずに左右に並べて表示されます。"
+
+#: includes/views/i18n.php:273
+msgid "The versions differ too much to align line by line, so they are shown side by side."
+msgstr "両方のバージョンの差が大きく行ごとに揃えられないため、左右に並べて表示されます。"
+
+#: includes/views/i18n.php:274
+msgid "Layout"
+msgstr "レイアウト"
+
+#: includes/views/i18n.php:275
+msgid "Side by side"
+msgstr "左右に並べて表示"
+
+#: includes/views/i18n.php:276
+msgid "Unified"
+msgstr "統合"
+
+#: includes/views/i18n.php:277
+msgid "Only line endings or a trailing newline differ."
+msgstr "改行コードまたは末尾の改行のみが異なります。"
+
+#: includes/views/i18n.php:278
+msgid "Differences"
+msgstr "差分"
+
+#. translators: %s: number of unchanged lines.
+#: includes/views/i18n.php:282
+#: includes/views/i18n.php:284
+#, php-format
+msgid "Show %s unchanged line"
+msgid_plural "Show %s unchanged lines"
+msgstr[0] "変更のない %s 行を表示"
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:289
+#: includes/views/i18n.php:291
+#, php-format
+msgid "%s line only on the remote site"
+msgid_plural "%s lines only on the remote site"
+msgstr[0] "リモートサイトのみにある %s 行"
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:296
+#: includes/views/i18n.php:298
+#, php-format
+msgid "%s line only on this site"
+msgid_plural "%s lines only on this site"
+msgstr[0] "このサイトのみにある %s 行"
+
+#: includes/views/i18n.php:302
+msgid "No backups yet"
+msgstr "バックアップはまだありません"
+
+#: includes/views/i18n.php:303
+msgid "Backups appear here after a sync overwrites or deletes something on this site."
+msgstr "同期によってこのサイトの内容が上書きまたは削除されると、ここにバックアップが表示されます。"
+
+#. translators: 1: number of files, 2: size such as 1.2 MB.
+#: includes/views/i18n.php:307
+#: includes/views/i18n.php:309
+#, php-format
+msgid "%1$s file · %2$s"
+msgid_plural "%1$s files · %2$s"
+msgstr[0] "%1$s 個のファイル · %2$s"
+
+#: includes/views/i18n.php:315
+msgid "No items."
+msgstr "項目はありません。"
+
+#: includes/views/i18n.php:316
+msgid "Restore"
+msgstr "復元"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:318
+#, php-format
+msgid "Restore %s"
+msgstr "%s を復元"
+
+#: includes/views/i18n.php:319
+msgid "Restore this item?"
+msgstr "この項目を復元しますか？"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:321
+#, php-format
+msgid "The backed-up version of %s will replace the current one. The current version is backed up first."
+msgstr "%s のバックアップ版が現在のバージョンを置き換えます。現在のバージョンは先にバックアップされます。"
+
+#. translators: %s: date.
+#: includes/views/i18n.php:323
+#, php-format
+msgid "Delete backup from %s"
+msgstr "%s のバックアップを削除"
+
+#: includes/views/i18n.php:324
+msgid "Delete this backup?"
+msgstr "このバックアップを削除しますか？"
+
+#: includes/views/i18n.php:325
+msgid "This permanently deletes every file in this backup run. This cannot be undone."
+msgstr "このバックアップ実行に含まれるすべてのファイルが完全に削除されます。この操作は元に戻せません。"
+
+#: includes/views/i18n.php:327
+msgid "No history yet"
+msgstr "履歴はまだありません"
+
+#: includes/views/i18n.php:328
+msgid "Applied sync items are recorded here."
+msgstr "適用された同期項目はここに記録されます。"
+
+#: includes/views/i18n.php:330
+msgid "Clear the history?"
+msgstr "履歴を消去しますか？"
+
+#: includes/views/i18n.php:331
+msgid "All recorded sync runs will be removed. Backups are not affected."
+msgstr "記録されたすべての同期実行が削除されます。バックアップには影響しません。"
+
+#. translators: 1: site URL, 2: plugin version, 3: PHP version, 4: post_max_size, 5: chunk size.
+#: includes/views/i18n.php:336
+#, php-format
+msgid "Connected to %1$s (Avesta Sync %2$s, PHP %3$s, upload limit %4$s, transfer size %5$s)"
+msgstr "%1$s に接続しました（Avesta Sync %2$s、PHP %3$s、アップロード上限 %4$s、転送サイズ %5$s）"
+
+#: includes/views/i18n.php:337
+msgid "Regenerate this site's key?"
+msgstr "このサイトのキーを再生成しますか？"
+
+#: includes/views/i18n.php:338
+msgid "The other site will stop working until you paste the new key into its settings."
+msgstr "新しいキーを先方サイトの設定に貼り付けるまで、先方サイトは動作しなくなります。"
+
+#: includes/views/i18n.php:339
+#: includes/views/settings.php:84
+msgid "Regenerate key"
+msgstr "キーを再生成"
+
+#: includes/views/i18n.php:340
+msgid "Discard unsaved changes?"
+msgstr "保存されていない変更を破棄しますか？"
+
+#: includes/views/i18n.php:341
+msgid "You changed settings but did not save them. Your edits stay in the form until you reload the page."
+msgstr "設定を変更しましたが、保存されていません。ページを再読み込みするまで、編集内容はフォームに残ります。"
+
+#: includes/views/i18n.php:342
+msgid "Leave without saving"
+msgstr "保存せずに移動"
+
+#: includes/views/i18n.php:343
+msgid "Stay here"
+msgstr "このページに留まる"
+
+#: includes/views/settings.php:15
+msgid "Theme files"
+msgstr "テーマファイル"
+
+#: includes/views/settings.php:15
+msgid "Templates, styles and assets of the themes you pick."
+msgstr "選択したテーマのテンプレート、スタイル、アセット。"
+
+#: includes/views/settings.php:16
+msgid "Custom plugins"
+msgstr "独自プラグイン"
+
+#: includes/views/settings.php:16
+msgid "Files of the plugin folders you pick. Activation state is never synced."
+msgstr "選択したプラグインフォルダー内のファイル。有効化の状態は同期されません。"
+
+#: includes/views/settings.php:17
+msgid "Pages, posts, templates, menus and a few options."
+msgstr "固定ページ、投稿、テンプレート、メニュー、および一部のオプション。"
+
+#: includes/views/settings.php:18
+msgid "Media uploads"
+msgstr "メディアアップロード"
+
+#: includes/views/settings.php:18
+msgid "Files in the uploads folder."
+msgstr "アップロードフォルダー内のファイル。"
+
+#: includes/views/settings.php:22
+msgid "Simple, variable, grouped and external products, including their variations."
+msgstr "シンプル商品、バリエーション商品、グループ商品、外部商品（バリエーションを含む）。"
+
+#: includes/views/settings.php:23
+#: includes/woo/class-woo.php:149
+#: includes/woo/class-woo.php:150
+msgid "Categories, tags and attributes"
+msgstr "カテゴリー、タグ、属性"
+
+#: includes/views/settings.php:23
+msgid "Product categories, tags and global attributes with their terms."
+msgstr "商品カテゴリー、タグ、およびグローバル属性とその値。"
+
+#: includes/views/settings.php:24
+msgid "Discount codes and their restrictions."
+msgstr "割引コードとその利用制限。"
+
+#: includes/views/settings.php:25
+msgid "General, tax and shipping settings. Payment gateways and API keys are never synced."
+msgstr "一般、税、配送の設定。決済ゲートウェイと API キーは同期されません。"
+
+#: includes/views/settings.php:37
+msgid "Connect this site to the other one and choose what is synced."
+msgstr "このサイトを先方のサイトに接続し、同期する内容を選択します。"
+
+#: includes/views/settings.php:42
+msgid "Settings saved."
+msgstr "設定を保存しました。"
+
+#: includes/views/settings.php:44
+msgid "A new key was generated. Update it on the other site."
+msgstr "新しいキーを生成しました。先方サイトでも更新してください。"
+
+#: includes/views/settings.php:54
+msgid "Remote site URL"
+msgstr "リモートサイトの URL"
+
+#: includes/views/settings.php:56
+msgid "HTTPS is required (localhost and *.test excepted)."
+msgstr "HTTPS が必須です（localhost と *.test は除く）。"
+
+#: includes/views/settings.php:59
+msgid "Remote secret key"
+msgstr "リモートの秘密キー"
+
+#: includes/views/settings.php:61
+msgid "Saved - leave blank to keep"
+msgstr "保存済み - 変更しない場合は空欄のまま"
+
+#: includes/views/settings.php:64
+msgid "Copy it from the Settings tab of the other site."
+msgstr "先方サイトの「設定」タブからコピーしてください。"
+
+#: includes/views/settings.php:67
+msgid "Test connection"
+msgstr "接続をテスト"
+
+#: includes/views/settings.php:73
+msgid "This site's key"
+msgstr "このサイトのキー"
+
+#: includes/views/settings.php:74
+msgid "Paste this key into the \"Remote secret key\" field of the other site so it can call this site."
+msgstr "このキーを先方サイトの「リモートの秘密キー」欄に貼り付けると、先方がこのサイトを呼び出せるようになります。"
+
+#: includes/views/settings.php:76
+msgid "Key to copy to the other site"
+msgstr "先方サイトにコピーするキー"
+
+#: includes/views/settings.php:83
+msgid "Whoever holds this key can write files to this site. Share it only with the other site and regenerate it if it may have leaked."
+msgstr "このキーを持つ人は誰でもこのサイトにファイルを書き込めます。先方のサイトとだけ共有し、漏えいの可能性がある場合は再生成してください。"
+
+#: includes/views/settings.php:88
+#: includes/views/settings.php:90
+msgid "What to sync"
+msgstr "同期する内容"
+
+#: includes/views/settings.php:106
+msgid "Products, categories and attributes, coupons and store settings. Orders and customers are never touched."
+msgstr "商品、カテゴリーと属性、クーポン、ストア設定。注文と顧客には一切手を加えません。"
+
+#: includes/views/settings.php:114
+msgid "WooCommerce is not active on this site, so its products and store settings cannot be synced."
+msgstr "このサイトでは WooCommerce が有効化されていないため、商品とストア設定は同期できません。"
+
+#: includes/views/settings.php:125
+msgid "Themes to sync"
+msgstr "同期するテーマ"
+
+#: includes/views/settings.php:134
+msgid "Plugin folders to sync"
+msgstr "同期するプラグインフォルダー"
+
+#: includes/views/settings.php:140
+msgid "Only files are synced; plugin activation state never is. Avesta Sync itself is excluded."
+msgstr "同期されるのはファイルのみで、プラグインの有効化状態は同期されません。Avesta Sync 自体は除外されます。"
+
+#: includes/views/settings.php:146
+msgid "WooCommerce items to sync"
+msgstr "同期する WooCommerce の項目"
+
+#: includes/views/settings.php:171
+msgid "Include Media Library entries"
+msgstr "メディアライブラリのエントリーを含める"
+
+#: includes/views/settings.php:172
+msgid "Also sync the attachment records (titles, captions, alt text) of synced uploads."
+msgstr "同期されたアップロードファイルの添付ファイル情報（タイトル、キャプション、代替テキスト）も同期します。"
+
+#: includes/views/settings.php:178
+msgid "Exclude patterns"
+msgstr "除外パターン"
+
+#: includes/views/settings.php:180
+msgid "Paths to leave out"
+msgstr "除外するパス"
+
+#: includes/views/settings.php:182
+msgid "One pattern per line. Examples:"
+msgstr "1 行につき 1 パターン。例："
+
+#: includes/views/settings.php:188
+msgid "A scheduled check only compares both sites and reports differences. It never changes anything."
+msgstr "定期チェックは両方のサイトを比較して差分を報告するだけで、何も変更しません。"
+
+#: includes/views/settings.php:191
+msgid "Check how often"
+msgstr "チェックの頻度"
+
+#: includes/views/settings.php:199
+msgid "Email the result to"
+msgstr "結果の送信先メールアドレス"
+
+#: includes/views/settings.php:208
+msgid "Backup runs to keep"
+msgstr "保持するバックアップ数"
+
+#: includes/views/settings.php:210
+msgid "0 keeps all backups. Older runs are deleted automatically."
+msgstr "0 の場合はすべてのバックアップを保持します。古いものは自動的に削除されます。"
+
+#: includes/views/settings.php:215
+msgid "Save settings"
+msgstr "設定を保存"
+
+#: includes/views/settings.php:216
+msgid "You have unsaved changes."
+msgstr "保存されていない変更があります。"
+
+#: includes/views/sync.php:14
+msgid "Compare both sites, review every difference, then choose what to do with each item. Push sends the version on this site to the remote site; pull brings the version on the remote site to this site. Nothing changes until you apply."
+msgstr "両方のサイトを比較し、すべての差分を確認してから、各項目の処理を選択します。プッシュはこのサイトのバージョンをリモートサイトに送り、プルはリモートサイトのバージョンをこのサイトに取り込みます。適用するまで何も変更されません。"
+
+#: includes/views/sync.php:18
+msgid "Compare"
+msgstr "比較"
+
+#: includes/views/sync.php:24
+msgid "Results may be out of date. Compare again."
+msgstr "結果が古い可能性があります。もう一度比較してください。"
+
+#: includes/views/sync.php:25
+msgid "Filter by status"
+msgstr "ステータスで絞り込み"
+
+#: includes/views/sync.php:30
+msgid "Search"
+msgstr "検索"
+
+#: includes/views/sync.php:31
+msgid "Filter by path or name"
+msgstr "パスまたは名前で絞り込み"
+
+#: includes/views/sync.php:34
+msgid "Section"
+msgstr "セクション"
+
+#: includes/views/sync.php:36
+msgid "All"
+msgstr "すべて"
+
+#: includes/views/sync.php:46
+msgid "Bulk actions for the rows shown"
+msgstr "表示中の行への一括操作"
+
+#: includes/views/sync.php:47
+msgid "Select all pushes"
+msgstr "すべてのプッシュを選択"
+
+#: includes/views/sync.php:48
+msgid "Select all pulls"
+msgstr "すべてのプルを選択"
+
+#: includes/views/sync.php:49
+msgid "Conflicts: push"
+msgstr "競合：プッシュ"
+
+#: includes/views/sync.php:50
+msgid "Conflicts: pull"
+msgstr "競合：プル"
+
+#: includes/views/sync.php:51
+msgid "Clear selection"
+msgstr "選択を解除"
+
+#: includes/views/sync.php:57
+msgid "No items match your filters."
+msgstr "フィルターに一致する項目はありません。"
+
+#: includes/views/sync.php:58
+msgid "Clear filters"
+msgstr "フィルターをクリア"
+
+#: includes/views/sync.php:65
+msgid "Sync progress"
+msgstr "同期の進行状況"
+
+#: includes/views/sync.php:68
+msgid "Sync log"
+msgstr "同期ログ"
+
+#: includes/views/sync.php:79
+msgid "Stop after this item"
+msgstr "この項目の後で停止"
+
+#: includes/views/sync.php:83
+msgid "Apply selected"
+msgstr "選択した項目を適用"
+
+#: includes/woo/class-woo-coupons.php:170
+msgid "The coupon has no code."
+msgstr "クーポンにコードがありません。"
+
+#: includes/woo/class-woo-coupons.php:176
+#: includes/woo/class-woo-product-import.php:54
+#: includes/woo/class-woo-settings.php:302
+#: includes/woo/class-woo-taxonomies.php:181
+#: includes/woo/class-woo-terms.php:200
+msgid "The backup failed, so nothing was changed."
+msgstr "バックアップに失敗したため、何も変更しませんでした。"
+
+#: includes/woo/class-woo-coupons.php:204
+msgid "coupon products"
+msgstr "クーポン対象商品"
+
+#: includes/woo/class-woo-coupons.php:206
+msgid "excluded products"
+msgstr "除外商品"
+
+#: includes/woo/class-woo-coupons.php:208
+msgid "coupon categories"
+msgstr "クーポン対象カテゴリー"
+
+#: includes/woo/class-woo-coupons.php:210
+msgid "excluded categories"
+msgstr "除外カテゴリー"
+
+#. translators: %s: variation SKU.
+#: includes/woo/class-woo-preview.php:106
+#, php-format
+msgid "SKU %s"
+msgstr "SKU %s"
+
+#: includes/woo/class-woo-preview.php:113
+msgid "Any"
+msgstr "すべて"
+
+#: includes/woo/class-woo-preview.php:116
+msgid "Variation"
+msgstr "バリエーション"
+
+#. translators: %s: product type.
+#: includes/woo/class-woo-product-import.php:32
+#, php-format
+msgid "Product type \"%s\" is not supported."
+msgstr "商品タイプ「%s」はサポートされていません。"
+
+#. translators: %s: product name.
+#: includes/woo/class-woo-product-import.php:38
+#: includes/woo/class-woo-products.php:69
+#, php-format
+msgid "Skipped \"%s\": it has no SKU and no URL name yet, so it cannot be matched."
+msgstr "「%s」をスキップしました：SKU も URL 名もまだないため、照合できません。"
+
+#: includes/woo/class-woo-product-import.php:49
+msgid "The matching item on the receiving site is not a product."
+msgstr "受信側サイトの該当する項目は商品ではありません。"
+
+#: includes/woo/class-woo-product-import.php:75
+msgid "The URL name is already used by another product on the receiving site"
+msgstr "この URL 名は受信側サイトの別の商品で既に使われています"
+
+#: includes/woo/class-woo-product-import.php:78
+msgid "Updated"
+msgstr "更新済み"
+
+#: includes/woo/class-woo-product-import.php:78
+msgid "Created"
+msgstr "作成済み"
+
+#: includes/woo/class-woo-product-import.php:193
+#: includes/woo/class-woo-variations.php:247
+msgid "shipping classes"
+msgstr "配送クラス"
+
+#: includes/woo/class-woo-product-import.php:237
+msgid "categories"
+msgstr "カテゴリー"
+
+#: includes/woo/class-woo-product-import.php:242
+msgid "tags"
+msgstr "タグ"
+
+#: includes/woo/class-woo-product-import.php:258
+msgid "Brands were skipped because the receiving site has no product brands"
+msgstr "受信側サイトに商品ブランドがないため、ブランドはスキップされました"
+
+#: includes/woo/class-woo-product-import.php:262
+msgid "brands"
+msgstr "ブランド"
+
+#. translators: %s: file path.
+#: includes/woo/class-woo-product-import.php:281
+#: includes/woo/class-woo-terms.php:240
+#: includes/woo/class-woo-variations.php:261
+#, php-format
+msgid "Image \"%s\" was not found on the receiving site. Sync the media library first"
+msgstr "画像「%s」が受信側サイトで見つかりません。先にメディアライブラリを同期してください"
+
+#. translators: %d: number of gallery images.
+#: includes/woo/class-woo-product-import.php:295
+#, php-format
+msgid "%d gallery image was not found on the receiving site. Sync the media library first"
+msgid_plural "%d gallery images were not found on the receiving site. Sync the media library first"
+msgstr[0] "%d 枚のギャラリー画像が受信側サイトで見つかりません。先にメディアライブラリを同期してください"
+
+#: includes/woo/class-woo-product-import.php:311
+msgid "upsells"
+msgstr "アップセル"
+
+#: includes/woo/class-woo-product-import.php:312
+msgid "cross-sells"
+msgstr "クロスセル"
+
+#: includes/woo/class-woo-product-import.php:315
+msgid "grouped products"
+msgstr "グループ商品"
+
+#. translators: %s: error.
+#: includes/woo/class-woo-product-import.php:394
+#, php-format
+msgid "WooCommerce did not accept a downloadable file: %s"
+msgstr "WooCommerce がダウンロード可能なファイルを受け付けませんでした：%s"
+
+#. translators: 1: product name, 2: product type.
+#: includes/woo/class-woo-products.php:64
+#, php-format
+msgid "Skipped \"%1$s\": product type \"%2$s\" is not supported."
+msgstr "「%1$s」をスキップしました：商品タイプ「%2$s」はサポートされていません。"
+
+#. translators: 1: "SKU" or "slug", 2: the shared SKU or slug, 3: list of product names.
+#: includes/woo/class-woo-products.php:93
+#, php-format
+msgid "Several products share the %1$s \"%2$s\", so none of them was synced: %3$s."
+msgstr "複数の商品が同じ %1$s「%2$s」を使用しているため、いずれも同期されませんでした：%3$s。"
+
+#: includes/woo/class-woo-products.php:94
+msgid "SKU"
+msgstr "SKU"
+
+#: includes/woo/class-woo-products.php:94
+msgid "URL name"
+msgstr "URL 名"
+
+#. translators: 1: field (upsells, cross-sells, grouped products), 2: list of product references (SKUs).
+#: includes/woo/class-woo-refs.php:174
+#, php-format
+msgid "%1$s that do not exist on the receiving site yet will be linked on a later sync: %2$s"
+msgstr "受信側サイトにまだ存在しない %1$s は、後の同期でリンクされます：%2$s"
+
+#. translators: 1: field (categories, tags, brands, shipping class), 2: list of slugs.
+#: includes/woo/class-woo-refs.php:247
+#, php-format
+msgid "Some %1$s do not exist on the receiving site yet: %2$s. Sync categories, tags and attributes first"
+msgstr "受信側サイトにまだ存在しない %1$s があります：%2$s。先にカテゴリー、タグ、属性を同期してください"
+
+#: includes/woo/class-woo-settings.php:107
+msgid "General"
+msgstr "一般"
+
+#: includes/woo/class-woo-settings.php:108
+msgid "Products and inventory"
+msgstr "商品と在庫"
+
+#: includes/woo/class-woo-settings.php:109
+msgid "Tax options"
+msgstr "税オプション"
+
+#: includes/woo/class-woo-settings.php:110
+msgid "Tax rates"
+msgstr "税率"
+
+#: includes/woo/class-woo-settings.php:111
+msgid "Shipping zones"
+msgstr "配送地域"
+
+#: includes/woo/class-woo-settings.php:112
+msgid "Shipping options"
+msgstr "配送オプション"
+
+#: includes/woo/class-woo-settings.php:113
+msgid "Accounts and privacy"
+msgstr "アカウントとプライバシー"
+
+#. translators: %s: name of a store setting (e.g. "price num decimals").
+#: includes/woo/class-woo-settings.php:239
+#, php-format
+msgid "The value of the store setting \"%s\" is not valid, so nothing in this group was changed."
+msgstr "ストア設定「%s」の値が無効なため、このグループ内の設定は何も変更されませんでした。"
+
+#: includes/woo/class-woo-settings.php:298
+msgid "This group of store settings is not known."
+msgstr "このストア設定グループは不明です。"
+
+#. translators: %d: number of settings.
+#: includes/woo/class-woo-settings.php:327
+#, php-format
+msgid "Updated: %d setting."
+msgid_plural "Updated: %d settings."
+msgstr[0] "更新しました：%d 件の設定。"
+
+#: includes/woo/class-woo-shipping.php:121
+msgid "Locations not covered by your other zones"
+msgstr "他の地域に含まれない場所"
+
+#. translators: 1: shipping method name, 2: shipping zone name.
+#: includes/woo/class-woo-shipping.php:125
+#, php-format
+msgid "Skipped shipping method \"%1$s\" in zone \"%2$s\": its settings look like they hold credentials."
+msgstr "地域「%2$s」の配送方法「%1$s」をスキップしました：設定に認証情報が含まれているようです。"
+
+#. translators: 1: shipping method name, 2: shipping zone name.
+#: includes/woo/class-woo-shipping.php:127
+#, php-format
+msgid "Skipped shipping method \"%1$s\" in zone \"%2$s\": only flat rate, free shipping and local pickup are synced."
+msgstr "地域「%2$s」の配送方法「%1$s」をスキップしました：同期されるのは定額、送料無料、ローカル受取のみです。"
+
+#. translators: %s: shipping method id.
+#: includes/woo/class-woo-shipping.php:223
+#: includes/woo/class-woo-shipping.php:249
+#, php-format
+msgid "Skipped shipping method \"%s\": only flat rate, free shipping and local pickup are synced"
+msgstr "配送方法「%s」をスキップしました：同期されるのは定額、送料無料、ローカル受取のみです"
+
+#. translators: %s: shipping method id.
+#: includes/woo/class-woo-shipping.php:228
+#, php-format
+msgid "Shipping method \"%s\" is not available on the receiving site"
+msgstr "配送方法「%s」は受信側サイトで利用できません"
+
+#. translators: %s: shipping class slug.
+#: includes/woo/class-woo-shipping.php:238
+#, php-format
+msgid "The shipping class \"%s\" does not exist on the receiving site, so its cost was skipped"
+msgstr "配送クラス「%s」は受信側サイトに存在しないため、その料金はスキップされました"
+
+#. translators: %d: number of shipping zones.
+#: includes/woo/class-woo-shipping.php:286
+#, php-format
+msgid "%d zone"
+msgid_plural "%d zones"
+msgstr[0] "%d 個の地域"
+
+#. translators: %d: number of shipping methods.
+#: includes/woo/class-woo-shipping.php:288
+#, php-format
+msgid "%d method"
+msgid_plural "%d methods"
+msgstr[0] "%d 個の方法"
+
+#. translators: 1: number of zones (e.g. "2 zones"), 2: number of methods (e.g. "3 methods").
+#. translators: 1: number of tax rates (e.g. "6 rates"), 2: number of tax classes (e.g. "2 tax classes").
+#: includes/woo/class-woo-shipping.php:290
+#: includes/woo/class-woo-tax.php:166
+#, php-format
+msgid "Replaced: %1$s, %2$s."
+msgstr "置き換えました：%1$s、%2$s。"
+
+#: includes/woo/class-woo-tax.php:116
+msgid "A tax rate uses a tax class that is not part of the settings being synced."
+msgstr "ある税率が、同期対象の設定に含まれない税クラスを使用しています。"
+
+#. translators: %d: number of tax rates.
+#: includes/woo/class-woo-tax.php:162
+#, php-format
+msgid "%d rate"
+msgid_plural "%d rates"
+msgstr[0] "%d 件の税率"
+
+#. translators: %d: number of tax classes.
+#: includes/woo/class-woo-tax.php:164
+#, php-format
+msgid "%d tax class"
+msgid_plural "%d tax classes"
+msgstr[0] "%d 件の税クラス"
+
+#. translators: %s: list of tax class slugs.
+#: includes/woo/class-woo-tax.php:169
+#, php-format
+msgid "These tax classes were kept because products still use them: %s."
+msgstr "商品がまだ使用しているため、次の税クラスは保持されました：%s。"
+
+#. translators: 1: attribute slug, 2: error.
+#: includes/woo/class-woo-taxonomies.php:130
+#, php-format
+msgid "The attribute \"%1$s\" could not be created. WooCommerce said: %2$s"
+msgstr "属性「%1$s」を作成できませんでした。WooCommerce からのメッセージ：%2$s"
+
+#. translators: %s: attribute slug.
+#: includes/woo/class-woo-taxonomies.php:133
+#, php-format
+msgid "Attribute \"%s\" was created with default settings. Sync attributes to copy its settings"
+msgstr "属性「%s」はデフォルト設定で作成されました。設定をコピーするには属性を同期してください"
+
+#: includes/woo/class-woo-taxonomies.php:165
+msgid "The attribute has no name."
+msgstr "属性に名前がありません。"
+
+#: includes/woo/class-woo-taxonomies.php:261
+msgid "Not deleted: products on the receiving site still use this attribute."
+msgstr "削除されませんでした：受信側サイトの商品がこの属性をまだ使用しています。"
+
+#: includes/woo/class-woo-taxonomies.php:267
+msgid "Attribute deleted."
+msgstr "属性を削除しました。"
+
+#. translators: %s: attribute label (e.g. Color), so "Color value".
+#: includes/woo/class-woo-terms.php:91
+#, php-format
+msgid "%s value"
+msgstr "%s の値"
+
+#: includes/woo/class-woo-terms.php:98
+msgid "Category"
+msgstr "カテゴリー"
+
+#: includes/woo/class-woo-terms.php:99
+msgid "Tag"
+msgstr "タグ"
+
+#: includes/woo/class-woo-terms.php:100
+msgid "Shipping class"
+msgstr "配送クラス"
+
+#: includes/woo/class-woo-terms.php:101
+msgid "Brand"
+msgstr "ブランド"
+
+#. translators: %s: taxonomy.
+#: includes/woo/class-woo-terms.php:177
+#, php-format
+msgid "The attribute \"%s\" does not exist on this site yet. Sync attributes first."
+msgstr "属性「%s」はこのサイトにまだ存在しません。先に属性を同期してください。"
+
+#. translators: %s: parent term slug.
+#: includes/woo/class-woo-terms.php:189
+#, php-format
+msgid "The parent \"%s\" does not exist on the receiving site yet. Sync it first."
+msgstr "親項目「%s」は受信側サイトにまだ存在しません。先に同期してください。"
+
+#: includes/woo/class-woo-terms.php:288
+msgid "Not deleted: products on the receiving site still use it, or it has child items."
+msgstr "削除されませんでした：受信側サイトの商品がまだ使用しているか、子項目があります。"
+
+#: includes/woo/class-woo-terms.php:295
+msgid "Deleted."
+msgstr "削除しました。"
+
+#: includes/woo/class-woo-terms.php:295
+msgid "It could not be deleted. The default category cannot be deleted."
+msgstr "削除できませんでした。デフォルトのカテゴリーは削除できません。"
+
+#. translators: 1: variation SKU or attributes, 2: error.
+#: includes/woo/class-woo-variations.php:196
+#, php-format
+msgid "The variation \"%1$s\" could not be saved. WooCommerce said: %2$s"
+msgstr "バリエーション「%1$s」を保存できませんでした。WooCommerce からのメッセージ：%2$s"
+
+#. translators: %d: number of variations.
+#: includes/woo/class-woo-variations.php:211
+#, php-format
+msgid "%d variation was restored from the Trash"
+msgid_plural "%d variations were restored from the Trash"
+msgstr[0] "%d 個のバリエーションをゴミ箱から復元しました"
+
+#. translators: 1: variations total, 2: created, 3: moved to Trash.
+#: includes/woo/class-woo-variations.php:216
+#, php-format
+msgid "%1$d variation (%2$d new, %3$d moved to Trash)."
+msgid_plural "%1$d variations (%2$d new, %3$d moved to Trash)."
+msgstr[0] "%1$d 個のバリエーション（新規 %2$d、ゴミ箱へ移動 %3$d）。"
+
+#: includes/woo/class-woo.php:92
+msgid "WooCommerce is not active on this site, so WooCommerce syncing is not available."
+msgstr "このサイトでは WooCommerce が有効化されていないため、WooCommerce の同期は利用できません。"
+
+#: includes/woo/class-woo.php:100
+msgid "WooCommerce is not active on the other site, so WooCommerce syncing is not available."
+msgstr "先方のサイトでは WooCommerce が有効化されていないため、WooCommerce の同期は利用できません。"
+
+#: includes/woo/class-woo.php:103
+msgid "WooCommerce syncing is switched off on the other site. Turn it on under Settings > What to sync on both sites."
+msgstr "先方のサイトでは WooCommerce の同期がオフになっています。両方のサイトの「設定 > 同期する内容」でオンにしてください。"
+
+#. translators: 1: local WooCommerce version, 2: remote WooCommerce version.
+#: includes/woo/class-woo.php:107
+#, php-format
+msgid "WooCommerce on the two sites is a different major version (%1$s here, %2$s on the other site). Update the older site before syncing."
+msgstr "2 つのサイトの WooCommerce のメジャーバージョンが異なります（こちらは %1$s、先方は %2$s）。同期する前に古い方のサイトを更新してください。"
+
+#. translators: 1: local WooCommerce version, 2: remote WooCommerce version.
+#: includes/woo/class-woo.php:111
+#, php-format
+msgid "WooCommerce on the two sites is a slightly different version (%1$s here, %2$s on the other site). Syncing works, but update both sites to the same version when you can."
+msgstr "2 つのサイトの WooCommerce のバージョンがわずかに異なります（こちらは %1$s、先方は %2$s）。同期は動作しますが、できるだけ早く両方を同じバージョンに更新してください。"
+
+#: includes/woo/class-woo.php:145
+msgid "WooCommerce is not active on the site providing this data."
+msgstr "このデータを提供するサイトでは WooCommerce が有効化されていません。"
+
+#: includes/woo/class-woo.php:145
+#: includes/woo/class-woo.php:407
+#: includes/woo/class-woo.php:441
+msgid "WooCommerce is not active on the site receiving this change."
+msgstr "この変更を受け取るサイトでは WooCommerce が有効化されていません。"
+
+#: includes/woo/class-woo.php:149
+#: includes/woo/class-woo.php:150
+msgid "categories, tags and attributes"
+msgstr "カテゴリー、タグ、属性"
+
+#: includes/woo/class-woo.php:151
+msgid "products"
+msgstr "商品"
+
+#: includes/woo/class-woo.php:152
+msgid "coupons"
+msgstr "クーポン"
+
+#: includes/woo/class-woo.php:153
+msgid "store settings"
+msgstr "ストア設定"
+
+#: includes/woo/class-woo.php:156
+#: includes/woo/class-woo.php:427
+msgid "This kind of item is not supported. Update Avesta Sync on both sites."
+msgstr "この種類の項目はサポートされていません。両方のサイトで Avesta Sync を更新してください。"
+
+#: includes/woo/class-woo.php:161
+msgid "WooCommerce syncing is switched off on the site providing this data. Turn on \"WooCommerce\" under Settings > What to sync on both sites."
+msgstr "このデータを提供するサイトでは WooCommerce の同期がオフになっています。両方のサイトの「設定 > 同期する内容」で「WooCommerce」をオンにしてください。"
+
+#: includes/woo/class-woo.php:161
+msgid "WooCommerce syncing is switched off on the site receiving this change. Turn on \"WooCommerce\" under Settings > What to sync on both sites."
+msgstr "この変更を受け取るサイトでは WooCommerce の同期がオフになっています。両方のサイトの「設定 > 同期する内容」で「WooCommerce」をオンにしてください。"
+
+#. translators: 1: kind of items (e.g. store settings), 2: the matching option name under Settings > What to sync.
+#: includes/woo/class-woo.php:170
+#, php-format
+msgid "WooCommerce syncing (%1$s) is switched off on the site providing this data. Turn on \"%2$s\" under Settings > What to sync on both sites."
+msgstr "このデータを提供するサイトでは WooCommerce の同期（%1$s）がオフになっています。両方のサイトの「設定 > 同期する内容」で「%2$s」をオンにしてください。"
+
+#. translators: 1: kind of items (e.g. store settings), 2: the matching option name under Settings > What to sync.
+#: includes/woo/class-woo.php:172
+#, php-format
+msgid "WooCommerce syncing (%1$s) is switched off on the site receiving this change. Turn on \"%2$s\" under Settings > What to sync on both sites."
+msgstr "この変更を受け取るサイトでは WooCommerce の同期（%1$s）がオフになっています。両方のサイトの「設定 > 同期する内容」で「%2$s」をオンにしてください。"
+
+#: includes/woo/class-woo.php:456
+msgid "Store settings cannot be deleted."
+msgstr "ストア設定は削除できません。"

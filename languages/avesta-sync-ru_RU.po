@@ -1,0 +1,2211 @@
+# Copyright (C) 2026 AvestaTech
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Avesta Sync 1.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/avesta-sync\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-15T21:21:16+00:00\n"
+"PO-Revision-Date: 2026-11-16 12:00+0000\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Domain: avesta-sync\n"
+
+#. Plugin Name of the plugin
+#: avesta-sync.php
+#: includes/class-admin.php:33
+#: includes/class-admin.php:156
+#: includes/views/i18n.php:127
+msgid "Avesta Sync"
+msgstr "Avesta Sync"
+
+#. Plugin URI of the plugin
+#: avesta-sync.php
+msgid "https://avestatech.ir"
+msgstr "https://avestatech.ir"
+
+#. Description of the plugin
+#: avesta-sync.php
+msgid "Hash-based two-way sync (push/pull) of theme files, custom plugins, content, media and WooCommerce catalog and settings between a local site and production over a signed REST API. Only changed items are transferred."
+msgstr "Двусторонняя синхронизация (отправка/получение) файлов темы, собственных плагинов, контента, медиафайлов, а также каталога и настроек WooCommerce между локальным сайтом и рабочим сайтом через подписанный REST API на основе хешей. Передаются только изменённые элементы."
+
+#. Author of the plugin
+#: avesta-sync.php
+msgid "AvestaTech"
+msgstr "AvestaTech"
+
+#: includes/class-admin.php:91
+#: includes/class-admin.php:106
+#: includes/class-admin.php:138
+#: includes/class-ajax.php:46
+msgid "Not allowed."
+msgstr "Не разрешено."
+
+#: includes/class-admin.php:145
+#: includes/views/dashboard.php:12
+msgid "Dashboard"
+msgstr "Консоль"
+
+#: includes/class-admin.php:146
+#: includes/views/sync.php:13
+msgid "Sync"
+msgstr "Синхронизация"
+
+#: includes/class-admin.php:147
+#: includes/views/backups.php:12
+#: includes/views/i18n.php:116
+#: includes/views/settings.php:206
+msgid "Backups"
+msgstr "Резервные копии"
+
+#: includes/class-admin.php:148
+#: includes/views/history.php:12
+msgid "History"
+msgstr "История"
+
+#: includes/class-admin.php:149
+#: includes/views/settings.php:36
+msgid "Settings"
+msgstr "Настройки"
+
+#: includes/class-admin.php:159
+#: includes/views/i18n.php:42
+msgid "Checking connection..."
+msgstr "Проверка соединения..."
+
+#: includes/class-admin.php:163
+msgid "Avesta Sync sections"
+msgstr "Разделы Avesta Sync"
+
+#: includes/class-ajax.php:36
+msgid "POST required."
+msgstr "Требуется POST-запрос."
+
+#: includes/class-ajax.php:148
+msgid "No scope selected. Tick at least one scope and save settings."
+msgstr "Область синхронизации не выбрана. Отметьте хотя бы одну область и сохраните настройки."
+
+#: includes/class-ajax.php:170
+msgid "Bad request."
+msgstr "Неверный запрос."
+
+#: includes/class-ajax.php:324
+#: includes/views/i18n.php:326
+msgid "Backup deleted."
+msgstr "Резервная копия удалена."
+
+#: includes/class-ajax.php:341
+#: includes/views/i18n.php:332
+msgid "History cleared."
+msgstr "История очищена."
+
+#: includes/class-auth.php:82
+msgid "Too many failed attempts. Try again later."
+msgstr "Слишком много неудачных попыток. Повторите позже."
+
+#: includes/class-auth.php:86
+msgid "Sync is not configured on this site."
+msgstr "Синхронизация на этом сайте не настроена."
+
+#: includes/class-auth.php:106
+msgid "Invalid or expired signature."
+msgstr "Недействительная или просроченная подпись."
+
+#. translators: %s: attribute label.
+#: includes/class-backup-labels.php:41
+#: includes/woo/class-woo-taxonomies.php:64
+#, php-format
+msgid "Attribute: %s"
+msgstr "Атрибут: %s"
+
+#. translators: %s: coupon code.
+#: includes/class-backup-labels.php:45
+#: includes/woo/class-woo-coupons.php:78
+#, php-format
+msgid "Coupon: %s"
+msgstr "Купон: %s"
+
+#. translators: %s: settings group.
+#. translators: %s: settings group (general, products, tax, ...).
+#: includes/class-backup-labels.php:49
+#: includes/woo/class-woo-settings.php:180
+#, php-format
+msgid "Store settings: %s"
+msgstr "Настройки магазина: %s"
+
+#. translators: %s: media title or file name.
+#: includes/class-backup-labels.php:53
+#: includes/class-media.php:136
+#, php-format
+msgid "Media: %s"
+msgstr "Медиафайл: %s"
+
+#. translators: %s: menu name.
+#: includes/class-backup-labels.php:57
+#: includes/class-menus.php:63
+#, php-format
+msgid "Menu: %s"
+msgstr "Меню: %s"
+
+#: includes/class-backup.php:216
+#: includes/class-backup.php:453
+msgid "Invalid backup run."
+msgstr "Недопустимый запуск резервного копирования."
+
+#: includes/class-backup.php:220
+msgid "Backup run not found."
+msgstr "Запуск резервного копирования не найден."
+
+#: includes/class-backup.php:395
+msgid "Backup file not found."
+msgstr "Файл резервной копии не найден."
+
+#: includes/class-backup.php:398
+#: includes/class-files.php:225
+msgid "Target is a directory."
+msgstr "Целевой путь является папкой."
+
+#: includes/class-backup.php:401
+#: includes/class-files.php:274
+msgid "Refused: PHP file fails to parse."
+msgstr "Отклонено: в PHP-файле есть синтаксические ошибки."
+
+#: includes/class-backup.php:404
+#: includes/class-files.php:277
+msgid "Backup of existing file failed; not overwritten."
+msgstr "Не удалось создать резервную копию существующего файла; он не был перезаписан."
+
+#: includes/class-backup.php:408
+#: includes/class-files.php:282
+msgid "Cannot move file into place."
+msgstr "Не удалось переместить файл на место."
+
+#. translators: %s: relative file path.
+#. translators: %s: name of the restored item (e.g. a product with its SKU).
+#: includes/class-backup.php:414
+#: includes/class-backup.php:436
+#, php-format
+msgid "Restored: %s. The previous version was backed up."
+msgstr "Восстановлено: %s. Предыдущая версия сохранена в резервной копии."
+
+#: includes/class-backup.php:428
+msgid "This backup is not in a restorable format."
+msgstr "Эту резервную копию нельзя восстановить: неподдерживаемый формат."
+
+#: includes/class-backup.php:432
+msgid "Restore failed."
+msgstr "Не удалось восстановить."
+
+#. translators: %s: name of the restored item (e.g. a product with its SKU).
+#: includes/class-backup.php:436
+msgid "Restored. The previous version was backed up."
+msgstr "Восстановлено. Предыдущая версия сохранена в резервной копии."
+
+#: includes/class-backup.php:464
+msgid "Could not delete the backup run."
+msgstr "Не удалось удалить запуск резервного копирования."
+
+#: includes/class-client.php:65
+msgid "Remote URL and key are not configured."
+msgstr "URL и ключ удалённого сайта не настроены."
+
+#: includes/class-client.php:98
+msgid "Invalid remote URL."
+msgstr "Недействительный URL удалённого сайта."
+
+#: includes/class-client.php:101
+msgid "Remote URL must use HTTPS."
+msgstr "URL удалённого сайта должен использовать HTTPS."
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:144
+#, php-format
+msgid "Remote redirected (HTTP %d). Use the final HTTPS URL of the remote site."
+msgstr "Удалённый сайт выполнил перенаправление (HTTP %d). Используйте итоговый HTTPS-адрес удалённого сайта."
+
+#. translators: %d: HTTP status code.
+#: includes/class-client.php:152
+#, php-format
+msgid "Unexpected response from remote (HTTP %d). Is Avesta Sync active there?"
+msgstr "Неожиданный ответ удалённого сайта (HTTP %d). Активен ли там Avesta Sync?"
+
+#: includes/class-client.php:317
+msgid "Cannot read local file."
+msgstr "Не удалось прочитать локальный файл."
+
+#: includes/class-client.php:371
+#: includes/class-client.php:399
+msgid "Corrupt chunk from remote."
+msgstr "С удалённого сайта получен повреждённый фрагмент."
+
+#: includes/class-client.php:407
+msgid "Remote returned an empty chunk."
+msgstr "Удалённый сайт вернул пустой фрагмент."
+
+#: includes/class-content.php:315
+msgid "Site title"
+msgstr "Название сайта"
+
+#: includes/class-content.php:316
+msgid "Tagline"
+msgstr "Описание"
+
+#: includes/class-content.php:317
+msgid "Homepage displays"
+msgstr "На главной странице отображать"
+
+#: includes/class-content.php:318
+msgid "Homepage"
+msgstr "Главная страница"
+
+#: includes/class-content.php:319
+msgid "Posts page"
+msgstr "Страница записей"
+
+#: includes/class-files.php:109
+msgid "Unknown scope."
+msgstr "Неизвестная область синхронизации."
+
+#: includes/class-files.php:178
+msgid "File not found."
+msgstr "Файл не найден."
+
+#: includes/class-files.php:185
+msgid "Cannot read file."
+msgstr "Не удалось прочитать файл."
+
+#: includes/class-files.php:222
+msgid "Invalid chunk parameters."
+msgstr "Недопустимые параметры фрагмента."
+
+#: includes/class-files.php:233
+msgid "Chunk offset mismatch."
+msgstr "Несовпадение смещения фрагмента."
+
+#: includes/class-files.php:238
+msgid "Cannot write temp file."
+msgstr "Не удалось записать временный файл."
+
+#: includes/class-files.php:271
+msgid "Size or SHA-256 mismatch after transfer."
+msgstr "Размер или SHA-256 не совпадают после передачи."
+
+#: includes/class-files.php:307
+#: includes/class-media.php:283
+#: includes/woo/class-woo-coupons.php:251
+#: includes/woo/class-woo-products.php:354
+#: includes/woo/class-woo-taxonomies.php:265
+#: includes/woo/class-woo-terms.php:292
+msgid "The backup failed, so nothing was deleted."
+msgstr "Резервная копия не создана, поэтому ничего не было удалено."
+
+#: includes/class-files.php:310
+msgid "Cannot delete file."
+msgstr "Не удалось удалить файл."
+
+#: includes/class-importer.php:34
+msgid "This item could not be read."
+msgstr "Этот элемент не удалось прочитать."
+
+#: includes/class-importer.php:43
+msgid "This item has the wrong type for its name, so it was ignored."
+msgstr "У этого элемента неверный тип для его названия, поэтому он был пропущен."
+
+#: includes/class-importer.php:94
+msgid "Syncing the media library is switched off on the site receiving this change."
+msgstr "Синхронизация медиафайлов отключена на сайте, который получает это изменение."
+
+#. translators: %s: post type.
+#: includes/class-importer.php:149
+#, php-format
+msgid "The content type \"%s\" does not exist on the receiving site."
+msgstr "Тип записей \"%s\" не существует на принимающем сайте."
+
+#. translators: %s: post type.
+#: includes/class-importer.php:152
+#, php-format
+msgid "This kind of content is not supported, or it has no URL name (\"%s\"). Update Avesta Sync on both sites."
+msgstr "Этот тип контента не поддерживается или у него нет ярлыка (\"%s\"). Обновите Avesta Sync на обоих сайтах."
+
+#. translators: %s: parent page path.
+#: includes/class-importer.php:173
+#, php-format
+msgid "The parent page \"%s\" does not exist on the receiving site yet. Sync it first."
+msgstr "Родительская страница \"%s\" ещё не существует на принимающем сайте. Сначала синхронизируйте её."
+
+#: includes/class-importer.php:210
+msgid "The featured image was not found on the receiving site. Sync the media library first."
+msgstr "Изображение записи не найдено на принимающем сайте. Сначала синхронизируйте медиафайлы."
+
+#: includes/class-importer.php:215
+#: includes/class-importer.php:302
+#: includes/class-media.php:265
+#: includes/woo/class-woo-coupons.php:232
+#: includes/woo/class-woo-taxonomies.php:191
+#: includes/woo/class-woo-terms.php:213
+msgid "Updated."
+msgstr "Обновлено."
+
+#: includes/class-importer.php:215
+#: includes/class-media.php:265
+#: includes/woo/class-woo-coupons.php:232
+#: includes/woo/class-woo-taxonomies.php:191
+#: includes/woo/class-woo-terms.php:213
+msgid "Created."
+msgstr "Создано."
+
+#: includes/class-importer.php:283
+msgid "This setting is not one that Avesta Sync syncs."
+msgstr "Эта настройка не синхронизируется Avesta Sync."
+
+#: includes/class-importer.php:290
+msgid "Cleared."
+msgstr "Очищено."
+
+#. translators: %s: page path.
+#: includes/class-importer.php:294
+#, php-format
+msgid "The page \"%s\" does not exist on the receiving site yet. Sync pages first."
+msgstr "Страница \"%s\" ещё не существует на принимающем сайте. Сначала синхронизируйте страницы."
+
+#: includes/class-importer.php:320
+#: includes/class-media.php:280
+#: includes/woo/class-woo-coupons.php:246
+#: includes/woo/class-woo-products.php:350
+#: includes/woo/class-woo-taxonomies.php:257
+#: includes/woo/class-woo-terms.php:277
+msgid "It was not found."
+msgstr "Не найдено."
+
+#: includes/class-importer.php:327
+msgid "Options cannot be deleted."
+msgstr "Опции нельзя удалить."
+
+#: includes/class-importer.php:331
+msgid "Menu deleted."
+msgstr "Меню удалено."
+
+#: includes/class-importer.php:331
+#: includes/class-media.php:288
+#: includes/woo/class-woo-taxonomies.php:267
+msgid "Delete failed."
+msgstr "Не удалось удалить."
+
+#: includes/class-importer.php:342
+#: includes/woo/class-woo-coupons.php:253
+#: includes/woo/class-woo-products.php:356
+msgid "Moved to Trash."
+msgstr "Перемещено в корзину."
+
+#: includes/class-importer.php:342
+#: includes/woo/class-woo-coupons.php:253
+#: includes/woo/class-woo-products.php:356
+msgid "It could not be moved to the Trash."
+msgstr "Не удалось переместить в корзину."
+
+#: includes/class-media.php:205
+msgid "Invalid media file path."
+msgstr "Недопустимый путь к медиафайлу."
+
+#: includes/class-media.php:212
+msgid "File is missing on this site: sync the file first (Media uploads scope)."
+msgstr "Файл отсутствует на этом сайте: сначала синхронизируйте файл (область «Загрузки медиафайлов»)."
+
+#: includes/class-media.php:288
+msgid "Media entry deleted. The files were kept."
+msgstr "Запись медиафайла удалена. Файлы сохранены."
+
+#: includes/class-menus.php:87
+msgid "Menu slug missing."
+msgstr "Не указан ярлык меню."
+
+#. translators: %d: number of menu items.
+#: includes/class-menus.php:160
+#, php-format
+msgid "Menu replaced: %d item."
+msgid_plural "Menu replaced: %d items."
+msgstr[0] "Меню заменено: %d элемент."
+msgstr[1] "Меню заменено: %d элемента."
+msgstr[2] "Меню заменено: %d элементов."
+
+#: includes/class-paths.php:56
+msgid "Invalid path."
+msgstr "Недопустимый путь."
+
+#: includes/class-paths.php:60
+msgid "Invalid path segment."
+msgstr "Недопустимый сегмент пути."
+
+#: includes/class-paths.php:166
+msgid "Path root not allowed."
+msgstr "Корневая папка пути не разрешена."
+
+#: includes/class-paths.php:173
+msgid "Path too short."
+msgstr "Путь слишком короткий."
+
+#: includes/class-paths.php:176
+msgid "File modifications are disabled on this site (DISALLOW_FILE_MODS)."
+msgstr "Изменение файлов отключено на этом сайте (DISALLOW_FILE_MODS)."
+
+#: includes/class-paths.php:179
+msgid "Invalid folder name."
+msgstr "Недопустимое имя папки."
+
+#: includes/class-paths.php:182
+msgid "Path is excluded from sync."
+msgstr "Путь исключён из синхронизации."
+
+#: includes/class-paths.php:185
+msgid "File type not allowed in uploads."
+msgstr "Этот тип файла нельзя загружать."
+
+#: includes/class-paths.php:190
+msgid "Symlinks are not allowed."
+msgstr "Символические ссылки не разрешены."
+
+#: includes/class-paths.php:199
+msgid "Path cannot be resolved."
+msgstr "Не удалось определить путь."
+
+#: includes/class-paths.php:204
+msgid "Path escapes its root."
+msgstr "Путь выходит за пределы корневой папки."
+
+#: includes/class-schedule.php:110
+msgid "No scope selected."
+msgstr "Область синхронизации не выбрана."
+
+#. translators: %s: site name.
+#: includes/class-schedule.php:151
+#, php-format
+msgid "[%s] Avesta Sync: differences found"
+msgstr "[%s] Avesta Sync: обнаружены различия"
+
+#. translators: 1: number of differing items, 2: number of identical items.
+#: includes/class-schedule.php:154
+#, php-format
+msgid "The scheduled check found %1$d differing item(s) (%2$d identical)."
+msgstr "Плановая проверка обнаружила отличающихся элементов: %1$d (идентичных: %2$d)."
+
+#: includes/class-schedule.php:157
+msgid "Review and apply:"
+msgstr "Просмотрите и примените:"
+
+#: includes/class-sync.php:112
+msgid "No WooCommerce options are turned on under Settings > What to sync, so nothing was compared."
+msgstr "В разделе Настройки > Что синхронизировать не включены опции WooCommerce, поэтому сравнивать было нечего."
+
+#: includes/class-sync.php:227
+#: includes/class-sync.php:296
+#: includes/class-sync.php:310
+msgid "Invalid item."
+msgstr "Недопустимый элемент."
+
+#: includes/class-sync.php:239
+#: includes/class-sync.php:245
+#: includes/class-sync.php:260
+#: includes/class-sync.php:307
+#: includes/class-sync.php:336
+msgid "This item is not part of what you chose to sync."
+msgstr "Этот элемент не входит в то, что вы выбрали для синхронизации."
+
+#: includes/class-sync.php:267
+#: includes/woo/class-woo.php:97
+msgid "The other site runs an older version of Avesta Sync that cannot sync WooCommerce. Update Avesta Sync on both sites."
+msgstr "На другом сайте установлена старая версия Avesta Sync, которая не умеет синхронизировать WooCommerce. Обновите Avesta Sync на обоих сайтах."
+
+#: includes/class-sync.php:383
+msgid "Pushed."
+msgstr "Отправлено."
+
+#: includes/class-sync.php:386
+msgid "Local file is missing; choose Pull or confirm deletion."
+msgstr "Локальный файл отсутствует: выберите «Получить» или подтвердите удаление."
+
+#: includes/class-sync.php:393
+msgid "Deleted on the remote site. A backup was kept there."
+msgstr "Удалено на удалённом сайте. Там сохранена резервная копия."
+
+#: includes/class-sync.php:410
+msgid "Remote file is missing; choose Push or confirm deletion."
+msgstr "Удалённый файл отсутствует: выберите «Отправить» или подтвердите удаление."
+
+#: includes/class-sync.php:417
+msgid "Deleted on this site. A backup was kept."
+msgstr "Удалено на этом сайте. Резервная копия сохранена."
+
+#: includes/class-sync.php:420
+msgid "Pulled."
+msgstr "Получено."
+
+#: includes/class-sync.php:440
+msgid "No result for item."
+msgstr "Нет результата для элемента."
+
+#. translators: 1: item size, 2: remote post_max_size.
+#: includes/class-sync.php:455
+#, php-format
+msgid "This item (%1$s) is too large for the other site, which accepts up to %2$s per request. Ask its host to raise the post_max_size setting."
+msgstr "Этот элемент (%1$s) слишком велик для другого сайта: он принимает до %2$s за один запрос. Попросите его хостинг-провайдера увеличить значение post_max_size."
+
+#: includes/class-sync.php:465
+msgid "Local item is missing; choose Pull or confirm deletion."
+msgstr "Локальный элемент отсутствует: выберите «Получить» или подтвердите удаление."
+
+#: includes/class-sync.php:490
+msgid "Remote item is missing; choose Push or confirm deletion."
+msgstr "Удалённый элемент отсутствует: выберите «Отправить» или подтвердите удаление."
+
+#: includes/views/backups.php:13
+msgid "Before a sync overwrites or deletes something on this site, the previous version is saved here. Restoring an item is itself backed up first."
+msgstr "Прежде чем синхронизация перезапишет или удалит что-либо на этом сайте, предыдущая версия сохраняется здесь. Восстановление элемента тоже сначала сохраняется в резервной копии."
+
+#: includes/views/dashboard.php:13
+msgid "The state of your connection and your latest activity at a glance."
+msgstr "Состояние соединения и последняя активность — с первого взгляда."
+
+#: includes/views/dashboard.php:17
+msgid "Compare now"
+msgstr "Сравнить сейчас"
+
+#: includes/views/history.php:13
+msgid "Every sync run, who started it and what happened to each item."
+msgstr "Каждый запуск синхронизации: кто его начал и что произошло с каждым элементом."
+
+#: includes/views/history.php:17
+#: includes/views/i18n.php:329
+msgid "Clear history"
+msgstr "Очистить историю"
+
+#: includes/views/i18n.php:14
+msgid "Working..."
+msgstr "Выполняется..."
+
+#: includes/views/i18n.php:15
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: includes/views/i18n.php:16
+msgid "Close"
+msgstr "Закрыть"
+
+#: includes/views/i18n.php:17
+msgid "Cancel"
+msgstr "Отмена"
+
+#: includes/views/i18n.php:18
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: includes/views/i18n.php:19
+msgid "Delete"
+msgstr "Удалить"
+
+#: includes/views/i18n.php:20
+msgid "Try again"
+msgstr "Повторить"
+
+#: includes/views/i18n.php:21
+#: includes/views/settings.php:62
+#: includes/views/settings.php:79
+msgid "Show"
+msgstr "Показать"
+
+#: includes/views/i18n.php:22
+msgid "Hide"
+msgstr "Скрыть"
+
+#: includes/views/i18n.php:23
+#: includes/views/settings.php:80
+msgid "Copy"
+msgstr "Копировать"
+
+#: includes/views/i18n.php:24
+msgid "Copied"
+msgstr "Скопировано"
+
+#: includes/views/i18n.php:25
+msgid "OK"
+msgstr "OK"
+
+#: includes/views/i18n.php:26
+msgid "Failed"
+msgstr "Ошибка"
+
+#: includes/views/i18n.php:27
+msgid "Local"
+msgstr "Локальный"
+
+#: includes/views/i18n.php:28
+msgid "Remote"
+msgstr "Удалённый"
+
+#: includes/views/i18n.php:29
+msgid "Not on this site"
+msgstr "Нет на этом сайте"
+
+#: includes/views/i18n.php:30
+msgid "Not on the remote site"
+msgstr "Нет на удалённом сайте"
+
+#: includes/views/i18n.php:31
+msgid "Something went wrong"
+msgstr "Что-то пошло не так"
+
+#: includes/views/i18n.php:32
+msgid "The request failed."
+msgstr "Запрос не выполнен."
+
+#. translators: %s: start of the unexpected server response.
+#: includes/views/i18n.php:34
+#, php-format
+msgid "Unexpected server response: %s"
+msgstr "Неожиданный ответ сервера: %s"
+
+#: includes/views/i18n.php:36
+msgctxt "bytes"
+msgid "B"
+msgstr "Б"
+
+#: includes/views/i18n.php:37
+msgctxt "kilobytes"
+msgid "KB"
+msgstr "КБ"
+
+#: includes/views/i18n.php:38
+msgctxt "megabytes"
+msgid "MB"
+msgstr "МБ"
+
+#: includes/views/i18n.php:39
+msgctxt "gigabytes"
+msgid "GB"
+msgstr "ГБ"
+
+#: includes/views/i18n.php:43
+msgid "Connected"
+msgstr "Подключено"
+
+#: includes/views/i18n.php:44
+msgid "Not connected"
+msgstr "Не подключено"
+
+#: includes/views/i18n.php:45
+msgid "Not configured"
+msgstr "Не настроено"
+
+#: includes/views/i18n.php:48
+#: includes/views/sync.php:37
+msgid "Theme"
+msgstr "Тема"
+
+#: includes/views/i18n.php:49
+#: includes/views/sync.php:38
+msgid "Plugins"
+msgstr "Плагины"
+
+#: includes/views/i18n.php:50
+#: includes/views/i18n.php:110
+#: includes/views/settings.php:17
+#: includes/views/sync.php:39
+msgid "Content"
+msgstr "Контент"
+
+#: includes/views/i18n.php:51
+#: includes/views/sync.php:40
+msgid "Media"
+msgstr "Медиафайлы"
+
+#: includes/views/i18n.php:52
+#: includes/views/i18n.php:81
+#: includes/views/settings.php:105
+#: includes/views/settings.php:113
+#: includes/views/sync.php:41
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: includes/views/i18n.php:55
+msgid "Attributes"
+msgstr "Атрибуты"
+
+#: includes/views/i18n.php:56
+msgid "Categories and tags"
+msgstr "Категории и метки"
+
+#: includes/views/i18n.php:57
+#: includes/views/settings.php:22
+#: includes/woo/class-woo.php:151
+msgid "Products"
+msgstr "Товары"
+
+#: includes/views/i18n.php:58
+#: includes/views/settings.php:24
+#: includes/woo/class-woo.php:152
+msgid "Coupons"
+msgstr "Купоны"
+
+#: includes/views/i18n.php:59
+#: includes/views/settings.php:25
+#: includes/woo/class-woo.php:153
+msgid "Store settings"
+msgstr "Настройки магазина"
+
+#: includes/views/i18n.php:62
+msgid "Variable"
+msgstr "Вариативный"
+
+#: includes/views/i18n.php:63
+msgid "Grouped"
+msgstr "Сгруппированный"
+
+#: includes/views/i18n.php:64
+msgid "External"
+msgstr "Внешний"
+
+#. translators: %s: number of product variations.
+#: includes/views/i18n.php:69
+#: includes/views/i18n.php:71
+#, php-format
+msgid "%s variation"
+msgid_plural "%s variations"
+msgstr[0] "%s вариация"
+msgstr[1] "%s вариации"
+msgstr[2] "%s вариаций"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:76
+#: includes/views/i18n.php:78
+#, php-format
+msgid "%s item was not synced"
+msgid_plural "%s items were not synced"
+msgstr[0] "%s элемент не синхронизирован"
+msgstr[1] "%s элемента не синхронизированы"
+msgstr[2] "%s элементов не синхронизировано"
+
+#: includes/views/i18n.php:80
+msgid "The other sections you selected are identical."
+msgstr "Остальные выбранные вами разделы идентичны."
+
+#: includes/views/i18n.php:82
+msgid "not active"
+msgstr "не активен"
+
+#. translators: 1: WooCommerce version on this site, 2: WooCommerce version on the remote site.
+#: includes/views/i18n.php:84
+#, php-format
+msgid "This site: %1$s, remote site: %2$s"
+msgstr "Этот сайт: %1$s, удалённый сайт: %2$s"
+
+#: includes/views/i18n.php:85
+msgid "Also overwrite stock quantities"
+msgstr "Также перезаписать остатки на складе"
+
+#: includes/views/i18n.php:86
+msgid "Stock is normally left alone, so sales made since the last sync stay correct. Tick this to copy stock from the sending site: to the remote site for a push, to this site for a pull."
+msgstr "Остатки обычно не изменяются, чтобы продажи, совершённые после последней синхронизации, оставались точными. Отметьте эту опцию, чтобы скопировать остатки с отправляющего сайта: на удалённый сайт при отправке, на этот сайт при получении."
+
+#: includes/views/i18n.php:87
+msgid "Stock quantities of the selected products will be overwritten on the site that receives them."
+msgstr "Остатки выбранных товаров будут перезаписаны на сайте, который их получает."
+
+#: includes/views/i18n.php:88
+msgid "Stock levels are not compared here. They are only copied when you tick \"Also overwrite stock quantities\" while applying."
+msgstr "Остатки здесь не сравниваются. Они копируются только если при применении отмечено «Также перезаписать остатки на складе»."
+
+#: includes/views/i18n.php:89
+msgid "WooCommerce items were not checked."
+msgstr "Элементы WooCommerce не были проверены."
+
+#: includes/views/i18n.php:90
+msgid "WooCommerce sync is unavailable."
+msgstr "Синхронизация WooCommerce недоступна."
+
+#: includes/views/i18n.php:91
+msgid "Stock quantities were also copied for the products in this run."
+msgstr "Остатки на складе для товаров в этом запуске также были скопированы."
+
+#: includes/views/i18n.php:93
+#: includes/views/settings.php:28
+msgid "Off"
+msgstr "Выключено"
+
+#: includes/views/i18n.php:94
+#: includes/views/settings.php:29
+msgid "Hourly"
+msgstr "Каждый час"
+
+#: includes/views/i18n.php:95
+#: includes/views/settings.php:30
+msgid "Twice daily"
+msgstr "Дважды в день"
+
+#: includes/views/i18n.php:96
+#: includes/views/settings.php:31
+msgid "Daily"
+msgstr "Ежедневно"
+
+#: includes/views/i18n.php:99
+msgid "New on this site"
+msgstr "Новый на этом сайте"
+
+#: includes/views/i18n.php:100
+msgid "Changed on this site"
+msgstr "Изменён на этом сайте"
+
+#: includes/views/i18n.php:101
+msgid "New on the remote site"
+msgstr "Новый на удалённом сайте"
+
+#: includes/views/i18n.php:102
+msgid "Changed on the remote site"
+msgstr "Изменён на удалённом сайте"
+
+#: includes/views/i18n.php:103
+#: includes/views/i18n.php:314
+msgid "Deleted on this site"
+msgstr "Удалён на этом сайте"
+
+#: includes/views/i18n.php:104
+#: includes/views/i18n.php:313
+msgid "Deleted on the remote site"
+msgstr "Удалён на удалённом сайте"
+
+#: includes/views/i18n.php:105
+msgid "Conflict"
+msgstr "Конфликт"
+
+#: includes/views/i18n.php:107
+msgid "Admin"
+msgstr "Админ-панель"
+
+#: includes/views/i18n.php:108
+msgid "WP-CLI"
+msgstr "WP-CLI"
+
+#: includes/views/i18n.php:109
+msgid "File"
+msgstr "Файл"
+
+#: includes/views/i18n.php:113
+#: includes/views/settings.php:52
+msgid "Connection"
+msgstr "Соединение"
+
+#: includes/views/i18n.php:114
+msgid "Last sync"
+msgstr "Последняя синхронизация"
+
+#: includes/views/i18n.php:115
+msgid "Last check"
+msgstr "Последняя проверка"
+
+#: includes/views/i18n.php:117
+#: includes/views/settings.php:187
+msgid "Scheduled check"
+msgstr "Плановая проверка"
+
+#: includes/views/i18n.php:118
+msgid "Contacting the remote site..."
+msgstr "Подключение к удалённому сайту..."
+
+#: includes/views/i18n.php:119
+msgid "Connection not checked yet."
+msgstr "Соединение ещё не проверено."
+
+#: includes/views/i18n.php:120
+msgid "Get started in three steps:"
+msgstr "Начните за три шага:"
+
+#: includes/views/i18n.php:121
+msgid "Install Avesta Sync on both sites."
+msgstr "Установите Avesta Sync на оба сайта."
+
+#: includes/views/i18n.php:122
+msgid "Copy this site's key into the other site's settings, and the other site's key and URL into this one."
+msgstr "Скопируйте ключ этого сайта в настройки другого сайта, а ключ и URL другого сайта — в настройки этого."
+
+#: includes/views/i18n.php:123
+msgid "Click Compare, review the differences and apply what you want."
+msgstr "Нажмите «Сравнить», просмотрите различия и примените нужные."
+
+#: includes/views/i18n.php:124
+msgid "Go to settings"
+msgstr "Перейти к настройкам"
+
+#: includes/views/i18n.php:125
+msgid "Cannot reach the remote site"
+msgstr "Не удаётся связаться с удалённым сайтом"
+
+#: includes/views/i18n.php:126
+msgid "Remote site"
+msgstr "Удалённый сайт"
+
+#: includes/views/i18n.php:128
+msgid "WordPress"
+msgstr "WordPress"
+
+#: includes/views/i18n.php:129
+msgid "PHP"
+msgstr "PHP"
+
+#: includes/views/i18n.php:130
+msgid "No sync has been run yet."
+msgstr "Синхронизация ещё не запускалась."
+
+#. translators: %s: user display name.
+#: includes/views/i18n.php:132
+#, php-format
+msgid "by %s"
+msgstr "от %s"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:134
+#, php-format
+msgid "%s ok"
+msgstr "успешно: %s"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:136
+#, php-format
+msgid "%s failed"
+msgstr "с ошибкой: %s"
+
+#: includes/views/i18n.php:137
+msgid "View history"
+msgstr "Посмотреть историю"
+
+#: includes/views/i18n.php:138
+msgid "No comparison has been run yet."
+msgstr "Сравнение ещё не запускалось."
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:140
+#, php-format
+msgid "In sync (%s identical items)"
+msgstr "Синхронизировано (идентичных элементов: %s)"
+
+#: includes/views/i18n.php:141
+msgid "Review in Sync"
+msgstr "Просмотреть в разделе «Синхронизация»"
+
+#. translators: %s: number of backup runs.
+#: includes/views/i18n.php:145
+#: includes/views/i18n.php:147
+#, php-format
+msgid "%s backup run"
+msgid_plural "%s backup runs"
+msgstr[0] "%s запуск резервного копирования"
+msgstr[1] "%s запуска резервного копирования"
+msgstr[2] "%s запусков резервного копирования"
+
+#. translators: %s: size such as 1.2 MB.
+#: includes/views/i18n.php:150
+#, php-format
+msgid "%s in total"
+msgstr "Всего: %s"
+
+#: includes/views/i18n.php:151
+msgid "Nothing backed up yet."
+msgstr "Резервных копий пока нет."
+
+#: includes/views/i18n.php:152
+msgid "Manage backups"
+msgstr "Управление резервными копиями"
+
+#: includes/views/i18n.php:153
+msgid "Next run:"
+msgstr "Следующий запуск:"
+
+#: includes/views/i18n.php:154
+msgid "Change schedule"
+msgstr "Изменить расписание"
+
+#: includes/views/i18n.php:157
+msgid "Skip"
+msgstr "Пропустить"
+
+#: includes/views/i18n.php:158
+#: includes/views/i18n.php:311
+msgid "Push"
+msgstr "Отправить"
+
+#: includes/views/i18n.php:159
+#: includes/views/i18n.php:312
+msgid "Pull"
+msgstr "Получить"
+
+#: includes/views/i18n.php:160
+msgid "From this site to the remote site"
+msgstr "С этого сайта на удалённый сайт"
+
+#: includes/views/i18n.php:161
+msgid "From the remote site to this site"
+msgstr "С удалённого сайта на этот сайт"
+
+#: includes/views/i18n.php:162
+msgid "Push: delete it on the remote site"
+msgstr "Отправить: удалить на удалённом сайте"
+
+#: includes/views/i18n.php:163
+msgid "Pull: delete it on this site"
+msgstr "Получить: удалить на этом сайте"
+
+#: includes/views/i18n.php:164
+msgid "Push: bring it back on the remote site"
+msgstr "Отправить: вернуть на удалённом сайте"
+
+#: includes/views/i18n.php:165
+msgid "Pull: bring it back to this site"
+msgstr "Получить: вернуть на этом сайте"
+
+#: includes/views/i18n.php:166
+msgid "Comparing both sites. This can take a while on large sites..."
+msgstr "Сравнение обоих сайтов. На больших сайтах это может занять некоторое время..."
+
+#: includes/views/i18n.php:167
+msgid "Everything you selected is identical."
+msgstr "Всё выбранное идентично."
+
+#. translators: %s: number of identical items.
+#: includes/views/i18n.php:169
+#, php-format
+msgid "%s items checked, nothing to sync."
+msgstr "Проверено элементов: %s, синхронизировать нечего."
+
+#. translators: 1: number of differences, 2: number of identical items.
+#: includes/views/i18n.php:171
+#, php-format
+msgid "Comparison finished: %1$s differences, %2$s identical."
+msgstr "Сравнение завершено: различий — %1$s, идентичных — %2$s."
+
+#: includes/views/i18n.php:172
+msgid "identical"
+msgstr "идентичны"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:174
+#, php-format
+msgid "Select %s"
+msgstr "Выбрать %s"
+
+#. translators: %s: group name.
+#: includes/views/i18n.php:176
+#, php-format
+msgid "Select all shown items in %s"
+msgstr "Выбрать все показанные элементы в группе «%s»"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:178
+#, php-format
+msgid "Direction for %s"
+msgstr "Направление для %s"
+
+#: includes/views/i18n.php:179
+msgid "View changes"
+msgstr "Посмотреть изменения"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:181
+#, php-format
+msgid "View changes for %s"
+msgstr "Посмотреть изменения в %s"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:185
+#: includes/views/i18n.php:187
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s элемент"
+msgstr[1] "%s элемента"
+msgstr[2] "%s элементов"
+
+#. translators: %s: number of selected items.
+#: includes/views/i18n.php:192
+#: includes/views/i18n.php:194
+#, php-format
+msgid "%s selected"
+msgid_plural "%s selected"
+msgstr[0] "Выбран %s"
+msgstr[1] "Выбрано %s"
+msgstr[2] "Выбрано %s"
+
+#. translators: 1: number of rows to load now, 2: number of rows remaining.
+#: includes/views/i18n.php:197
+#, php-format
+msgid "Show %1$s more (%2$s left)"
+msgstr "Показать ещё %1$s (осталось %2$s)"
+
+#. translators: 1: rows shown, 2: total rows.
+#: includes/views/i18n.php:199
+#, php-format
+msgid "Showing %1$s of %2$s items"
+msgstr "Показано %1$s из %2$s элементов"
+
+#. translators: 1: selected, 2: pushes, 3: pulls, 4: deletions.
+#: includes/views/i18n.php:203
+#: includes/views/i18n.php:205
+#, php-format
+msgid "%1$s item selected (%2$s push, %3$s pull, %4$s delete)"
+msgid_plural "%1$s items selected (%2$s push, %3$s pull, %4$s delete)"
+msgstr[0] "Выбран %1$s элемент (отправить: %2$s, получить: %3$s, удалить: %4$s)"
+msgstr[1] "Выбрано %1$s элемента (отправить: %2$s, получить: %3$s, удалить: %4$s)"
+msgstr[2] "Выбрано %1$s элементов (отправить: %2$s, получить: %3$s, удалить: %4$s)"
+
+#. translators: %s: number of selected items hidden by filters.
+#: includes/views/i18n.php:208
+#, php-format
+msgid "%s of them are hidden by your filters."
+msgstr "Из них скрыто фильтрами: %s."
+
+#: includes/views/i18n.php:209
+msgid "Nothing selected to apply."
+msgstr "Для применения ничего не выбрано."
+
+#: includes/views/i18n.php:210
+msgid "Done"
+msgstr "Готово"
+
+#. translators: %s: error message.
+#: includes/views/i18n.php:212
+#, php-format
+msgid "Failed: %s"
+msgstr "Ошибка: %s"
+
+#: includes/views/i18n.php:215
+msgid "Apply selected changes?"
+msgstr "Применить выбранные изменения?"
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:219
+#: includes/views/i18n.php:221
+#, php-format
+msgid "You are about to apply %s item:"
+msgid_plural "You are about to apply %s items:"
+msgstr[0] "Вы собираетесь применить %s элемент:"
+msgstr[1] "Вы собираетесь применить %s элемента:"
+msgstr[2] "Вы собираетесь применить %s элементов:"
+
+#: includes/views/i18n.php:223
+msgid "will be pushed to the remote site"
+msgstr "будет отправлено на удалённый сайт"
+
+#: includes/views/i18n.php:224
+msgid "will be pulled to this site"
+msgstr "будет получено на этот сайт"
+
+#: includes/views/i18n.php:225
+msgid "will be deleted"
+msgstr "будет удалено"
+
+#. translators: %s: number of deletions.
+#: includes/views/i18n.php:229
+#: includes/views/i18n.php:231
+#, php-format
+msgid "%s item will be deleted. A backup is saved on the site where it is deleted."
+msgid_plural "%s items will be deleted. A backup is saved on the site where they are deleted."
+msgstr[0] "%s элемент будет удалён. Резервная копия сохраняется на сайте, где выполняется удаление."
+msgstr[1] "%s элемента будут удалены. Резервная копия сохраняется на сайте, где выполняется удаление."
+msgstr[2] "%s элементов будет удалено. Резервная копия сохраняется на сайте, где выполняется удаление."
+
+#: includes/views/i18n.php:233
+msgid "Before anything is overwritten or deleted, the site that receives the change saves a backup of it."
+msgstr "Прежде чем что-либо будет перезаписано или удалено, сайт, получающий изменение, сохраняет его резервную копию."
+
+#. translators: %s: number of items.
+#: includes/views/i18n.php:237
+#: includes/views/i18n.php:239
+#, php-format
+msgid "Apply %s item"
+msgid_plural "Apply %s items"
+msgstr[0] "Применить %s элемент"
+msgstr[1] "Применить %s элемента"
+msgstr[2] "Применить %s элементов"
+
+#. translators: 1: current item, 2: total items.
+#: includes/views/i18n.php:242
+#, php-format
+msgid "Applied %1$s of %2$s"
+msgstr "Применено %1$s из %2$s"
+
+#: includes/views/i18n.php:243
+msgid "Stopping after the current item..."
+msgstr "Остановка после текущего элемента..."
+
+#. translators: 1: number ok, 2: number failed.
+#: includes/views/i18n.php:245
+#, php-format
+msgid "Finished: %1$s ok, %2$s failed."
+msgstr "Завершено: успешно — %1$s, с ошибкой — %2$s."
+
+#. translators: %s: number of items not processed.
+#: includes/views/i18n.php:249
+#: includes/views/i18n.php:251
+#, php-format
+msgid "Stopped. %s item was not applied and is still selected."
+msgid_plural "Stopped. %s items were not applied and are still selected."
+msgstr[0] "Остановлено. %s элемент не был применён и остаётся выбранным."
+msgstr[1] "Остановлено. %s элемента не были применены и остаются выбранными."
+msgstr[2] "Остановлено. %s элементов не были применены и остаются выбранными."
+
+#. translators: %s: number of failed items.
+#: includes/views/i18n.php:254
+#, php-format
+msgid "Retry %s failed"
+msgstr "Повторить неудачные: %s"
+
+#: includes/views/i18n.php:255
+msgid "Media files were copied. If new files do not show up in the Media Library, enable \"Include Media Library entries\" in Settings or regenerate thumbnails."
+msgstr "Медиафайлы скопированы. Если новые файлы не появились в медиабиблиотеке, включите «Включать записи медиабиблиотеки» в настройках или заново создайте миниатюры."
+
+#: includes/views/i18n.php:256
+msgid "push"
+msgstr "отправить"
+
+#: includes/views/i18n.php:257
+msgid "pull"
+msgstr "получить"
+
+#: includes/views/i18n.php:258
+msgid "delete on the remote site"
+msgstr "удалить на удалённом сайте"
+
+#: includes/views/i18n.php:259
+msgid "delete on this site"
+msgstr "удалить на этом сайте"
+
+#. translators: 1: item number, 2: total, 3: action, 4: path.
+#: includes/views/i18n.php:261
+#, php-format
+msgid "[%1$s/%2$s] %3$s %4$s"
+msgstr "[%1$s/%2$s] %3$s %4$s"
+
+#: includes/views/i18n.php:264
+msgid "Compare versions"
+msgstr "Сравнение версий"
+
+#: includes/views/i18n.php:265
+msgid "Binary file - no preview"
+msgstr "Двоичный файл — предпросмотр недоступен"
+
+#: includes/views/i18n.php:266
+msgid "This file is too large to preview."
+msgstr "Этот файл слишком большой для предпросмотра."
+
+#: includes/views/i18n.php:267
+msgid "Nothing to show for this item."
+msgstr "Для этого элемента нечего показывать."
+
+#: includes/views/i18n.php:268
+msgid "Both versions are identical."
+msgstr "Обе версии идентичны."
+
+#: includes/views/i18n.php:269
+msgid "Does not exist on this site"
+msgstr "Не существует на этом сайте"
+
+#: includes/views/i18n.php:270
+msgid "Does not exist on the remote site"
+msgstr "Не существует на удалённом сайте"
+
+#. translators: %s: maximum number of lines.
+#: includes/views/i18n.php:272
+#, php-format
+msgid "The file has more than %s lines, so the versions are shown side by side without alignment."
+msgstr "В файле больше %s строк, поэтому версии показаны рядом без выравнивания."
+
+#: includes/views/i18n.php:273
+msgid "The versions differ too much to align line by line, so they are shown side by side."
+msgstr "Версии слишком сильно различаются, чтобы выровнять их построчно, поэтому они показаны рядом."
+
+#: includes/views/i18n.php:274
+msgid "Layout"
+msgstr "Вид"
+
+#: includes/views/i18n.php:275
+msgid "Side by side"
+msgstr "Рядом"
+
+#: includes/views/i18n.php:276
+msgid "Unified"
+msgstr "Единый"
+
+#: includes/views/i18n.php:277
+msgid "Only line endings or a trailing newline differ."
+msgstr "Отличаются только символы конца строки или завершающий перевод строки."
+
+#: includes/views/i18n.php:278
+msgid "Differences"
+msgstr "Различия"
+
+#. translators: %s: number of unchanged lines.
+#: includes/views/i18n.php:282
+#: includes/views/i18n.php:284
+#, php-format
+msgid "Show %s unchanged line"
+msgid_plural "Show %s unchanged lines"
+msgstr[0] "Показать %s неизменённую строку"
+msgstr[1] "Показать %s неизменённые строки"
+msgstr[2] "Показать %s неизменённых строк"
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:289
+#: includes/views/i18n.php:291
+#, php-format
+msgid "%s line only on the remote site"
+msgid_plural "%s lines only on the remote site"
+msgstr[0] "%s строка только на удалённом сайте"
+msgstr[1] "%s строки только на удалённом сайте"
+msgstr[2] "%s строк только на удалённом сайте"
+
+#. translators: %s: number of lines.
+#: includes/views/i18n.php:296
+#: includes/views/i18n.php:298
+#, php-format
+msgid "%s line only on this site"
+msgid_plural "%s lines only on this site"
+msgstr[0] "%s строка только на этом сайте"
+msgstr[1] "%s строки только на этом сайте"
+msgstr[2] "%s строк только на этом сайте"
+
+#: includes/views/i18n.php:302
+msgid "No backups yet"
+msgstr "Резервных копий пока нет"
+
+#: includes/views/i18n.php:303
+msgid "Backups appear here after a sync overwrites or deletes something on this site."
+msgstr "Резервные копии появятся здесь после того, как синхронизация перезапишет или удалит что-либо на этом сайте."
+
+#. translators: 1: number of files, 2: size such as 1.2 MB.
+#: includes/views/i18n.php:307
+#: includes/views/i18n.php:309
+#, php-format
+msgid "%1$s file · %2$s"
+msgid_plural "%1$s files · %2$s"
+msgstr[0] "%1$s файл · %2$s"
+msgstr[1] "%1$s файла · %2$s"
+msgstr[2] "%1$s файлов · %2$s"
+
+#: includes/views/i18n.php:315
+msgid "No items."
+msgstr "Нет элементов."
+
+#: includes/views/i18n.php:316
+msgid "Restore"
+msgstr "Восстановить"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:318
+#, php-format
+msgid "Restore %s"
+msgstr "Восстановить %s"
+
+#: includes/views/i18n.php:319
+msgid "Restore this item?"
+msgstr "Восстановить этот элемент?"
+
+#. translators: %s: file path.
+#: includes/views/i18n.php:321
+#, php-format
+msgid "The backed-up version of %s will replace the current one. The current version is backed up first."
+msgstr "Сохранённая версия %s заменит текущую. Текущая версия сначала сохраняется в резервной копии."
+
+#. translators: %s: date.
+#: includes/views/i18n.php:323
+#, php-format
+msgid "Delete backup from %s"
+msgstr "Удалить резервную копию от %s"
+
+#: includes/views/i18n.php:324
+msgid "Delete this backup?"
+msgstr "Удалить эту резервную копию?"
+
+#: includes/views/i18n.php:325
+msgid "This permanently deletes every file in this backup run. This cannot be undone."
+msgstr "Все файлы этой резервной копии будут удалены безвозвратно. Это действие нельзя отменить."
+
+#: includes/views/i18n.php:327
+msgid "No history yet"
+msgstr "Истории пока нет"
+
+#: includes/views/i18n.php:328
+msgid "Applied sync items are recorded here."
+msgstr "Применённые элементы синхронизации записываются здесь."
+
+#: includes/views/i18n.php:330
+msgid "Clear the history?"
+msgstr "Очистить историю?"
+
+#: includes/views/i18n.php:331
+msgid "All recorded sync runs will be removed. Backups are not affected."
+msgstr "Все записанные запуски синхронизации будут удалены. Резервные копии не затрагиваются."
+
+#. translators: 1: site URL, 2: plugin version, 3: PHP version, 4: post_max_size, 5: chunk size.
+#: includes/views/i18n.php:336
+#, php-format
+msgid "Connected to %1$s (Avesta Sync %2$s, PHP %3$s, upload limit %4$s, transfer size %5$s)"
+msgstr "Подключено к %1$s (Avesta Sync %2$s, PHP %3$s, лимит загрузки %4$s, размер передачи %5$s)"
+
+#: includes/views/i18n.php:337
+msgid "Regenerate this site's key?"
+msgstr "Создать новый ключ этого сайта?"
+
+#: includes/views/i18n.php:338
+msgid "The other site will stop working until you paste the new key into its settings."
+msgstr "Другой сайт перестанет работать, пока вы не вставите новый ключ в его настройки."
+
+#: includes/views/i18n.php:339
+#: includes/views/settings.php:84
+msgid "Regenerate key"
+msgstr "Создать новый ключ"
+
+#: includes/views/i18n.php:340
+msgid "Discard unsaved changes?"
+msgstr "Отменить несохранённые изменения?"
+
+#: includes/views/i18n.php:341
+msgid "You changed settings but did not save them. Your edits stay in the form until you reload the page."
+msgstr "Вы изменили настройки, но не сохранили их. Ваши правки останутся в форме, пока вы не перезагрузите страницу."
+
+#: includes/views/i18n.php:342
+msgid "Leave without saving"
+msgstr "Уйти без сохранения"
+
+#: includes/views/i18n.php:343
+msgid "Stay here"
+msgstr "Остаться"
+
+#: includes/views/settings.php:15
+msgid "Theme files"
+msgstr "Файлы темы"
+
+#: includes/views/settings.php:15
+msgid "Templates, styles and assets of the themes you pick."
+msgstr "Шаблоны, стили и ресурсы выбранных тем."
+
+#: includes/views/settings.php:16
+msgid "Custom plugins"
+msgstr "Собственные плагины"
+
+#: includes/views/settings.php:16
+msgid "Files of the plugin folders you pick. Activation state is never synced."
+msgstr "Файлы выбранных папок плагинов. Состояние активации никогда не синхронизируется."
+
+#: includes/views/settings.php:17
+msgid "Pages, posts, templates, menus and a few options."
+msgstr "Страницы, записи, шаблоны, меню и некоторые опции."
+
+#: includes/views/settings.php:18
+msgid "Media uploads"
+msgstr "Загрузки медиафайлов"
+
+#: includes/views/settings.php:18
+msgid "Files in the uploads folder."
+msgstr "Файлы из папки загрузок."
+
+#: includes/views/settings.php:22
+msgid "Simple, variable, grouped and external products, including their variations."
+msgstr "Простые, вариативные, сгруппированные и внешние товары, включая их вариации."
+
+#: includes/views/settings.php:23
+#: includes/woo/class-woo.php:149
+#: includes/woo/class-woo.php:150
+msgid "Categories, tags and attributes"
+msgstr "Категории, метки и атрибуты"
+
+#: includes/views/settings.php:23
+msgid "Product categories, tags and global attributes with their terms."
+msgstr "Категории товаров, метки и глобальные атрибуты вместе с их терминами."
+
+#: includes/views/settings.php:24
+msgid "Discount codes and their restrictions."
+msgstr "Промокоды и их ограничения."
+
+#: includes/views/settings.php:25
+msgid "General, tax and shipping settings. Payment gateways and API keys are never synced."
+msgstr "Общие настройки, налоги и доставка. Платёжные шлюзы и ключи API никогда не синхронизируются."
+
+#: includes/views/settings.php:37
+msgid "Connect this site to the other one and choose what is synced."
+msgstr "Подключите этот сайт к другому и выберите, что синхронизировать."
+
+#: includes/views/settings.php:42
+msgid "Settings saved."
+msgstr "Настройки сохранены."
+
+#: includes/views/settings.php:44
+msgid "A new key was generated. Update it on the other site."
+msgstr "Создан новый ключ. Обновите его на другом сайте."
+
+#: includes/views/settings.php:54
+msgid "Remote site URL"
+msgstr "URL удалённого сайта"
+
+#: includes/views/settings.php:56
+msgid "HTTPS is required (localhost and *.test excepted)."
+msgstr "Требуется HTTPS (кроме localhost и *.test)."
+
+#: includes/views/settings.php:59
+msgid "Remote secret key"
+msgstr "Секретный ключ удалённого сайта"
+
+#: includes/views/settings.php:61
+msgid "Saved - leave blank to keep"
+msgstr "Сохранён — оставьте пустым, чтобы не менять"
+
+#: includes/views/settings.php:64
+msgid "Copy it from the Settings tab of the other site."
+msgstr "Скопируйте его на вкладке «Настройки» другого сайта."
+
+#: includes/views/settings.php:67
+msgid "Test connection"
+msgstr "Проверить соединение"
+
+#: includes/views/settings.php:73
+msgid "This site's key"
+msgstr "Ключ этого сайта"
+
+#: includes/views/settings.php:74
+msgid "Paste this key into the \"Remote secret key\" field of the other site so it can call this site."
+msgstr "Вставьте этот ключ в поле «Секретный ключ удалённого сайта» на другом сайте, чтобы он мог обращаться к этому сайту."
+
+#: includes/views/settings.php:76
+msgid "Key to copy to the other site"
+msgstr "Ключ для копирования на другой сайт"
+
+#: includes/views/settings.php:83
+msgid "Whoever holds this key can write files to this site. Share it only with the other site and regenerate it if it may have leaked."
+msgstr "Тот, у кого есть этот ключ, может записывать файлы на этот сайт. Передавайте его только другому сайту и создайте новый, если он мог утечь."
+
+#: includes/views/settings.php:88
+#: includes/views/settings.php:90
+msgid "What to sync"
+msgstr "Что синхронизировать"
+
+#: includes/views/settings.php:106
+msgid "Products, categories and attributes, coupons and store settings. Orders and customers are never touched."
+msgstr "Товары, категории и атрибуты, купоны и настройки магазина. Заказы и клиенты никогда не затрагиваются."
+
+#: includes/views/settings.php:114
+msgid "WooCommerce is not active on this site, so its products and store settings cannot be synced."
+msgstr "WooCommerce не активен на этом сайте, поэтому его товары и настройки магазина нельзя синхронизировать."
+
+#: includes/views/settings.php:125
+msgid "Themes to sync"
+msgstr "Темы для синхронизации"
+
+#: includes/views/settings.php:134
+msgid "Plugin folders to sync"
+msgstr "Папки плагинов для синхронизации"
+
+#: includes/views/settings.php:140
+msgid "Only files are synced; plugin activation state never is. Avesta Sync itself is excluded."
+msgstr "Синхронизируются только файлы; состояние активации плагина — никогда. Сам Avesta Sync исключён."
+
+#: includes/views/settings.php:146
+msgid "WooCommerce items to sync"
+msgstr "Элементы WooCommerce для синхронизации"
+
+#: includes/views/settings.php:171
+msgid "Include Media Library entries"
+msgstr "Включать записи медиабиблиотеки"
+
+#: includes/views/settings.php:172
+msgid "Also sync the attachment records (titles, captions, alt text) of synced uploads."
+msgstr "Также синхронизировать записи вложений (названия, подписи, альтернативный текст) для синхронизированных загрузок."
+
+#: includes/views/settings.php:178
+msgid "Exclude patterns"
+msgstr "Шаблоны исключений"
+
+#: includes/views/settings.php:180
+msgid "Paths to leave out"
+msgstr "Пути, которые нужно пропустить"
+
+#: includes/views/settings.php:182
+msgid "One pattern per line. Examples:"
+msgstr "Один шаблон на строку. Примеры:"
+
+#: includes/views/settings.php:188
+msgid "A scheduled check only compares both sites and reports differences. It never changes anything."
+msgstr "Плановая проверка только сравнивает оба сайта и сообщает о различиях. Она ничего не изменяет."
+
+#: includes/views/settings.php:191
+msgid "Check how often"
+msgstr "Как часто проверять"
+
+#: includes/views/settings.php:199
+msgid "Email the result to"
+msgstr "Отправлять результат на email"
+
+#: includes/views/settings.php:208
+msgid "Backup runs to keep"
+msgstr "Сколько запусков резервного копирования хранить"
+
+#: includes/views/settings.php:210
+msgid "0 keeps all backups. Older runs are deleted automatically."
+msgstr "0 — хранить все резервные копии. Более старые запуски удаляются автоматически."
+
+#: includes/views/settings.php:215
+msgid "Save settings"
+msgstr "Сохранить настройки"
+
+#: includes/views/settings.php:216
+msgid "You have unsaved changes."
+msgstr "У вас есть несохранённые изменения."
+
+#: includes/views/sync.php:14
+msgid "Compare both sites, review every difference, then choose what to do with each item. Push sends the version on this site to the remote site; pull brings the version on the remote site to this site. Nothing changes until you apply."
+msgstr "Сравните оба сайта, просмотрите каждое различие и выберите, что делать с каждым элементом. «Отправить» передаёт версию с этого сайта на удалённый сайт; «получить» приносит версию с удалённого сайта на этот сайт. Ничего не изменится, пока вы не примените изменения."
+
+#: includes/views/sync.php:18
+msgid "Compare"
+msgstr "Сравнить"
+
+#: includes/views/sync.php:24
+msgid "Results may be out of date. Compare again."
+msgstr "Результаты могли устареть. Выполните сравнение заново."
+
+#: includes/views/sync.php:25
+msgid "Filter by status"
+msgstr "Фильтр по статусу"
+
+#: includes/views/sync.php:30
+msgid "Search"
+msgstr "Поиск"
+
+#: includes/views/sync.php:31
+msgid "Filter by path or name"
+msgstr "Фильтр по пути или названию"
+
+#: includes/views/sync.php:34
+msgid "Section"
+msgstr "Раздел"
+
+#: includes/views/sync.php:36
+msgid "All"
+msgstr "Все"
+
+#: includes/views/sync.php:46
+msgid "Bulk actions for the rows shown"
+msgstr "Массовые действия для показанных строк"
+
+#: includes/views/sync.php:47
+msgid "Select all pushes"
+msgstr "Выбрать все отправляемые"
+
+#: includes/views/sync.php:48
+msgid "Select all pulls"
+msgstr "Выбрать все получаемые"
+
+#: includes/views/sync.php:49
+msgid "Conflicts: push"
+msgstr "Конфликты: отправить"
+
+#: includes/views/sync.php:50
+msgid "Conflicts: pull"
+msgstr "Конфликты: получить"
+
+#: includes/views/sync.php:51
+msgid "Clear selection"
+msgstr "Снять выбор"
+
+#: includes/views/sync.php:57
+msgid "No items match your filters."
+msgstr "Нет элементов, соответствующих фильтрам."
+
+#: includes/views/sync.php:58
+msgid "Clear filters"
+msgstr "Сбросить фильтры"
+
+#: includes/views/sync.php:65
+msgid "Sync progress"
+msgstr "Ход синхронизации"
+
+#: includes/views/sync.php:68
+msgid "Sync log"
+msgstr "Журнал синхронизации"
+
+#: includes/views/sync.php:79
+msgid "Stop after this item"
+msgstr "Остановить после этого элемента"
+
+#: includes/views/sync.php:83
+msgid "Apply selected"
+msgstr "Применить выбранные"
+
+#: includes/woo/class-woo-coupons.php:170
+msgid "The coupon has no code."
+msgstr "У купона нет кода."
+
+#: includes/woo/class-woo-coupons.php:176
+#: includes/woo/class-woo-product-import.php:54
+#: includes/woo/class-woo-settings.php:302
+#: includes/woo/class-woo-taxonomies.php:181
+#: includes/woo/class-woo-terms.php:200
+msgid "The backup failed, so nothing was changed."
+msgstr "Резервная копия не создана, поэтому ничего не было изменено."
+
+#: includes/woo/class-woo-coupons.php:204
+msgid "coupon products"
+msgstr "товары купона"
+
+#: includes/woo/class-woo-coupons.php:206
+msgid "excluded products"
+msgstr "исключённые товары"
+
+#: includes/woo/class-woo-coupons.php:208
+msgid "coupon categories"
+msgstr "категории купона"
+
+#: includes/woo/class-woo-coupons.php:210
+msgid "excluded categories"
+msgstr "исключённые категории"
+
+#. translators: %s: variation SKU.
+#: includes/woo/class-woo-preview.php:106
+#, php-format
+msgid "SKU %s"
+msgstr "SKU %s"
+
+#: includes/woo/class-woo-preview.php:113
+msgid "Any"
+msgstr "Любой"
+
+#: includes/woo/class-woo-preview.php:116
+msgid "Variation"
+msgstr "Вариация"
+
+#. translators: %s: product type.
+#: includes/woo/class-woo-product-import.php:32
+#, php-format
+msgid "Product type \"%s\" is not supported."
+msgstr "Тип товара \"%s\" не поддерживается."
+
+#. translators: %s: product name.
+#: includes/woo/class-woo-product-import.php:38
+#: includes/woo/class-woo-products.php:69
+#, php-format
+msgid "Skipped \"%s\": it has no SKU and no URL name yet, so it cannot be matched."
+msgstr "Пропущено: \"%s\" — у него пока нет SKU и ярлыка, поэтому его нельзя сопоставить."
+
+#: includes/woo/class-woo-product-import.php:49
+msgid "The matching item on the receiving site is not a product."
+msgstr "Соответствующий элемент на принимающем сайте не является товаром."
+
+#: includes/woo/class-woo-product-import.php:75
+msgid "The URL name is already used by another product on the receiving site"
+msgstr "Ярлык уже используется другим товаром на принимающем сайте"
+
+#: includes/woo/class-woo-product-import.php:78
+msgid "Updated"
+msgstr "Обновлено"
+
+#: includes/woo/class-woo-product-import.php:78
+msgid "Created"
+msgstr "Создано"
+
+#: includes/woo/class-woo-product-import.php:193
+#: includes/woo/class-woo-variations.php:247
+msgid "shipping classes"
+msgstr "классы доставки"
+
+#: includes/woo/class-woo-product-import.php:237
+msgid "categories"
+msgstr "категории"
+
+#: includes/woo/class-woo-product-import.php:242
+msgid "tags"
+msgstr "метки"
+
+#: includes/woo/class-woo-product-import.php:258
+msgid "Brands were skipped because the receiving site has no product brands"
+msgstr "Бренды пропущены, так как на принимающем сайте нет брендов товаров"
+
+#: includes/woo/class-woo-product-import.php:262
+msgid "brands"
+msgstr "бренды"
+
+#. translators: %s: file path.
+#: includes/woo/class-woo-product-import.php:281
+#: includes/woo/class-woo-terms.php:240
+#: includes/woo/class-woo-variations.php:261
+#, php-format
+msgid "Image \"%s\" was not found on the receiving site. Sync the media library first"
+msgstr "Изображение \"%s\" не найдено на принимающем сайте. Сначала синхронизируйте медиабиблиотеку"
+
+#. translators: %d: number of gallery images.
+#: includes/woo/class-woo-product-import.php:295
+#, php-format
+msgid "%d gallery image was not found on the receiving site. Sync the media library first"
+msgid_plural "%d gallery images were not found on the receiving site. Sync the media library first"
+msgstr[0] "%d изображение галереи не найдено на принимающем сайте. Сначала синхронизируйте медиабиблиотеку"
+msgstr[1] "%d изображения галереи не найдены на принимающем сайте. Сначала синхронизируйте медиабиблиотеку"
+msgstr[2] "%d изображений галереи не найдено на принимающем сайте. Сначала синхронизируйте медиабиблиотеку"
+
+#: includes/woo/class-woo-product-import.php:311
+msgid "upsells"
+msgstr "рекомендуемые товары"
+
+#: includes/woo/class-woo-product-import.php:312
+msgid "cross-sells"
+msgstr "сопутствующие товары"
+
+#: includes/woo/class-woo-product-import.php:315
+msgid "grouped products"
+msgstr "сгруппированные товары"
+
+#. translators: %s: error.
+#: includes/woo/class-woo-product-import.php:394
+#, php-format
+msgid "WooCommerce did not accept a downloadable file: %s"
+msgstr "WooCommerce не принял загружаемый файл: %s"
+
+#. translators: 1: product name, 2: product type.
+#: includes/woo/class-woo-products.php:64
+#, php-format
+msgid "Skipped \"%1$s\": product type \"%2$s\" is not supported."
+msgstr "Пропущено: \"%1$s\" — тип товара \"%2$s\" не поддерживается."
+
+#. translators: 1: "SKU" or "slug", 2: the shared SKU or slug, 3: list of product names.
+#: includes/woo/class-woo-products.php:93
+#, php-format
+msgid "Several products share the %1$s \"%2$s\", so none of them was synced: %3$s."
+msgstr "Несколько товаров используют %1$s \"%2$s\", поэтому ни один из них не был синхронизирован: %3$s."
+
+#: includes/woo/class-woo-products.php:94
+msgid "SKU"
+msgstr "SKU"
+
+#: includes/woo/class-woo-products.php:94
+msgid "URL name"
+msgstr "ярлык"
+
+#. translators: 1: field (upsells, cross-sells, grouped products), 2: list of product references (SKUs).
+#: includes/woo/class-woo-refs.php:174
+#, php-format
+msgid "%1$s that do not exist on the receiving site yet will be linked on a later sync: %2$s"
+msgstr "Элементы типа «%1$s», которых пока нет на принимающем сайте, будут связаны при следующей синхронизации: %2$s"
+
+#. translators: 1: field (categories, tags, brands, shipping class), 2: list of slugs.
+#: includes/woo/class-woo-refs.php:247
+#, php-format
+msgid "Some %1$s do not exist on the receiving site yet: %2$s. Sync categories, tags and attributes first"
+msgstr "Некоторых элементов типа «%1$s» пока нет на принимающем сайте: %2$s. Сначала синхронизируйте категории, метки и атрибуты"
+
+#: includes/woo/class-woo-settings.php:107
+msgid "General"
+msgstr "Общие"
+
+#: includes/woo/class-woo-settings.php:108
+msgid "Products and inventory"
+msgstr "Товары и запасы"
+
+#: includes/woo/class-woo-settings.php:109
+msgid "Tax options"
+msgstr "Параметры налогов"
+
+#: includes/woo/class-woo-settings.php:110
+msgid "Tax rates"
+msgstr "Налоговые ставки"
+
+#: includes/woo/class-woo-settings.php:111
+msgid "Shipping zones"
+msgstr "Зоны доставки"
+
+#: includes/woo/class-woo-settings.php:112
+msgid "Shipping options"
+msgstr "Параметры доставки"
+
+#: includes/woo/class-woo-settings.php:113
+msgid "Accounts and privacy"
+msgstr "Аккаунты и приватность"
+
+#. translators: %s: name of a store setting (e.g. "price num decimals").
+#: includes/woo/class-woo-settings.php:239
+#, php-format
+msgid "The value of the store setting \"%s\" is not valid, so nothing in this group was changed."
+msgstr "Недопустимое значение настройки магазина \"%s\", поэтому ничего в этой группе не было изменено."
+
+#: includes/woo/class-woo-settings.php:298
+msgid "This group of store settings is not known."
+msgstr "Эта группа настроек магазина неизвестна."
+
+#. translators: %d: number of settings.
+#: includes/woo/class-woo-settings.php:327
+#, php-format
+msgid "Updated: %d setting."
+msgid_plural "Updated: %d settings."
+msgstr[0] "Обновлена %d настройка."
+msgstr[1] "Обновлено %d настройки."
+msgstr[2] "Обновлено %d настроек."
+
+#: includes/woo/class-woo-shipping.php:121
+msgid "Locations not covered by your other zones"
+msgstr "Местоположения, не входящие в другие зоны"
+
+#. translators: 1: shipping method name, 2: shipping zone name.
+#: includes/woo/class-woo-shipping.php:125
+#, php-format
+msgid "Skipped shipping method \"%1$s\" in zone \"%2$s\": its settings look like they hold credentials."
+msgstr "Способ доставки \"%1$s\" в зоне \"%2$s\" пропущен: похоже, его настройки содержат учётные данные."
+
+#. translators: 1: shipping method name, 2: shipping zone name.
+#: includes/woo/class-woo-shipping.php:127
+#, php-format
+msgid "Skipped shipping method \"%1$s\" in zone \"%2$s\": only flat rate, free shipping and local pickup are synced."
+msgstr "Способ доставки \"%1$s\" в зоне \"%2$s\" пропущен: синхронизируются только фиксированная ставка, бесплатная доставка и самовывоз."
+
+#. translators: %s: shipping method id.
+#: includes/woo/class-woo-shipping.php:223
+#: includes/woo/class-woo-shipping.php:249
+#, php-format
+msgid "Skipped shipping method \"%s\": only flat rate, free shipping and local pickup are synced"
+msgstr "Способ доставки \"%s\" пропущен: синхронизируются только фиксированная ставка, бесплатная доставка и самовывоз"
+
+#. translators: %s: shipping method id.
+#: includes/woo/class-woo-shipping.php:228
+#, php-format
+msgid "Shipping method \"%s\" is not available on the receiving site"
+msgstr "Способ доставки \"%s\" недоступен на принимающем сайте"
+
+#. translators: %s: shipping class slug.
+#: includes/woo/class-woo-shipping.php:238
+#, php-format
+msgid "The shipping class \"%s\" does not exist on the receiving site, so its cost was skipped"
+msgstr "Класса доставки \"%s\" нет на принимающем сайте, поэтому его стоимость пропущена"
+
+#. translators: %d: number of shipping zones.
+#: includes/woo/class-woo-shipping.php:286
+#, php-format
+msgid "%d zone"
+msgid_plural "%d zones"
+msgstr[0] "%d зона"
+msgstr[1] "%d зоны"
+msgstr[2] "%d зон"
+
+#. translators: %d: number of shipping methods.
+#: includes/woo/class-woo-shipping.php:288
+#, php-format
+msgid "%d method"
+msgid_plural "%d methods"
+msgstr[0] "%d способ"
+msgstr[1] "%d способа"
+msgstr[2] "%d способов"
+
+#. translators: 1: number of zones (e.g. "2 zones"), 2: number of methods (e.g. "3 methods").
+#. translators: 1: number of tax rates (e.g. "6 rates"), 2: number of tax classes (e.g. "2 tax classes").
+#: includes/woo/class-woo-shipping.php:290
+#: includes/woo/class-woo-tax.php:166
+#, php-format
+msgid "Replaced: %1$s, %2$s."
+msgstr "Заменено: %1$s, %2$s."
+
+#: includes/woo/class-woo-tax.php:116
+msgid "A tax rate uses a tax class that is not part of the settings being synced."
+msgstr "Налоговая ставка использует налоговый класс, который не входит в синхронизируемые настройки."
+
+#. translators: %d: number of tax rates.
+#: includes/woo/class-woo-tax.php:162
+#, php-format
+msgid "%d rate"
+msgid_plural "%d rates"
+msgstr[0] "%d ставка"
+msgstr[1] "%d ставки"
+msgstr[2] "%d ставок"
+
+#. translators: %d: number of tax classes.
+#: includes/woo/class-woo-tax.php:164
+#, php-format
+msgid "%d tax class"
+msgid_plural "%d tax classes"
+msgstr[0] "%d налоговый класс"
+msgstr[1] "%d налоговых класса"
+msgstr[2] "%d налоговых классов"
+
+#. translators: %s: list of tax class slugs.
+#: includes/woo/class-woo-tax.php:169
+#, php-format
+msgid "These tax classes were kept because products still use them: %s."
+msgstr "Эти налоговые классы сохранены, так как их всё ещё используют товары: %s."
+
+#. translators: 1: attribute slug, 2: error.
+#: includes/woo/class-woo-taxonomies.php:130
+#, php-format
+msgid "The attribute \"%1$s\" could not be created. WooCommerce said: %2$s"
+msgstr "Не удалось создать атрибут \"%1$s\". WooCommerce сообщил: %2$s"
+
+#. translators: %s: attribute slug.
+#: includes/woo/class-woo-taxonomies.php:133
+#, php-format
+msgid "Attribute \"%s\" was created with default settings. Sync attributes to copy its settings"
+msgstr "Атрибут \"%s\" создан с настройками по умолчанию. Синхронизируйте атрибуты, чтобы скопировать его настройки"
+
+#: includes/woo/class-woo-taxonomies.php:165
+msgid "The attribute has no name."
+msgstr "У атрибута нет названия."
+
+#: includes/woo/class-woo-taxonomies.php:261
+msgid "Not deleted: products on the receiving site still use this attribute."
+msgstr "Не удалено: на принимающем сайте этот атрибут всё ещё используется в товарах."
+
+#: includes/woo/class-woo-taxonomies.php:267
+msgid "Attribute deleted."
+msgstr "Атрибут удалён."
+
+#. translators: %s: attribute label (e.g. Color), so "Color value".
+#: includes/woo/class-woo-terms.php:91
+#, php-format
+msgid "%s value"
+msgstr "Значение «%s»"
+
+#: includes/woo/class-woo-terms.php:98
+msgid "Category"
+msgstr "Категория"
+
+#: includes/woo/class-woo-terms.php:99
+msgid "Tag"
+msgstr "Метка"
+
+#: includes/woo/class-woo-terms.php:100
+msgid "Shipping class"
+msgstr "Класс доставки"
+
+#: includes/woo/class-woo-terms.php:101
+msgid "Brand"
+msgstr "Бренд"
+
+#. translators: %s: taxonomy.
+#: includes/woo/class-woo-terms.php:177
+#, php-format
+msgid "The attribute \"%s\" does not exist on this site yet. Sync attributes first."
+msgstr "Атрибута \"%s\" пока нет на этом сайте. Сначала синхронизируйте атрибуты."
+
+#. translators: %s: parent term slug.
+#: includes/woo/class-woo-terms.php:189
+#, php-format
+msgid "The parent \"%s\" does not exist on the receiving site yet. Sync it first."
+msgstr "Родителя \"%s\" пока нет на принимающем сайте. Сначала синхронизируйте его."
+
+#: includes/woo/class-woo-terms.php:288
+msgid "Not deleted: products on the receiving site still use it, or it has child items."
+msgstr "Не удалено: на принимающем сайте он всё ещё используется в товарах или у него есть дочерние элементы."
+
+#: includes/woo/class-woo-terms.php:295
+msgid "Deleted."
+msgstr "Удалено."
+
+#: includes/woo/class-woo-terms.php:295
+msgid "It could not be deleted. The default category cannot be deleted."
+msgstr "Не удалось удалить. Категорию по умолчанию удалить нельзя."
+
+#. translators: 1: variation SKU or attributes, 2: error.
+#: includes/woo/class-woo-variations.php:196
+#, php-format
+msgid "The variation \"%1$s\" could not be saved. WooCommerce said: %2$s"
+msgstr "Не удалось сохранить вариацию \"%1$s\". WooCommerce сообщил: %2$s"
+
+#. translators: %d: number of variations.
+#: includes/woo/class-woo-variations.php:211
+#, php-format
+msgid "%d variation was restored from the Trash"
+msgid_plural "%d variations were restored from the Trash"
+msgstr[0] "%d вариация восстановлена из корзины"
+msgstr[1] "%d вариации восстановлены из корзины"
+msgstr[2] "%d вариаций восстановлено из корзины"
+
+#. translators: 1: variations total, 2: created, 3: moved to Trash.
+#: includes/woo/class-woo-variations.php:216
+#, php-format
+msgid "%1$d variation (%2$d new, %3$d moved to Trash)."
+msgid_plural "%1$d variations (%2$d new, %3$d moved to Trash)."
+msgstr[0] "%1$d вариация (%2$d новая, %3$d перемещена в корзину)."
+msgstr[1] "%1$d вариации (%2$d новых, %3$d перемещено в корзину)."
+msgstr[2] "%1$d вариаций (%2$d новых, %3$d перемещено в корзину)."
+
+#: includes/woo/class-woo.php:92
+msgid "WooCommerce is not active on this site, so WooCommerce syncing is not available."
+msgstr "WooCommerce не активен на этом сайте, поэтому синхронизация WooCommerce недоступна."
+
+#: includes/woo/class-woo.php:100
+msgid "WooCommerce is not active on the other site, so WooCommerce syncing is not available."
+msgstr "WooCommerce не активен на другом сайте, поэтому синхронизация WooCommerce недоступна."
+
+#: includes/woo/class-woo.php:103
+msgid "WooCommerce syncing is switched off on the other site. Turn it on under Settings > What to sync on both sites."
+msgstr "Синхронизация WooCommerce отключена на другом сайте. Включите её в разделе Настройки > Что синхронизировать на обоих сайтах."
+
+#. translators: 1: local WooCommerce version, 2: remote WooCommerce version.
+#: includes/woo/class-woo.php:107
+#, php-format
+msgid "WooCommerce on the two sites is a different major version (%1$s here, %2$s on the other site). Update the older site before syncing."
+msgstr "Версии WooCommerce на двух сайтах отличаются основным номером (%1$s здесь, %2$s на другом сайте). Обновите более старый сайт перед синхронизацией."
+
+#. translators: 1: local WooCommerce version, 2: remote WooCommerce version.
+#: includes/woo/class-woo.php:111
+#, php-format
+msgid "WooCommerce on the two sites is a slightly different version (%1$s here, %2$s on the other site). Syncing works, but update both sites to the same version when you can."
+msgstr "Версии WooCommerce на двух сайтах немного различаются (%1$s здесь, %2$s на другом сайте). Синхронизация работает, но при возможности обновите оба сайта до одной версии."
+
+#: includes/woo/class-woo.php:145
+msgid "WooCommerce is not active on the site providing this data."
+msgstr "WooCommerce не активен на сайте, предоставляющем эти данные."
+
+#: includes/woo/class-woo.php:145
+#: includes/woo/class-woo.php:407
+#: includes/woo/class-woo.php:441
+msgid "WooCommerce is not active on the site receiving this change."
+msgstr "WooCommerce не активен на сайте, получающем это изменение."
+
+#: includes/woo/class-woo.php:149
+#: includes/woo/class-woo.php:150
+msgid "categories, tags and attributes"
+msgstr "категории, метки и атрибуты"
+
+#: includes/woo/class-woo.php:151
+msgid "products"
+msgstr "товары"
+
+#: includes/woo/class-woo.php:152
+msgid "coupons"
+msgstr "купоны"
+
+#: includes/woo/class-woo.php:153
+msgid "store settings"
+msgstr "настройки магазина"
+
+#: includes/woo/class-woo.php:156
+#: includes/woo/class-woo.php:427
+msgid "This kind of item is not supported. Update Avesta Sync on both sites."
+msgstr "Этот тип элементов не поддерживается. Обновите Avesta Sync на обоих сайтах."
+
+#: includes/woo/class-woo.php:161
+msgid "WooCommerce syncing is switched off on the site providing this data. Turn on \"WooCommerce\" under Settings > What to sync on both sites."
+msgstr "Синхронизация WooCommerce отключена на сайте, предоставляющем эти данные. Включите «WooCommerce» в разделе Настройки > Что синхронизировать на обоих сайтах."
+
+#: includes/woo/class-woo.php:161
+msgid "WooCommerce syncing is switched off on the site receiving this change. Turn on \"WooCommerce\" under Settings > What to sync on both sites."
+msgstr "Синхронизация WooCommerce отключена на сайте, получающем это изменение. Включите «WooCommerce» в разделе Настройки > Что синхронизировать на обоих сайтах."
+
+#. translators: 1: kind of items (e.g. store settings), 2: the matching option name under Settings > What to sync.
+#: includes/woo/class-woo.php:170
+#, php-format
+msgid "WooCommerce syncing (%1$s) is switched off on the site providing this data. Turn on \"%2$s\" under Settings > What to sync on both sites."
+msgstr "Синхронизация WooCommerce (%1$s) отключена на сайте, предоставляющем эти данные. Включите \"%2$s\" в разделе Настройки > Что синхронизировать на обоих сайтах."
+
+#. translators: 1: kind of items (e.g. store settings), 2: the matching option name under Settings > What to sync.
+#: includes/woo/class-woo.php:172
+#, php-format
+msgid "WooCommerce syncing (%1$s) is switched off on the site receiving this change. Turn on \"%2$s\" under Settings > What to sync on both sites."
+msgstr "Синхронизация WooCommerce (%1$s) отключена на сайте, получающем это изменение. Включите \"%2$s\" в разделе Настройки > Что синхронизировать на обоих сайтах."
+
+#: includes/woo/class-woo.php:456
+msgid "Store settings cannot be deleted."
+
+msgstr "Настройки магазина нельзя удалить."
